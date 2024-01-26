@@ -24,7 +24,7 @@ CoBrite Tunable Laser
 	
 	
 4 Channels Power Suppy GPP4323
-	- <img src="[https://your-image-url.type](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/main/Documentation/Repo_Docs/GPP_Front.jpg)" raw=true width="100" height="100">
+	- <img src="[https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/main/Documentation/Repo_Docs/GPP_Front.jpg)" raw=true width="100" height="100">
 
 
 KEITHLEY Source Meter 2612
