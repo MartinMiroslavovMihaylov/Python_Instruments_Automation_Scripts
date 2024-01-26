@@ -16,7 +16,7 @@ Extra GUI is started for live updates of the data accusition.
 # Instruments
 
 AnaPico AG APPH20G
-	- <img src="[https://your-image-url.type](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/main/Documentation/Repo_Docs/APP_Front.jpg)" width="100" height="100">
+	- ![alt text](https://your-image-url.type](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/main/Documentation/Repo_Docs/APP_Front.jpg?raw=true)
 
 
 CoBrite Tunable Laser
