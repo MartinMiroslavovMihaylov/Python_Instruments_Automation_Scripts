@@ -1,4 +1,6 @@
-# Python_Instruments_Automation_Scripts
+# Python setup.py Lib  
+
+Folder containing the Python Instruments Scripts with setup.py file for easy instal
 
 # Python Documentation Link
 
