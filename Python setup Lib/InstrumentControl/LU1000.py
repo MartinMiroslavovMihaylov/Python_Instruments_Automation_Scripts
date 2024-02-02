@@ -5,27 +5,21 @@ Created on Tue Dec 14 11:04:21 2021
 @author: Martin.Mihaylov
 """
 from __future__ import print_function
-import os       
-import numpy as np                          
-os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE" 
-import oct2py
 from oct2py import Oct2Py
+import oct2py
+import os
+import numpy as np
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 oc = Oct2Py()
-import os 
-
-
-
-
 
 
 def Paths():
-    import tkinter as tk 
+    import tkinter as tk
     from tkinter import filedialog
 
     # =============================================================================
     # Automatic Paths selection to COM and OCT6
     # =============================================================================
-
 
     # =============================================================================
     # Select the Paths to COM and OCT6
@@ -38,45 +32,21 @@ def Paths():
           2) - Select OCT6 directory
     
           ''')
-    #Path COM
+    # Path COM
     root = tk.Tk()
-    COM = filedialog.askdirectory(parent = root,title = 'Select COM Directory: ')
+    COM = filedialog.askdirectory(parent=root, title='Select COM Directory: ')
     root.destroy()
-    
-    
-    
-    #Path OCT6
+
+    # Path OCT6
     root = tk.Tk()
-    OCT6 = filedialog.askdirectory(parent = root,title = 'Select COM Directory: ')
+    OCT6 = filedialog.askdirectory(parent=root, title='Select COM Directory: ')
     root.destroy()
-    
+
     return COM, OCT6
-    
 
-path = os.getcwd()
-nameCOM = '\COM'
-nameOCT6 = '\OCT6'
-
-
-
-if os.path.exists(path+nameCOM) == True:
-    PathCOM = path+nameCOM
-    PathOCT6 = path+nameOCT6
-else:
-    PathCOM , PathOCT6 = Paths()
-    
-
-'''
-Initialize Connection to the Instrument whit the Octave engine.
-Selected COM and OCT6 Paths are needed!!!
-'''
-oc.addpath(PathCOM); 
-oc.addpath(PathOCT6);  
 
 class LU1000:
 
-
-    
     print(
         '''
         ################ ATTENTION ################
@@ -91,21 +61,37 @@ class LU1000:
          
         ################ ATTENTION ################
         '''
-            )
-    
+    )
+
     print(
-            '''
+        '''
             
             In the Class Lib ypu need to give the Paths to COM and OCT6 folders.
             The folders are coming together whit the lib. If not download them from:
                 https://www.novoptel.de/Home/Downloads_en.php 
                 
             '''
-            )
-            
-    def __init__(self):
+    )
 
-        
+    def __init__(self, path=None):
+        nameCOM = '/COM'
+        nameOCT6 = '/OCT6'
+
+        if path == None:
+            path = os.getcwd()
+
+        if os.path.exists(path+nameCOM) == True:
+            PathCOM = path+nameCOM
+            PathOCT6 = path+nameOCT6
+        else:
+            PathCOM, PathOCT6 = Paths()
+
+        '''
+        Initialize Connection to the Instrument whit the Octave engine.
+        Selected COM and OCT6 Paths are needed!!!
+        '''
+        oc.addpath(PathCOM)
+        oc.addpath(PathOCT6)
 
 # =============================================================================
 #         stri = input('Select LU1000 device (0) or look it up in LastDevLU.mat (1 or "enter"):')
@@ -114,17 +100,13 @@ class LU1000:
 #         else:
 # =============================================================================
         oc.initlu()
-        DevDescrLU  = oc.load('LastDevLU.mat',  'LastDevDescr')['LastDevDescr']
-        
-        print(DevDescrLU) 
-        
-    
-    
-    
-    
+        DevDescrLU = oc.load('LastDevLU.mat',  'LastDevDescr')['LastDevDescr']
+
+        print(DevDescrLU)
+
     def Close(self):
         '''
-        
+
 
         Returns
         -------
@@ -132,20 +114,19 @@ class LU1000:
             Close connection 
 
         '''
-        
+
         ok = oc.closelu()
         print(ok, sep='\n')
-        
-    
-    
-    
-    
+
+
 # =============================================================================
-# ASK 
+# ASK
 # =============================================================================
-    def ask_Power(self,laser):
+
+
+    def ask_Power(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -164,7 +145,7 @@ class LU1000:
             in dBm*100
 
         '''
-        
+
         if laser == 1:
             res, ok = oc.readlu(128+49, nout=2)
             return float(res/100)
@@ -172,15 +153,12 @@ class LU1000:
             res, ok = oc.readlu(256+49, nout=2)
             return float(res/100)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-            
-    
-    
-    
-    
-    def ask_LaserOutput(self,laser):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def ask_LaserOutput(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -210,16 +188,13 @@ class LU1000:
                 print('OFF')
             else:
                 print('ON')
-        else: 
-            raise ValueError('Unknown input! See function description for more info.')
-            
-    
-    
-    
-    
-    def ask_ControllerTemp(self,laser):
+        else:
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def ask_ControllerTemp(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -237,7 +212,7 @@ class LU1000:
             Controller module temperature in Celsiusx16
 
         '''
-        
+
         if laser == 1:
             res, ok = oc.readlu(128+51, nout=2)
             return float(res)
@@ -245,15 +220,12 @@ class LU1000:
             res, ok = oc.readlu(256+51, nout=2)
             return float(res)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
+            raise ValueError(
+                'Unknown input! See function description for more info.')
 
-    
-    
-    
-    
-    def ask_Gridspacing(self,laser):
+    def ask_Gridspacing(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -271,8 +243,7 @@ class LU1000:
             Grid spacing in GHz*10
 
         '''
-        
-        
+
         if laser == 1:
             res, ok = oc.readlu(128+52, nout=2)
             return float(res)
@@ -280,15 +251,12 @@ class LU1000:
             res, ok = oc.readlu(256+52, nout=2)
             return float(res)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-            
-    
-    
-    
-    
-    def ask_FirstChannFreqTHz(self,laser):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def ask_FirstChannFreqTHz(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -299,7 +267,7 @@ class LU1000:
         ------
         ValueError
             Error message
-            
+
 
         Returns
         -------
@@ -307,7 +275,7 @@ class LU1000:
             First channel’s frequency, THz
 
         '''
-        
+
         if laser == 1:
             res, ok = oc.readlu(128+53, nout=2)
             return float(res)
@@ -315,15 +283,12 @@ class LU1000:
             res, ok = oc.readlu(256+53, nout=2)
             return float(res)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-        
-    
-    
-    
-    
-    def ask_FirstChannFreqGHz(self,laser):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def ask_FirstChannFreqGHz(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -341,7 +306,7 @@ class LU1000:
             First channel’s frequency, GHz*10
 
         '''
-        
+
         if laser == 1:
             res, ok = oc.readlu(128+54, nout=2)
             return float(res)
@@ -349,15 +314,12 @@ class LU1000:
             res, ok = oc.readlu(256+54, nout=2)
             return float(res)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-            
-    
-    
-    
-    
-    def ask_ChannelFreqTHz(self,laser):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def ask_ChannelFreqTHz(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -375,7 +337,7 @@ class LU1000:
             Ask channel Frequency in THz
 
         '''
-        
+
         if laser == 1:
             res, ok = oc.readlu(128+64, nout=2)
             return float(res)
@@ -383,15 +345,12 @@ class LU1000:
             res, ok = oc.readlu(256+64, nout=2)
             return float(res)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
+            raise ValueError(
+                'Unknown input! See function description for more info.')
 
-    
-    
-    
-    
-    def ask_ChannelFreqGHz(self,laser):
+    def ask_ChannelFreqGHz(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -409,7 +368,7 @@ class LU1000:
             Returns channel’s frequency as GHZ*10
 
         '''
-        
+
         if laser == 1:
             res, ok = oc.readlu(128+65, nout=2)
             return float(res)
@@ -417,15 +376,12 @@ class LU1000:
             res, ok = oc.readlu(256+65, nout=2)
             return float(res)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-        
-    
-    
-    
-    
-    def ask_OpticalPower(self,laser):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def ask_OpticalPower(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -443,7 +399,7 @@ class LU1000:
             Returns the optical power encoded as dBm*100
 
         '''
-        
+
         if laser == 1:
             res, ok = oc.readlu(128+66, nout=2)
             return float(res/100)
@@ -451,15 +407,12 @@ class LU1000:
             res, ok = oc.readlu(256+66, nout=2)
             return float(res/100)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-        
-    
-    
-    
-    
-    def ask_Temperature(self,laser):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def ask_Temperature(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -477,7 +430,7 @@ class LU1000:
             Returns the current temperature encoded as °C*100.
 
         '''
-       
+
         if laser == 1:
             res, ok = oc.readlu(128+67, nout=2)
             return float(res)
@@ -485,15 +438,12 @@ class LU1000:
             res, ok = oc.readlu(256+67, nout=2)
             return float(res)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-        
-    
-    
-    
-    
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
     def ask_MinOpticalOutputPower(self):
         '''
-        
+
 
         Returns
         -------
@@ -504,13 +454,9 @@ class LU1000:
         res, ok = oc.readlu(128+80, nout=2)
         return res
 
-    
-    
-    
-    
     def ask_MaxOpticalOutputPower(self):
         '''
-        
+
 
         Returns
         -------
@@ -518,17 +464,13 @@ class LU1000:
             Maximum possible optical power setting
 
         '''
-    
+
         res, ok = oc.readlu(128+81, nout=2)
         return res
-   
-    
-    
-    
-    
-    def ask_LaserFirstFreqTHz(self,laser):
+
+    def ask_LaserFirstFreqTHz(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -546,7 +488,7 @@ class LU1000:
             Laser’s first frequency, THz
 
         '''
-        
+
         if laser == 1:
             res, ok = oc.readlu(128+82, nout=2)
             return float(res)
@@ -554,15 +496,12 @@ class LU1000:
             res, ok = oc.readlu(256+82, nout=2)
             return float(res)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-      
-    
-    
-    
-    
-    def ask_LaserFirstFreqGHz(self,laser):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def ask_LaserFirstFreqGHz(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -580,7 +519,7 @@ class LU1000:
             Laser’s first frequency, GHz*10
 
         '''
-        
+
         if laser == 1:
             res, ok = oc.readlu(128+83, nout=2)
             return float(res)
@@ -588,13 +527,12 @@ class LU1000:
             res, ok = oc.readlu(256+83, nout=2)
             return float(res)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-        
-    
-    
-    def ask_minFreqLaser(self,laser):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def ask_minFreqLaser(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -612,21 +550,19 @@ class LU1000:
             min possible frequency.
 
         '''
-        
-        
-        if laser in [1,2]:
+
+        if laser in [1, 2]:
             THz = self.ask_LaserFirstFreqTHz(laser)
             GHz = self.ask_LaserFirstFreqGHz(laser)
             Freq = THz + GHz*1e-4
             return Freq
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-    
-    
-    
-    def ask_LaserLastFreqTHz(self,laser):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def ask_LaserLastFreqTHz(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -644,7 +580,7 @@ class LU1000:
            Laser’s last frequency, THz
 
         '''
-        
+
         if laser == 1:
             res, ok = oc.readlu(128+84, nout=2)
             return float(res)
@@ -652,15 +588,12 @@ class LU1000:
             res, ok = oc.readlu(256+84, nout=2)
             return float(res)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-            
-    
-    
-    
-    
-    def ask_LaserLastFreqGHz(self,laser):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def ask_LaserLastFreqGHz(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -679,7 +612,7 @@ class LU1000:
             Laser’s last frequency, GHz*10
 
         '''
-        
+
         if laser == 1:
             res, ok = oc.readlu(128+85, nout=2)
             return float(res)
@@ -687,13 +620,12 @@ class LU1000:
             res, ok = oc.readlu(256+85, nout=2)
             return float(res)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-        
-        
-        
-    def ask_maxFreqLaser(self,laser):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def ask_maxFreqLaser(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -711,21 +643,19 @@ class LU1000:
             max possible frequency
 
         '''
-        
-        
-        if laser in [1,2]:
+
+        if laser in [1, 2]:
             THz = self.ask_LaserLastFreqTHz(laser)
             GHz = self.ask_LaserLastFreqTHz(laser)
             Freq = THz + GHz*1e-4
             return float(Freq)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-    
-    
-    
-    def ask_LaserMinGridFreq(self,laser):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def ask_LaserMinGridFreq(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -743,7 +673,7 @@ class LU1000:
             Laser’s minimum supported grid spacing, GHz*10
 
         '''
-        
+
         if laser == 1:
             res, ok = oc.readlu(128+86, nout=2)
             return float(res)
@@ -751,15 +681,12 @@ class LU1000:
             res, ok = oc.readlu(256+86, nout=2)
             return float(res)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-        
-    
-    
-    
-    
-    def ask_Frequency(self,laser):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def ask_Frequency(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -770,29 +697,27 @@ class LU1000:
         ------
         ValueError
             Error message
-            
+
         Returns
         -------
         Freq : float
             Calculate and return Frequency on the selected channel
 
         '''
-        
-        sLaser = [1,2]
+
+        sLaser = [1, 2]
         if laser in sLaser:
             THz = float(self.ask_ChannelFreqTHz(laser))
             GHz = float(self.ask_ChannelFreqGHz(laser))
             Freq = THz + GHz*1e-4
             return Freq
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-            
-    
-    
-    
-    def ask_LaserChannel(self,laser):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def ask_LaserChannel(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -811,7 +736,7 @@ class LU1000:
             Selected Channel Number
 
         '''
-        
+
         if laser == 1:
             res, ok = oc.readlu(128+48, nout=2)
             return float(res)
@@ -819,13 +744,12 @@ class LU1000:
             res, ok = oc.readlu(256+48, nout=2)
             return float(res)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-            
-        
+            raise ValueError(
+                'Unknown input! See function description for more info.')
 
-    def ask_Whispermode(self,laser):
+    def ask_Whispermode(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -847,7 +771,7 @@ class LU1000:
         if laser == 1:
             res, ok = oc.readlu(128+108, nout=2)
             data = float(res)
-            if data == 0:     
+            if data == 0:
                 return 'OFF'
             else:
                 return 'ON'
@@ -855,18 +779,18 @@ class LU1000:
             res, ok = oc.readlu(256+108, nout=2)
             return float(res)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-    
+            raise ValueError(
+                'Unknown input! See function description for more info.')
 
-    
-    
+
 # =============================================================================
 # SET
 # =============================================================================
 
-    def set_Power(self,laser,value):
+
+    def set_Power(self, laser, value):
         '''
-        
+
 
         Parameters
         ----------
@@ -886,11 +810,10 @@ class LU1000:
         None.
 
         '''
-        
-        
+
         value = float(value)
         if laser == 1:
-            if value>10:
+            if value > 10:
                 print('''
                       ################# Warning #################
                       
@@ -909,9 +832,10 @@ class LU1000:
                 ok = oc.writelu(128+49, int(value))
                 print('Power = '+str(float(value/100))+'dBm')
             else:
-                raise ValueError('Unknown input! See function description for more info.')
+                raise ValueError(
+                    'Unknown input! See function description for more info.')
         elif laser == 2:
-            if value>10:
+            if value > 10:
                 print('''
                       ################# Warning #################
                       
@@ -930,17 +854,15 @@ class LU1000:
                 ok = oc.writelu(256+49, int(value))
                 print('Power = '+str(float(value/100))+'dBm')
             else:
-                raise ValueError('Unknown input! See function description for more info.')
+                raise ValueError(
+                    'Unknown input! See function description for more info.')
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-            
-    
-    
-    
-    
-    def set_LaserChannel(self,laser,value):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def set_LaserChannel(self, laser, value):
         '''
-        
+
 
         Parameters
         ----------
@@ -960,22 +882,19 @@ class LU1000:
         None.
 
         '''
-    
+
         if laser == 1:
             oc.writelu(128+48, value)
-             
-        elif laser == 2:
-            oc.writelu(256+48, value) 
-        else:
-            raise ValueError('Unknown input! See function description for more info.')
 
-    
-    
-    
-    
-    def set_LaserOutput(self,laser,value):
+        elif laser == 2:
+            oc.writelu(256+48, value)
+        else:
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def set_LaserOutput(self, laser, value):
         '''
-        
+
 
         Parameters
         ----------
@@ -995,8 +914,8 @@ class LU1000:
         None.
 
         '''
-        
-        sValue = ['ON','OFF',1,0]
+
+        sValue = ['ON', 'OFF', 1, 0]
         if value in sValue:
             if laser == 1:
                 if value == 1 or value == 'ON':
@@ -1007,25 +926,24 @@ class LU1000:
                     print('### Laser 1 is OFF')
             elif laser == 2:
                 if value == 1 or value == 'ON':
-                    oc.writelu(256+50, 8) 
+                    oc.writelu(256+50, 8)
                     print('### Laser 2 is ON ###')
                 else:
-                    oc.writelu(256+50, 0)   
+                    oc.writelu(256+50, 0)
                     print('### Laser 2 is OFF ###')
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-        
-    
-    
-    
-    
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+
 # =============================================================================
 # Test Write Grid
 # =============================================================================
-    
-    def set_Gridspacing(self,laser,value):
+
+
+    def set_Gridspacing(self, laser, value):
         '''
-        
+
 
         Parameters
         ----------
@@ -1044,24 +962,24 @@ class LU1000:
         None.
 
         '''
-    
+
         if value >= 1:
             if laser == 1:
-                oc.writelu(128+52, value )
-    
+                oc.writelu(128+52, value)
+
             elif laser == 2:
-                oc.writelu(256+52, value )
-                
+                oc.writelu(256+52, value)
+
             else:
-                raise ValueError('Unknown input! See function description for more info.')
+                raise ValueError(
+                    'Unknown input! See function description for more info.')
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-    
-    
-    
-    def set_FirstChannFreqTHz(self,laser,value):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def set_FirstChannFreqTHz(self, laser, value):
         '''
-        
+
 
         Parameters
         ----------
@@ -1072,7 +990,7 @@ class LU1000:
         ------
         ValueError
             Error message
-            
+
 
         Returns
         -------
@@ -1080,18 +998,18 @@ class LU1000:
             First channel’s frequency, THz
 
         '''
-        
+
         if laser == 1:
-            oc.writelu(128+53, int(value) )
+            oc.writelu(128+53, int(value))
         elif laser == 2:
-            oc.writelu(256+53, value )
+            oc.writelu(256+53, value)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-    
-    
-    def set_FirstChannFreqGHz(self,laser,value):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def set_FirstChannFreqGHz(self, laser, value):
         '''
-        
+
 
         Parameters
         ----------
@@ -1109,20 +1027,18 @@ class LU1000:
             First channel’s frequency, GHz*10
 
         '''
-        
+
         if laser == 1:
-            oc.writelu(128+54, value )
+            oc.writelu(128+54, value)
         elif laser == 2:
-            oc.writelu(256+54, value )
+            oc.writelu(256+54, value)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-            
-            
-            
-            
-    def set_Frequency(self,laser,value):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def set_Frequency(self, laser, value):
         '''
-        
+
 
         Parameters
         ----------
@@ -1137,29 +1053,26 @@ class LU1000:
         None.
 
         '''
-        
+
         if laser == 1:
-            
-            GHz = int((value%1)*1e4)
+
+            GHz = int((value % 1)*1e4)
             THz = int(value // 1)
-            self.set_FirstChannFreqTHz(1,THz)
-            self.set_FirstChannFreqGHz(1,GHz)
-            
+            self.set_FirstChannFreqTHz(1, THz)
+            self.set_FirstChannFreqGHz(1, GHz)
+
         elif laser == 2:
-            GHz = int((value%1)*1e4)
+            GHz = int((value % 1)*1e4)
             THz = int(value // 1)
-            self.set_FirstChannFreqTHz(2,THz)
-            self.set_FirstChannFreqGHz(2,GHz)
+            self.set_FirstChannFreqTHz(2, THz)
+            self.set_FirstChannFreqGHz(2, GHz)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-            
-            
-            
-        
-    def set_Whispermode(self,laser,state):
-        
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def set_Whispermode(self, laser, state):
         '''
-        
+
 
         Parameters
         ----------
@@ -1173,46 +1086,48 @@ class LU1000:
         None.
 
         '''
-        stState = ['ON','OFF']
+        stState = ['ON', 'OFF']
         if state in stState:
             if state == 'ON':
                 if laser == 1:
-                    oc.writelu(128+108, 2 )
+                    oc.writelu(128+108, 2)
                     data = self.ask_Whispermode(1)
-                    while data != 'ON': 
-                        oc.writelu(128+108, 2 )
+                    while data != 'ON':
+                        oc.writelu(128+108, 2)
                         data = self.ask_Whispermode(1)
-                        
+
                 elif laser == 2:
-                    oc.writelu(256+108, 2 )
+                    oc.writelu(256+108, 2)
                     data = self.ask_Whispermode(2)
-                    while data != 'ON': 
-                        oc.writelu(128+108, 2 )
+                    while data != 'ON':
+                        oc.writelu(128+108, 2)
                         data = self.ask_Whispermode(2)
                 else:
-                    raise ValueError('Unknown input! See function description for more info.')
+                    raise ValueError(
+                        'Unknown input! See function description for more info.')
             elif state == 'OFF':
                 if laser == 1:
-                    oc.writelu(128+108, 0 )
+                    oc.writelu(128+108, 0)
                     data = self.ask_Whispermode(1)
-                    while data != 'OFF': 
-                        oc.writelu(128+108, 0 )
+                    while data != 'OFF':
+                        oc.writelu(128+108, 0)
                         data = self.ask_Whispermode(1)
                 elif laser == 2:
-                    oc.writelu(256+108, 0 )
+                    oc.writelu(256+108, 0)
                     data = self.ask_Whispermode(2)
-                    while data != 'OFF': 
-                        oc.writelu(128+108, 0 )
+                    while data != 'OFF':
+                        oc.writelu(128+108, 0)
                         data = self.ask_Whispermode(2)
                 else:
-                    raise ValueError('Unknown input! See function description for more info.')
+                    raise ValueError(
+                        'Unknown input! See function description for more info.')
             else:
-                raise ValueError('Unknown input! See function description for more info.')
-                
-        
-    def set_FineTune(self,laser,value):
+                raise ValueError(
+                    'Unknown input! See function description for more info.')
+
+    def set_FineTune(self, laser, value):
         '''
-        
+
 
         Parameters
         ----------
@@ -1231,15 +1146,18 @@ class LU1000:
         elif laser == 2:
             oc.writelu(256+98, int(value))
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-            
-            
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+
 # =============================================================================
 # Get/Save Data
 # =============================================================================
-    def get_Data(self,laser):
+
+
+    def get_Data(self, laser):
         '''
-        
+
 
         Parameters
         ----------
@@ -1257,7 +1175,7 @@ class LU1000:
             Return a dictionary with the measured power and set frequency.
 
         '''
-        
+
         OutPut = {}
         if laser == 1:
             Power = self.ask_Power(laser)
@@ -1270,10 +1188,6 @@ class LU1000:
             OutPut['Power/dBm'] = Power
             OutPut['Set Frequency/THz'] = Freq
         else:
-            raise ValueError('Unknown input! See function description for more info.')
+            raise ValueError(
+                'Unknown input! See function description for more info.')
         return OutPut
-
-
-
-
-
