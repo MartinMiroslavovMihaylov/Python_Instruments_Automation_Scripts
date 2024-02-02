@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KEITHLEY Source Meter 2612 module &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Instruments Automatisation Libraries
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">KEITHLEY Source Meter 2612 module</a><ul>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612</span></code></a><ul>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.Close"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.Close()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.Identification"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.Identification()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.Reset"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.Reset()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.ask_Current"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.ask_Current()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.ask_LimitReached"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.ask_LimitReached()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.ask_Power"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.ask_Power()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.ask_Resistance"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.ask_Resistance()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.ask_Voltage"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.ask_Voltage()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.ask_readBuffer"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.ask_readBuffer()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.get_Data"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.get_Data()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.query"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.query()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_AutoCurrentRange"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_AutoCurrentRange()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_AutoVoltageRange"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_AutoVoltageRange()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_ChannelDisplay"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_ChannelDisplay()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_Current"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_Current()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_CurrentLimit"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_CurrentLimit()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_CurrentRange"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_CurrentRange()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_DisplayMeasurementFunction"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_DisplayMeasurementFunction()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_OutputSourceFunction"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_OutputSourceFunction()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_PulseMeasured"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_PulseMeasured()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_SourceOutput"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_SourceOutput()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_Voltage"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_Voltage()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_VoltageLimit"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_VoltageLimit()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_VoltageRange"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_VoltageRange()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.write"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.write()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Instruments Automatisation Libraries</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">KEITHLEY Source Meter 2612 module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/rst/KEITHLEY2612.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="keithley-source-meter-2612-module">
+<h1>KEITHLEY Source Meter 2612 module<a class="headerlink" href="#keithley-source-meter-2612-module" title="Link to this heading"></a></h1>
+<p id="module-KEITHLEY2612">Created on Fri Dec 10 08:39:48 2021</p>
+<p>&#64;author: Martin.Mihaylov</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">KEITHLEY2612.</span></span><span class="sig-name descname"><span class="pre">KEITHLEY2612</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.Close">
+<span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.Close" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.Identification">
+<span class="sig-name descname"><span class="pre">Identification</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.Identification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.Identification" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.Reset">
+<span class="sig-name descname"><span class="pre">Reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.Reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.Reset" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> (<em>str</em>) – Select Channel A or B and restore to defaults channel settings.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.ask_Current">
+<span class="sig-name descname"><span class="pre">ask_Current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.ask_Current"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.ask_Current" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Return float whit the measured value on the channel</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE  float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.ask_LimitReached">
+<span class="sig-name descname"><span class="pre">ask_LimitReached</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.ask_LimitReached"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.ask_LimitReached" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> (<em>str</em>) – This output indicates that a configured limit has been reached.
+(voltage, current, or power limit)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DESCRIPTION.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TYPE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.ask_Power">
+<span class="sig-name descname"><span class="pre">ask_Power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.ask_Power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.ask_Power" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>TYPE</strong> – Return float whit the measured value on the channel</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.ask_Resistance">
+<span class="sig-name descname"><span class="pre">ask_Resistance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.ask_Resistance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.ask_Resistance" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>TYPE</strong> – Return float whit the measured value on the channel</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.ask_Voltage">
+<span class="sig-name descname"><span class="pre">ask_Voltage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.ask_Voltage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.ask_Voltage" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>TYPE</strong> – Return float whit the measured value on the channel</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.ask_readBuffer">
+<span class="sig-name descname"><span class="pre">ask_readBuffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.ask_readBuffer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.ask_readBuffer" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p></li>
+<li><p><strong>start</strong> (<em>int</em>) – select start value</p></li>
+<li><p><strong>stop</strong> (<em>int</em>) – select stop value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>Print the source function used</em></p></li>
+<li><p><em>for ‘start’ - ‘stop’ readings stored in</em></p></li>
+<li><p><em>source-measure unit (SMU)</em></p></li>
+<li><p><em>channel A, buffer 1.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.get_Data">
+<span class="sig-name descname"><span class="pre">get_Data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.get_Data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.get_Data" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>OutPut</strong> – Return a dictionary whit the measured voltage and current.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.query">
+<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.query" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.set_AutoCurrentRange">
+<span class="sig-name descname"><span class="pre">set_AutoCurrentRange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.set_AutoCurrentRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.set_AutoCurrentRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p></li>
+<li><p><strong>state</strong> (<em>str</em>) – ON/OFF current source autorange</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.set_AutoVoltageRange">
+<span class="sig-name descname"><span class="pre">set_AutoVoltageRange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.set_AutoVoltageRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.set_AutoVoltageRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p></li>
+<li><p><strong>state</strong> (<em>str</em>) – ON/OFF voltage source autorange</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.set_ChannelDisplay">
+<span class="sig-name descname"><span class="pre">set_ChannelDisplay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">double</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.set_ChannelDisplay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.set_ChannelDisplay" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p></li>
+<li><p><strong>double</strong> (<em>boolen</em><em>, </em><em>optional</em>) – <p>Displays source-measure for SMU A and SMU B.
+double = None per defould.
+if double = True:</p>
+<blockquote>
+<div><p>Display Chan A and B</p>
+</div></blockquote>
+<dl class="simple">
+<dt>else:</dt><dd><p>Display only Chan selected</p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.set_Current">
+<span class="sig-name descname"><span class="pre">set_Current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.set_Current"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.set_Current" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>str</em>) – Select Channel A or B</p></li>
+<li><p><strong>value</strong> (<em>int/float</em>) – Set Current on channels A and B</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.set_CurrentLimit">
+<span class="sig-name descname"><span class="pre">set_CurrentLimit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.set_CurrentLimit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.set_CurrentLimit" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>str</em>) – Select Channel A or B</p></li>
+<li><p><strong>value</strong> (<em>int/float</em>) – Sets the current limitof channel X to V.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.set_CurrentRange">
+<span class="sig-name descname"><span class="pre">set_CurrentRange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.set_CurrentRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.set_CurrentRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>str</em>) – Select Channel A or B</p></li>
+<li><p><strong>value</strong> (<em>int/float</em>) – Set current source voltage limit</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.set_DisplayMeasurementFunction">
+<span class="sig-name descname"><span class="pre">set_DisplayMeasurementFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">typ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.set_DisplayMeasurementFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.set_DisplayMeasurementFunction" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p></li>
+<li><p><strong>typ</strong> (<em>str</em>) – Selects the displayed measurement function:
+Amperes, volts, ohms, or watts.
+SMU A and SMU B can be set for different measurement functions!</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.set_OutputSourceFunction">
+<span class="sig-name descname"><span class="pre">set_OutputSourceFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">typ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.set_OutputSourceFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.set_OutputSourceFunction" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>str</em>) – Select channl A or B</p></li>
+<li><p><strong>typ</strong> (<em>str</em>) – The source function. Set to one of the following values:
+typ = ‘volt’ for Selects voltage source function
+typ = ‘amp’ for Selects voltage source function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.set_PulseMeasured">
+<span class="sig-name descname"><span class="pre">set_PulseMeasured</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ton</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toff</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.set_PulseMeasured"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.set_PulseMeasured" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p></li>
+<li><p><strong>value</strong> (<em>int/float</em><em> or </em><em>list with curly braces for example {1</em><em>,</em><em>2</em><em>,</em><em>3</em><em>...</em><em>.}.</em>) – </p></li>
+<li><p><strong>ton</strong> (<em>int/float</em>) – X ms pulse on</p></li>
+<li><p><strong>toff</strong> (<em>int/float</em>) – X ms pulse off</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.set_SourceOutput">
+<span class="sig-name descname"><span class="pre">set_SourceOutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.set_SourceOutput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.set_SourceOutput" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p></li>
+<li><p><strong>state</strong> (<em>str</em>) – Set source output (CHAN A) ON and OF</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.set_Voltage">
+<span class="sig-name descname"><span class="pre">set_Voltage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.set_Voltage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.set_Voltage" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>str</em>) – Select Channel A or B</p></li>
+<li><p><strong>value</strong> (<em>int/float</em>) – Set voltage on channels A and B</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.set_VoltageLimit">
+<span class="sig-name descname"><span class="pre">set_VoltageLimit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.set_VoltageLimit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.set_VoltageLimit" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>str</em>) – Select Channel A or B</p></li>
+<li><p><strong>value</strong> (<em>int/float</em>) – Sets the voltage limitof channel X to V.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.set_VoltageRange">
+<span class="sig-name descname"><span class="pre">set_VoltageRange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.set_VoltageRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.set_VoltageRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>str</em>) – Select Channel A or B</p></li>
+<li><p><strong>value</strong> (<em>int/float</em>) – Set voltage source voltage limit</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.write" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Martin.Mihaylov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

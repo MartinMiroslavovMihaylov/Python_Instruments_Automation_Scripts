@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KEITHLEY2612 &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Instruments Automatisation Libraries
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Instruments Automatisation Libraries</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">KEITHLEY2612</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for KEITHLEY2612</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Fri Dec 10 08:39:48 2021</span>
+
+<span class="sd">@author: Martin.Mihaylov</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pyvisa</span> <span class="k">as</span> <span class="nn">visa</span>
+
+
+    
+<div class="viewcode-block" id="KEITHLEY2612">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612">[docs]</a>
+<span class="k">class</span> <span class="nc">KEITHLEY2612</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Connect to Device and print the Identification Number.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">ResourceManager</span><span class="p">()</span><span class="o">.</span><span class="n">open_resource</span><span class="p">(</span><span class="n">resource_str</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">))</span>
+        
+
+
+<div class="viewcode-block" id="KEITHLEY2612.query">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.query">[docs]</a>
+    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="KEITHLEY2612.write">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.write">[docs]</a>
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="KEITHLEY2612.Close">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.Close">[docs]</a>
+    <span class="k">def</span> <span class="nf">Close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Instrument Keithley Instruments Inc., Model 2612, 1152698, 1.4.2 is closed!&#39;</span><span class="p">)</span></div>
+
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Reset to Defoult</span>
+<span class="c1"># =============================================================================</span>
+    
+<div class="viewcode-block" id="KEITHLEY2612.Reset">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.Reset">[docs]</a>
+    <span class="k">def</span> <span class="nf">Reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select Channel A or B and restore to defaults channel settings.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">             Error message </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.reset()&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+            
+    
+    
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># ASK</span>
+<span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="KEITHLEY2612.Identification">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.Identification">[docs]</a>
+    <span class="k">def</span> <span class="nf">Identification</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">))</span></div>
+
+
+
+
+<div class="viewcode-block" id="KEITHLEY2612.ask_LimitReached">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.ask_LimitReached">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_LimitReached</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            This output indicates that a configured limit has been reached.</span>
+<span class="sd">            (voltage, current, or power limit)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">            DESCRIPTION.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smua.source.compliance&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="KEITHLEY2612.ask_Current">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.ask_Current">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_Current</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str </span>
+<span class="sd">            Select channel A or B</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE  float</span>
+<span class="sd">            Return float whit the measured value on the channel</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;print(smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.i())&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="KEITHLEY2612.ask_Voltage">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.ask_Voltage">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_Voltage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select channel A or B</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message </span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE : float</span>
+<span class="sd">            Return float whit the measured value on the channel</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;print(smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.v())&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+                
+    
+    
+    
+    
+<div class="viewcode-block" id="KEITHLEY2612.ask_Power">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.ask_Power">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_Power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select channel A or B</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message </span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE : float</span>
+<span class="sd">            Return float whit the measured value on the channel</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;print(smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.p())&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+                
+    
+    
+    
+    
+<div class="viewcode-block" id="KEITHLEY2612.ask_Resistance">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.ask_Resistance">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_Resistance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select channel A or B</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message </span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE : float</span>
+<span class="sd">            Return float whit the measured value on the channel</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;print(smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.r())&#39;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="KEITHLEY2612.ask_readBuffer">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.ask_readBuffer">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_readBuffer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">start</span><span class="p">,</span><span class="n">stop</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select channel A or B</span>
+<span class="sd">        start : int</span>
+<span class="sd">            select start value</span>
+<span class="sd">        stop : int</span>
+<span class="sd">            select stop value</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Print the source function used</span>
+<span class="sd">        for &#39;start&#39; - &#39;stop&#39; readings stored in</span>
+<span class="sd">        source-measure unit (SMU)</span>
+<span class="sd">        channel A, buffer 1.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;printbuffer(&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">start</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;,smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;)&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+                    
+    
+    
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1">#SET </span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="KEITHLEY2612.set_SourceOutput">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_SourceOutput">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_SourceOutput</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select channel A or B</span>
+<span class="sd">        state : str </span>
+<span class="sd">            Set source output (CHAN A) ON and OF</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">stList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">]</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stList</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.output = smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.OUTPUT_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+    
+    
+    
+    
+<div class="viewcode-block" id="KEITHLEY2612.set_AutoVoltageRange">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_AutoVoltageRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_AutoVoltageRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select channel A or B</span>
+<span class="sd">        state : str</span>
+<span class="sd">           ON/OFF voltage source autorange</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">           Error message </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">stList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">]</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stList</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.autorangev = smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.AUTORANGE_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+                
+    
+    
+    
+    
+<div class="viewcode-block" id="KEITHLEY2612.set_AutoCurrentRange">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_AutoCurrentRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_AutoCurrentRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select channel A or B</span>
+<span class="sd">        state : str</span>
+<span class="sd">           ON/OFF current source autorange</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">           Error message </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">stList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">]</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stList</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.autorangei = smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.AUTORANGE_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="KEITHLEY2612.set_VoltageRange">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_VoltageRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_VoltageRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select Channel A or B</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">            Set voltage source voltage limit</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+  
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.0e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.measure.rangev = &#39;</span> <span class="o">+</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+    
+    
+    
+    
+<div class="viewcode-block" id="KEITHLEY2612.set_CurrentRange">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_CurrentRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_CurrentRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select Channel A or B</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">            Set current source voltage limit</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.0e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.rangei = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="KEITHLEY2612.set_VoltageLimit">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_VoltageLimit">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_VoltageLimit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select Channel A or B</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">            Sets the voltage limitof channel X to V.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.0e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.limitv = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="KEITHLEY2612.set_CurrentLimit">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_CurrentLimit">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_CurrentLimit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select Channel A or B</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">            Sets the current limitof channel X to V.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.0e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.limiti = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="KEITHLEY2612.set_Voltage">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_Voltage">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_Voltage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select Channel A or B</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">            Set voltage on channels A and B</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.4e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.levelv = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="KEITHLEY2612.set_Current">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_Current">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_Current</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select Channel A or B</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">            Set Current on channels A and B</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.4e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.leveli = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="KEITHLEY2612.set_ChannelDisplay">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_ChannelDisplay">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_ChannelDisplay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">double</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select channel A or B</span>
+<span class="sd">        double : boolen, optional</span>
+<span class="sd">            Displays source-measure for SMU A and SMU B.</span>
+<span class="sd">            double = None per defould.</span>
+<span class="sd">            if double = True:</span>
+<span class="sd">                Display Chan A and B </span>
+<span class="sd">            else:</span>
+<span class="sd">                Display only Chan selected</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">double</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;display.screen = display.SMUA_SMUB&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;display.screen = display.SMU&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="o">.</span><span class="n">upper</span><span class="p">()))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+                   
+    
+    
+    
+    
+<div class="viewcode-block" id="KEITHLEY2612.set_OutputSourceFunction">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_OutputSourceFunction">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_OutputSourceFunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">typ</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select channl A or B</span>
+<span class="sd">        typ : str</span>
+<span class="sd">            The source function. Set to one of the following values:</span>
+<span class="sd">            typ = &#39;volt&#39; for Selects voltage source function</span>
+<span class="sd">            typ = &#39;amp&#39; for Selects voltage source function</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">typ</span> <span class="o">=</span> <span class="n">typ</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">tList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;volt&#39;</span><span class="p">,</span><span class="s1">&#39;amp&#39;</span><span class="p">]</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span> <span class="ow">and</span> <span class="n">typ</span> <span class="ow">in</span> <span class="n">tList</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="s1">&#39;volt&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.func = smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.OUTPUT_DCVOLTS&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="s1">&#39;amp&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.func = smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.OUTPUT_DCAMPS&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+              
+    
+    
+    
+    
+<div class="viewcode-block" id="KEITHLEY2612.set_DisplayMeasurementFunction">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_DisplayMeasurementFunction">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_DisplayMeasurementFunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">typ</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select channel A or B</span>
+<span class="sd">        typ : str</span>
+<span class="sd">            Selects the displayed measurement function: </span>
+<span class="sd">            Amperes, volts, ohms, or watts.</span>
+<span class="sd">            SMU A and SMU B can be set for different measurement functions!</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">typ</span> <span class="o">=</span> <span class="n">typ</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">tList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;volt&#39;</span><span class="p">,</span><span class="s1">&#39;amp&#39;</span><span class="p">,</span><span class="s1">&#39;ohm&#39;</span><span class="p">,</span><span class="s1">&#39;watt&#39;</span><span class="p">]</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span> <span class="ow">and</span> <span class="n">typ</span> <span class="ow">in</span> <span class="n">tList</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="s1">&#39;volt&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;display.smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.func = display.MEASURE_DCVOLTS&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="s1">&#39;amp&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;display.smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.func = display.MEASURE_DCAMPS&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="s1">&#39;ohm&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;display.smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.func = display.MEASURE_OHMS&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="s1">&#39;watt&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;display.smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.func = display.MEASURE_WATTS&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+              
+    
+    
+    
+    
+<div class="viewcode-block" id="KEITHLEY2612.set_PulseMeasured">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_PulseMeasured">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_PulseMeasured</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">ton</span><span class="p">,</span><span class="n">toff</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select channel A or B</span>
+<span class="sd">        value : int/float or list with curly braces for example {1,2,3....}.</span>
+<span class="sd">        ton : int/float</span>
+<span class="sd">             X ms pulse on</span>
+<span class="sd">        toff : int/float</span>
+<span class="sd">            X ms pulse off</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;ConfigPulseIMeasureV(smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ton</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">toff</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;)&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+                   
+    
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Get/Save Data</span>
+<span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="KEITHLEY2612.get_Data">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.get_Data">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_Data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Select channel A or B</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        OutPut : dict</span>
+<span class="sd">            Return a dictionary whit the measured voltage and current.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
+        <span class="n">OutPut</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+            <span class="n">Current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_Current</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span>
+            <span class="n">Voltage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_Voltage</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span>
+        <span class="n">OutPut</span><span class="p">[</span><span class="s1">&#39;Voltage/V&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Voltage</span>
+        <span class="n">OutPut</span><span class="p">[</span><span class="s1">&#39;Current/A&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Current</span>
+        <span class="k">return</span> <span class="n">OutPut</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Martin.Mihaylov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

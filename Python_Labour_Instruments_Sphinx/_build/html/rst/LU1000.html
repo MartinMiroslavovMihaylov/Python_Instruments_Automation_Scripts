@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Novoptel Laser LU1000 module &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Instruments Automatisation Libraries
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Novoptel Laser LU1000 module</a><ul>
+<li><a class="reference internal" href="#LU1000.LU1000"><code class="docutils literal notranslate"><span class="pre">LU1000</span></code></a><ul>
+<li><a class="reference internal" href="#LU1000.LU1000.Close"><code class="docutils literal notranslate"><span class="pre">LU1000.Close()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_ChannelFreqGHz"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_ChannelFreqGHz()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_ChannelFreqTHz"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_ChannelFreqTHz()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_ControllerTemp"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_ControllerTemp()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_FirstChannFreqGHz"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_FirstChannFreqGHz()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_FirstChannFreqTHz"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_FirstChannFreqTHz()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_Frequency"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_Frequency()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_Gridspacing"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_Gridspacing()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_LaserChannel"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_LaserChannel()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_LaserFirstFreqGHz"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_LaserFirstFreqGHz()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_LaserFirstFreqTHz"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_LaserFirstFreqTHz()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_LaserLastFreqGHz"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_LaserLastFreqGHz()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_LaserLastFreqTHz"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_LaserLastFreqTHz()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_LaserMinGridFreq"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_LaserMinGridFreq()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_LaserOutput"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_LaserOutput()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_MaxOpticalOutputPower"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_MaxOpticalOutputPower()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_MinOpticalOutputPower"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_MinOpticalOutputPower()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_OpticalPower"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_OpticalPower()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_Power"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_Power()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_Temperature"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_Temperature()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_Whispermode"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_Whispermode()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_maxFreqLaser"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_maxFreqLaser()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.ask_minFreqLaser"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_minFreqLaser()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.get_Data"><code class="docutils literal notranslate"><span class="pre">LU1000.get_Data()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.set_FineTune"><code class="docutils literal notranslate"><span class="pre">LU1000.set_FineTune()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.set_FirstChannFreqGHz"><code class="docutils literal notranslate"><span class="pre">LU1000.set_FirstChannFreqGHz()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.set_FirstChannFreqTHz"><code class="docutils literal notranslate"><span class="pre">LU1000.set_FirstChannFreqTHz()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.set_Frequency"><code class="docutils literal notranslate"><span class="pre">LU1000.set_Frequency()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.set_Gridspacing"><code class="docutils literal notranslate"><span class="pre">LU1000.set_Gridspacing()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.set_LaserChannel"><code class="docutils literal notranslate"><span class="pre">LU1000.set_LaserChannel()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.set_LaserOutput"><code class="docutils literal notranslate"><span class="pre">LU1000.set_LaserOutput()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.set_Power"><code class="docutils literal notranslate"><span class="pre">LU1000.set_Power()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000.set_Whispermode"><code class="docutils literal notranslate"><span class="pre">LU1000.set_Whispermode()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#LU1000.Paths"><code class="docutils literal notranslate"><span class="pre">Paths()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Instruments Automatisation Libraries</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Novoptel Laser LU1000 module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/rst/LU1000.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="novoptel-laser-lu1000-module">
+<h1>Novoptel Laser LU1000 module<a class="headerlink" href="#novoptel-laser-lu1000-module" title="Link to this heading"></a></h1>
+<p id="module-LU1000">Created on Tue Dec 14 11:04:21 2021</p>
+<p>&#64;author: Martin.Mihaylov</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="LU1000.LU1000">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LU1000.</span></span><span class="sig-name descname"><span class="pre">LU1000</span></span><a class="reference internal" href="../_modules/LU1000.html#LU1000"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.Close">
+<span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.Close" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Close connection</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_ChannelFreqGHz">
+<span class="sig-name descname"><span class="pre">ask_ChannelFreqGHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_ChannelFreqGHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_ChannelFreqGHz" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns channel’s frequency as GHZ*10</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_ChannelFreqTHz">
+<span class="sig-name descname"><span class="pre">ask_ChannelFreqTHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_ChannelFreqTHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_ChannelFreqTHz" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Ask channel Frequency in THz</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_ControllerTemp">
+<span class="sig-name descname"><span class="pre">ask_ControllerTemp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_ControllerTemp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_ControllerTemp" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – Controller module temperature in Celsiusx16</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_FirstChannFreqGHz">
+<span class="sig-name descname"><span class="pre">ask_FirstChannFreqGHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_FirstChannFreqGHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_FirstChannFreqGHz" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – First channel’s frequency, GHz*10</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_FirstChannFreqTHz">
+<span class="sig-name descname"><span class="pre">ask_FirstChannFreqTHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_FirstChannFreqTHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_FirstChannFreqTHz" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – First channel’s frequency, THz</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_Frequency">
+<span class="sig-name descname"><span class="pre">ask_Frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_Frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_Frequency" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Freq</strong> – Calculate and return Frequency on the selected channel</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_Gridspacing">
+<span class="sig-name descname"><span class="pre">ask_Gridspacing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_Gridspacing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_Gridspacing" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Grid spacing in GHz*10</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_LaserChannel">
+<span class="sig-name descname"><span class="pre">ask_LaserChannel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_LaserChannel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_LaserChannel" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – Selected Channel Number</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>foat</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_LaserFirstFreqGHz">
+<span class="sig-name descname"><span class="pre">ask_LaserFirstFreqGHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_LaserFirstFreqGHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_LaserFirstFreqGHz" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – Laser’s first frequency, GHz*10</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_LaserFirstFreqTHz">
+<span class="sig-name descname"><span class="pre">ask_LaserFirstFreqTHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_LaserFirstFreqTHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_LaserFirstFreqTHz" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – Laser’s first frequency, THz</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_LaserLastFreqGHz">
+<span class="sig-name descname"><span class="pre">ask_LaserLastFreqGHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_LaserLastFreqGHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_LaserLastFreqGHz" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – Laser’s last frequency, GHz*10</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_LaserLastFreqTHz">
+<span class="sig-name descname"><span class="pre">ask_LaserLastFreqTHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_LaserLastFreqTHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_LaserLastFreqTHz" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – Laser’s last frequency, THz</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_LaserMinGridFreq">
+<span class="sig-name descname"><span class="pre">ask_LaserMinGridFreq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_LaserMinGridFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_LaserMinGridFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Laser’s minimum supported grid spacing, GHz*10</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_LaserOutput">
+<span class="sig-name descname"><span class="pre">ask_LaserOutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_LaserOutput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_LaserOutput" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Laser emable(‘ON’) or laser diseble(‘OFF’)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_MaxOpticalOutputPower">
+<span class="sig-name descname"><span class="pre">ask_MaxOpticalOutputPower</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_MaxOpticalOutputPower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_MaxOpticalOutputPower" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – Maximum possible optical power setting</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_MinOpticalOutputPower">
+<span class="sig-name descname"><span class="pre">ask_MinOpticalOutputPower</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_MinOpticalOutputPower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_MinOpticalOutputPower" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – Ask minimum possible optical power setting</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_OpticalPower">
+<span class="sig-name descname"><span class="pre">ask_OpticalPower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_OpticalPower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_OpticalPower" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – Returns the optical power encoded as dBm*100</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_Power">
+<span class="sig-name descname"><span class="pre">ask_Power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_Power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_Power" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Ask Sets or returns the laser module’s current optical power
+in dBm*100</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_Temperature">
+<span class="sig-name descname"><span class="pre">ask_Temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_Temperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_Temperature" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – Returns the current temperature encoded as °C*100.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_Whispermode">
+<span class="sig-name descname"><span class="pre">ask_Whispermode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_Whispermode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_Whispermode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – Whispermode Status</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>foat</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_maxFreqLaser">
+<span class="sig-name descname"><span class="pre">ask_maxFreqLaser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_maxFreqLaser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_maxFreqLaser" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>max possible frequency</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.ask_minFreqLaser">
+<span class="sig-name descname"><span class="pre">ask_minFreqLaser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.ask_minFreqLaser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_minFreqLaser" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>min possible frequency.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.get_Data">
+<span class="sig-name descname"><span class="pre">get_Data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.get_Data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.get_Data" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – DESCRIPTION.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>OutPut</strong> – Return a dictionary whit the measured power and set frequency.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.set_FineTune">
+<span class="sig-name descname"><span class="pre">set_FineTune</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.set_FineTune"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.set_FineTune" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p></li>
+<li><p><strong>value</strong> (<em>int</em>) – Fine tunning set the frequency in MHz steps</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.set_FirstChannFreqGHz">
+<span class="sig-name descname"><span class="pre">set_FirstChannFreqGHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.set_FirstChannFreqGHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.set_FirstChannFreqGHz" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – First channel’s frequency, GHz*10</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.set_FirstChannFreqTHz">
+<span class="sig-name descname"><span class="pre">set_FirstChannFreqTHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.set_FirstChannFreqTHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.set_FirstChannFreqTHz" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – First channel’s frequency, THz</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.set_Frequency">
+<span class="sig-name descname"><span class="pre">set_Frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.set_Frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.set_Frequency" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – Set Laser Frequency.
+value in form value = 192.876</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.set_Gridspacing">
+<span class="sig-name descname"><span class="pre">set_Gridspacing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.set_Gridspacing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.set_Gridspacing" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p></li>
+<li><p><strong>value</strong> (<em>int</em>) – Set Grid spacing. Smalles possible value = 1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.set_LaserChannel">
+<span class="sig-name descname"><span class="pre">set_LaserChannel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.set_LaserChannel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.set_LaserChannel" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p></li>
+<li><p><strong>value</strong> (<em>int</em>) – <dl class="simple">
+<dt>Sets or returns the laser module’s current channel</dt><dd><p>value = select channel value</p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.set_LaserOutput">
+<span class="sig-name descname"><span class="pre">set_LaserOutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.set_LaserOutput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.set_LaserOutput" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p></li>
+<li><p><strong>value</strong> (<em>int/str</em>) – Turn Laser N output ON/OFF
+value = ‘ON’|’OFF’<a href="#id1"><span class="problematic" id="id2">|</span></a>1|0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.set_Power">
+<span class="sig-name descname"><span class="pre">set_Power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.set_Power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.set_Power" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – Sets the laser module’s current optical power
+in dBm</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000.set_Whispermode">
+<span class="sig-name descname"><span class="pre">set_Whispermode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#LU1000.set_Whispermode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.set_Whispermode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p></li>
+<li><p><strong>state</strong> (<em>str</em>) – [‘ON’,’OFF’]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LU1000.Paths">
+<span class="sig-prename descclassname"><span class="pre">LU1000.</span></span><span class="sig-name descname"><span class="pre">Paths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/LU1000.html#Paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.Paths" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Martin.Mihaylov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

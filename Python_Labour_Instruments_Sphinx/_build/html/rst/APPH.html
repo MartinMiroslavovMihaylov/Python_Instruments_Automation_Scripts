@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APPH module &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CoBrite module" href="CoBrite.html" />
+    <link rel="prev" title="KEITHLEY2612 module" href="KEITHLEY2612.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Instruments Automatisation Libraries
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="MG3694C.html">MG3694C module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AQ6370D.html">AQ6370D module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KA3005.html">KA3005 module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PM100D.html">PM100D module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MS4647B.html">MS4647B module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MS2760A.html">MS2760A module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LU1000.html">LU1000 module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="KEITHLEY2612.html">KEITHLEY2612 module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">APPH module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#APPH.APPH"><code class="docutils literal notranslate"><span class="pre">APPH</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ANMeasExample"><code class="docutils literal notranslate"><span class="pre">APPH.ANMeasExample()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.Abort"><code class="docutils literal notranslate"><span class="pre">APPH.Abort()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.Close"><code class="docutils literal notranslate"><span class="pre">APPH.Close()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.FNMeasExample"><code class="docutils literal notranslate"><span class="pre">APPH.FNMeasExample()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.Init"><code class="docutils literal notranslate"><span class="pre">APPH.Init()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.PNMeasExample"><code class="docutils literal notranslate"><span class="pre">APPH.PNMeasExample()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.VCOMeasExample"><code class="docutils literal notranslate"><span class="pre">APPH.VCOMeasExample()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_ANSpot"><code class="docutils literal notranslate"><span class="pre">APPH.ask_ANSpot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_ANTraceFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_ANTraceFreq()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_ANTraceNoise"><code class="docutils literal notranslate"><span class="pre">APPH.ask_ANTraceNoise()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_ANTraceSpurFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_ANTraceSpurFreq()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_ANTraceSpurPower"><code class="docutils literal notranslate"><span class="pre">APPH.ask_ANTraceSpurPower()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_CalcFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_CalcFreq()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_CalcPower"><code class="docutils literal notranslate"><span class="pre">APPH.ask_CalcPower()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_DUTPortStatus"><code class="docutils literal notranslate"><span class="pre">APPH.ask_DUTPortStatus()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_DUTPortVoltage"><code class="docutils literal notranslate"><span class="pre">APPH.ask_DUTPortVoltage()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_FNSpot"><code class="docutils literal notranslate"><span class="pre">APPH.ask_FNSpot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_FNTraceFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_FNTraceFreq()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_FNTraceNoise"><code class="docutils literal notranslate"><span class="pre">APPH.ask_FNTraceNoise()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_FNTraceSpurFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_FNTraceSpurFreq()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_FNTraceSpurPower"><code class="docutils literal notranslate"><span class="pre">APPH.ask_FNTraceSpurPower()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_PMTraceJitter"><code class="docutils literal notranslate"><span class="pre">APPH.ask_PMTraceJitter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_PMTraceNoise"><code class="docutils literal notranslate"><span class="pre">APPH.ask_PMTraceNoise()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_PNSpot"><code class="docutils literal notranslate"><span class="pre">APPH.ask_PNSpot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_PN_IFGain"><code class="docutils literal notranslate"><span class="pre">APPH.ask_PN_IFGain()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_PN_StartFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_PN_StartFreq()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_PN_StopFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_PN_StopFreq()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_SysMeasMode"><code class="docutils literal notranslate"><span class="pre">APPH.ask_SysMeasMode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_SystemError"><code class="docutils literal notranslate"><span class="pre">APPH.ask_SystemError()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOKPuShing"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOKPuShing()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOKVCO"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOKVCO()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTYPE"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTYPE()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTestISupply"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestISupply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTestPNoise"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestPNoise()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTestPnoiseOFFSet"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestPnoiseOFFSet()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTestPoint"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestPoint()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTestPower"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestPower()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTestStart"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestStart()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTestStop"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestStop()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTraceFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTraceFreq()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTracePNoise"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTracePNoise()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTracePower"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTracePower()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTraceVoltage"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTraceVoltage()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VSOTestFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VSOTestFreq()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VSOTestNoise"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VSOTestNoise()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.getIdn"><code class="docutils literal notranslate"><span class="pre">APPH.getIdn()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.query"><code class="docutils literal notranslate"><span class="pre">APPH.query()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_CalcAverage"><code class="docutils literal notranslate"><span class="pre">APPH.set_CalcAverage()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_DUTPortStatus"><code class="docutils literal notranslate"><span class="pre">APPH.set_DUTPortStatus()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_DUTPortVoltage"><code class="docutils literal notranslate"><span class="pre">APPH.set_DUTPortVoltage()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_FreqExecute"><code class="docutils literal notranslate"><span class="pre">APPH.set_FreqExecute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_Output"><code class="docutils literal notranslate"><span class="pre">APPH.set_Output()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_PNIFGain"><code class="docutils literal notranslate"><span class="pre">APPH.set_PNIFGain()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_PNStartFreq"><code class="docutils literal notranslate"><span class="pre">APPH.set_PNStartFreq()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_PNStopFreq"><code class="docutils literal notranslate"><span class="pre">APPH.set_PNStopFreq()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_PowerExecute"><code class="docutils literal notranslate"><span class="pre">APPH.set_PowerExecute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_SysMeasMode"><code class="docutils literal notranslate"><span class="pre">APPH.set_SysMeasMode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOKPuShing"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOKPuShing()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOKVCO"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOKVCO()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTYPE"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTYPE()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTestFreq"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestFreq()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTestISupply"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestISupply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTestNoise"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestNoise()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTestPNoise"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestPNoise()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTestPnoiseOFFSet"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestPnoiseOFFSet()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTestPoint"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestPoint()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTestPower"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestPower()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTestStart"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestStart()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTestStop"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestStop()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOWait"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOWait()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.write"><code class="docutils literal notranslate"><span class="pre">APPH.write()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CoBrite.html">CoBrite module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GPP4323.html">GPP4323 module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Instruments Automatisation Libraries</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">APPH module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/rst/APPH.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-APPH">
+<span id="apph-module"></span><h1>APPH module<a class="headerlink" href="#module-APPH" title="Link to this heading"></a></h1>
+<p>Created on Tue Feb 15 10:57:49 2022</p>
+<p>&#64;author: Martin.Mihaylov</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="APPH.APPH">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">APPH.</span></span><span class="sig-name descname"><span class="pre">APPH</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ANMeasExample">
+<span class="sig-name descname"><span class="pre">ANMeasExample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ANMeasExample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ANMeasExample" title="Link to this definition"></a></dt>
+<dd><p>This is a small example how to make a Phase Noise measurment.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.Abort">
+<span class="sig-name descname"><span class="pre">Abort</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.Abort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.Abort" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Abort measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.Close">
+<span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.Close" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.FNMeasExample">
+<span class="sig-name descname"><span class="pre">FNMeasExample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.FNMeasExample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.FNMeasExample" title="Link to this definition"></a></dt>
+<dd><p>This is a small example how to make a Frequency Noise measurment.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.Init">
+<span class="sig-name descname"><span class="pre">Init</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.Init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.Init" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Initialize the measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.PNMeasExample">
+<span class="sig-name descname"><span class="pre">PNMeasExample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.PNMeasExample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.PNMeasExample" title="Link to this definition"></a></dt>
+<dd><p>This is a small example how to make a Phase Noise measurment.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.VCOMeasExample">
+<span class="sig-name descname"><span class="pre">VCOMeasExample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">NoieseOffset1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NoieseOffset2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measPoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tunRangeMin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tunRangeMax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SupplyVoltage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.VCOMeasExample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.VCOMeasExample" title="Link to this definition"></a></dt>
+<dd><p>This is a small example how to make a Voltage controlled oscillator Noise measurment.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_ANSpot">
+<span class="sig-name descname"><span class="pre">ask_ANSpot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_ANSpot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_ANSpot" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>TYPE</em>) – <dl class="simple">
+<dt>The parameter is given as offset frequency in [Hz]</dt><dd><p>Unit Hz
+Value - float</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the phase noise value of the last measurement at the offset frequency
+defined in &lt;value&gt;. The parameter is given as offset frequency in [Hz]
+Unit Hz
+Value - float</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_ANTraceFreq">
+<span class="sig-name descname"><span class="pre">ask_ANTraceFreq</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_ANTraceFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_ANTraceFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns a list of offset frequency values of the current measurement as block data.
+Hz</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_ANTraceNoise">
+<span class="sig-name descname"><span class="pre">ask_ANTraceNoise</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_ANTraceNoise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_ANTraceNoise" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns a list of amplitude noise spectrum values of the current measurement as block data
+Unit dBc/Hz</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_ANTraceSpurFreq">
+<span class="sig-name descname"><span class="pre">ask_ANTraceSpurFreq</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_ANTraceSpurFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_ANTraceSpurFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns a list of offset frequencies of the spurs in the active trace as block data.
+Unit Hz</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_ANTraceSpurPower">
+<span class="sig-name descname"><span class="pre">ask_ANTraceSpurPower</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_ANTraceSpurPower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_ANTraceSpurPower" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns a list of power values of the spurs in the active trace as block data.
+Unit dBc</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_CalcFreq">
+<span class="sig-name descname"><span class="pre">ask_CalcFreq</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_CalcFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_CalcFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Reads back the detected frequency from a frequency search.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_CalcPower">
+<span class="sig-name descname"><span class="pre">ask_CalcPower</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_CalcPower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_CalcPower" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Reads back the detected power level from a frequency search.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_DUTPortStatus">
+<span class="sig-name descname"><span class="pre">ask_DUTPortStatus</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_DUTPortStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_DUTPortStatus" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stat</strong> – Query the status of the DUT TUNE port.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_DUTPortVoltage">
+<span class="sig-name descname"><span class="pre">ask_DUTPortVoltage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_DUTPortVoltage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_DUTPortVoltage" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sets/gets the voltage at the DUT TUNE püort. Returns the configured value. If the output is
+turned off, it doesn’t necessarily return 0, as an internal voltage may be configured.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_FNSpot">
+<span class="sig-name descname"><span class="pre">ask_FNSpot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_FNSpot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_FNSpot" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – <dl class="simple">
+<dt>The parameters defines the spot noise offset frequency in [Hz].</dt><dd><p>Unit Hz
+Value - float</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the spot noise value at the specified offset frequency.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_FNTraceFreq">
+<span class="sig-name descname"><span class="pre">ask_FNTraceFreq</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_FNTraceFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_FNTraceFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns a list of offset frequency values of the current measurement as block data.
+Unit Hz</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE lisz</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_FNTraceNoise">
+<span class="sig-name descname"><span class="pre">ask_FNTraceNoise</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_FNTraceNoise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_FNTraceNoise" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns a list of phase noise spectrum values of the current measurement as block data.
+Unit Hz</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_FNTraceSpurFreq">
+<span class="sig-name descname"><span class="pre">ask_FNTraceSpurFreq</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_FNTraceSpurFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_FNTraceSpurFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns a list of offset frequencies of the spurs in the active trace as block data.
+Unit Hz</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_FNTraceSpurPower">
+<span class="sig-name descname"><span class="pre">ask_FNTraceSpurPower</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_FNTraceSpurPower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_FNTraceSpurPower" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns a list of power values of the spurs in the active trace as block data.
+Unit Hz</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_PMTraceJitter">
+<span class="sig-name descname"><span class="pre">ask_PMTraceJitter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_PMTraceJitter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_PMTraceJitter" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns the RMS jitter of the current trace.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_PMTraceNoise">
+<span class="sig-name descname"><span class="pre">ask_PMTraceNoise</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_PMTraceNoise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_PMTraceNoise" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns a list of phase noise points of the most recent measurement as block data.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_PNSpot">
+<span class="sig-name descname"><span class="pre">ask_PNSpot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_PNSpot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_PNSpot" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – The parameter is given as offset frequency in [Hz]
+Unit Hz
+Value - float</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the phase noise value of the last measurement at the offset frequency
+defined in &lt;value&gt;. The parameter is given as offset frequency in [Hz]
+Unit Hz
+Value - float</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_PN_IFGain">
+<span class="sig-name descname"><span class="pre">ask_PN_IFGain</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_PN_IFGain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_PN_IFGain" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Range: 0-60
+Query the IF gain for the measurement.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_PN_StartFreq">
+<span class="sig-name descname"><span class="pre">ask_PN_StartFreq</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_PN_StartFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_PN_StartFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the start offset frequency</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_PN_StopFreq">
+<span class="sig-name descname"><span class="pre">ask_PN_StopFreq</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_PN_StopFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_PN_StopFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the stop offset frequency</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_SysMeasMode">
+<span class="sig-name descname"><span class="pre">ask_SysMeasMode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_SysMeasMode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_SysMeasMode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Gets the active measurement mode.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_SystemError">
+<span class="sig-name descname"><span class="pre">ask_SystemError</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_SystemError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_SystemError" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Return parameters: List of integer error numbers. This query is a request for all
+entries in the instrument’s error queue. Error messages in the queue contain an
+integer in the range [-32768,32768] denoting an error code and associated descriptive
+text. This query clears the instrument’s error queue.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_VCOKPuShing">
+<span class="sig-name descname"><span class="pre">ask_VCOKPuShing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_VCOKPuShing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_VCOKPuShing" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the pushing parameter for the measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_VCOKVCO">
+<span class="sig-name descname"><span class="pre">ask_VCOKVCO</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_VCOKVCO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_VCOKVCO" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the tune sensitivity parameter for the measurement.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_VCOTYPE">
+<span class="sig-name descname"><span class="pre">ask_VCOTYPE</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_VCOTYPE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_VCOTYPE" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the DUT type for the measurement.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_VCOTestISupply">
+<span class="sig-name descname"><span class="pre">ask_VCOTestISupply</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_VCOTestISupply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_VCOTestISupply" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the supply current parameter for the measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_VCOTestPNoise">
+<span class="sig-name descname"><span class="pre">ask_VCOTestPNoise</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_VCOTestPNoise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_VCOTestPNoise" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the phase noise parameter for the measurement.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_VCOTestPnoiseOFFSet">
+<span class="sig-name descname"><span class="pre">ask_VCOTestPnoiseOFFSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_VCOTestPnoiseOFFSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_VCOTestPnoiseOFFSet" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>int</em>) – Can be set to [1,2,3,4]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error massage</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the 4 offset frequencies at which the phase noise is measured</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_VCOTestPoint">
+<span class="sig-name descname"><span class="pre">ask_VCOTestPoint</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_VCOTestPoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_VCOTestPoint" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the number rof voltage points to use in the measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_VCOTestPower">
+<span class="sig-name descname"><span class="pre">ask_VCOTestPower</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_VCOTestPower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_VCOTestPower" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the power parameter for the measurement.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_VCOTestStart">
+<span class="sig-name descname"><span class="pre">ask_VCOTestStart</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_VCOTestStart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_VCOTestStart" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the start tuning voltage for the measurement.
+Unit V</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_VCOTestStop">
+<span class="sig-name descname"><span class="pre">ask_VCOTestStop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_VCOTestStop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_VCOTestStop" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the stop tuning voltage for the measurement.
+Unit V</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_VCOTraceFreq">
+<span class="sig-name descname"><span class="pre">ask_VCOTraceFreq</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_VCOTraceFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_VCOTraceFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns a list of frequency values measured at each tune voltage point of the
+current measurement as block data2.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_VCOTracePNoise">
+<span class="sig-name descname"><span class="pre">ask_VCOTracePNoise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_VCOTracePNoise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_VCOTracePNoise" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> (<em>ist</em>) – Can be set to [1,2,3,4]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error massage</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns a list of phase noise values measured at each tune voltage point of
+the current measurement as block data. The parameter 1-4 selects the offset
+frequency from the set defined by the SENS:VCO:TEST:PN:OFFS &lt;list&gt; command</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_VCOTracePower">
+<span class="sig-name descname"><span class="pre">ask_VCOTracePower</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_VCOTracePower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_VCOTracePower" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns a list of power values measured at each tune voltage point of the current
+measurement as block data.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_VCOTraceVoltage">
+<span class="sig-name descname"><span class="pre">ask_VCOTraceVoltage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_VCOTraceVoltage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_VCOTraceVoltage" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns a list of tune voltage values measured at each tune voltage point of the
+current measurement as block data.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_VSOTestFreq">
+<span class="sig-name descname"><span class="pre">ask_VSOTestFreq</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_VSOTestFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_VSOTestFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the frequency parameter for the measurement.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.ask_VSOTestNoise">
+<span class="sig-name descname"><span class="pre">ask_VSOTestNoise</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_VSOTestNoise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_VSOTestNoise" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the the phase noise parameter for the measurement.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.getIdn">
+<span class="sig-name descname"><span class="pre">getIdn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.getIdn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.getIdn" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the device serial number and name</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE Str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.query">
+<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.query" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_CalcAverage">
+<span class="sig-name descname"><span class="pre">set_CalcAverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_CalcAverage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_CalcAverage" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>event</strong> (<em>str</em>) – Waits for the defined event
+NEXT: next iteration complete
+ALL: measurement complete
+&lt;value&gt;: specified iteration complete
+Optionally, a timeout in milliseconds can be specified as a second parameter.
+This command will block further SCPI requests until the specified event or the
+specified timeout has occurred. If no timeout is specified, the timeout will be
+ininite.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_DUTPortStatus">
+<span class="sig-name descname"><span class="pre">set_DUTPortStatus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_DUTPortStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_DUTPortStatus" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Enables/disables the DUT TUNE port. Can be [‘ON’,’OFF’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error massage</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_DUTPortVoltage">
+<span class="sig-name descname"><span class="pre">set_DUTPortVoltage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_DUTPortVoltage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_DUTPortVoltage" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Sets the voltage at the DUT TUNE püort. Returns the configured value.
+If the output is turned off, it doesn’t necessarily return 0, as an internal
+voltage may be configured</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_FreqExecute">
+<span class="sig-name descname"><span class="pre">set_FreqExecute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_FreqExecute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_FreqExecute" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Starts the frequency search. See the CALCulate subsystem on how to read out the result.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_Output">
+<span class="sig-name descname"><span class="pre">set_Output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_Output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_Output" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>status</strong> (<em>str</em>) – Set Output ON and OFF.  CAn be [‘ON’,’OFF’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error massage</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_PNIFGain">
+<span class="sig-name descname"><span class="pre">set_PNIFGain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_PNIFGain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_PNIFGain" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Range: 0-60
+Sets the IF gain for the measurement.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error massage</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_PNStartFreq">
+<span class="sig-name descname"><span class="pre">set_PNStartFreq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_PNStartFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_PNStartFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Unit HZ
+Sets the start offset frequency.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_PNStopFreq">
+<span class="sig-name descname"><span class="pre">set_PNStopFreq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_PNStopFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_PNStopFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Unit HZ
+Sets the stop offset frequency.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_PowerExecute">
+<span class="sig-name descname"><span class="pre">set_PowerExecute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_PowerExecute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_PowerExecute" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Starts the power measurement. When performing SENS:FREQ:EXEC, this measurement
+will be automatically run at the end (if a signal is detected</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_SysMeasMode">
+<span class="sig-name descname"><span class="pre">set_SysMeasMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_SysMeasMode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_SysMeasMode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – <dl class="simple">
+<dt>Sets/gets the active measurement mode. Can be [‘PN’,’AN’,’FN’,’BB’,’TRAN’,’VCO’]</dt><dd><ul class="simple">
+<li><p>PN: phase noise measurement</p></li>
+<li><p>AN: amplitude noise measurement</p></li>
+<li><p>FN: frequency noise measurement (results are converted to phase noise)</p></li>
+<li><p>BB: base band measurement (not yet available)</p></li>
+<li><p>TRAN: transient analysis (not yet available)</p></li>
+<li><p>VCO: voltage controlled oscillator characterization</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error massage</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_VCOKPuShing">
+<span class="sig-name descname"><span class="pre">set_VCOKPuShing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_VCOKPuShing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_VCOKPuShing" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Enables/disables the pushing parameter for the measurement.
+Can be [‘ON’,’OFF’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error massage</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_VCOKVCO">
+<span class="sig-name descname"><span class="pre">set_VCOKVCO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_VCOKVCO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_VCOKVCO" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Enables/disables the tune sensitivity parameter for the measurement
+Can be [‘ON’,’OFF’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error massage</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_VCOTYPE">
+<span class="sig-name descname"><span class="pre">set_VCOTYPE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">typ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_VCOTYPE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_VCOTYPE" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>typ</strong> (<em>str</em>) – Select the DUT type for the measurement. Distinguish between slow (VCXO) and fast
+(VCO) tuning sensitivities. Can be [‘VCO’,’VCXO’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error massage</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_VCOTestFreq">
+<span class="sig-name descname"><span class="pre">set_VCOTestFreq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_VCOTestFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_VCOTestFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Enables/disables the frequency parameter for the measurement.
+Can be [‘ON’,’OFF’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error massage</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_VCOTestISupply">
+<span class="sig-name descname"><span class="pre">set_VCOTestISupply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_VCOTestISupply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_VCOTestISupply" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Enables/disables the supply current parameter for the measurement.
+Can be [‘ON’,’OFF’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error massage</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_VCOTestNoise">
+<span class="sig-name descname"><span class="pre">set_VCOTestNoise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_VCOTestNoise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_VCOTestNoise" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Enables/disables the phase noise parameter for the measurement
+Can be  [‘ON’,’OFF’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error massage</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_VCOTestPNoise">
+<span class="sig-name descname"><span class="pre">set_VCOTestPNoise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_VCOTestPNoise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_VCOTestPNoise" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Enables/disables the phase noise parameter for the measurement.
+CAn be set to [‘ON’,’OFF’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error massage</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_VCOTestPnoiseOFFSet">
+<span class="sig-name descname"><span class="pre">set_VCOTestPnoiseOFFSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_VCOTestPnoiseOFFSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_VCOTestPnoiseOFFSet" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value1</strong> (<em>float</em>) – freq val 1</p></li>
+<li><p><strong>value2</strong> (<em>float</em>) – freq val 2</p></li>
+<li><p><strong>value3</strong> (<em>float</em>) – freq val 3</p></li>
+<li><p><strong>value4</strong> (<em>float</em>) – freq val 4</p></li>
+</ul>
+</dd>
+</dl>
+<p>Sets up to 4 offset frequencies at which the phase noise is measured.
+At least 1 parameter is required. Blank parameters are set to 0
+(disabled). The query returns the set frequency for the specified
+offset. The offset can be specified with the &lt;sel&gt; parameter and can
+be chosen from 1|2|3|4</p>
+<p>Unit HZ</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_VCOTestPoint">
+<span class="sig-name descname"><span class="pre">set_VCOTestPoint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_VCOTestPoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_VCOTestPoint" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Sets the number rof voltage points to use in the measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_VCOTestPower">
+<span class="sig-name descname"><span class="pre">set_VCOTestPower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_VCOTestPower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_VCOTestPower" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Enables/disables the power parameter for the measurement.
+Can be [‘ON’,’OFF’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error massage</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_VCOTestStart">
+<span class="sig-name descname"><span class="pre">set_VCOTestStart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_VCOTestStart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_VCOTestStart" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Sets the start tuning voltage for the measurement.
+Unit V</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_VCOTestStop">
+<span class="sig-name descname"><span class="pre">set_VCOTestStop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_VCOTestStop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_VCOTestStop" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Sets the stop tuning voltage for the measurement.
+Unit V</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.set_VCOWait">
+<span class="sig-name descname"><span class="pre">set_VCOWait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_VCOWait"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_VCOWait" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>str</em>) – Can be [‘ALL’,’NEXT’]</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – This command requests a preliminary result during the measurement and blocks until
+the resultis ready. The first parameter (required) specifies the target iteration
+to be saved. NEXT specifies the next possible iteration, ALL specifies the last
+iteration of the measurement (i.e. waits for the measurement to finish) and an
+iteger specifies the specific iteration requested.The second parameter (optional)
+defines a timeout in milliseconds. If the command terminates without generating a
+preliminary result. It will produce an error. This error can be queried with
+SYST:ERR? or SYST:ERR:ALL?.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DESCRIPTION.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TYPE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="APPH.APPH.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.write" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="KEITHLEY2612.html" class="btn btn-neutral float-left" title="KEITHLEY2612 module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CoBrite.html" class="btn btn-neutral float-right" title="CoBrite module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Martin.Mihaylov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

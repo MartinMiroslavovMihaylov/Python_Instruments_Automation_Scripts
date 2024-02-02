@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PM100D &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Instruments Automatisation Libraries
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Instruments Automatisation Libraries</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">PM100D</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for PM100D</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Thu Dec  2 08:27:01 2021</span>
+
+<span class="sd">@author: MartinMihaylov</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pyvisa</span> <span class="k">as</span> <span class="nn">visa</span>
+
+
+<span class="n">Serien_Nummer</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;P0024970&#39;</span><span class="p">,</span><span class="s1">&#39;P0033858&#39;</span><span class="p">]</span>
+
+
+
+    
+<div class="viewcode-block" id="PM100D">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D">[docs]</a>
+<span class="k">class</span> <span class="nc">PM100D</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_str</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">ResourceManager</span><span class="p">()</span><span class="o">.</span><span class="n">open_resource</span><span class="p">(</span><span class="s1">&#39;USB0::0x1313::0x8078::&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">resource_str</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;::INSTR&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">))</span>
+
+        
+<div class="viewcode-block" id="PM100D.query">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.query">[docs]</a>
+    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="PM100D.write">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.write">[docs]</a>
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="PM100D.Close">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.Close">[docs]</a>
+    <span class="k">def</span> <span class="nf">Close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Instrument PM100D is closed!&#39;</span><span class="p">)</span></div>
+
+    
+       
+    
+    
+    
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1">#     Self Test</span>
+<span class="c1"># =============================================================================</span>
+    
+<div class="viewcode-block" id="PM100D.self_test">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.self_test">[docs]</a>
+    <span class="k">def</span> <span class="nf">self_test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">             Use this query command to perform the instrument self-test routine. The command</span>
+<span class="sd">             places the coded result in the Output Queue. A returned value of zero (0) indicates</span>
+<span class="sd">             that the test passed, other values indicate that the test failed.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;A returned value of zero (0) indicates that the test passed, other </span><span class="se">\</span>
+<span class="s1">              values indicate that the test failed.&#39;</span><span class="p">)</span>
+              
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;*TST?&#39;</span><span class="p">)</span></div>
+
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Configuration </span>
+<span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="PM100D.ReadConfig">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ReadConfig">[docs]</a>
+    <span class="k">def</span> <span class="nf">ReadConfig</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">            Query the current measurement configuration</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;CONFigure?&#39;</span><span class="p">)</span></div>
+
+
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Fetch last meassure Data </span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="PM100D.fetchData">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.fetchData">[docs]</a>
+    <span class="k">def</span> <span class="nf">fetchData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE float</span>
+<span class="sd">            Read last measurement data. WILL NOT START THE MEASURMENT</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:FETCh?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
+
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># OPC Register</span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="PM100D.OPC">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.OPC">[docs]</a>
+    <span class="k">def</span> <span class="nf">OPC</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Query the OPC value</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;*OPC?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Initialize Commando</span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="PM100D.Init">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.Init">[docs]</a>
+    <span class="k">def</span> <span class="nf">Init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Start measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:INITiate:IMMediate&#39;</span><span class="p">)</span></div>
+
+        
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Abort Measurement</span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="PM100D.Abort">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.Abort">[docs]</a>
+    <span class="k">def</span> <span class="nf">Abort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None. </span>
+<span class="sd">            Abort measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;ABORt&#39;</span><span class="p">)</span></div>
+
+        
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Adapter Settings</span>
+<span class="c1"># =============================================================================</span>
+
+
+<div class="viewcode-block" id="PM100D.ask_AdapterType">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ask_AdapterType">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_AdapterType</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Queries default sensor adapter type</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;INPut:ADAPter:TYPE?&#39;</span><span class="p">)</span></div>
+
+    
+    
+<div class="viewcode-block" id="PM100D.set_AdapterType">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.set_AdapterType">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_AdapterType</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Sets default sensor adapter type:</span>
+<span class="sd">                Allow senor types are: [&#39;PHOTodiode&#39;,&#39;THERmal&#39;,&#39;PYRo&#39;]</span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stState</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PHOTodiode&#39;</span><span class="p">,</span><span class="s1">&#39;THERmal&#39;</span><span class="p">,</span><span class="s1">&#39;PYRo&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stState</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;INPut:ADAPter:TYPE &#39;</span> <span class="o">+</span> <span class="n">state</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Photodiode parameters</span>
+<span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="PM100D.set_PD">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.set_PD">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_PD</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str/int</span>
+<span class="sd">            Sets the bandwidth of the photodiode input stage. </span>
+<span class="sd">                Can be [&#39;ON&#39;,&#39;OFF&#39;,1,0]</span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">            DESCRIPTION.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="n">stState</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stState</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;INPut:PDIode:FILTer:LPASs:STATe &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Ask Instrument </span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="PM100D.ask_beeper">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ask_beeper">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_beeper</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Type print str</span>
+<span class="sd">            Return the state of the the beeper</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;SYSTem:BEEPer:STATe?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Beeper is ON&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Beeper is OFF&#39;</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="PM100D.ask_calibration">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ask_calibration">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_calibration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Returns a human readable calibration string. This is a query</span>
+<span class="sd">            only command. The response is formatted as string response</span>
+<span class="sd">            data.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;CALibration:STRing?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="PM100D.ask_PDPower">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ask_PDPower">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_PDPower</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Queries the photodiode response value.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;CORRection:POWer:PDIOde:RESPonse?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="PM100D.ask_Thermopile">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ask_Thermopile">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_Thermopile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Queries the thermopile response value</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;POWer:THERmopile:RESPonse?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="PM100D.ask_Pyro">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ask_Pyro">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_Pyro</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Queries the pyro-detectro response value</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;ENERgy:PYRO:RESPonse?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+<div class="viewcode-block" id="PM100D.ask_energyRange">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ask_energyRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_energyRange</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Queries the energy range</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;ENERgy:RANGe:UPPer?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="PM100D.ask_currentRange">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ask_currentRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_currentRange</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Queries the current curent range</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;CURRent:DC:UPPer?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="PM100D.ask_AutoCurrentRange">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ask_AutoCurrentRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_AutoCurrentRange</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str </span>
+<span class="sd">            Queries the auto-ranging function state</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;CURRent:DC:AUTO?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="PM100D.ask_freqRange">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ask_freqRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_freqRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Queries the frequency range. </span>
+<span class="sd">            Can be  [&#39;MAX&#39;,&#39;MIN&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">            Queries the frequency range</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">stState</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MAX&#39;</span><span class="p">,</span><span class="s1">&#39;MIN&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stState</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s1">&#39;MAX&#39;</span><span class="p">:</span>
+                <span class="n">state</span> <span class="o">=</span> <span class="s1">&#39;UPPer?&#39;</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;SENSe:FREQuency:Range:&#39;</span> <span class="o">+</span> <span class="n">state</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">state</span> <span class="o">=</span> <span class="s1">&#39;LOWer?&#39;</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;SENSe:FREQuency:Range:&#39;</span> <span class="o">+</span> <span class="n">state</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+ 
+    
+ 
+    
+<div class="viewcode-block" id="PM100D.ask_PowerUnits">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ask_PowerUnits">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_PowerUnits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Queries the power unit</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;SENSe:POWer:DC:UNIT?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+<div class="viewcode-block" id="PM100D.ask_AutoPowerRange">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ask_AutoPowerRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_AutoPowerRange</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        status : print massage str</span>
+<span class="sd">            Queries the auto-ranging function state</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;POWer:DC:RANGe:AUTO?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Auto Range is ON&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Auto Range is OFF&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">status</span></div>
+
+
+    
+
+
+
+<div class="viewcode-block" id="PM100D.ask_PowerRange">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ask_PowerRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_PowerRange</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Queries the power range.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;POWer:DC:RANGe:UPPer?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="PM100D.ask_voltRange">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ask_voltRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_voltRange</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Queries the current voltage range</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;VOLTage:DC:UPPer?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="PM100D.ask_AutoVoltageRange">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ask_AutoVoltageRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_AutoVoltageRange</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">           Queries the auto-ranging function state</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;VOLTage:DC:AUTO?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="PM100D.ask_Wavelength">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ask_Wavelength">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_Wavelength</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Queries the operation wavelength</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;CORRection:WAVelength?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="PM100D.ask_BeamDiameter">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ask_BeamDiameter">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_BeamDiameter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str </span>
+<span class="sd">            Queries the beam diameter</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;CORRection:BEAMdiameter?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="PM100D.ask_Average">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ask_Average">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_Average</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Queries the averaging rate</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+    
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;SENSe:AVERage:COUNt?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Set Power,Energy,Current,Voltage Measurment Values aand Wavelength</span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="PM100D.set_PowerUnits">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.set_PowerUnits">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_PowerUnits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Sets the power unit W or dBm. Can be [&#39;W&#39;,&#39;dBm&#39;].</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stState</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="s1">&#39;dBm&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stState</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;POWer:DC:UNIT &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="PM100D.set_AutoPowerRange">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.set_AutoPowerRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_AutoPowerRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : float/int</span>
+<span class="sd">            Switches the auto-ranging function on and off. Can be set to [&#39;ON&#39;,&#39;OFF&#39;,1,0].</span>
+<span class="sd">        </span>
+<span class="sd">        </span>
+<span class="sd">         Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+<span class="sd">            </span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">stState</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stState</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;POWer:DC:RANGe:AUTO &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+            
+            
+            
+<div class="viewcode-block" id="PM100D.set_PowerRange">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.set_PowerRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_PowerRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float</span>
+<span class="sd">             Sets the current range in W</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="c1">#unit = str(input(&#39;Give a power unit Value [W|dBm]: &#39;))</span>
+        <span class="c1">#self.set_PowerUnits(unit)</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span>  <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;POWer:DC:RANGe:UPPer &#39;</span> <span class="o">+</span> <span class="n">value</span> <span class="o">+</span> <span class="s1">&#39; W&#39;</span><span class="p">)</span>  
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+            
+            
+            
+        
+<div class="viewcode-block" id="PM100D.set_AutoCurrentRange">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.set_AutoCurrentRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_AutoCurrentRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Switches the auto-ranging function on and off. Can be set to [&#39;ON&#39;,&#39;OFF&#39;,1,0].</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stState</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stState</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SENSe:CURRent:DC:RANGe:AUTO &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+            
+            
+            
+            
+<div class="viewcode-block" id="PM100D.set_currentRange">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.set_currentRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_currentRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float</span>
+<span class="sd">           Sets the current range in A.</span>
+<span class="sd">           </span>
+<span class="sd">           </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span>  <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SENSe:CURRent:DC:RANGe:UPPer &#39;</span> <span class="o">+</span> <span class="n">value</span> <span class="o">+</span> <span class="s1">&#39; A&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+            
+            
+            
+     
+<div class="viewcode-block" id="PM100D.set_AutoVoltageRange">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.set_AutoVoltageRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_AutoVoltageRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str/int</span>
+<span class="sd">            witches the auto-ranging function on and off. Can be [&#39;ON&#39;,&#39;OFF&#39;,1,0]</span>
+<span class="sd">        </span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+<span class="sd">            </span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stState</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stState</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SENSe:VOLTage:DC:RANGe:AUTO &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+            
+            
+         
+<div class="viewcode-block" id="PM100D.set_voltageRange">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.set_voltageRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_voltageRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float</span>
+<span class="sd">            Sets the voltage range in V</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span>  <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SENSe:VOLTage:DC:RANGe:UPPer &#39;</span> <span class="o">+</span> <span class="n">value</span> <span class="o">+</span> <span class="s1">&#39; V&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+        
+        
+<div class="viewcode-block" id="PM100D.set_energyRange">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.set_energyRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_energyRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float</span>
+<span class="sd">             Sets the voltage range in J</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span>  <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SENSe:ENERgy:DC:RANGe:UPPer &#39;</span> <span class="o">+</span> <span class="n">value</span> <span class="o">+</span> <span class="s1">&#39; J&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+    
+    
+    
+    
+<div class="viewcode-block" id="PM100D.set_WaveLength">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.set_WaveLength">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_WaveLength</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float</span>
+<span class="sd">            Sets the operation wavelength in nm.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SENSe:CORRection:WAVelength &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; nm&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+<div class="viewcode-block" id="PM100D.set_Average">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.set_Average">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_Average</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float</span>
+<span class="sd">            Sets the averaging rate (1 sample takes approx. 3ms)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SENSe:AVERage:COUNt &#39;</span> <span class="o">+</span> <span class="n">value</span><span class="p">)</span></div>
+
+        
+        
+        
+        
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Configure</span>
+<span class="c1"># =============================================================================</span>
+
+
+<div class="viewcode-block" id="PM100D.ConfigPower">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ConfigPower">[docs]</a>
+    <span class="k">def</span> <span class="nf">ConfigPower</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Configure for power measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:CONFigure:POWer&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+<div class="viewcode-block" id="PM100D.ConfigCurrent">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ConfigCurrent">[docs]</a>
+    <span class="k">def</span> <span class="nf">ConfigCurrent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">             Configure for current measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:CONFigure:CURRent:DC&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+        
+<div class="viewcode-block" id="PM100D.ConfigVoltage">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ConfigVoltage">[docs]</a>
+    <span class="k">def</span> <span class="nf">ConfigVoltage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Configure for voltage measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:CONFigure::VOLTage:DC&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+        
+<div class="viewcode-block" id="PM100D.ConfigEnergy">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ConfigEnergy">[docs]</a>
+    <span class="k">def</span> <span class="nf">ConfigEnergy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Configure for energy measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:CONFigure:ENERgy&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+        
+<div class="viewcode-block" id="PM100D.ConfigFreq">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ConfigFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">ConfigFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Configure for frequency measuremen</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:CONFigure:FREQuency&#39;</span><span class="p">)</span></div>
+
+      
+        
+      
+        
+<div class="viewcode-block" id="PM100D.ConfigPowerDensity">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ConfigPowerDensity">[docs]</a>
+    <span class="k">def</span> <span class="nf">ConfigPowerDensity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Configure for power density measuremen</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:CONFigure:PDENsity&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+<div class="viewcode-block" id="PM100D.ConfigEnergyDensity">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ConfigEnergyDensity">[docs]</a>
+    <span class="k">def</span> <span class="nf">ConfigEnergyDensity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Configure for energy density measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:CONFigure:EDENsity&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+<div class="viewcode-block" id="PM100D.ConfigResistance">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ConfigResistance">[docs]</a>
+    <span class="k">def</span> <span class="nf">ConfigResistance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Configure for sensor presence resistance measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:CONFigure:RESistance&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+<div class="viewcode-block" id="PM100D.ConfigTemp">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.ConfigTemp">[docs]</a>
+    <span class="k">def</span> <span class="nf">ConfigTemp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Configure for sensor temperature measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:CONFigure:TEMPerature&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Perform Measurment    </span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="PM100D.MeasPower">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.MeasPower">[docs]</a>
+    <span class="k">def</span> <span class="nf">MeasPower</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Perform Power meas</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;MEASure:POWer&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+<div class="viewcode-block" id="PM100D.MeasCurrent">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.MeasCurrent">[docs]</a>
+    <span class="k">def</span> <span class="nf">MeasCurrent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Performs a current measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;MEASure:CURRent:DC &#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+        
+<div class="viewcode-block" id="PM100D.MeasVoltage">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.MeasVoltage">[docs]</a>
+    <span class="k">def</span> <span class="nf">MeasVoltage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Performs a voltage measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;MEASure:VOLTage:DC&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+        
+        
+<div class="viewcode-block" id="PM100D.MeasEnergy">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.MeasEnergy">[docs]</a>
+    <span class="k">def</span> <span class="nf">MeasEnergy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Performs a energy measuremen</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;MEASure:ENERgy&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+        
+<div class="viewcode-block" id="PM100D.MeasPowerDensity">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.MeasPowerDensity">[docs]</a>
+    <span class="k">def</span> <span class="nf">MeasPowerDensity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Performs a power density measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;MEASure:PDENsity&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+        
+<div class="viewcode-block" id="PM100D.MeasEnergyDensity">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.MeasEnergyDensity">[docs]</a>
+    <span class="k">def</span> <span class="nf">MeasEnergyDensity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Performs a energy density measuremen</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;MEASure:EDENsity&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+        
+<div class="viewcode-block" id="PM100D.MeasResistance">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.MeasResistance">[docs]</a>
+    <span class="k">def</span> <span class="nf">MeasResistance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">             Performs a sensor presence resistance measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;MEASure:RESistance&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+        
+        
+<div class="viewcode-block" id="PM100D.MeasTemp">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.MeasTemp">[docs]</a>
+    <span class="k">def</span> <span class="nf">MeasTemp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">             Performs a sensor temperature measuremen</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;MEASure:TEMPerature&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+<div class="viewcode-block" id="PM100D.MeasFreq">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.MeasFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">MeasFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Performs a frequency measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;MEASure:FREQuency&#39;</span><span class="p">)</span></div>
+
+        
+        
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Measurment Test </span>
+<span class="c1"># =============================================================================</span>
+    
+<div class="viewcode-block" id="PM100D.adjustPowerMeas">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.adjustPowerMeas">[docs]</a>
+    <span class="k">def</span> <span class="nf">adjustPowerMeas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Adjust the Power Measurments</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">un</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Set Power unit W/dBm: &#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_PowerUnits</span><span class="p">(</span><span class="n">un</span><span class="p">)</span>
+        <span class="n">dis</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Set Power Measurment Range auto/manual: &#39;</span><span class="p">)</span>
+        <span class="n">disList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span><span class="s1">&#39;manual&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">dis</span> <span class="ow">in</span> <span class="n">disList</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dis</span> <span class="o">==</span> <span class="s1">&#39;auto&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_AutoPowerRange</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_AutoPowerRange</span><span class="p">(</span><span class="s1">&#39;OFF&#39;</span><span class="p">)</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Sets the upper Power range in W to: &#39;</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_PowerRange</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid input! adjustPowerMeas() is stoped!&#39;</span><span class="p">)</span></div>
+
+      
+            
+      
+        
+<div class="viewcode-block" id="PM100D.adjustEnergyMeas">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.adjustEnergyMeas">[docs]</a>
+    <span class="k">def</span> <span class="nf">adjustEnergyMeas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">           Adjust the Energy Measurment.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Energy is measured in J&#39;</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Set Energy range in J: &#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_energyRange</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
+
+        
+        
+        
+        
+        
+        
+<div class="viewcode-block" id="PM100D.adjustVoltageRange">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.adjustVoltageRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">adjustVoltageRange</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Adjust the Voltage Measurments.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">dis</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Set Voltage Measurment Range auto/manual: &#39;</span><span class="p">)</span>
+        <span class="n">disList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span><span class="s1">&#39;manual&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">dis</span> <span class="ow">in</span> <span class="n">disList</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dis</span> <span class="o">==</span> <span class="s1">&#39;auto&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_AutoVoltageRange</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_AutoVoltageRange</span><span class="p">(</span><span class="s1">&#39;OFF&#39;</span><span class="p">)</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Sets the upper range to: &#39;</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_voltageRange</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid input! adjustVoltageRange() is stoped!&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="PM100D.adjustCurrentRange">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.adjustCurrentRange">[docs]</a>
+    <span class="k">def</span> <span class="nf">adjustCurrentRange</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Adjust the Voltage Measurment.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">dis</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Set Current Measurment Range auto/manual: &#39;</span><span class="p">)</span>
+        <span class="n">disList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span><span class="s1">&#39;manual&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">dis</span> <span class="ow">in</span> <span class="n">disList</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dis</span> <span class="o">==</span> <span class="s1">&#39;auto&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_AutoCurrentRange</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_AutoVoltageRange</span><span class="p">(</span><span class="s1">&#39;OFF&#39;</span><span class="p">)</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Sets the upper range to: &#39;</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_currentRange</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid input! adjustVoltageRange() is stoped!&#39;</span><span class="p">)</span></div>
+
+        
+      
+           
+
+        
+<div class="viewcode-block" id="PM100D.set_Parameters">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.set_Parameters">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_Parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Type</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        Type : str</span>
+<span class="sd">            This function will set the measurments parameters.</span>
+<span class="sd">            Can be set to Type = [&#39;Power&#39;,&#39;Energy&#39;,&#39;Current&#39;,&#39;Voltage&#39;]</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        
+        <span class="n">waveL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Sets the operation wavelength in nm: &#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_WaveLength</span><span class="p">(</span><span class="n">waveL</span><span class="p">)</span>
+        <span class="n">diss</span> <span class="o">=</span> <span class="n">Type</span>
+        <span class="n">dissList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Power&#39;</span><span class="p">,</span><span class="s1">&#39;Energy&#39;</span><span class="p">,</span><span class="s1">&#39;Current&#39;</span><span class="p">,</span><span class="s1">&#39;Voltage&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">diss</span> <span class="ow">in</span> <span class="n">dissList</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">diss</span> <span class="o">==</span> <span class="s1">&#39;Power&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">adjustPowerMeas</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">diss</span> <span class="o">==</span> <span class="s1">&#39;Energy&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">adjustEnergyMeas</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">diss</span> <span class="o">==</span> <span class="s1">&#39;Voltage&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">adjustVoltageRange</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">adjustCurrentRange</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid input! Function will be stoped!&#39;</span><span class="p">)</span></div>
+
+            
+        
+        
+        
+        
+        
+        
+<div class="viewcode-block" id="PM100D.DisplayParam">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.DisplayParam">[docs]</a>
+    <span class="k">def</span> <span class="nf">DisplayParam</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Type</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        Type : str</span>
+<span class="sd">            This function will print all the adjusted parameters.</span>
+<span class="sd">            Can be set to Type = [&#39;Power&#39;,&#39;Energy&#39;,&#39;Current&#39;,&#39;Voltage&#39;]</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Adapter Type: &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_AdapterType</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Max Frequency range: &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_freqRange</span><span class="p">(</span><span class="s1">&#39;MAX&#39;</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Min Frequency range: &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_freqRange</span><span class="p">(</span><span class="s1">&#39;MIN&#39;</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Waveelength: &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_Wavelength</span><span class="p">())</span>
+        
+        <span class="n">meas</span> <span class="o">=</span> <span class="n">Type</span>
+        <span class="n">measList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Power&#39;</span><span class="p">,</span><span class="s1">&#39;Energy&#39;</span><span class="p">,</span><span class="s1">&#39;Current&#39;</span><span class="p">,</span><span class="s1">&#39;Voltage&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">meas</span> <span class="ow">in</span> <span class="n">measList</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">meas</span> <span class="o">==</span> <span class="s1">&#39;Power&#39;</span><span class="p">:</span> 
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Power Unit set: &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_PowerUnits</span><span class="p">())</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Power range auto: &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_AutoPowerRange</span><span class="p">())</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Power Range set: &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_PowerRange</span><span class="p">())</span>
+                
+            <span class="k">elif</span> <span class="n">meas</span> <span class="o">==</span> <span class="s1">&#39;Energy&#39;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Energy range auto: &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_energyRange</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="n">meas</span> <span class="o">==</span> <span class="s1">&#39;Voltage&#39;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Voltage range auto: &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_AutoVoltageRange</span><span class="p">())</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Voltage range: &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_voltRange</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="n">meas</span> <span class="o">==</span> <span class="s1">&#39;Current&#39;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Current range auto: &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_AutoCurrentRange</span><span class="p">())</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Current range: &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_currentRange</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid Value! Function will be terminated.&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+        
+        
+<div class="viewcode-block" id="PM100D.DisplayParamDict">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.DisplayParamDict">[docs]</a>
+    <span class="k">def</span> <span class="nf">DisplayParamDict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Type</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        Type : str</span>
+<span class="sd">            This function will print all the adjusted parameters.</span>
+<span class="sd">            Can be set to Type = [&#39;Power&#39;,&#39;Energy&#39;,&#39;Current&#39;,&#39;Voltage&#39;]</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Headers : str</span>
+<span class="sd">            String with [&#39;Power&#39;,&#39;Energy&#39;,&#39;Current&#39;,&#39;Voltage&#39;]</span>
+<span class="sd">        Data : lidt</span>
+<span class="sd">            Data from the instrument.</span>
+<span class="sd">        Params : list</span>
+<span class="sd">            List with str for different data that are extractet from the instrument.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This function will print all the adjusted parameters.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">Headers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Power&#39;</span><span class="p">,</span><span class="s1">&#39;Energy&#39;</span><span class="p">,</span><span class="s1">&#39;Current&#39;</span><span class="p">,</span><span class="s1">&#39;Voltage&#39;</span><span class="p">]</span>
+        <span class="n">Params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Adapter Type&#39;</span><span class="p">,</span><span class="s1">&#39;Max Frequency range&#39;</span><span class="p">,</span><span class="s1">&#39;Min Frequency range&#39;</span><span class="p">,</span><span class="s1">&#39;Waveelength&#39;</span><span class="p">]</span>
+        <span class="n">Data</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_AdapterType</span><span class="p">(),</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_freqRange</span><span class="p">(</span><span class="s1">&#39;MAX&#39;</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_freqRange</span><span class="p">(</span><span class="s1">&#39;MIN&#39;</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_Wavelength</span><span class="p">()]</span>
+    
+        <span class="n">meas</span> <span class="o">=</span> <span class="n">Type</span>
+        <span class="n">measList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Power&#39;</span><span class="p">,</span><span class="s1">&#39;Energy&#39;</span><span class="p">,</span><span class="s1">&#39;Current&#39;</span><span class="p">,</span><span class="s1">&#39;Voltage&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">meas</span> <span class="ow">in</span> <span class="n">measList</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">meas</span> <span class="o">==</span> <span class="s1">&#39;Power&#39;</span><span class="p">:</span> 
+                <span class="n">Params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Power Unit set&#39;</span><span class="p">)</span>
+                <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_PowerUnits</span><span class="p">())</span>
+                <span class="n">Params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Power range auto&#39;</span><span class="p">)</span>
+                <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_AutoPowerRange</span><span class="p">())</span>
+                <span class="n">Params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Power Range set&#39;</span><span class="p">)</span>
+                <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_PowerRange</span><span class="p">())</span> 
+             
+            <span class="k">elif</span> <span class="n">meas</span> <span class="o">==</span> <span class="s1">&#39;Energy&#39;</span><span class="p">:</span>
+                <span class="n">Params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Energy range auto&#39;</span><span class="p">)</span>
+                <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_energyRange</span><span class="p">())</span>
+                
+            <span class="k">elif</span> <span class="n">meas</span> <span class="o">==</span> <span class="s1">&#39;Voltage&#39;</span><span class="p">:</span>
+                <span class="n">Params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Voltage range auto&#39;</span><span class="p">)</span>
+                <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_AutoVoltageRange</span><span class="p">())</span>
+                <span class="n">Params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Voltage range&#39;</span><span class="p">)</span>
+                <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_voltRange</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="n">meas</span> <span class="o">==</span> <span class="s1">&#39;Current&#39;</span><span class="p">:</span>
+                <span class="n">Params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Current range auto&#39;</span><span class="p">)</span>
+                <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_AutoCurrentRange</span><span class="p">())</span>
+                <span class="n">Params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Current range&#39;</span><span class="p">)</span>
+                <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_currentRange</span><span class="p">())</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid Value! Function will be terminated.&#39;</span><span class="p">)</span>
+            
+        <span class="k">return</span> <span class="n">Headers</span><span class="p">,</span><span class="n">Data</span><span class="p">,</span><span class="n">Params</span></div>
+
+        
+        
+                
+                
+
+                
+<div class="viewcode-block" id="PM100D.PowerMeas">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.PowerMeas">[docs]</a>
+    <span class="k">def</span> <span class="nf">PowerMeas</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        data : Data from the measurment </span>
+<span class="sd">            Performs a power measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Performs a power measurement</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This Function prtforme Power measurments.&#39;</span><span class="p">)</span>
+        <span class="c1">#print(&#39;To go on whit the measurments please check again the parameters set!&#39;)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_Parameters</span><span class="p">(</span><span class="s1">&#39;Power&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#####################################&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">DisplayParam</span><span class="p">(</span><span class="s1">&#39;Power&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#####################################&#39;</span><span class="p">)</span>
+
+        <span class="n">com</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Should the measurment proceed yes/no: &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">com</span> <span class="o">==</span> <span class="s1">&#39;yes&#39;</span><span class="p">:</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>
+            <span class="n">complite</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="n">complite</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+                <span class="n">complite</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPC</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="mf">0.1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ConfigPower</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">MeasPower</span><span class="p">()</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetchData</span><span class="p">()</span>
+            
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Measurment is canceled!&#39;</span><span class="p">)</span></div>
+
+
+             
+
+<div class="viewcode-block" id="PM100D.DefaultPowerMeas">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.DefaultPowerMeas">[docs]</a>
+    <span class="k">def</span> <span class="nf">DefaultPowerMeas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">WaveLength</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Data from the measurment </span>
+<span class="sd">            Performs a power measurement whit hard codded parameter!.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_PowerUnits</span><span class="p">(</span><span class="s1">&#39;dBm&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_WaveLength</span><span class="p">(</span><span class="n">WaveLength</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_AutoPowerRange</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span>
+        
+        <span class="c1">#print(&#39;#####################################&#39;)</span>
+        <span class="c1">#self.DisplayParam(&#39;Power&#39;)</span>
+        <span class="c1">#print(&#39;#####################################&#39;)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>
+        <span class="n">complite</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">complite</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+            <span class="n">complite</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPC</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ConfigPower</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MeasPower</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetchData</span><span class="p">()</span>   </div>
+
+
+
+
+
+<div class="viewcode-block" id="PM100D.PowerSpecifications">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.PowerSpecifications">[docs]</a>
+    <span class="k">def</span> <span class="nf">PowerSpecifications</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Return Instrument parameters</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">DisplayParam</span><span class="p">(</span><span class="s1">&#39;Power&#39;</span><span class="p">)</span></div>
+</div>
+
+        
+        
+
+        
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Martin.Mihaylov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

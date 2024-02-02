@@ -1,0 +1,2126 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MS4647B &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Instruments Automatisation Libraries
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Instruments Automatisation Libraries</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">MS4647B</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for MS4647B</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Mon Dec 13 10:40:31 2021</span>
+
+<span class="sd">@author: Martin.Mihaylov</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pyvisa</span> <span class="k">as</span> <span class="nn">visa</span>
+
+
+
+    
+<div class="viewcode-block" id="MS4647B">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B">[docs]</a>
+<span class="k">class</span> <span class="nc">MS4647B</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Connect to Device and print the Identification Number.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">ResourceManager</span><span class="p">(</span><span class="s1">&#39;@py&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">open_resource</span><span class="p">(</span><span class="n">resource_str</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="MS4647B.query">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.query">[docs]</a>
+    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="MS4647B.write">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.write">[docs]</a>
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="MS4647B.Close">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.Close">[docs]</a>
+    <span class="k">def</span> <span class="nf">Close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Instrument Anritsu MS4647B is closed!&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+    
+
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Get the instrument Serial Number and Model </span>
+<span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="MS4647B.getIdn">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.getIdn">[docs]</a>
+    <span class="k">def</span> <span class="nf">getIdn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">                Device Serial Number and Model</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;*IDN?&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Return to local </span>
+<span class="c1"># =============================================================================</span>
+        
+<div class="viewcode-block" id="MS4647B.RTL">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.RTL">[docs]</a>
+    <span class="k">def</span> <span class="nf">RTL</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">        Description: Send all devices to local operation. No query</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;RTL&#39;</span><span class="p">)</span></div>
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Ask </span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="MS4647B.ask_SubSystem">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_SubSystem">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_SubSystem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">                The :SENSe:HOLD subsystem command sets the hold function for all </span>
+<span class="sd">                channels on a per-instrument basis</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:HOLD:FUNCtion?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_SweepCount">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_SweepCount">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_SweepCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">            Channel Number 1,2,3...</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">           Description: Query only. Outputs the averaging sweep count for the </span>
+<span class="sd">            indicated channel.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENS&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:AVER:SWE?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_TestSet">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_TestSet">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_TestSet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">            Channel Number 1,2,3...</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">           Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">            Query State of TS3739.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENS&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:TS3739:STATe?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_SysErrors">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_SysErrors">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_SysErrors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">            Description: Query only. Outputs the number of errors in the error queue.</span>
+<span class="sd">        </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SYST:ERR:COUN?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_StatOperation">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_StatOperation">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_StatOperation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">                Description: Query only. Outputs the value of the operation status </span>
+<span class="sd">                condition reg.</span>
+<span class="sd">                Range: 0 to 32767</span>
+<span class="sd">                Default Value: 0</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:STAT:OPER:COND?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_StatOperationRegister">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_StatOperationRegister">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_StatOperationRegister</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE    str</span>
+<span class="sd">                Sets the value of the operation status enable register. </span>
+<span class="sd">                Outputs the value of the operation status enable register.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:STATus:OPERation:ENABle?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_FreqSpan">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_FreqSpan">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_FreqSpan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE  : float</span>
+<span class="sd">                Optional query. Span is automatically calculated as Stop Frequency minus</span>
+<span class="sd">                Start Frequency. The query returns the resulting span in Hertz.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:FREQuency:SPAN?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_CenterFreq">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_CenterFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_CenterFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE : float</span>
+<span class="sd">                Optional query. Center frequency is automatically calculated using Stop Frequency and Start</span>
+<span class="sd">                Frequency as:</span>
+<span class="sd">            </span>
+<span class="sd">                    Fc = ((Fstop - Fstart)/2) + Fstart</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:FREQuency:CENTer?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_CWFreq">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_CWFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_CWFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">         Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE : float</span>
+<span class="sd">                Sets the CW frequency of the indicated channel. Outputs the CW </span>
+<span class="sd">                frequency of the indicated channel.</span>
+
+<span class="sd">                The output parameter is in Hertz.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENS&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:FREQ:CW?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_DataFreq">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_DataFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_DataFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">           Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE : str</span>
+<span class="sd">            Outputs the frequency list for the indicated channel</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:FREQuency:DATA?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_SweepChannelStatus">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_SweepChannelStatus">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_SweepChannelStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE : str</span>
+<span class="sd">            The query outputs the On/Off state of the option to sweep only the active </span>
+<span class="sd">            channel</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:DISP:ACT:CHAN:SWE:STAT?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+  
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_AssignetDataPort">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_AssignetDataPort">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_AssignetDataPort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">            the N(ports number) for the .sNp data output.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE : str</span>
+<span class="sd">            Outputs the data port pair assigned to use when creating an sNp data </span>
+<span class="sd">            file on the indicated channel.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+       
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="p">,</span><span class="s1">&#39;4&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;FORMat:S&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;P:PORT?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> </div>
+
+            
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_ParamFormInFile">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_ParamFormInFile">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_ParamFormInFile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Outputs the parameter format displayed in an SNP data file.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:FORMat:SNP:PARameter?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_RFState">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_RFState">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_RFState</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE : str</span>
+<span class="sd">            Outputs the RF on/off state in Hold</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SYST:HOLD:RF?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_SetAverageState">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_SetAverageState">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_SetAverageState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE : str</span>
+<span class="sd">            Outputs the averaging function on/off status on the indicated channel.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENS&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:AVER?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+          
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_AverageFunctionType">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_AverageFunctionType">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_AverageFunctionType</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">         Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE : str</span>
+<span class="sd">            Outputs the averaging function type of point-by-point or sweep-by-sweep.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENS&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:AVER:TYP?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_AverageCount">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_AverageCount">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_AverageCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE : float</span>
+<span class="sd">            Outputs the averaging count for the indicated channel.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENS&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:AVER:COUN?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_TransferData">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_TransferData">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_TransferData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">portNumb</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+<span class="sd">            File Name</span>
+<span class="sd">        portNumb : int</span>
+<span class="sd">            the N(ports number) for the .sNp data output.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE : str</span>
+<span class="sd">            The query outputs the disk file data to the</span>
+<span class="sd">            GPIB. The file must exist</span>
+<span class="sd">            </span>
+<span class="sd">            </span>
+<span class="sd">            </span>
+<span class="sd">            Hard coded path on the VNA = &#39;C:/tmp/&#39;</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;C:/tmp/&#39;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_.s&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">portNumb</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;p&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:MMEM:TRAN? &#39;</span><span class="o">+</span><span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_TransferDataCSV">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_TransferDataCSV">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_TransferDataCSV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+<span class="sd">            File Name</span>
+<span class="sd">        portNumb : int</span>
+<span class="sd">            the N(ports number) for the .sNp data output.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE : str</span>
+<span class="sd">            The query outputs the disk file data to the</span>
+<span class="sd">            GPIB. The file must exist</span>
+<span class="sd">            </span>
+<span class="sd">            </span>
+<span class="sd">            </span>
+<span class="sd">            Hard coded path on the VNA = &#39;C:/tmp/&#39;</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;C:/tmp/&#39;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;_.csv&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:MMEM:TRAN? &#39;</span><span class="o">+</span><span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span></div>
+
+
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_ResolutionBW">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_ResolutionBW">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_ResolutionBW</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE : float</span>
+<span class="sd">           The command sets the IF bandwidth for the indicated channel. The query outputs the IF</span>
+<span class="sd">           bandwidth for the indicated channel.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENS&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:BAND?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_PowerOnPort">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_PowerOnPort">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_PowerOnPort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">segment</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        segment : int </span>
+<span class="sd">            Selected Source. Can be from 1-16</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">            Channel Number 1,2,3...</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Value: flaot</span>
+<span class="sd">             Outputs the power level of the indicated port on the indicated channel.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        
+        <span class="n">stSegment</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">stChanNumber</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">segment</span> <span class="ow">in</span> <span class="n">stSegment</span> <span class="ow">and</span> <span class="n">ChanNumber</span> <span class="ow">in</span> <span class="n">stChanNumber</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOUR&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:POW:PORT&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> </div>
+
+            
+            
+            
+            
+            
+<div class="viewcode-block" id="MS4647B.ask_SmoothingState">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_SmoothingState">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_SmoothingState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ChanNumber</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">            Channel Number 1,2,3...</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">            Query outputs the smoothing on/off status for the indicated channel and active trace.</span>
+<span class="sd">            1 = ON</span>
+<span class="sd">            2 = OFF</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:CALC&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:SMO?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
+
+    
+
+
+
+
+<div class="viewcode-block" id="MS4647B.ask_DisplayTrace">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_DisplayTrace">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_DisplayTrace</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">            Query only. Outputs the Active Channel number.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:DISPlay:WINDow:ACTivate?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_DisplayCount">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_DisplayCount">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_DisplayCount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">            Quuery the number of displayed channels.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:DISP:COUN?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_DisplayTitle">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_DisplayTitle">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_DisplayTitle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">            Outputs the user title for the channel</span>
+<span class="sd">            indicated</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:DISP:WIND1:TITL?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_SelectParameter">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_SelectParameter">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_SelectParameter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">           The query outputs only the selected parameter.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:CALC1:PAR1:DEF?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_SweepDelay">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_SweepDelay">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_SweepDelay</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">            Outputs the sweep delay time of the indicated channel.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENS1:SWE:DEL?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.ask_SweepTime">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.ask_SweepTime">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_SweepTime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">            Outputs the Sweep Time of the indicated  channel.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENS1:SWE:TIM?&#39;</span><span class="p">))</span></div>
+
+    
+    
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Set</span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="MS4647B.set_ClearAverage">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_ClearAverage">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_ClearAverage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+<span class="sd">                     Description: Clears and restarts the averaging sweep count of the </span>
+<span class="sd">                     indicated channel.</span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENS&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:AVER:CLE&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_SubSystemHold">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_SubSystemHold">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_SubSystemHold</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">        Sets the hold function for all channels on a per-instrument basis.</span>
+<span class="sd">        The sweep is stopped.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENS:HOLD:FUNC HOLD&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_SubSystemSing">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_SubSystemSing">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_SubSystemSing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">        The sweep restarts and sweeps until the end of the</span>
+<span class="sd">        sweep, at which point it sets the end of sweep status bit and</span>
+<span class="sd">        stops.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENS:HOLD:FUNC SING&#39;</span><span class="p">)</span></div>
+
+     
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_SubSystemCont">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_SubSystemCont">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_SubSystemCont</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">        The sweep is sweeping continuously</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENS:HOLD:FUNC CONT&#39;</span><span class="p">)</span>    </div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_DisplayScale">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_DisplayScale">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_DisplayScale</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">        Description: Auto scales all traces on all channels. </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:DISPlay:Y:AUTO&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_TS3739">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_TS3739">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_TS3739</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">       Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+<span class="sd">        state : str/int</span>
+<span class="sd">                The :SENSe{1-16}:TS3739 subsystem commands are used to configure and </span>
+<span class="sd">                control the VectorStar ME7838x  Broadband/Millimeter-Wave 3738A Test Set.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENS&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:TS3739 &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> 
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> </div>
+
+            
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_ClearError">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_ClearError">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_ClearError</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">        Description: Clears the contents of the error queue.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SYST:ERR:CLE&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_DisplayColorReset">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_DisplayColorReset">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_DisplayColorReset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">        Resets all colors and inverted colors to their normal default values.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:DISP:COL:RES&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_StatOperationRegister">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_StatOperationRegister">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_StatOperationRegister</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : TYPE</span>
+<span class="sd">            Sets the value of the operation status enable register. </span>
+<span class="sd">            Outputs the value of the operation status enable register.</span>
+<span class="sd">            The input parameter is a unitless number.</span>
+<span class="sd">            </span>
+<span class="sd">            Range: 0 to 65535</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:STAT:OPER:ENAB &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_StartFreq">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_StartFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_StartFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+<span class="sd">        value : int/str in form - 10E+9</span>
+<span class="sd">                Sets the start value of the sweep range of the indicated channel. </span>
+<span class="sd">                The input parameter is in Hertz, Meters, or Seconds.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:FREQuency:STARt &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> </div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_StopFreq">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_StopFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_StopFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+<span class="sd">        value : int/str in form - 10E+9</span>
+<span class="sd">                Sets the stop value of the sweep range of the indicated channel. </span>
+<span class="sd">                The input parameter is in Hertz, Meters, or Seconds.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:FREQuency:STOP &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> </div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_CenterFreq">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_CenterFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_CenterFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+<span class="sd">        value : int/str in form - 10E+9</span>
+<span class="sd">                Sets the center value of the sweep range of the indicated channel. </span>
+<span class="sd">                Outputs the center value of the sweep range of the indicated channel</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENS&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:FREQ:CENT &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_CWFreq">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_CWFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_CWFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+<span class="sd">        value : int/str in form - 10E+9</span>
+<span class="sd">               Sets the CW frequency of the indicated channel. Outputs the CW </span>
+<span class="sd">               frequency of the indicated channel.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENS&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:FREQ:CW &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_SweepChannelStatus">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_SweepChannelStatus">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_SweepChannelStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str/int</span>
+<span class="sd">                The command turns On/Off the option to sweep only the active channel</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:DISP:ACT:CHAN:SWE:STAT  &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_AssignetDataPort">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_AssignetDataPort">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_AssignetDataPort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">,</span><span class="n">value1</span><span class="p">,</span><span class="n">value2</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+<span class="sd">        value1 : int</span>
+<span class="sd">            </span>
+<span class="sd">        value2 : int</span>
+<span class="sd">            </span>
+<span class="sd">            The command assigns the data port pair to use when creating an sNp </span>
+<span class="sd">            data file on the indicated channel. The use of Port 3 and/or Port 4 </span>
+<span class="sd">            requires a 4-port VNA instrument</span>
+<span class="sd">        </span>
+<span class="sd">            PORT12 | PORT13 | PORT14 | PORT23 | PORT24 | PORT34</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">value1</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value1</span><span class="p">)</span>
+        <span class="n">value2</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value1</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="p">,</span><span class="s1">&#39;4&#39;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:CALC&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:FORM:S&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;P:PORT PORT&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value1</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value2</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_ParamFormInFile">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_ParamFormInFile">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_ParamFormInFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        unit : str</span>
+<span class="sd">            Sets the parameter format displayed in an SNP data file. </span>
+<span class="sd">            Where:</span>
+<span class="sd">                 • LINPH = Linear and Phase</span>
+<span class="sd">                 • LOGPH = Log and Phase</span>
+<span class="sd">                 • REIM = Real and Imaginary Numbers</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;LINPH&#39;</span><span class="p">,</span><span class="s1">&#39;LOGPH&#39;</span><span class="p">,</span><span class="s1">&#39;REIM&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:FORM:SNP:PAR &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_RFState">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_RFState">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_RFState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str/int</span>
+<span class="sd">                Sets the RF on/off state in Hold.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SYST:HOLD:RF &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+          
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_SetAverageState">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_SetAverageState">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_SetAverageState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+<span class="sd">        state : int/str</span>
+<span class="sd">             Turns averaging on/off for the indicated channel (Turns on and Off the averaging for all channels).</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENS&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:AVER &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> </div>
+
+           
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_AverageFunctionType">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_AverageFunctionType">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_AverageFunctionType</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Sets the averaging function type to point-by-point or sweep-by-sweep.</span>
+<span class="sd">            POIN | SWE</span>
+<span class="sd">            Default Value: POIN</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;SWE&#39;</span><span class="p">,</span><span class="s1">&#39;POIN&#39;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENS&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:AVER:TYP &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+           <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> </div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_AverageCount">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_AverageCount">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_AverageCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+<span class="sd">        value : int</span>
+<span class="sd">            Sets the averaging count for the indicated channel. The channel must </span>
+<span class="sd">            be turned on.</span>
+<span class="sd">            The input parameter is a unitless number.</span>
+<span class="sd">            Range: 1 to 1024</span>
+<span class="sd">            Default Value: 1</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENS&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:AVER:COUN &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+           <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> </div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_ResolutionBW">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_ResolutionBW">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_ResolutionBW</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">                     Channel Number 1,2,3...</span>
+<span class="sd">        value : int/floa/str</span>
+<span class="sd">           The command sets the IF bandwidth for the indicated channel. The query outputs the IF</span>
+<span class="sd">           bandwidth for the indicated channel.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> 
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENS&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:BAND &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>        
+        <span class="k">else</span><span class="p">:</span>
+           <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> </div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_PowerOnPort">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_PowerOnPort">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_PowerOnPort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">segment</span><span class="p">,</span><span class="n">ChanNumber</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        segment : int </span>
+<span class="sd">            Selected Source. Can be from 1-16</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">            Channel Number 1,2,3...</span>
+<span class="sd">        value : int/floa/str</span>
+<span class="sd">            Sets the power level of the indicated port on the indicated channel.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+   
+        <span class="n">stSegment</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">stChanNumber</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">segment</span> <span class="ow">in</span> <span class="n">stSegment</span> <span class="ow">and</span> <span class="n">ChanNumber</span> <span class="ow">in</span> <span class="n">stChanNumber</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOUR&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:POW:PORT&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> </div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_SmoothingState">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_SmoothingState">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_SmoothingState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ChanNumber</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">            Channel Number 1,2,3...</span>
+<span class="sd">        state : str/int</span>
+<span class="sd">            can be int or str form the list [&#39;ON&#39;,&#39;OFF&#39;,1,0]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">             Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        The command sets the smoothing aperture for the indicated channel and active trace.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:CALC&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;:SMO &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> </div>
+
+        
+    
+    
+    
+     
+<div class="viewcode-block" id="MS4647B.set_SmoothingAPERture">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_SmoothingAPERture">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_SmoothingAPERture</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ChanNumber</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">            Channel Number 1,2,3...</span>
+<span class="sd">        value : int</span>
+<span class="sd">            Procentge smoothing between 0 to 100</span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        The command sets the smoothing aperture for the indicated channel and active trace.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+           
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:CALC&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;SMO:APER &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_DisplayTrace">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_DisplayTrace">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_DisplayTrace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ChanNumber</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">            Channel Number 1,2,3...</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        The command sets the active channel to the indicated number. When the VNA is set to</span>
+<span class="sd">        100,000 point mode, the number of channels is</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+           
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:DISP:WIND&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ChanNumber</span><span class="p">)</span><span class="o">+</span> <span class="s1">&#39;:ACT&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_DisplayCount">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_DisplayCount">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_DisplayCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ChannelNumber</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">            Channel Number 1,2,3...</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns </span>
+<span class="sd">        -------</span>
+<span class="sd">        None: Sets the number of displayed channels. When the VNA is in 25,000 point mode, the</span>
+<span class="sd">        number of channels can only be 1 (one), 2, 3, 4, 6, 8, 9, 10, 12, or 16 channels. If the</span>
+<span class="sd">        channel display is set to a non-listed number (5, 7, 11, 13, 14, 15), the instrument is set to</span>
+<span class="sd">        the next higher channel number. If a number of greater than 16 is entered, the</span>
+<span class="sd">        instrument is set to 16 channels. If the instrument is set to 100,000 points, any input</span>
+<span class="sd">        results in 1 (one) channel. Outputs the number of displayed channels.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChannelNumber</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+           
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:DISP:COUN &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ChannelNumber</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_DisplayTitle">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_DisplayTitle">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_DisplayTitle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ChannelName</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        ChanNumber : int</span>
+<span class="sd">            Channel Number 1,2,3...</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None: Sets the user title for the channel indicated.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ChannelName</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:DISP:WIND1:TITL &#39;</span> <span class="o">+</span> <span class="n">ChannelName</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+        
+<div class="viewcode-block" id="MS4647B.set_SelectParameter">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_SelectParameter">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_SelectParameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">S_Param</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        S_Param : str</span>
+<span class="sd">            S-Parameter selected. </span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None: Select an S-Parameter. 16 S-Parameters for 4 Ports config can be selected.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">S_Paramls</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;S11&#39;</span><span class="p">,</span><span class="s1">&#39;S12&#39;</span><span class="p">,</span><span class="s1">&#39;S13&#39;</span><span class="p">,</span><span class="s1">&#39;S14&#39;</span><span class="p">,</span><span class="s1">&#39;S21&#39;</span><span class="p">,</span><span class="s1">&#39;S22&#39;</span><span class="p">,</span><span class="s1">&#39;S23&#39;</span><span class="p">,</span><span class="s1">&#39;S24&#39;</span><span class="p">,</span><span class="s1">&#39;S31&#39;</span><span class="p">,</span><span class="s1">&#39;S32&#39;</span><span class="p">,</span><span class="s1">&#39;S33&#39;</span><span class="p">,</span><span class="s1">&#39;S34&#39;</span><span class="p">,</span><span class="s1">&#39;S41&#39;</span><span class="p">,</span><span class="s1">&#39;S42&#39;</span><span class="p">,</span><span class="s1">&#39;S43&#39;</span><span class="p">,</span><span class="s1">&#39;S44&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">S_Param</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">S_Param</span> <span class="ow">in</span> <span class="n">S_Paramls</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:CALC1:PAR1:DEF &#39;</span> <span class="o">+</span> <span class="n">S_Param</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_SweepDelay">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_SweepDelay">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_SweepDelay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        time : float</span>
+<span class="sd">            Sets the sweep delay time of the indicated channel.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENS1:SWE:DEL &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="p">))</span></div>
+
+    
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.set_SweepTime">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.set_SweepTime">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_SweepTime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        time : float</span>
+<span class="sd">            Sets the Sweep Time of the indicated channel. </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENS1:SWE:TIM &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="p">))</span></div>
+
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Save </span>
+<span class="c1"># =============================================================================</span>
+        
+<div class="viewcode-block" id="MS4647B.SaveData">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.SaveData">[docs]</a>
+    <span class="k">def</span> <span class="nf">SaveData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">portNumb</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+<span class="sd">            File Name</span>
+<span class="sd">        portNumb : TYPE</span>
+<span class="sd">                The N(ports number) for the .sNp data output.</span>
+<span class="sd">                Description: Stores a data file of the type specified by the filename</span>
+<span class="sd">                extension.No query.</span>
+<span class="sd">                </span>
+<span class="sd">                </span>
+<span class="sd">                Hard coded path on the VNA = &#39;C:/tmp/&#39;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;C:/tmp/&#39;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;_.s&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">portNumb</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;p&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:MMEM:STOR &#39;</span><span class="o">+</span><span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.SaveDataCSV">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.SaveDataCSV">[docs]</a>
+    <span class="k">def</span> <span class="nf">SaveDataCSV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+<span class="sd">            File Name</span>
+<span class="sd">        portNumb : TYPE</span>
+<span class="sd">                The N(ports number) for the .sNp data output.</span>
+<span class="sd">                Description: Stores a data file of the type specified by the filename</span>
+<span class="sd">                extension.No query.</span>
+<span class="sd">                </span>
+<span class="sd">                </span>
+<span class="sd">                Hard coded path on the VNA = &#39;C:/tmp/&#39;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;C:/tmp/&#39;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;_.csv&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:MMEM:STOR &#39;</span><span class="o">+</span><span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.SaveImage">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.SaveImage">[docs]</a>
+    <span class="k">def</span> <span class="nf">SaveImage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+<span class="sd">            File Name</span>
+<span class="sd">        portNumb : TYPE</span>
+<span class="sd">                The N(ports number) for the .sNp data output.</span>
+<span class="sd">                Description: Stores a data file of the type specified by the filename</span>
+<span class="sd">                extension.No query.</span>
+<span class="sd">                </span>
+<span class="sd">                </span>
+<span class="sd">                Hard coded path on the VNA = &#39;C:/tmp/&#39;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;C:/tmp/Image/&#39;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;_.png&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:MMEMory:STORe:IMAGe &#39;</span><span class="o">+</span><span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span></div>
+
+       
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.DeleteData">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.DeleteData">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeleteData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">portNumb</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">                </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+<span class="sd">            File Name</span>
+<span class="sd">        portNumb : TYPE</span>
+<span class="sd">                The N(ports number) for the .sNp data output.</span>
+<span class="sd">                Delete a disk, file, or directory. Use caution with this command as there is no recovery</span>
+<span class="sd">                operation in case of a user mistake or error. No query</span>
+<span class="sd">                </span>
+<span class="sd">                </span>
+<span class="sd">                Hard coded path on the VNA = &#39;C:/tmp/&#39;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;C:/tmp/&#39;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;_.s&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">portNumb</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;p&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:MMEMory:DEL &#39;</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span></div>
+
+       
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.DeleteDataCSV">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.DeleteDataCSV">[docs]</a>
+    <span class="k">def</span> <span class="nf">DeleteDataCSV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">                </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : str</span>
+<span class="sd">            File Name</span>
+<span class="sd">        portNumb : TYPE</span>
+<span class="sd">                The N(ports number) for the .sNp data output.</span>
+<span class="sd">                Delete a disk, file, or directory. Use caution with this command as there is no recovery</span>
+<span class="sd">                operation in case of a user mistake or error. No query</span>
+<span class="sd">                </span>
+<span class="sd">                </span>
+<span class="sd">                Hard coded path on the VNA = &#39;C:/tmp/&#39;</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;C:/tmp/&#39;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;_.csv&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:MMEMory:DEL &#39;</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.SaveTransferData">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.SaveTransferData">[docs]</a>
+    <span class="k">def</span> <span class="nf">SaveTransferData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">portNumb</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        file : str</span>
+<span class="sd">                File data extracted from function ask_TransferData</span>
+<span class="sd">        path : str</span>
+<span class="sd">            Where on the PC to save the data</span>
+<span class="sd">        name : str</span>
+<span class="sd">            Name of the File</span>
+<span class="sd">        portNumb : int/str</span>
+<span class="sd">            The N(ports number) for the .sNp data output.</span>
+<span class="sd">            </span>
+<span class="sd">            Write a text File whit the transfered Data</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+    
+        <span class="n">readinglines</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.s&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">portNumb</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">readinglines</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+                
+    
+    
+    
+    
+<div class="viewcode-block" id="MS4647B.SaveTransferDataCSV">
+<a class="viewcode-back" href="../rst/MS4647B.html#MS4647B.MS4647B.SaveTransferDataCSV">[docs]</a>
+    <span class="k">def</span> <span class="nf">SaveTransferDataCSV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="p">,</span><span class="n">path</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        file : str</span>
+<span class="sd">                File data extracted from function ask_TransferData</span>
+<span class="sd">        path : str</span>
+<span class="sd">            Where on the PC to save the data</span>
+<span class="sd">        name : str</span>
+<span class="sd">            Name of the File</span>
+<span class="sd">        portNumb : int/str</span>
+<span class="sd">            The N(ports number) for the .sNp data output.</span>
+<span class="sd">            </span>
+<span class="sd">            Write a text File whit the transfered Data</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+    
+        <span class="n">readinglines</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">readinglines</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+</div>
+
+
+    
+    
+    
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Martin.Mihaylov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anritsu Vectro Analyzer MS4647B module &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Instruments Automatisation Libraries
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Anritsu Vectro Analyzer MS4647B module</a><ul>
+<li><a class="reference internal" href="#MS4647B.MS4647B"><code class="docutils literal notranslate"><span class="pre">MS4647B</span></code></a><ul>
+<li><a class="reference internal" href="#MS4647B.MS4647B.Close"><code class="docutils literal notranslate"><span class="pre">MS4647B.Close()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.DeleteData"><code class="docutils literal notranslate"><span class="pre">MS4647B.DeleteData()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.DeleteDataCSV"><code class="docutils literal notranslate"><span class="pre">MS4647B.DeleteDataCSV()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.RTL"><code class="docutils literal notranslate"><span class="pre">MS4647B.RTL()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.SaveData"><code class="docutils literal notranslate"><span class="pre">MS4647B.SaveData()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.SaveDataCSV"><code class="docutils literal notranslate"><span class="pre">MS4647B.SaveDataCSV()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.SaveImage"><code class="docutils literal notranslate"><span class="pre">MS4647B.SaveImage()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.SaveTransferData"><code class="docutils literal notranslate"><span class="pre">MS4647B.SaveTransferData()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.SaveTransferDataCSV"><code class="docutils literal notranslate"><span class="pre">MS4647B.SaveTransferDataCSV()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_AssignetDataPort"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_AssignetDataPort()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_AverageCount"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_AverageCount()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_AverageFunctionType"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_AverageFunctionType()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_CWFreq"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_CWFreq()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_CenterFreq"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_CenterFreq()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_DataFreq"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_DataFreq()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_DisplayCount"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_DisplayCount()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_DisplayTitle"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_DisplayTitle()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_DisplayTrace"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_DisplayTrace()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_FreqSpan"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_FreqSpan()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_ParamFormInFile"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_ParamFormInFile()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_PowerOnPort"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_PowerOnPort()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_RFState"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_RFState()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_ResolutionBW"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_ResolutionBW()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_SelectParameter"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_SelectParameter()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_SetAverageState"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_SetAverageState()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_SmoothingState"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_SmoothingState()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_StatOperation"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_StatOperation()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_StatOperationRegister"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_StatOperationRegister()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_SubSystem"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_SubSystem()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_SweepChannelStatus"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_SweepChannelStatus()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_SweepCount"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_SweepCount()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_SweepDelay"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_SweepDelay()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_SweepTime"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_SweepTime()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_SysErrors"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_SysErrors()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_TestSet"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_TestSet()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_TransferData"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_TransferData()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.ask_TransferDataCSV"><code class="docutils literal notranslate"><span class="pre">MS4647B.ask_TransferDataCSV()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.getIdn"><code class="docutils literal notranslate"><span class="pre">MS4647B.getIdn()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.query"><code class="docutils literal notranslate"><span class="pre">MS4647B.query()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_AssignetDataPort"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_AssignetDataPort()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_AverageCount"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_AverageCount()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_AverageFunctionType"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_AverageFunctionType()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_CWFreq"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_CWFreq()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_CenterFreq"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_CenterFreq()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_ClearAverage"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_ClearAverage()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_ClearError"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_ClearError()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_DisplayColorReset"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_DisplayColorReset()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_DisplayCount"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_DisplayCount()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_DisplayScale"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_DisplayScale()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_DisplayTitle"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_DisplayTitle()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_DisplayTrace"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_DisplayTrace()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_ParamFormInFile"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_ParamFormInFile()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_PowerOnPort"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_PowerOnPort()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_RFState"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_RFState()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_ResolutionBW"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_ResolutionBW()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_SelectParameter"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_SelectParameter()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_SetAverageState"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_SetAverageState()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_SmoothingAPERture"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_SmoothingAPERture()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_SmoothingState"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_SmoothingState()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_StartFreq"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_StartFreq()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_StatOperationRegister"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_StatOperationRegister()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_StopFreq"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_StopFreq()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_SubSystemCont"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_SubSystemCont()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_SubSystemHold"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_SubSystemHold()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_SubSystemSing"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_SubSystemSing()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_SweepChannelStatus"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_SweepChannelStatus()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_SweepDelay"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_SweepDelay()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_SweepTime"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_SweepTime()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.set_TS3739"><code class="docutils literal notranslate"><span class="pre">MS4647B.set_TS3739()</span></code></a></li>
+<li><a class="reference internal" href="#MS4647B.MS4647B.write"><code class="docutils literal notranslate"><span class="pre">MS4647B.write()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Instruments Automatisation Libraries</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Anritsu Vectro Analyzer MS4647B module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/rst/MS4647B.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="anritsu-vectro-analyzer-ms4647b-module">
+<h1>Anritsu Vectro Analyzer MS4647B module<a class="headerlink" href="#anritsu-vectro-analyzer-ms4647b-module" title="Link to this heading"></a></h1>
+<p id="module-MS4647B">Created on Mon Dec 13 10:40:31 2021</p>
+<p>&#64;author: Martin.Mihaylov</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="MS4647B.MS4647B">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MS4647B.</span></span><span class="sig-name descname"><span class="pre">MS4647B</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.Close">
+<span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.Close" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.DeleteData">
+<span class="sig-name descname"><span class="pre">DeleteData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">portNumb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.DeleteData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.DeleteData" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – File Name</p></li>
+<li><p><strong>portNumb</strong> – The N(ports number) for the .sNp data output.
+Delete a disk, file, or directory. Use caution with this command as there is no recovery
+operation in case of a user mistake or error. No query</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.DeleteDataCSV">
+<span class="sig-name descname"><span class="pre">DeleteDataCSV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.DeleteDataCSV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.DeleteDataCSV" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – File Name</p></li>
+<li><p><strong>portNumb</strong> – The N(ports number) for the .sNp data output.
+Delete a disk, file, or directory. Use caution with this command as there is no recovery
+operation in case of a user mistake or error. No query</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.RTL">
+<span class="sig-name descname"><span class="pre">RTL</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.RTL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.RTL" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>None.</em></p></li>
+<li><p><strong>Description</strong> (<em>Send all devices to local operation. No query</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.SaveData">
+<span class="sig-name descname"><span class="pre">SaveData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">portNumb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.SaveData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.SaveData" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – File Name</p></li>
+<li><p><strong>portNumb</strong> – The N(ports number) for the .sNp data output.
+Description: Stores a data file of the type specified by the filename
+extension.No query.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.SaveDataCSV">
+<span class="sig-name descname"><span class="pre">SaveDataCSV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.SaveDataCSV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.SaveDataCSV" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – File Name</p></li>
+<li><p><strong>portNumb</strong> – The N(ports number) for the .sNp data output.
+Description: Stores a data file of the type specified by the filename
+extension.No query.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.SaveImage">
+<span class="sig-name descname"><span class="pre">SaveImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.SaveImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.SaveImage" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – File Name</p></li>
+<li><p><strong>portNumb</strong> – The N(ports number) for the .sNp data output.
+Description: Stores a data file of the type specified by the filename
+extension.No query.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.SaveTransferData">
+<span class="sig-name descname"><span class="pre">SaveTransferData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">portNumb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.SaveTransferData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.SaveTransferData" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>str</em>) – File data extracted from function ask_TransferData</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – Where on the PC to save the data</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the File</p></li>
+<li><p><strong>portNumb</strong> (<em>int/str</em>) – <p>The N(ports number) for the .sNp data output.</p>
+<p>Write a text File whit the transfered Data</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.SaveTransferDataCSV">
+<span class="sig-name descname"><span class="pre">SaveTransferDataCSV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.SaveTransferDataCSV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.SaveTransferDataCSV" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>str</em>) – File data extracted from function ask_TransferData</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – Where on the PC to save the data</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the File</p></li>
+<li><p><strong>portNumb</strong> (<em>int/str</em>) – <p>The N(ports number) for the .sNp data output.</p>
+<p>Write a text File whit the transfered Data</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_AssignetDataPort">
+<span class="sig-name descname"><span class="pre">ask_AssignetDataPort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_AssignetDataPort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_AssignetDataPort" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int/float</em>) – the N(ports number) for the .sNp data output.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>TYPE</strong> – Outputs the data port pair assigned to use when creating an sNp data
+file on the indicated channel.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_AverageCount">
+<span class="sig-name descname"><span class="pre">ask_AverageCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_AverageCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_AverageCount" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>TYPE</strong> – Outputs the averaging count for the indicated channel.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_AverageFunctionType">
+<span class="sig-name descname"><span class="pre">ask_AverageFunctionType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_AverageFunctionType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_AverageFunctionType" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Parameters</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TYPE</strong> – Outputs the averaging function type of point-by-point or sweep-by-sweep.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_CWFreq">
+<span class="sig-name descname"><span class="pre">ask_CWFreq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_CWFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_CWFreq" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Parameters</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p><strong>TYPE</strong> – Sets the CW frequency of the indicated channel. Outputs the CW
+frequency of the indicated channel.</p>
+<p>The output parameter is in Hertz.</p>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_CenterFreq">
+<span class="sig-name descname"><span class="pre">ask_CenterFreq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_CenterFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_CenterFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p><strong>TYPE</strong> – Optional query. Center frequency is automatically calculated using Stop Frequency and Start
+Frequency as:</p>
+<blockquote>
+<div><p>Fc = ((Fstop - Fstart)/2) + Fstart</p>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_DataFreq">
+<span class="sig-name descname"><span class="pre">ask_DataFreq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_DataFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_DataFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>TYPE</strong> – Outputs the frequency list for the indicated channel</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_DisplayCount">
+<span class="sig-name descname"><span class="pre">ask_DisplayCount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_DisplayCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_DisplayCount" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Quuery the number of displayed channels.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_DisplayTitle">
+<span class="sig-name descname"><span class="pre">ask_DisplayTitle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_DisplayTitle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_DisplayTitle" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Outputs the user title for the channel
+indicated</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_DisplayTrace">
+<span class="sig-name descname"><span class="pre">ask_DisplayTrace</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_DisplayTrace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_DisplayTrace" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query only. Outputs the Active Channel number.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_FreqSpan">
+<span class="sig-name descname"><span class="pre">ask_FreqSpan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_FreqSpan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_FreqSpan" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>TYPE</strong> – Optional query. Span is automatically calculated as Stop Frequency minus
+Start Frequency. The query returns the resulting span in Hertz.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_ParamFormInFile">
+<span class="sig-name descname"><span class="pre">ask_ParamFormInFile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_ParamFormInFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_ParamFormInFile" title="Link to this definition"></a></dt>
+<dd><p>Outputs the parameter format displayed in an SNP data file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_PowerOnPort">
+<span class="sig-name descname"><span class="pre">ask_PowerOnPort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">segment</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_PowerOnPort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_PowerOnPort" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>segment</strong> (<em>int</em>) – Selected Source. Can be from 1-16</p></li>
+<li><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Value</strong> – Outputs the power level of the indicated port on the indicated channel.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>flaot</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_RFState">
+<span class="sig-name descname"><span class="pre">ask_RFState</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_RFState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_RFState" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>TYPE</strong> – Outputs the RF on/off state in Hold</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_ResolutionBW">
+<span class="sig-name descname"><span class="pre">ask_ResolutionBW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_ResolutionBW"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_ResolutionBW" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TYPE</strong> – The command sets the IF bandwidth for the indicated channel. The query outputs the IF
+bandwidth for the indicated channel.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_SelectParameter">
+<span class="sig-name descname"><span class="pre">ask_SelectParameter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_SelectParameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_SelectParameter" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The query outputs only the selected parameter.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_SetAverageState">
+<span class="sig-name descname"><span class="pre">ask_SetAverageState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_SetAverageState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_SetAverageState" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>TYPE</strong> – Outputs the averaging function on/off status on the indicated channel.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_SmoothingState">
+<span class="sig-name descname"><span class="pre">ask_SmoothingState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_SmoothingState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_SmoothingState" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Query outputs the smoothing on/off status for the indicated channel and active trace.
+1 = ON
+2 = OFF</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TYPE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_StatOperation">
+<span class="sig-name descname"><span class="pre">ask_StatOperation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_StatOperation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_StatOperation" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Description: Query only. Outputs the value of the operation status
+condition reg.
+Range: 0 to 32767
+Default Value: 0</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_StatOperationRegister">
+<span class="sig-name descname"><span class="pre">ask_StatOperationRegister</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_StatOperationRegister"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_StatOperationRegister" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sets the value of the operation status enable register.
+Outputs the value of the operation status enable register.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE    str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_SubSystem">
+<span class="sig-name descname"><span class="pre">ask_SubSystem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_SubSystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_SubSystem" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The :SENSe:HOLD subsystem command sets the hold function for all
+channels on a per-instrument basis</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_SweepChannelStatus">
+<span class="sig-name descname"><span class="pre">ask_SweepChannelStatus</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_SweepChannelStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_SweepChannelStatus" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>TYPE</strong> – The query outputs the On/Off state of the option to sweep only the active
+channel</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_SweepCount">
+<span class="sig-name descname"><span class="pre">ask_SweepCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_SweepCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_SweepCount" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>Description: Query only. Outputs the averaging sweep count for the</dt><dd><p>indicated channel.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_SweepDelay">
+<span class="sig-name descname"><span class="pre">ask_SweepDelay</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_SweepDelay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_SweepDelay" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Outputs the sweep delay time of the indicated channel.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_SweepTime">
+<span class="sig-name descname"><span class="pre">ask_SweepTime</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_SweepTime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_SweepTime" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Outputs the Sweep Time of the indicated  channel.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_SysErrors">
+<span class="sig-name descname"><span class="pre">ask_SysErrors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_SysErrors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_SysErrors" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Description: Query only. Outputs the number of errors in the error queue.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_TestSet">
+<span class="sig-name descname"><span class="pre">ask_TestSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_TestSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_TestSet" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query State of TS3739.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_TransferData">
+<span class="sig-name descname"><span class="pre">ask_TransferData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">portNumb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_TransferData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_TransferData" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – File Name</p></li>
+<li><p><strong>portNumb</strong> (<em>int</em>) – the N(ports number) for the .sNp data output.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TYPE</strong> – The query outputs the disk file data to the
+GPIB. The file must exist</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>str</p>
+<p>Hard coded path on the VNA = ‘C:/tmp/’</p>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.ask_TransferDataCSV">
+<span class="sig-name descname"><span class="pre">ask_TransferDataCSV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_TransferDataCSV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_TransferDataCSV" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – File Name</p></li>
+<li><p><strong>portNumb</strong> (<em>int</em>) – the N(ports number) for the .sNp data output.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TYPE</strong> – The query outputs the disk file data to the
+GPIB. The file must exist</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>str</p>
+<p>Hard coded path on the VNA = ‘C:/tmp/’</p>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.getIdn">
+<span class="sig-name descname"><span class="pre">getIdn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.getIdn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.getIdn" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Device Serial Number and Model</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.query">
+<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.query" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_AssignetDataPort">
+<span class="sig-name descname"><span class="pre">set_AssignetDataPort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_AssignetDataPort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_AssignetDataPort" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p></li>
+<li><p><strong>value1</strong> (<em>int</em>) – </p></li>
+<li><p><strong>value2</strong> (<em>int</em>) – <p>The command assigns the data port pair to use when creating an sNp
+data file on the indicated channel. The use of Port 3 and/or Port 4
+requires a 4-port VNA instrument</p>
+<p>PORT12 | PORT13 | PORT14 | PORT23 | PORT24 | PORT34</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_AverageCount">
+<span class="sig-name descname"><span class="pre">set_AverageCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_AverageCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_AverageCount" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p></li>
+<li><p><strong>value</strong> (<em>int</em>) – Sets the averaging count for the indicated channel. The channel must
+be turned on.
+The input parameter is a unitless number.
+Range: 1 to 1024
+Default Value: 1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_AverageFunctionType">
+<span class="sig-name descname"><span class="pre">set_AverageFunctionType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_AverageFunctionType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_AverageFunctionType" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p></li>
+<li><p><strong>state</strong> (<em>str</em>) – Sets the averaging function type to point-by-point or sweep-by-sweep.
+POIN | SWE
+Default Value: POIN</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_CWFreq">
+<span class="sig-name descname"><span class="pre">set_CWFreq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_CWFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_CWFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p></li>
+<li><p><strong>value</strong> (<em>int/str in form - 10E+9</em>) – Sets the CW frequency of the indicated channel. Outputs the CW
+frequency of the indicated channel.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_CenterFreq">
+<span class="sig-name descname"><span class="pre">set_CenterFreq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_CenterFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_CenterFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p></li>
+<li><p><strong>value</strong> (<em>int/str in form - 10E+9</em>) – Sets the center value of the sweep range of the indicated channel.
+Outputs the center value of the sweep range of the indicated channel</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_ClearAverage">
+<span class="sig-name descname"><span class="pre">set_ClearAverage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_ClearAverage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_ClearAverage" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…
+Description: Clears and restarts the averaging sweep count of the
+indicated channel.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_ClearError">
+<span class="sig-name descname"><span class="pre">set_ClearError</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_ClearError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_ClearError" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>None.</em></p></li>
+<li><p><strong>Description</strong> (<em>Clears the contents of the error queue.</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_DisplayColorReset">
+<span class="sig-name descname"><span class="pre">set_DisplayColorReset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_DisplayColorReset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_DisplayColorReset" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>None.</em></p></li>
+<li><p><em>Resets all colors and inverted colors to their normal default values.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_DisplayCount">
+<span class="sig-name descname"><span class="pre">set_DisplayCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChannelNumber</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_DisplayCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_DisplayCount" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>None</strong> (<em>Sets the number of displayed channels. When the VNA is in 25,000 point mode, the</em>)</p></li>
+<li><p><em>number of channels can only be 1 (one), 2, 3, 4, 6, 8, 9, 10, 12, or 16 channels. If the</em></p></li>
+<li><p><em>channel display is set to a non-listed number (5, 7, 11, 13, 14, 15), the instrument is set to</em></p></li>
+<li><p><em>the next higher channel number. If a number of greater than 16 is entered, the</em></p></li>
+<li><p><em>instrument is set to 16 channels. If the instrument is set to 100,000 points, any input</em></p></li>
+<li><p><em>results in 1 (one) channel. Outputs the number of displayed channels.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_DisplayScale">
+<span class="sig-name descname"><span class="pre">set_DisplayScale</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_DisplayScale"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_DisplayScale" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>None.</em></p></li>
+<li><p><strong>Description</strong> (<em>Auto scales all traces on all channels.</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_DisplayTitle">
+<span class="sig-name descname"><span class="pre">set_DisplayTitle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChannelName</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_DisplayTitle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_DisplayTitle" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Sets the user title for the channel indicated.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_DisplayTrace">
+<span class="sig-name descname"><span class="pre">set_DisplayTrace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_DisplayTrace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_DisplayTrace" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>The command sets the active channel to the indicated number. When the VNA is set to</em></p></li>
+<li><p><em>100,000 point mode, the number of channels is</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_ParamFormInFile">
+<span class="sig-name descname"><span class="pre">set_ParamFormInFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_ParamFormInFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_ParamFormInFile" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>unit</strong> (<em>str</em>) – <p>Sets the parameter format displayed in an SNP data file.
+Where:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>LINPH = Linear and Phase</p></li>
+<li><p>LOGPH = Log and Phase</p></li>
+<li><p>REIM = Real and Imaginary Numbers</p></li>
+</ul>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_PowerOnPort">
+<span class="sig-name descname"><span class="pre">set_PowerOnPort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">segment</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_PowerOnPort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_PowerOnPort" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>segment</strong> (<em>int</em>) – Selected Source. Can be from 1-16</p></li>
+<li><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p></li>
+<li><p><strong>value</strong> (<em>int/floa/str</em>) – Sets the power level of the indicated port on the indicated channel.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_RFState">
+<span class="sig-name descname"><span class="pre">set_RFState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_RFState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_RFState" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str/int</em>) – Sets the RF on/off state in Hold.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_ResolutionBW">
+<span class="sig-name descname"><span class="pre">set_ResolutionBW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_ResolutionBW"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_ResolutionBW" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p></li>
+<li><p><strong>value</strong> (<em>int/floa/str</em>) – The command sets the IF bandwidth for the indicated channel. The query outputs the IF
+bandwidth for the indicated channel.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_SelectParameter">
+<span class="sig-name descname"><span class="pre">set_SelectParameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">S_Param</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_SelectParameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_SelectParameter" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>S_Param</strong> (<em>str</em>) – S-Parameter selected.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong></p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Select an S-Parameter. 16 S-Parameters for 4 Ports config can be selected.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_SetAverageState">
+<span class="sig-name descname"><span class="pre">set_SetAverageState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_SetAverageState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_SetAverageState" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p></li>
+<li><p><strong>state</strong> (<em>int/str</em>) – Turns averaging on/off for the indicated channel (Turns on and Off the averaging for all channels).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_SmoothingAPERture">
+<span class="sig-name descname"><span class="pre">set_SmoothingAPERture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_SmoothingAPERture"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_SmoothingAPERture" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p></li>
+<li><p><strong>value</strong> (<em>int</em>) – Procentge smoothing between 0 to 100</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The command sets the smoothing aperture for the indicated channel and active trace.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_SmoothingState">
+<span class="sig-name descname"><span class="pre">set_SmoothingState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_SmoothingState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_SmoothingState" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p></li>
+<li><p><strong>state</strong> (<em>str/int</em>) – can be int or str form the list [‘ON’,’OFF’,1,0]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The command sets the smoothing aperture for the indicated channel and active trace.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_StartFreq">
+<span class="sig-name descname"><span class="pre">set_StartFreq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_StartFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_StartFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p></li>
+<li><p><strong>value</strong> (<em>int/str in form - 10E+9</em>) – Sets the start value of the sweep range of the indicated channel.
+The input parameter is in Hertz, Meters, or Seconds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_StatOperationRegister">
+<span class="sig-name descname"><span class="pre">set_StatOperationRegister</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_StatOperationRegister"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_StatOperationRegister" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>TYPE</em>) – <p>Sets the value of the operation status enable register.
+Outputs the value of the operation status enable register.
+The input parameter is a unitless number.</p>
+<p>Range: 0 to 65535</p>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_StopFreq">
+<span class="sig-name descname"><span class="pre">set_StopFreq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_StopFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_StopFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p></li>
+<li><p><strong>value</strong> (<em>int/str in form - 10E+9</em>) – Sets the stop value of the sweep range of the indicated channel.
+The input parameter is in Hertz, Meters, or Seconds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_SubSystemCont">
+<span class="sig-name descname"><span class="pre">set_SubSystemCont</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_SubSystemCont"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_SubSystemCont" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>None.</em></p></li>
+<li><p><em>The sweep is sweeping continuously</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_SubSystemHold">
+<span class="sig-name descname"><span class="pre">set_SubSystemHold</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_SubSystemHold"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_SubSystemHold" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>None.</em></p></li>
+<li><p><em>Sets the hold function for all channels on a per-instrument basis.</em></p></li>
+<li><p><em>The sweep is stopped.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_SubSystemSing">
+<span class="sig-name descname"><span class="pre">set_SubSystemSing</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_SubSystemSing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_SubSystemSing" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>None.</em></p></li>
+<li><p><em>The sweep restarts and sweeps until the end of the</em></p></li>
+<li><p><em>sweep, at which point it sets the end of sweep status bit and</em></p></li>
+<li><p><em>stops.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_SweepChannelStatus">
+<span class="sig-name descname"><span class="pre">set_SweepChannelStatus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_SweepChannelStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_SweepChannelStatus" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str/int</em>) – The command turns On/Off the option to sweep only the active channel</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_SweepDelay">
+<span class="sig-name descname"><span class="pre">set_SweepDelay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_SweepDelay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_SweepDelay" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>time</strong> (<em>float</em>) – Sets the sweep delay time of the indicated channel.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_SweepTime">
+<span class="sig-name descname"><span class="pre">set_SweepTime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_SweepTime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_SweepTime" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>time</strong> (<em>float</em>) – Sets the Sweep Time of the indicated channel.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.set_TS3739">
+<span class="sig-name descname"><span class="pre">set_TS3739</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ChanNumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.set_TS3739"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.set_TS3739" title="Link to this definition"></a></dt>
+<dd><dl>
+<dt>Parameters</dt><dd><dl class="simple">
+<dt>ChanNumber<span class="classifier">int</span></dt><dd><p>Channel Number 1,2,3…</p>
+</dd>
+<dt>state<span class="classifier">str/int</span></dt><dd><p>The :SENSe{1-16}:TS3739 subsystem commands are used to configure and
+control the VectorStar ME7838x  Broadband/Millimeter-Wave 3738A Test Set.</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>ValueError</dt><dd><p>Error message</p>
+</dd>
+</dl>
+<p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS4647B.MS4647B.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.write" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Martin.Mihaylov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

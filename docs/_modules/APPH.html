@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APPH &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Instruments Automatisation Libraries
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../rst/MG3694C.html">MG3694C module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rst/AQ6370D.html">AQ6370D module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rst/KA3005.html">KA3005 module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rst/PM100D.html">PM100D module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rst/MS4647B.html">MS4647B module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rst/MS2760A.html">MS2760A module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rst/LU1000.html">LU1000 module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rst/KEITHLEY2612.html">KEITHLEY2612 module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rst/APPH.html">APPH module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rst/CoBrite.html">CoBrite module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rst/GPP4323.html">GPP4323 module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Instruments Automatisation Libraries</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">APPH</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for APPH</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Tue Feb 15 10:57:49 2022</span>
+
+<span class="sd">@author: Martin.Mihaylov</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pyvisa</span> <span class="k">as</span> <span class="nn">visa</span>
+
+
+    
+<div class="viewcode-block" id="APPH">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH">[docs]</a>
+<span class="k">class</span> <span class="nc">APPH</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_str</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">ResourceManager</span><span class="p">()</span><span class="o">.</span><span class="n">open_resource</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">resource_str</span><span class="p">),</span><span class="n">query_delay</span>  <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span><span class="n">read_termination</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">))</span>
+
+        
+<div class="viewcode-block" id="APPH.query">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.query">[docs]</a>
+    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="APPH.write">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.write">[docs]</a>
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="APPH.Close">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.Close">[docs]</a>
+    <span class="k">def</span> <span class="nf">Close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;AnaPico AG,APPH20G is closed!&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+        
+        
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Initiate System</span>
+<span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="APPH.Init">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.Init">[docs]</a>
+    <span class="k">def</span> <span class="nf">Init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Initialize the measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:INITiate:IMMediate&#39;</span><span class="p">)</span></div>
+
+        
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Abort</span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="APPH.Abort">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.Abort">[docs]</a>
+    <span class="k">def</span> <span class="nf">Abort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Abort measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:ABORt&#39;</span><span class="p">)</span></div>
+
+        
+<span class="c1"># =============================================================================</span>
+<span class="c1"># ASK</span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="APPH.ask_CalcFreq">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_CalcFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_CalcFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE float </span>
+<span class="sd">            Reads back the detected frequency from a frequency search.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:CALCulate:FREQuency?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+
+
+
+<div class="viewcode-block" id="APPH.ask_CalcPower">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_CalcPower">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_CalcPower</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE float</span>
+<span class="sd">            Reads back the detected power level from a frequency search.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:CALCulate:POWer?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>  </div>
+
+    
+
+
+    
+<div class="viewcode-block" id="APPH.ask_DUTPortVoltage">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_DUTPortVoltage">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_DUTPortVoltage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE float</span>
+<span class="sd">           Sets/gets the voltage at the DUT TUNE püort. Returns the configured value. If the output is</span>
+<span class="sd">           turned off, it doesn’t necessarily return 0, as an internal voltage may be configured.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:TUNE:DUT:VOLT?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_DUTPortStatus">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_DUTPortStatus">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_DUTPortStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        stat : str</span>
+<span class="sd">           Query the status of the DUT TUNE port.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;SOURce:TUNE:DUT:STAT?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">stat</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+            <span class="n">stat</span> <span class="o">=</span> <span class="s1">&#39;OFF&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">stat</span> <span class="o">=</span> <span class="s1">&#39;ON&#39;</span>
+        <span class="k">return</span> <span class="n">stat</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_SysMeasMode">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_SysMeasMode">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_SysMeasMode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Gets the active measurement mode.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;SENSe:MODE?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_SystemError">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_SystemError">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_SystemError</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE list</span>
+<span class="sd">            Return parameters: List of integer error numbers. This query is a request for all </span>
+<span class="sd">            entries in the instrument’s error queue. Error messages in the queue contain an </span>
+<span class="sd">            integer in the range [-32768,32768] denoting an error code and associated descriptive</span>
+<span class="sd">            text. This query clears the instrument’s error queue.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SYSTem:ERRor:ALL?&#39;</span><span class="p">)</span></div>
+
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Ask Phase Noise</span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="APPH.ask_PMTraceJitter">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_PMTraceJitter">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_PMTraceJitter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Returns the RMS jitter of the current trace.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+            
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:CALCulate:PN:TRACE:SPURious:JITTer?&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+        
+        
+<div class="viewcode-block" id="APPH.ask_PMTraceNoise">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_PMTraceNoise">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_PMTraceNoise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE list</span>
+<span class="sd">            Returns a list of phase noise points of the most recent measurement as block data.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:CALCulate:PN:TRACe:NOISe?&#39;</span><span class="p">)</span>  </div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_PN_IFGain">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_PN_IFGain">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_PN_IFGain</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE float</span>
+<span class="sd">            Range: 0-60</span>
+<span class="sd">            Query the IF gain for the measurement.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:PN:IFGain?&#39;</span><span class="p">))</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_PN_StartFreq">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_PN_StartFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_PN_StartFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE float</span>
+<span class="sd">            Query the start offset frequency</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:PN:FREQuency:STARt?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_PN_StopFreq">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_PN_StopFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_PN_StopFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE float</span>
+<span class="sd">            Query the stop offset frequency</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:PN:FREQuency:STOP?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
+
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_PNSpot">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_PNSpot">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_PNSpot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float </span>
+<span class="sd">            The parameter is given as offset frequency in [Hz]</span>
+<span class="sd">            Unit Hz</span>
+<span class="sd">            Value - float</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Returns the phase noise value of the last measurement at the offset frequency </span>
+<span class="sd">            defined in &lt;value&gt;. The parameter is given as offset frequency in [Hz]</span>
+<span class="sd">            Unit Hz</span>
+<span class="sd">            Value - float</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;CALCulate:PN:TRACE:SPOT? &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
+
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Ask Amplitude Noise</span>
+<span class="c1"># =============================================================================</span>
+
+    
+<div class="viewcode-block" id="APPH.ask_ANTraceFreq">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_ANTraceFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_ANTraceFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Returns a list of offset frequency values of the current measurement as block data.</span>
+<span class="sd">            Hz</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:CALCulate:AN:TRACe:FREQuency?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_ANTraceNoise">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_ANTraceNoise">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_ANTraceNoise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Returns a list of amplitude noise spectrum values of the current measurement as block data</span>
+<span class="sd">            Unit dBc/Hz</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;CALCulate:AN:TRACe:NOISe?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_ANTraceSpurFreq">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_ANTraceSpurFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_ANTraceSpurFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Returns a list of offset frequencies of the spurs in the active trace as block data.</span>
+<span class="sd">            Unit Hz</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:CALCulate:AN:TRACe:SPURious:FREQuency?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_ANTraceSpurPower">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_ANTraceSpurPower">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_ANTraceSpurPower</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Returns a list of power values of the spurs in the active trace as block data.</span>
+<span class="sd">            Unit dBc</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:CALCulate:AN:TRACe:SPURious:POWer?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_ANSpot">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_ANSpot">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_ANSpot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : TYPE</span>
+<span class="sd">            The parameter is given as offset frequency in [Hz]</span>
+<span class="sd">                Unit Hz</span>
+<span class="sd">                Value - float</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Returns the phase noise value of the last measurement at the offset frequency </span>
+<span class="sd">            defined in &lt;value&gt;. The parameter is given as offset frequency in [Hz]</span>
+<span class="sd">            Unit Hz</span>
+<span class="sd">            Value - float</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;CALCulate:AN:TRACE:SPOT? &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
+
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Ask Frequency Noise</span>
+<span class="c1"># =============================================================================</span>
+
+
+<div class="viewcode-block" id="APPH.ask_FNTraceFreq">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_FNTraceFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_FNTraceFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE lisz</span>
+<span class="sd">            Returns a list of offset frequency values of the current measurement as block data.</span>
+<span class="sd">            Unit Hz</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:CALCulate:FN:TRACe:FREQuency?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_FNTraceNoise">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_FNTraceNoise">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_FNTraceNoise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE list</span>
+<span class="sd">             Returns a list of phase noise spectrum values of the current measurement as block data.</span>
+<span class="sd">             Unit Hz</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:CALCulate:FN:TRACe:NOISe?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_FNTraceSpurFreq">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_FNTraceSpurFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_FNTraceSpurFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE list</span>
+<span class="sd">            Returns a list of offset frequencies of the spurs in the active trace as block data.</span>
+<span class="sd">            Unit Hz</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:CALCulate:FN:TRACe:SPURious:FREQuency?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_FNTraceSpurPower">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_FNTraceSpurPower">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_FNTraceSpurPower</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE list</span>
+<span class="sd">               Returns a list of power values of the spurs in the active trace as block data.</span>
+<span class="sd">               Unit Hz</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:CALCulate:FN:TRACe:SPURious:POWer?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_FNSpot">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_FNSpot">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_FNSpot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float</span>
+<span class="sd">            The parameters defines the spot noise offset frequency in [Hz].</span>
+<span class="sd">                Unit Hz</span>
+<span class="sd">                Value - float</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Returns the spot noise value at the specified offset frequency. </span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;CALCulate:FN:TRACE:SPOT? &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
+
+    
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Ask Voltage controlled Oscillator</span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="APPH.ask_VCOTraceFreq">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_VCOTraceFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_VCOTraceFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE list</span>
+<span class="sd">            Returns a list of frequency values measured at each tune voltage point of the </span>
+<span class="sd">            current measurement as block data2.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;CALCulate:VCO:TRACE:FREQuency?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_VCOTracePNoise">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_VCOTracePNoise">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_VCOTracePNoise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : ist</span>
+<span class="sd">            Can be set to [1,2,3,4]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error massage</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE list</span>
+<span class="sd">            Returns a list of phase noise values measured at each tune voltage point of </span>
+<span class="sd">            the current measurement as block data. The parameter 1-4 selects the offset </span>
+<span class="sd">            frequency from the set defined by the SENS:VCO:TEST:PN:OFFS &lt;list&gt; command</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">chanLS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chanLS</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;CALCulate:VCO:TRACE:PNoise? &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+            
+            
+            
+<div class="viewcode-block" id="APPH.ask_VCOTracePower">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_VCOTracePower">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_VCOTracePower</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE list </span>
+<span class="sd">            Returns a list of power values measured at each tune voltage point of the current </span>
+<span class="sd">            measurement as block data.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;CALCulate:VCO:TRACE:POWer?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_VCOTraceVoltage">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_VCOTraceVoltage">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_VCOTraceVoltage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE list</span>
+<span class="sd">            Returns a list of tune voltage values measured at each tune voltage point of the </span>
+<span class="sd">            current measurement as block data.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;CALCulate:VCO:TRACE:VOLTage?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_VSOTestFreq">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_VSOTestFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_VSOTestFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Query the frequency parameter for the measurement.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:TEST:FREQuency?&#39;</span><span class="p">)</span>   </div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_VSOTestNoise">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_VSOTestNoise">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_VSOTestNoise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Query the the phase noise parameter for the measurement.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:TEST:PNoise?&#39;</span><span class="p">)</span>   </div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_VCOTestPower">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_VCOTestPower">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_VCOTestPower</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Query the power parameter for the measurement.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:TEST:POWer?&#39;</span><span class="p">)</span>   </div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_VCOTestStart">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_VCOTestStart">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_VCOTestStart</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">             Query the start tuning voltage for the measurement.</span>
+<span class="sd">             Unit V</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:VOLTage:STARt?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_VCOTestStop">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_VCOTestStop">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_VCOTestStop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Query the stop tuning voltage for the measurement.</span>
+<span class="sd">            Unit V</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:VOLTage:STOP?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_VCOTestISupply">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_VCOTestISupply">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_VCOTestISupply</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Query the supply current parameter for the measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:TEST:ISUPply?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_VCOKPuShing">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_VCOKPuShing">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_VCOKPuShing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Query the pushing parameter for the measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:TEST:KPUShing?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_VCOKVCO">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_VCOKVCO">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_VCOKVCO</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Query the tune sensitivity parameter for the measurement.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:TEST:KVCO?&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+        
+<div class="viewcode-block" id="APPH.ask_VCOTYPE">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_VCOTYPE">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_VCOTYPE</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Query the DUT type for the measurement.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:TYPE?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_VCOTestPNoise">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_VCOTestPNoise">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_VCOTestPNoise</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Query the phase noise parameter for the measurement.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:TEST:PNoise?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_VCOTestPnoiseOFFSet">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_VCOTestPnoiseOFFSet">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_VCOTestPnoiseOFFSet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : int</span>
+<span class="sd">            Can be set to [1,2,3,4]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error massage</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Query the 4 offset frequencies at which the phase noise is measured</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+    
+        <span class="n">stateLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stateLs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:TEST:Pnoise:OFFSet&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;?&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+<div class="viewcode-block" id="APPH.ask_VCOTestPoint">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ask_VCOTestPoint">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_VCOTestPoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            Query the number rof voltage points to use in the measurement</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:VOLTage:POINts?&#39;</span><span class="p">)</span></div>
+
+        
+        
+<span class="c1"># =============================================================================</span>
+<span class="c1"># SET</span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="APPH.set_Output">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_Output">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_Output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">status</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        status : str</span>
+<span class="sd">            Set Output ON and OFF.  CAn be [&#39;ON&#39;,&#39;OFF&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error massage</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">statusLs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="ow">in</span> <span class="n">statusLs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:OUTput &#39;</span><span class="o">+</span><span class="n">status</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.set_SysMeasMode">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_SysMeasMode">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_SysMeasMode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Sets/gets the active measurement mode. Can be [&#39;PN&#39;,&#39;AN&#39;,&#39;FN&#39;,&#39;BB&#39;,&#39;TRAN&#39;,&#39;VCO&#39;]</span>
+<span class="sd">                • PN: phase noise measurement</span>
+<span class="sd">                • AN: amplitude noise measurement</span>
+<span class="sd">                • FN: frequency noise measurement (results are converted to phase noise)</span>
+<span class="sd">                • BB: base band measurement (not yet available)</span>
+<span class="sd">                • TRAN: transient analysis (not yet available)</span>
+<span class="sd">                • VCO: voltage controlled oscillator characterization</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error massage</span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stateLs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PN&#39;</span><span class="p">,</span><span class="s1">&#39;AN&#39;</span><span class="p">,</span><span class="s1">&#39;FN&#39;</span><span class="p">,</span><span class="s1">&#39;BB&#39;</span><span class="p">,</span><span class="s1">&#39;TRAN&#39;</span><span class="p">,</span><span class="s1">&#39;VCO&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stateLs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SENSe:MODE &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+            
+            
+            
+<div class="viewcode-block" id="APPH.set_FreqExecute">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_FreqExecute">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_FreqExecute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Starts the frequency search. See the CALCulate subsystem on how to read out the result.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SENSe:FREQuency:EXECute?&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+        
+<div class="viewcode-block" id="APPH.set_PowerExecute">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_PowerExecute">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_PowerExecute</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            Starts the power measurement. When performing SENS:FREQ:EXEC, this measurement </span>
+<span class="sd">            will be automatically run at the end (if a signal is detected</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SENSe:POWer:EXECute?&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+<div class="viewcode-block" id="APPH.set_CalcAverage">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_CalcAverage">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_CalcAverage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">event</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        event : str</span>
+<span class="sd">                Waits for the defined event </span>
+<span class="sd">                NEXT: next iteration complete </span>
+<span class="sd">                ALL: measurement complete</span>
+<span class="sd">                &lt;value&gt;: specified iteration complete </span>
+<span class="sd">                Optionally, a timeout in milliseconds can be specified as a second parameter. </span>
+<span class="sd">                This command will block further SCPI requests until the specified event or the</span>
+<span class="sd">                specified timeout has occurred. If no timeout is specified, the timeout will be </span>
+<span class="sd">                ininite.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;CALCulate:WAIT:AVERage &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">event</span><span class="p">))</span></div>
+
+        
+
+
+<div class="viewcode-block" id="APPH.set_DUTPortVoltage">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_DUTPortVoltage">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_DUTPortVoltage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float</span>
+<span class="sd">            Sets the voltage at the DUT TUNE püort. Returns the configured value. </span>
+<span class="sd">            If the output is turned off, it doesn’t necessarily return 0, as an internal</span>
+<span class="sd">            voltage may be configured</span>
+<span class="sd">            </span>
+<span class="sd">            </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:TUNE:DUT:VOLT &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
+
+        
+    
+<div class="viewcode-block" id="APPH.set_DUTPortStatus">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_DUTPortStatus">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_DUTPortStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Enables/disables the DUT TUNE port. Can be [&#39;ON&#39;,&#39;OFF&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error massage</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stateLs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stateLs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:TUNE:DUT:STAT &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+        
+            
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Set Phase Noise</span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="APPH.set_PNIFGain">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_PNIFGain">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_PNIFGain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float</span>
+<span class="sd">            Range: 0-60</span>
+<span class="sd">            Sets the IF gain for the measurement.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error massage</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="n">value</span><span class="o">&gt;</span><span class="mf">60.0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe:PN:IFGain &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
+
+            
+            
+            
+            
+<div class="viewcode-block" id="APPH.set_PNStartFreq">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_PNStartFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_PNStartFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float</span>
+<span class="sd">                    Unit HZ</span>
+<span class="sd">                    Sets the start offset frequency.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe:PN:FREQuency:STARt &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
+
+        
+        
+<div class="viewcode-block" id="APPH.set_PNStopFreq">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_PNStopFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_PNStopFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float</span>
+<span class="sd">            Unit HZ</span>
+<span class="sd">            Sets the stop offset frequency.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe:PN:FREQuency:STOP &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
+
+        
+        
+        
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Set Voltage controlled Oscillators</span>
+<span class="c1"># =============================================================================</span>
+        
+
+<div class="viewcode-block" id="APPH.set_VCOWait">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_VCOWait">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_VCOWait</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Can be [&#39;ALL&#39;,&#39;NEXT&#39;]</span>
+<span class="sd">        value : float</span>
+<span class="sd">            This command requests a preliminary result during the measurement and blocks until </span>
+<span class="sd">            the resultis ready. The first parameter (required) specifies the target iteration </span>
+<span class="sd">            to be saved. NEXT specifies the next possible iteration, ALL specifies the last </span>
+<span class="sd">            iteration of the measurement (i.e. waits for the measurement to finish) and an </span>
+<span class="sd">            iteger specifies the specific iteration requested.The second parameter (optional) </span>
+<span class="sd">            defines a timeout in milliseconds. If the command terminates without generating a </span>
+<span class="sd">            preliminary result. It will produce an error. This error can be queried with</span>
+<span class="sd">            SYST:ERR? or SYST:ERR:ALL?.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">            DESCRIPTION.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        
+        <span class="n">stateLs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ALL&#39;</span><span class="p">,</span><span class="s1">&#39;NEXT&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stateLs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;CALCulate:VCO:WAIT &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
+
+        
+        
+        
+        
+<div class="viewcode-block" id="APPH.set_VCOTestFreq">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_VCOTestFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_VCOTestFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str </span>
+<span class="sd">            Enables/disables the frequency parameter for the measurement.</span>
+<span class="sd">            Can be [&#39;ON&#39;,&#39;OFF&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error massage</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stateLs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stateLs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:TEST:FREQuency &#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+            
+            
+            
+<div class="viewcode-block" id="APPH.set_VCOTestNoise">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_VCOTestNoise">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_VCOTestNoise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Enables/disables the phase noise parameter for the measurement</span>
+<span class="sd">            Can be  [&#39;ON&#39;,&#39;OFF&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error massage</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stateLs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stateLs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:TEST:PNoise &#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.set_VCOTestPower">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_VCOTestPower">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_VCOTestPower</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Enables/disables the power parameter for the measurement.</span>
+<span class="sd">            Can be [&#39;ON&#39;,&#39;OFF&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error massage</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+    
+        <span class="n">stateLs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stateLs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:TEST:POWer &#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+            
+            
+            
+            
+    
+<div class="viewcode-block" id="APPH.set_VCOTestStart">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_VCOTestStart">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_VCOTestStart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float</span>
+<span class="sd">            Sets the start tuning voltage for the measurement.</span>
+<span class="sd">            Unit V</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:VOLTage:STARt &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
+
+        
+        
+        
+    
+<div class="viewcode-block" id="APPH.set_VCOTestStop">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_VCOTestStop">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_VCOTestStop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float</span>
+<span class="sd">            Sets the stop tuning voltage for the measurement.</span>
+<span class="sd">            Unit V</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:VOLTage:STOP &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
+
+        
+        
+        
+        
+<div class="viewcode-block" id="APPH.set_VCOTestISupply">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_VCOTestISupply">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_VCOTestISupply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Enables/disables the supply current parameter for the measurement.</span>
+<span class="sd">            Can be [&#39;ON&#39;,&#39;OFF&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error massage</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stateLs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stateLs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:TEST:ISUPply &#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+    
+<div class="viewcode-block" id="APPH.set_VCOKPuShing">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_VCOKPuShing">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_VCOKPuShing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Enables/disables the pushing parameter for the measurement.</span>
+<span class="sd">            Can be [&#39;ON&#39;,&#39;OFF&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error massage</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stateLs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stateLs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:TEST:KPUShing &#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.set_VCOKVCO">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_VCOKVCO">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_VCOKVCO</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">           Enables/disables the tune sensitivity parameter for the measurement</span>
+<span class="sd">           Can be [&#39;ON&#39;,&#39;OFF&#39;]</span>
+<span class="sd">           </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error massage</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stateLs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stateLs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:TEST:KVCO &#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="APPH.set_VCOTYPE">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_VCOTYPE">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_VCOTYPE</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">typ</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        typ : str</span>
+<span class="sd">            Select the DUT type for the measurement. Distinguish between slow (VCXO) and fast</span>
+<span class="sd">            (VCO) tuning sensitivities. Can be [&#39;VCO&#39;,&#39;VCXO&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error massage</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">typLs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;VCO&#39;</span><span class="p">,</span><span class="s1">&#39;VCXO&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">typ</span> <span class="ow">in</span> <span class="n">typLs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:TYPE &#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">typ</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+        
+        
+        
+        
+<div class="viewcode-block" id="APPH.set_VCOTestPNoise">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_VCOTestPNoise">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_VCOTestPNoise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Enables/disables the phase noise parameter for the measurement.</span>
+<span class="sd">            CAn be set to [&#39;ON&#39;,&#39;OFF&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error massage</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stateLs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stateLs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:TEST:PNoise &#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+            
+            
+            
+<div class="viewcode-block" id="APPH.set_VCOTestPnoiseOFFSet">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_VCOTestPnoiseOFFSet">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_VCOTestPnoiseOFFSet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value1</span><span class="p">,</span><span class="n">value2</span><span class="p">,</span><span class="n">value3</span><span class="p">,</span><span class="n">value4</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value1 : float</span>
+<span class="sd">            freq val 1</span>
+<span class="sd">        value2 : float</span>
+<span class="sd">            freq val 2</span>
+<span class="sd">        value3 : float</span>
+<span class="sd">            freq val 3</span>
+<span class="sd">        value4 : float</span>
+<span class="sd">            freq val 4</span>
+
+
+<span class="sd">        Sets up to 4 offset frequencies at which the phase noise is measured. </span>
+<span class="sd">        At least 1 parameter is required. Blank parameters are set to 0 </span>
+<span class="sd">        (disabled). The query returns the set frequency for the specified </span>
+<span class="sd">        offset. The offset can be specified with the &lt;sel&gt; parameter and can </span>
+<span class="sd">        be chosen from 1|2|3|4</span>
+<span class="sd">        </span>
+<span class="sd">        Unit HZ</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:TEST:Pnoise:OFFSet &#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value3</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;,&#39;</span>\
+                   <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value4</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value4</span><span class="p">))</span></div>
+
+        
+            
+            
+<div class="viewcode-block" id="APPH.set_VCOTestPoint">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.set_VCOTestPoint">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_VCOTestPoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float</span>
+<span class="sd">            Sets the number rof voltage points to use in the measurement</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe:VCO:VOLTage:POINts &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
+
+
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Get Functions</span>
+<span class="c1"># =============================================================================</span>
+        
+        
+<div class="viewcode-block" id="APPH.getIdn">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.getIdn">[docs]</a>
+    <span class="k">def</span> <span class="nf">getIdn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Str</span>
+<span class="sd">            Queries the device serial number and name</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">)</span></div>
+
+        
+        
+            
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Measurments Examples </span>
+<span class="c1"># =============================================================================</span>
+    
+<div class="viewcode-block" id="APPH.PNMeasExample">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.PNMeasExample">[docs]</a>
+    <span class="k">def</span> <span class="nf">PNMeasExample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This is a small example how to make a Phase Noise measurment.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_SysMeasMode</span><span class="p">(</span><span class="s1">&#39;PN&#39;</span><span class="p">)</span> <span class="c1"># select phase noise measurement</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>                <span class="c1"># start measurement</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_CalcAverage</span><span class="p">(</span><span class="s1">&#39;ALL&#39;</span><span class="p">)</span> <span class="c1"># wait for the measurement to finish</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_SystemError</span><span class="p">()</span>     <span class="c1"># check if measurement was successful</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_PNSpot</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="c1">#request spot noise value at 1MHz offset</span>
+        <span class="n">ResultDic</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Erro Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">err</span> <span class="c1">#Write Error status if 0 no errors!</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Spot Phase Noise @ &#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="k">return</span> <span class="n">ResultDic</span></div>
+
+    
+    
+    
+<div class="viewcode-block" id="APPH.ANMeasExample">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ANMeasExample">[docs]</a>
+    <span class="k">def</span> <span class="nf">ANMeasExample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This is a small example how to make a Phase Noise measurment.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_SysMeasMode</span><span class="p">(</span><span class="s1">&#39;AN&#39;</span><span class="p">)</span> <span class="c1"># select amplitude noise measurement</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>                <span class="c1"># start measurement</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_SystemError</span><span class="p">()</span>     <span class="c1"># check if measurement was successful</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_ANSpot</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="c1">#request spot noise value at 1MHz offset</span>
+        <span class="n">ResultDic</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Erro Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">err</span> <span class="c1">#Write Error status if 0 no errors!</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Spot Amplitude Noise @ &#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="k">return</span> <span class="n">ResultDic</span></div>
+
+
+
+
+
+<div class="viewcode-block" id="APPH.FNMeasExample">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.FNMeasExample">[docs]</a>
+    <span class="k">def</span> <span class="nf">FNMeasExample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This is a small example how to make a Frequency Noise measurment.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_SysMeasMode</span><span class="p">(</span><span class="s1">&#39;FN&#39;</span><span class="p">)</span> <span class="c1"># select amplitude noise measurement</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>                <span class="c1"># start measurement</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_SystemError</span><span class="p">()</span>     <span class="c1"># check if measurement was successful</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_FNSpot</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="c1">#request spot noise value at 1MHz offset</span>
+        <span class="n">ResultDic</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Erro Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">err</span> <span class="c1">#Write Error status if 0 no errors!</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Spot Frequency Noise @ &#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="k">return</span> <span class="n">ResultDic</span></div>
+
+    
+    
+    
+<div class="viewcode-block" id="APPH.VCOMeasExample">
+<a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.VCOMeasExample">[docs]</a>
+    <span class="k">def</span> <span class="nf">VCOMeasExample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">NoieseOffset1</span><span class="p">,</span><span class="n">NoieseOffset2</span><span class="p">,</span><span class="n">measPoints</span><span class="p">,</span><span class="n">tunRangeMin</span><span class="p">,</span><span class="n">tunRangeMax</span><span class="p">,</span><span class="n">SupplyVoltage</span><span class="p">,</span><span class="n">delay</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This is a small example how to make a Voltage controlled oscillator Noise measurment.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="c1">#Config </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_SysMeasMode</span><span class="p">(</span><span class="s1">&#39;VCO&#39;</span><span class="p">)</span> <span class="c1">#select VCO characterization</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestFreq</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1">#enable frequency parameter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestISupply</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1">#enable supply current parameter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOKPuShing</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1">#enable pushing parameter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOKVCO</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1">#enable Kvco parameter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestPNoise</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1">#enable spot noise parameter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestPnoiseOFFSet</span><span class="p">(</span><span class="n">NoieseOffset1</span><span class="p">,</span><span class="n">NoieseOffset2</span><span class="p">)</span> <span class="c1">#set two spot noise offsets: 1.2kHz, 100kHz</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestPower</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1">#enable power parameter</span>
+        
+        
+        <span class="c1">#measurment</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTYPE</span><span class="p">(</span><span class="s1">&#39;VCO&#39;</span><span class="p">)</span> <span class="c1">#set DUT Type (VCO or VCXO)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestPoint</span><span class="p">(</span><span class="n">measPoints</span><span class="p">)</span> <span class="c1">#set 11 measurement points</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestStart</span><span class="p">(</span><span class="n">tunRangeMin</span><span class="p">)</span> <span class="c1">#set tuning range minimum to 0.5V</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestStop</span><span class="p">(</span><span class="n">tunRangeMax</span><span class="p">)</span> <span class="c1">#set tuning range maximum to 10V</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_DUTPortVoltage</span><span class="p">(</span><span class="n">SupplyVoltage</span><span class="p">)</span> <span class="c1">#set supply voltage to 6V</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_DUTPortStatus</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1"># enable supply voltage </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>                <span class="c1"># start measurement</span>
+        
+        
+        <span class="c1">#loop</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOWait</span><span class="p">(</span><span class="s1">&#39;ALL&#39;</span><span class="p">,</span><span class="n">delay</span><span class="p">)</span> <span class="c1">#wait for the measurement to finish</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_SystemError</span><span class="p">()</span> <span class="c1">#check if measurement was successful</span>
+        <span class="n">ResultDic</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        
+        <span class="c1">#read results</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;control voltage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOTraceVoltage</span><span class="p">()</span> <span class="c1">#request control voltage data array</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;frequency data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOTraceFreq</span><span class="p">()</span> <span class="c1">#request frequency data array</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Kvco data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOKVCO</span><span class="p">()</span> <span class="c1"># request Kvco data array</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;pushing data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOKPuShing</span><span class="p">()</span> <span class="c1">#request pushing data array</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;supply current data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOTestISupply</span><span class="p">()</span> <span class="c1">#request supply current data array</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;power level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOTracePower</span><span class="p">()</span> <span class="c1">#request power level data array</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;spot noise data array @offset #1 (1.2kHz)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOTestPnoiseOFFSet</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#request spot noise data array @offset #1 (1.2kHz)</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Error Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">err</span> <span class="c1">#Write Error status if 0 no errors!</span></div>
+</div>
+
+        
+        
+        
+        
+        
+
+        
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Martin.Mihaylov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

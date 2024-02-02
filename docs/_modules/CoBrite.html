@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoBrite &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Instruments Automatisation Libraries
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Instruments Automatisation Libraries</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">CoBrite</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for CoBrite</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Mon Feb 14 13:54:49 2022</span>
+
+<span class="sd">@author: Martin.Mihaylov</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pyvisa</span> <span class="k">as</span> <span class="nn">visa</span>
+
+
+    
+<div class="viewcode-block" id="CoBrite">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite">[docs]</a>
+<span class="k">class</span> <span class="nc">CoBrite</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_str</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">ResourceManager</span><span class="p">()</span><span class="o">.</span><span class="n">open_resource</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">resource_str</span><span class="p">),</span><span class="n">query_delay</span>  <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">))</span>
+
+        
+<div class="viewcode-block" id="CoBrite.query">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.query">[docs]</a>
+    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="CoBrite.write">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.write">[docs]</a>
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="CoBrite.read">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.read">[docs]</a>
+    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None</span>
+<span class="sd">            This function must be set after each set_() function. CoBrite </span>
+<span class="sd">            writes the set_() to register and returns ;/r/n to the user. The</span>
+<span class="sd">            ;/r/n command will mess up the next data sent to CoBrite from the user.</span>
+<span class="sd">            An empty read() is required after each set_() function sendet to the</span>
+<span class="sd">            laser. </span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">read_raw</span><span class="p">()</span></div>
+
+    
+<div class="viewcode-block" id="CoBrite.Close">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.Close">[docs]</a>
+    <span class="k">def</span> <span class="nf">Close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+        
+        
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Identify       </span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="CoBrite.Identification">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.Identification">[docs]</a>
+    <span class="k">def</span> <span class="nf">Identification</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Identification name and model of the instrument. </span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">)</span></div>
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># ASK </span>
+<span class="c1"># =============================================================================</span>
+    
+
+<div class="viewcode-block" id="CoBrite.ask_FreqTHz">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.ask_FreqTHz">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_FreqTHz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : int</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Queries the wavelength setting of a tunable laser port.</span>
+<span class="sd">            Value format is in THz.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chanLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chanLs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">freq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;FREQ? 1,1,1&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">freq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;FREQ? 1,1,2&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> 
+                
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">freq</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="CoBrite.ask_Wavelength">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.ask_Wavelength">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_Wavelength</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : int</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Queries the wavelength setting of a tunable laser port. </span>
+<span class="sd">            Value format is in Nanometer.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        
+        <span class="n">chanLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chanLs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">wav</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;WAV? 1,1,1&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">wav</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;WAV? 1,1,2&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> 
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">wav</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+    
+
+
+
+
+<div class="viewcode-block" id="CoBrite.ask_Offset">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.ask_Offset">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_Offset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : int</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        flaot</span>
+<span class="sd">            Queries the frequency offset setting of a tunable laser port. </span>
+<span class="sd">            Value format is in GHz.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="n">chanLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chanLs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">freq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;OFF? 1,1,1&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">freq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;OFF? 1,1,2&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> 
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">freq</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+
+
+
+
+<div class="viewcode-block" id="CoBrite.ask_LaserOutput">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.ask_LaserOutput">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_LaserOutput</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : int</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Query if laser is ON or OFF. </span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chanLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+        
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chanLs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span>  <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;STATe? 1,1,1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">out</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">out</span> <span class="o">=</span> <span class="s1">&#39;OFF&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">out</span> <span class="o">=</span> <span class="s1">&#39;ON&#39;</span>
+            <span class="k">elif</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;STATe? 1,1,2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">out</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">out</span> <span class="o">=</span> <span class="s1">&#39;OFF&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">out</span> <span class="o">=</span> <span class="s1">&#39;ON&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> 
+        <span class="k">return</span> <span class="n">out</span> </div>
+
+        
+    
+    
+        
+        
+
+<div class="viewcode-block" id="CoBrite.ask_Power">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.ask_Power">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_Power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : int</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Queries the optical output power target setting of a tunable laser</span>
+<span class="sd">            port. Value format is in dBm.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chanLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chanLs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">power</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;POW? 1,1,1&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">power</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;POW? 1,1,2&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> 
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">power</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="CoBrite.ask_ActualPower">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.ask_ActualPower">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_ActualPower</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : int</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Queries the current optical output power reading of a tunable laser</span>
+<span class="sd">            port. Value format is in dBm.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chanLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chanLs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">apow</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;APOW? 1,1,1&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">apow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;APOW? 1,1,2&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> 
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">apow</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+
+
+
+
+<div class="viewcode-block" id="CoBrite.ask_LaserLim">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.ask_LaserLim">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_LaserLim</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : int</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        DataDic : dictionary</span>
+<span class="sd">            Query maximum tuning Parameters of Laser in location C-S-D in csv </span>
+<span class="sd">            format.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chanLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chanLs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">lim</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;LIM? 1,1,1&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">lim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;LIM? 1,1,2&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> 
+        <span class="n">datasep</span> <span class="o">=</span> <span class="n">lim</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">datasep</span> <span class="o">=</span> <span class="n">datasep</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+        <span class="n">DataDic</span> <span class="o">=</span>  <span class="p">{}</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Minimum Frequency&#39;</span><span class="p">,</span><span class="s1">&#39;Maximum Frequency&#39;</span><span class="p">,</span><span class="s1">&#39;Fine tuning Range&#39;</span><span class="p">,</span><span class="s1">&#39;Minimum Power&#39;</span><span class="p">,</span><span class="s1">&#39;Maximum Power&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">datasep</span><span class="p">)):</span>
+            <span class="n">DataDic</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">datasep</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">DataDic</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="CoBrite.ask_Configuration">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.ask_Configuration">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_Configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : int</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        DataDic : dictionary</span>
+<span class="sd">            Query current configuration of Laser in location C-S-D in csv format</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="n">chanLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chanLs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">config</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:CONFiguration? 1,1,1&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:CONFiguration? 1,1,2&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> 
+        <span class="n">datasep</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">datasep</span> <span class="o">=</span> <span class="n">datasep</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">datasep</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-1&#39;</span><span class="p">:</span>  
+            <span class="n">datasep</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;NO&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">datasep</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;YES&#39;</span>
+        <span class="n">DataDic</span> <span class="o">=</span>  <span class="p">{}</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Wavelength&#39;</span><span class="p">,</span><span class="s1">&#39;Offset&#39;</span><span class="p">,</span><span class="s1">&#39;Output Power&#39;</span><span class="p">,</span><span class="s1">&#39;Output state&#39;</span><span class="p">,</span><span class="s1">&#39;Busy state&#39;</span><span class="p">,</span><span class="s1">&#39;Dither state&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">datasep</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)):</span>
+            <span class="n">DataDic</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">datasep</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">DataDic</span><span class="p">[</span><span class="s1">&#39;Dither supported&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datasep</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">DataDic</span></div>
+
+
+
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># SET</span>
+<span class="c1"># =============================================================================</span>
+    
+<div class="viewcode-block" id="CoBrite.set_Power">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.set_Power">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_Power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : int</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+<span class="sd">        value : float</span>
+<span class="sd">            Sets the optical output power target setting of a tunable laser port.</span>
+<span class="sd">            Value format is in dBm.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chanLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chanLs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;POW 1,1,1,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;POW 1,1,2,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> </div>
+
+     
+        
+     
+        
+     
+<div class="viewcode-block" id="CoBrite.set_Wavelength">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.set_Wavelength">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_Wavelength</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : int</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+<span class="sd">        value : float</span>
+<span class="sd">            Sets the wavelength setting of a tunable laser port. Value format </span>
+<span class="sd">            is in Nanometer.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chanLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chanLs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;WAV 1,1,1,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;WAV 1,1,2,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> </div>
+
+        
+        
+        
+        
+      
+<div class="viewcode-block" id="CoBrite.set_FreqTHz">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.set_FreqTHz">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_FreqTHz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : int</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+<span class="sd">        value : float</span>
+<span class="sd">            Sets or queries the wavelength setting of a tunable laser port.</span>
+<span class="sd">            Value format is in Tera Hertz.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chanLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chanLs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;FREQ 1,1,1,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;FREQ 1,1,2,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> </div>
+
+                
+        
+
+
+
+
+        
+<div class="viewcode-block" id="CoBrite.set_LaserOutput">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.set_LaserOutput">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_LaserOutput</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : int</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+<span class="sd">        state : float/int</span>
+<span class="sd">            Set if laser is ON or OFF. Can be integer 0 or 1, but can be a str </span>
+<span class="sd">            ON and OFF.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chanLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">stateLs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;0&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s1">&#39;ON&#39;</span> <span class="ow">or</span> <span class="n">state</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
+        <span class="k">elif</span> <span class="n">state</span> <span class="o">==</span> <span class="s1">&#39;OFF&#39;</span> <span class="ow">or</span> <span class="n">state</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chanLs</span> <span class="ow">and</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stateLs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;STATe 1,1,1,&#39;</span> <span class="o">+</span> <span class="n">state</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;STATe 1,1,2,&#39;</span> <span class="o">+</span> <span class="n">state</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> </div>
+
+                
+              
+                
+              
+                
+              
+                
+<div class="viewcode-block" id="CoBrite.set_Offset">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.set_Offset">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_Offset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : int</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+<span class="sd">        value : float</span>
+<span class="sd">            Sets the frequency offset setting of a tunable laser port. </span>
+<span class="sd">            Value format is in Giga Hertz.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chanLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chanLs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;OFF 1,1,1,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;OFF 1,1,2,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> </div>
+
+         
+         
+         
+         
+         
+        
+<div class="viewcode-block" id="CoBrite.set_Configuration">
+<a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.set_Configuration">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_Configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">freq</span><span class="p">,</span><span class="n">power</span><span class="p">,</span><span class="n">offset</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : int</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+<span class="sd">        freq : float</span>
+<span class="sd">            Sets frequency in Thz format. For example freq = 192.2345</span>
+<span class="sd">        power : float</span>
+<span class="sd">            Sets the power to dBm. For example power = 9.8.</span>
+<span class="sd">            min Power = 8.8 </span>
+<span class="sd">            max Power = 17.8</span>
+<span class="sd">            Check ask_LaserLim() for more info. </span>
+<span class="sd">        offset : float</span>
+<span class="sd">            Sets offset Freq in range Ghz.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">chanLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chanLs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_FreqTHz</span><span class="p">(</span><span class="n">chan</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_Power</span><span class="p">(</span><span class="n">chan</span><span class="p">,</span> <span class="n">power</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_Offset</span><span class="p">(</span><span class="n">chan</span><span class="p">,</span> <span class="n">offset</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">chan</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_FreqTHz</span><span class="p">(</span><span class="n">chan</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_Power</span><span class="p">(</span><span class="n">chan</span><span class="p">,</span> <span class="n">power</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_Offset</span><span class="p">(</span><span class="n">chan</span><span class="p">,</span> <span class="n">offset</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span> </div>
+</div>
+
+            
+            
+        
+        
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Martin.Mihaylov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

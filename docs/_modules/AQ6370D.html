@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AQ6370D &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Instruments Automatisation Libraries
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Instruments Automatisation Libraries</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">AQ6370D</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for AQ6370D</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Tue Dec 14 12:58:27 2021</span>
+
+<span class="sd">@author: Martin.Mihaylov</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">vxi11</span>
+
+
+<div class="viewcode-block" id="AQ6370D">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D">[docs]</a>
+<span class="k">class</span> <span class="nc">AQ6370D</span><span class="p">(</span><span class="n">vxi11</span><span class="o">.</span><span class="n">Instrument</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    A class thats uses vxi11 library to interface a Yokogawa AQ6370D.</span>
+<span class="sd">    Need to have python &#39;vxi11&#39;, &#39;pandas&#39; and &#39;numpy&#39; librarys installed!</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hostname</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get name and identification.</span>
+<span class="sd">        Make a restart of the instrument in the beginning to get the instrument </span>
+<span class="sd">        to default settings.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">hostname</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;*RST&#39;</span><span class="p">)</span>
+        
+<div class="viewcode-block" id="AQ6370D.query">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.query">[docs]</a>
+    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="AQ6370D.Close">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.Close">[docs]</a>
+    <span class="k">def</span> <span class="nf">Close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Instrument Yokogawa AQ6370D is closed!&#39;</span><span class="p">)</span></div>
+
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Start Sweep</span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="AQ6370D.StartSweep">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.StartSweep">[docs]</a>
+    <span class="k">def</span> <span class="nf">StartSweep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Makes a sweep</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:INITIATE&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Stop Measurment</span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="AQ6370D.Stop">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.Stop">[docs]</a>
+    <span class="k">def</span> <span class="nf">Stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+<span class="sd">            OSA.ask_SweepMode()</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;ABORt&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># ASK </span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="AQ6370D.ask_DisplayAutoY">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_DisplayAutoY">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_DisplayAutoY</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Queries the automatic setting function of</span>
+<span class="sd">            the sub scale of the level axis.</span>
+<span class="sd">            Response 0 = OFF, 1 = ON</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:DISPLAY:TRACE:Y2:AUTO?&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;OFF&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;ON&#39;</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_DisplayYUnit">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_DisplayYUnit">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_DisplayYUnit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Queries the units of the main scale of the</span>
+<span class="sd">            level axis.</span>
+<span class="sd">            DBM = dBm</span>
+<span class="sd">            W = W</span>
+<span class="sd">            DBM/NM = dBm/nm or dBm/THz</span>
+<span class="sd">            W/NM = W/nm or W/THz</span>
+<span class="sd">            Response 0 = dBm</span>
+<span class="sd">                1 = W</span>
+<span class="sd">                2 = DBM/NM</span>
+<span class="sd">                3 = W/NM</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+               
+        <span class="n">data</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:DISPLAY:TRACE:Y1:UNIT?&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;dBm&#39;</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;W&#39;</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;DBM/NM&#39;</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;3&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;W/NM&#39;</span></div>
+
+       
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_WavelengthStart">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_WavelengthStart">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_WavelengthStart</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Queries the measurement condition</span>
+<span class="sd">            measurement start wavelength</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSE:WAVELENGTH:START?&#39;</span><span class="p">))</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_WavelengthStop">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_WavelengthStop">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_WavelengthStop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dloat</span>
+<span class="sd">            Queries the measurement condition</span>
+<span class="sd">            measurement start wavelength</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSE:WAVELENGTH:STOP?&#39;</span><span class="p">))</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_CenterWavelenght">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_CenterWavelenght">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_CenterWavelenght</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Queries the synchronous sweep function.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:WAVelength:CENTer?&#39;</span><span class="p">))</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_DataFormat">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_DataFormat">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_DataFormat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Queries the format used for data transfer</span>
+<span class="sd">            via GP-IB.</span>
+<span class="sd">            </span>
+<span class="sd">            ASCii = ASCII format (default)</span>
+<span class="sd">            REAL[,64] = REAL format (64bits)</span>
+<span class="sd">            REAL,32 = REAL format (32bits)</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:FORMat:DATA?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_UnitX">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_UnitX">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_UnitX</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Queries the units for the X axis.</span>
+<span class="sd">            </span>
+<span class="sd">            </span>
+<span class="sd">            For AQ6370C, AQ6373 or AQ6373B</span>
+<span class="sd">            WAVelength = Wavelength</span>
+<span class="sd">            FREQuency = Frequency</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">data</span> <span class="o">=</span>  <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:UNIT:X?&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;WAVelength&#39;</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;FREQuency&#39;</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;WNUMber&#39;</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_TraceState">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_TraceState">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_TraceState</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Queries the display status of the specified</span>
+<span class="sd">            trace.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;TRACe:STATe?&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;Trace is OFF&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;Trace is ON&#39;</span></div>
+
+   
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_TraceActive">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_TraceActive">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_TraceActive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Queries the trace to be transferred.</span>
+<span class="sd">            </span>
+<span class="sd">            Outputs - (TRA|TRB|TRC|TRD|TRE|TRF|TRG)</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:TRACe:ACTive?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_CentralWavelenght">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_CentralWavelenght">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_CentralWavelenght</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Queries the center wavelength of the</span>
+<span class="sd">            X-axis of the display scale</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSE:WAVELENGTH:CENTER?&#39;</span><span class="p">))</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_Span">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_Span">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_Span</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Queries the measurement condition</span>
+<span class="sd">            measurement span.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSE:WAVELENGTH:SPAN?&#39;</span><span class="p">))</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_TraceResolution">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_TraceResolution">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_TraceResolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">           Trace selected - [&#39;TRA&#39;,&#39;TRB&#39;,&#39;TRC&#39;,&#39;TRD&#39;,&#39;TRE&#39;,&#39;TRF&#39;,&#39;TRG&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of floats</span>
+<span class="sd">            Queries the actual resolution data of the</span>
+<span class="sd">            specified trace.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+    
+        <span class="n">sState</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TRA&#39;</span><span class="p">,</span><span class="s1">&#39;TRB&#39;</span><span class="p">,</span><span class="s1">&#39;TRC&#39;</span><span class="p">,</span><span class="s1">&#39;TRD&#39;</span><span class="p">,</span><span class="s1">&#39;TRE&#39;</span><span class="p">,</span><span class="s1">&#39;TRF&#39;</span><span class="p">,</span><span class="s1">&#39;TRG&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">sState</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;CALCULATE:ARESOLUTION? &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">data</span>
+        
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_BWResolution">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_BWResolution">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_BWResolution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Queries the measurment resolution</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSE:BANDWIDTH?&#39;</span><span class="p">))</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_Sensitivity">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_Sensitivity">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_Sensitivity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Queries the measurement sensitivity.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">data</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSE:SENSE?&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;NHLD&#39;</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;NAUT&#39;</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;MID&#39;</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;3&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;HIGH1&#39;</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;4&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;HIGH2&#39;</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;5&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;HIGH3&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;NORMAL&#39;</span></div>
+
+       
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_AverageCount">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_AverageCount">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_AverageCount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Queries the number of times averaging for</span>
+<span class="sd">            each measured point.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSE:AVERAGE:COUNT?&#39;</span><span class="p">))</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_SegmentPoints">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_SegmentPoints">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_SegmentPoints</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Queries the number of sampling points</span>
+<span class="sd">            to be measured at one time when performing</span>
+<span class="sd">            SEGMENT MEASURE.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSE:SWEEP:SEGMENT:POINTS?&#39;</span><span class="p">))</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_SamplePoints">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_SamplePoints">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_SamplePoints</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Queries the number of samples measured</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSE:SWEEP:POINTS?&#39;</span><span class="p">))</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_SamplePointsAuto">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_SamplePointsAuto">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_SamplePointsAuto</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Queries the function of automatically</span>
+<span class="sd">            setting the sampling number to be measured</span>
+<span class="sd">            </span>
+<span class="sd">            Response 0 = OFF, 1 = ON</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSE:SWEEP:POINTS:AUTO?&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;OFF&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;ON&#39;</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_SweepSpeed">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_SweepSpeed">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_SweepSpeed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Queries the sweep speed</span>
+<span class="sd">            1x|0: Standard</span>
+<span class="sd">            2x|1: Twice as fast as standard</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSE:SWEEP:SPEED?&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;Standard&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;Twise as fast as standard&#39;</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_TraceDataX">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_TraceDataX">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_TraceDataX</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">             Name of the trace that should be extractselected.          </span>
+<span class="sd">            state = [TRA|TRB|TRC|TRD|TRE|TRF|TRG]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list of floats</span>
+<span class="sd">            Queries the wavelength axis data of the</span>
+<span class="sd">            specified trace.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">sState</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TRA&#39;</span><span class="p">,</span><span class="s1">&#39;TRB&#39;</span><span class="p">,</span><span class="s1">&#39;TRC&#39;</span><span class="p">,</span><span class="s1">&#39;TRD&#39;</span><span class="p">,</span><span class="s1">&#39;TRE&#39;</span><span class="p">,</span><span class="s1">&#39;TRF&#39;</span><span class="p">,</span><span class="s1">&#39;TRG&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">sState</span><span class="p">:</span>   
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:TRACE:X? &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_TraceDataY">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_TraceDataY">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_TraceDataY</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Name of the trace that should be extractselected.          </span>
+<span class="sd">            state = [TRA|TRB|TRC|TRD|TRE|TRF|TRG]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        data : list of floats</span>
+<span class="sd">            Queries the level axis data of specified trace.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">sState</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TRA&#39;</span><span class="p">,</span><span class="s1">&#39;TRB&#39;</span><span class="p">,</span><span class="s1">&#39;TRC&#39;</span><span class="p">,</span><span class="s1">&#39;TRD&#39;</span><span class="p">,</span><span class="s1">&#39;TRE&#39;</span><span class="p">,</span><span class="s1">&#39;TRF&#39;</span><span class="p">,</span><span class="s1">&#39;TRG&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">sState</span><span class="p">:</span>   
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:TRACE:Y? &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">data</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_SweepMode">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_SweepMode">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_SweepMode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Queries the sweep mode</span>
+<span class="sd">            [&#39;SINGle&#39;,&#39;REPeat&#39;,&#39;AUTO&#39;,&#39;SEGMent&#39;]</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">data</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:INITiate:SMODe?&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;SINGle&#39;</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;REPeat&#39;</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;3&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;AUTO&#39;</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;4&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;SEGMent&#39;</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.ask_TraceAttribute">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.ask_TraceAttribute">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_TraceAttribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Name of the trace that should be extractselected. </span>
+<span class="sd">            sState = [&#39;TRA&#39;,&#39;TRB&#39;,&#39;TRC&#39;,&#39;TRD&#39;,&#39;TRE&#39;,&#39;TRF&#39;,&#39;TRG&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            Queries the attributes of the specified</span>
+<span class="sd">            trace</span>
+<span class="sd">            [&#39;WRITe&#39;,&#39;FIX&#39;,&#39;MAX&#39;,&#39;MIN&#39;,&#39;RAVG&#39;,&#39;CALC&#39;]</span>
+<span class="sd">            WRITe = WRITE</span>
+<span class="sd">            FIX = FIX</span>
+<span class="sd">            MAX = MAX HOLD</span>
+<span class="sd">            MIN = MIN HOLD</span>
+<span class="sd">            RAVG = ROLL AVG</span>
+<span class="sd">            CALC = CALC</span>
+
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">sState</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TRA&#39;</span><span class="p">,</span><span class="s1">&#39;TRB&#39;</span><span class="p">,</span><span class="s1">&#39;TRC&#39;</span><span class="p">,</span><span class="s1">&#39;TRD&#39;</span><span class="p">,</span><span class="s1">&#39;TRE&#39;</span><span class="p">,</span><span class="s1">&#39;TRF&#39;</span><span class="p">,</span><span class="s1">&#39;TRG&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">sState</span><span class="p">:</span>
+            <span class="n">data</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:TRACE:ATTRIBUTE:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;?&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;WRITE&#39;</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;FIX&#39;</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;MAX HOLD&#39;</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;3&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;MIN HOLD&#39;</span>
+        <span class="k">elif</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;4&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;ROLL AVG&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;CALC&#39;</span></div>
+
+
+    
+    
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># SET</span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="AQ6370D.set_DisplayYUnit">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.set_DisplayYUnit">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_DisplayYUnit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Set the units of the main scale of the</span>
+<span class="sd">            level axis</span>
+<span class="sd">            [&#39;dBm&#39;,&#39;W&#39;,&#39;DBM/NM&#39;,&#39;W/NM&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">sState</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dBm&#39;</span><span class="p">,</span><span class="s1">&#39;W&#39;</span><span class="p">,</span><span class="s1">&#39;DBM/NM&#39;</span><span class="p">,</span><span class="s1">&#39;W/NM&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">sState</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:DISPLAY:TRACE:Y1:UNIT &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.set_WavelengthStart">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.set_WavelengthStart">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_WavelengthStart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">            Set the measurement condition</span>
+<span class="sd">        unit : str</span>
+<span class="sd">            units - [M|HZ].</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">sUnit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M&#39;</span><span class="p">,</span><span class="s1">&#39;HZ&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">sUnit</span><span class="p">:</span>    
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSE:WAVELENGTH:START &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.set_WavelengthStop">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.set_WavelengthStop">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_WavelengthStop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Set the measurement condition</span>
+<span class="sd">        measurement stop wavelength</span>
+<span class="sd">        </span>
+<span class="sd">        [M|HZ]</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">sUnit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M&#39;</span><span class="p">,</span><span class="s1">&#39;HZ&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">sUnit</span><span class="p">:</span>    
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSE:WAVELENGTH:STOP &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.set_DataFormat">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.set_DataFormat">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_DataFormat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        unit : str</span>
+<span class="sd">            sUnit = [&#39;ASCii&#39;, &#39;REAL[,64]&#39;, &#39;REAL,32&#39;]</span>
+<span class="sd">            </span>
+<span class="sd">            </span>
+<span class="sd">            When the format is set to REAL (binary) using</span>
+<span class="sd">            this command, the output data of the following</span>
+<span class="sd">            commands are produced in the REAL format.</span>
+<span class="sd">            :CALCulate:DATA:CGAin?</span>
+<span class="sd">            :CALCulate:DATA:CNF?</span>
+<span class="sd">            :CALCulate:DATA:CPOWers?</span>
+<span class="sd">            :CALCulate:DATA:CSNR?</span>
+<span class="sd">            :CALCulate:DATA:CWAVelengths?</span>
+<span class="sd">            :TRACe[:DATA]:X?</span>
+<span class="sd">            :TRACe[:DATA]:Y?</span>
+<span class="sd">                • The default is ASCII mode.</span>
+<span class="sd">                • When the *RST command is executed, the</span>
+<span class="sd">                format is reset to the ASCII mode.</span>
+<span class="sd">                • The ASCII format outputs a list of numerics</span>
+<span class="sd">                each of which is delimited by a comma (,).</span>
+<span class="sd">                Example: 12345,12345,....</span>
+<span class="sd">                • By default, the REAL format outputs data in</span>
+<span class="sd">                fixed length blocks of 64 bits, floating-point</span>
+<span class="sd">                binary numerics.</span>
+<span class="sd">                • If “REAL,32” is specified in the parameter,</span>
+<span class="sd">                data is output in the 32-bit, floating-point</span>
+<span class="sd">                binary form.</span>
+<span class="sd">                • The fixed length block is defined by IEEE</span>
+<span class="sd">                488.2 and consists of “#” (ASCII), one numeric</span>
+<span class="sd">                (ASCII) indicating the number of bytes that</span>
+<span class="sd">                specifies the length after #, length designation</span>
+<span class="sd">                (ASCII), and binary data of a specified length</span>
+<span class="sd">                in this order. Binary data consists of a floatingpoint data string of 8 bytes (64 bits) or 4 bytes</span>
+<span class="sd">                (32 bits). Floating-point data consists of lowerorder bytes to higher-order bytes.</span>
+<span class="sd">                E.g.: #18 [eight &lt;byte data&gt;]</span>
+<span class="sd">                #280[80 &lt;byte data&gt;]</span>
+<span class="sd">                #48008[8008 &lt;byte data&gt;]</span>
+<span class="sd">                • For data output in the 32-bit floating-point</span>
+<span class="sd">                binary form, cancellation of significant digits</span>
+<span class="sd">                is more likely to occur in comparison with</span>
+<span class="sd">                transfer of data in the 64-bit, floating-point</span>
+<span class="sd">                binary form.</span>
+<span class="sd">                • This is a sequential command</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">sUnit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ASCii&#39;</span><span class="p">,</span> <span class="s1">&#39;REAL[,64]&#39;</span><span class="p">,</span> <span class="s1">&#39;REAL,32&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">sUnit</span><span class="p">:</span>    
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;FORMAT:DATA &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.set_UnitX">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.set_UnitX">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_UnitX</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        unit : str</span>
+<span class="sd">            Set the units for the X axis.</span>
+<span class="sd">            sUnit = [&#39;WAV&#39;,&#39;FREQ&#39;,&#39;WNUM&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">sUnit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;WAV&#39;</span><span class="p">,</span><span class="s1">&#39;FREQ&#39;</span><span class="p">,</span><span class="s1">&#39;WNUM&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">sUnit</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:UNIT:X &#39;</span><span class="o">+</span> <span class="n">unit</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.set_CenterWavelenght">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.set_CenterWavelenght">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_CenterWavelenght</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">            Set the center wavelength of the</span>
+<span class="sd">            X-axis of the display scale</span>
+<span class="sd">        unit : str</span>
+<span class="sd">            sUnits = [&#39;M&#39;,&#39;HZ&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">sUnit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M&#39;</span><span class="p">,</span><span class="s1">&#39;HZ&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">sUnit</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSE:WAVELENGTH:CENTER &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.set_Span">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.set_Span">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_Span</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">            Set the measurement condition</span>
+<span class="sd">        measurement span.</span>
+<span class="sd">        unit : str</span>
+<span class="sd">            sUnits = [&#39;M&#39;,&#39;HZ&#39;]</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">sUnit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M&#39;</span><span class="p">,</span><span class="s1">&#39;HZ&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">sUnit</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSE:WAVELENGTH:SPAN &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.set_BWResolution">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.set_BWResolution">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_BWResolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">            Set the measurment resolution</span>
+<span class="sd">        unit : str</span>
+<span class="sd">            sUnit = [&#39;M&#39;,&#39;HZ&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">sUnit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;M&#39;</span><span class="p">,</span><span class="s1">&#39;HZ&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">sUnit</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSE:BANDWIDTH:RESOLUTION &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.set_Sensitivity">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.set_Sensitivity">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_Sensitivity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        unit : str</span>
+<span class="sd">            Set the measurement sensitivity.</span>
+<span class="sd">                NHLD = NORMAL HOLD</span>
+<span class="sd">                NAUT = NORMAL AUTO</span>
+<span class="sd">                NORMal = NORMAL</span>
+<span class="sd">                MID = MID</span>
+<span class="sd">                HIGH1 = HIGH1 or HIGH1/CHOP</span>
+<span class="sd">                HIGH2 = HIGH2 or HIGH2/CHOP</span>
+<span class="sd">                HIGH3 = HIGH3 or HIGH3/CHOP</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">sUnit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;NHLD&#39;</span><span class="p">,</span><span class="s1">&#39;NAUT&#39;</span><span class="p">,</span><span class="s1">&#39;MID&#39;</span><span class="p">,</span><span class="s1">&#39;HIGH1&#39;</span><span class="p">,</span><span class="s1">&#39;HIGH2&#39;</span><span class="p">,</span><span class="s1">&#39;HIGH3&#39;</span><span class="p">,</span><span class="s1">&#39;NORMAL&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">sUnit</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSE:SENSE &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.set_AverageCount">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.set_AverageCount">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_AverageCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : int</span>
+<span class="sd">            Set the number of times averaging for</span>
+<span class="sd">            each measured point.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSE:AVERAGE:COUNT &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
+
+           
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.set_SegmentPoints">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.set_SegmentPoints">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_SegmentPoints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value :int</span>
+<span class="sd">            Set the number of sampling points</span>
+<span class="sd">            to be measured at one time when performing</span>
+<span class="sd">            SEGMENT MEASURE.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSE:SWEEP:SEGMENT:POINTS &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.set_SamplePoints">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.set_SamplePoints">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_SamplePoints</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : int</span>
+<span class="sd">            Set the number of samples measured</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSE:SWEEP:POINTS &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.set_SweepSpeed">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.set_SweepSpeed">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_SweepSpeed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : int</span>
+<span class="sd">            Set the sweep speed.</span>
+<span class="sd">            1 - Standard</span>
+<span class="sd">            2 - Twice as fast as standard</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSE:SWEEP:SPEED 1x&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSE:SWEEP:SPEED 2x&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.set_SamplePointsAuto">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.set_SamplePointsAuto">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_SamplePointsAuto</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Set the function of automatically</span>
+<span class="sd">            setting the sampling number to be measured</span>
+<span class="sd">            [&#39;ON&#39;|&#39;OFF&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">sState</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="o">|</span><span class="s1">&#39;OFF&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">sState</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39; :SENSE:SWEEP:POINTS:AUTO &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.set_TraceActive">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.set_TraceActive">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_TraceActive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Sets the active trace.</span>
+<span class="sd">            sState = [&#39;TRA&#39;,&#39;TRB&#39;,&#39;TRC&#39;,&#39;TRD&#39;,&#39;TRE&#39;,&#39;TRF&#39;,&#39;TRG&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">sState</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TRA&#39;</span><span class="p">,</span><span class="s1">&#39;TRB&#39;</span><span class="p">,</span><span class="s1">&#39;TRC&#39;</span><span class="p">,</span><span class="s1">&#39;TRD&#39;</span><span class="p">,</span><span class="s1">&#39;TRE&#39;</span><span class="p">,</span><span class="s1">&#39;TRF&#39;</span><span class="p">,</span><span class="s1">&#39;TRG&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">sState</span><span class="p">:</span>    
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:TRACE:ACTIVE &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.set_SweepMode">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.set_SweepMode">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_SweepMode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Set the sweep mode</span>
+<span class="sd">            [&#39;SINGle&#39;,&#39;REPeat&#39;,&#39;AUTO&#39;,&#39;SEGMent&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">sState</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SINGle&#39;</span><span class="p">,</span><span class="s1">&#39;REPeat&#39;</span><span class="p">,</span><span class="s1">&#39;AUTO&#39;</span><span class="p">,</span><span class="s1">&#39;SEGMent&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">sState</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;INITIATE:SMODE &#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.set_TraceAttribute">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.set_TraceAttribute">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_TraceAttribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">trace</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        trace : str</span>
+<span class="sd">            Sets the active trace.</span>
+<span class="sd">            sState = [&#39;TRA&#39;,&#39;TRB&#39;,&#39;TRC&#39;,&#39;TRD&#39;,&#39;TRE&#39;,&#39;TRF&#39;,&#39;TRG&#39;]</span>
+<span class="sd">            </span>
+<span class="sd">        state : str</span>
+<span class="sd">            Set the attributes of the specified</span>
+<span class="sd">            trace</span>
+<span class="sd">            [&#39;WRITe&#39;,&#39;FIX&#39;,&#39;MAX&#39;,&#39;MIN&#39;,&#39;RAVG&#39;,&#39;CALC&#39;]</span>
+<span class="sd">            </span>
+<span class="sd">            WRITe = WRITE</span>
+<span class="sd">            FIX = FIX</span>
+<span class="sd">            MAX = MAX HOLD</span>
+<span class="sd">            MIN = MIN HOLD</span>
+<span class="sd">            RAVG = ROLL AVG</span>
+<span class="sd">            CALC = CALC</span>
+
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">sState</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;WRITe&#39;</span><span class="p">,</span><span class="s1">&#39;FIX&#39;</span><span class="p">,</span><span class="s1">&#39;MAX&#39;</span><span class="p">,</span><span class="s1">&#39;MIN&#39;</span><span class="p">,</span><span class="s1">&#39;RAVG&#39;</span><span class="p">,</span><span class="s1">&#39;CALC&#39;</span><span class="p">]</span>
+        <span class="n">sTrace</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TRA&#39;</span><span class="p">,</span><span class="s1">&#39;TRB&#39;</span><span class="p">,</span><span class="s1">&#39;TRC&#39;</span><span class="p">,</span><span class="s1">&#39;TRD&#39;</span><span class="p">,</span><span class="s1">&#39;TRE&#39;</span><span class="p">,</span><span class="s1">&#39;TRF&#39;</span><span class="p">,</span><span class="s1">&#39;TRG&#39;</span><span class="p">]</span>
+        
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">sState</span> <span class="ow">and</span> <span class="n">trace</span> <span class="ow">in</span> <span class="n">sTrace</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:TRACE:ATTRIBUTE:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># get Data</span>
+<span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="AQ6370D.get_Data">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.get_Data">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_Data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+
+<span class="w">        </span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get data on X and Y Traces from OSA.</span>
+<span class="sd">        Data Output is CST File.</span>
+<span class="sd">        Data is Saved in X Column and Y Column </span>
+<span class="sd">        state = &#39;TRA&#39;,&#39;TRB&#39;,&#39;TRC&#39;,&#39;TRD&#39;,&#39;TRE&#39;,&#39;TRF&#39;,&#39;TRG&#39;</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">sState</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TRA&#39;</span><span class="p">,</span><span class="s1">&#39;TRB&#39;</span><span class="p">,</span><span class="s1">&#39;TRC&#39;</span><span class="p">,</span><span class="s1">&#39;TRD&#39;</span><span class="p">,</span><span class="s1">&#39;TRE&#39;</span><span class="p">,</span><span class="s1">&#39;TRF&#39;</span><span class="p">,</span><span class="s1">&#39;TRG&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">sState</span><span class="p">:</span>
+            <span class="c1">#Get Headers</span>
+            <span class="n">HeaderX</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_UnitX</span><span class="p">()</span>
+            <span class="n">HeaderY</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_DisplayYUnit</span><span class="p">()</span>
+            <span class="c1">#Get Data</span>
+            <span class="n">dataX</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_TraceDataX</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+            <span class="n">dataY</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_TraceDataY</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+            
+            <span class="c1">#create CSV</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="n">HeaderX</span><span class="p">):</span><span class="n">dataX</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">HeaderY</span><span class="p">):</span><span class="n">dataY</span><span class="p">}</span>
+            <span class="n">Data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">HeaderX</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">HeaderY</span><span class="p">)])</span>
+            
+            <span class="k">return</span> <span class="n">Data</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+
+    
+    
+    
+    
+<div class="viewcode-block" id="AQ6370D.print_ParamsOSA">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.print_ParamsOSA">[docs]</a>
+    <span class="k">def</span> <span class="nf">print_ParamsOSA</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        srt </span>
+<span class="sd">            Parameters set on the Yokogawa AQ6370D</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;################ OSA Parameters ################&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Y-Axis units = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_DisplayYUnit</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;X-Axis units = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_UnitX</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Start Wavelength = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_WavelengthStart</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Stop Wavelength = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_WavelengthStop</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bandwidth Resolution = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_BWResolution</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Center Wavelenght = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_CenterWavelenght</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Span = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_Span</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Output data format = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_DataFormat</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Displayed trace = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_TraceState</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Selected Trace = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_TraceActive</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Averaging Points = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_AverageCount</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sample Points = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_SamplePoints</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sweep speed = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_SweepSpeed</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sweep Mode = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_SweepMode</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;################ OSA Parameters ################&#39;</span><span class="p">)</span></div>
+
+        
+     
+    
+<div class="viewcode-block" id="AQ6370D.get_ParamsOSA">
+<a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D.get_ParamsOSA">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_ParamsOSA</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        srt </span>
+<span class="sd">            Parameters set on the Yokogawa AQ6370D</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">Header</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Y-Axis units&#39;</span><span class="p">,</span><span class="s1">&#39;X-Axis units&#39;</span><span class="p">,</span><span class="s1">&#39;Start Wavelength&#39;</span><span class="p">,</span><span class="s1">&#39;Stop Wavelength&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;Bandwidth Resolution&#39;</span><span class="p">,</span><span class="s1">&#39;Center Wavelenght&#39;</span><span class="p">,</span><span class="s1">&#39;Span&#39;</span><span class="p">,</span><span class="s1">&#39;Output data format&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;Displayed trace&#39;</span><span class="p">,</span><span class="s1">&#39;Selected Trace&#39;</span><span class="p">,</span><span class="s1">&#39;Averaging Points&#39;</span><span class="p">,</span><span class="s1">&#39;Sample Points&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;Sweep speed&#39;</span><span class="p">,</span><span class="s1">&#39;Sweep Mode&#39;</span><span class="p">]</span>
+        <span class="n">Data</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_DisplayYUnit</span><span class="p">())</span>
+        <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_UnitX</span><span class="p">())</span>
+        <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_WavelengthStart</span><span class="p">())</span>
+        <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_WavelengthStop</span><span class="p">())</span>
+        <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_BWResolution</span><span class="p">())</span>
+        <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_CenterWavelenght</span><span class="p">())</span>
+        <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_Span</span><span class="p">())</span>
+        <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_DataFormat</span><span class="p">())</span>
+        <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_TraceState</span><span class="p">())</span>
+        <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_TraceActive</span><span class="p">())</span>
+        <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_AverageCount</span><span class="p">())</span>
+        <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_SamplePoints</span><span class="p">())</span>
+        <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_SweepSpeed</span><span class="p">())</span>
+        <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_SweepMode</span><span class="p">())</span>
+
+        
+        <span class="k">return</span> <span class="n">Header</span><span class="p">,</span><span class="n">Data</span></div>
+</div>
+
+        
+        
+        
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Martin.Mihaylov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yokogawa Optical Spectrum Analyzer AQ6370D module &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Instruments Automatisation Libraries
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Yokogawa Optical Spectrum Analyzer AQ6370D module</a><ul>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D"><code class="docutils literal notranslate"><span class="pre">AQ6370D</span></code></a><ul>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.Close"><code class="docutils literal notranslate"><span class="pre">AQ6370D.Close()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.StartSweep"><code class="docutils literal notranslate"><span class="pre">AQ6370D.StartSweep()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.Stop"><code class="docutils literal notranslate"><span class="pre">AQ6370D.Stop()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_AverageCount"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_AverageCount()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_BWResolution"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_BWResolution()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_CenterWavelenght"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_CenterWavelenght()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_CentralWavelenght"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_CentralWavelenght()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_DataFormat"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_DataFormat()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_DisplayAutoY"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_DisplayAutoY()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_DisplayYUnit"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_DisplayYUnit()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_SamplePoints"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_SamplePoints()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_SamplePointsAuto"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_SamplePointsAuto()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_SegmentPoints"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_SegmentPoints()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_Sensitivity"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_Sensitivity()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_Span"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_Span()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_SweepMode"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_SweepMode()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_SweepSpeed"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_SweepSpeed()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_TraceActive"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_TraceActive()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_TraceAttribute"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_TraceAttribute()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_TraceDataX"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_TraceDataX()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_TraceDataY"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_TraceDataY()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_TraceResolution"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_TraceResolution()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_TraceState"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_TraceState()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_UnitX"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_UnitX()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_WavelengthStart"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_WavelengthStart()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.ask_WavelengthStop"><code class="docutils literal notranslate"><span class="pre">AQ6370D.ask_WavelengthStop()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.get_Data"><code class="docutils literal notranslate"><span class="pre">AQ6370D.get_Data()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.get_ParamsOSA"><code class="docutils literal notranslate"><span class="pre">AQ6370D.get_ParamsOSA()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.print_ParamsOSA"><code class="docutils literal notranslate"><span class="pre">AQ6370D.print_ParamsOSA()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.query"><code class="docutils literal notranslate"><span class="pre">AQ6370D.query()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.set_AverageCount"><code class="docutils literal notranslate"><span class="pre">AQ6370D.set_AverageCount()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.set_BWResolution"><code class="docutils literal notranslate"><span class="pre">AQ6370D.set_BWResolution()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.set_CenterWavelenght"><code class="docutils literal notranslate"><span class="pre">AQ6370D.set_CenterWavelenght()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.set_DataFormat"><code class="docutils literal notranslate"><span class="pre">AQ6370D.set_DataFormat()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.set_DisplayYUnit"><code class="docutils literal notranslate"><span class="pre">AQ6370D.set_DisplayYUnit()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.set_SamplePoints"><code class="docutils literal notranslate"><span class="pre">AQ6370D.set_SamplePoints()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.set_SamplePointsAuto"><code class="docutils literal notranslate"><span class="pre">AQ6370D.set_SamplePointsAuto()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.set_SegmentPoints"><code class="docutils literal notranslate"><span class="pre">AQ6370D.set_SegmentPoints()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.set_Sensitivity"><code class="docutils literal notranslate"><span class="pre">AQ6370D.set_Sensitivity()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.set_Span"><code class="docutils literal notranslate"><span class="pre">AQ6370D.set_Span()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.set_SweepMode"><code class="docutils literal notranslate"><span class="pre">AQ6370D.set_SweepMode()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.set_SweepSpeed"><code class="docutils literal notranslate"><span class="pre">AQ6370D.set_SweepSpeed()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.set_TraceActive"><code class="docutils literal notranslate"><span class="pre">AQ6370D.set_TraceActive()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.set_TraceAttribute"><code class="docutils literal notranslate"><span class="pre">AQ6370D.set_TraceAttribute()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.set_UnitX"><code class="docutils literal notranslate"><span class="pre">AQ6370D.set_UnitX()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.set_WavelengthStart"><code class="docutils literal notranslate"><span class="pre">AQ6370D.set_WavelengthStart()</span></code></a></li>
+<li><a class="reference internal" href="#AQ6370D.AQ6370D.set_WavelengthStop"><code class="docutils literal notranslate"><span class="pre">AQ6370D.set_WavelengthStop()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Instruments Automatisation Libraries</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Yokogawa Optical Spectrum Analyzer AQ6370D module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/rst/AQ6370D.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="yokogawa-optical-spectrum-analyzer-aq6370d-module">
+<h1>Yokogawa Optical Spectrum Analyzer AQ6370D module<a class="headerlink" href="#yokogawa-optical-spectrum-analyzer-aq6370d-module" title="Link to this heading"></a></h1>
+<p id="module-AQ6370D">Created on Tue Dec 14 12:58:27 2021</p>
+<p>&#64;author: Martin.Mihaylov</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AQ6370D.</span></span><span class="sig-name descname"><span class="pre">AQ6370D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Instrument</span></code></p>
+<p>A class thats uses vxi11 library to interface a Yokogawa AQ6370D.
+Need to have python ‘vxi11’, ‘pandas’ and ‘numpy’ librarys installed!</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.Close">
+<span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.Close" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.StartSweep">
+<span class="sig-name descname"><span class="pre">StartSweep</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.StartSweep"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.StartSweep" title="Link to this definition"></a></dt>
+<dd><p>Makes a sweep</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.Stop">
+<span class="sig-name descname"><span class="pre">Stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.Stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.Stop" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>OSA.ask_SweepMode()</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_AverageCount">
+<span class="sig-name descname"><span class="pre">ask_AverageCount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_AverageCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_AverageCount" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the number of times averaging for
+each measured point.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_BWResolution">
+<span class="sig-name descname"><span class="pre">ask_BWResolution</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_BWResolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_BWResolution" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the measurment resolution</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_CenterWavelenght">
+<span class="sig-name descname"><span class="pre">ask_CenterWavelenght</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_CenterWavelenght"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_CenterWavelenght" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the synchronous sweep function.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_CentralWavelenght">
+<span class="sig-name descname"><span class="pre">ask_CentralWavelenght</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_CentralWavelenght"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_CentralWavelenght" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the center wavelength of the
+X-axis of the display scale</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_DataFormat">
+<span class="sig-name descname"><span class="pre">ask_DataFormat</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_DataFormat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_DataFormat" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>Queries the format used for data transfer
+via GP-IB.</p>
+<p>ASCii = ASCII format (default)
+REAL[,64] = REAL format (64bits)
+REAL,32 = REAL format (32bits)</p>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_DisplayAutoY">
+<span class="sig-name descname"><span class="pre">ask_DisplayAutoY</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_DisplayAutoY"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_DisplayAutoY" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the automatic setting function of
+the sub scale of the level axis.
+Response 0 = OFF, 1 = ON</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_DisplayYUnit">
+<span class="sig-name descname"><span class="pre">ask_DisplayYUnit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_DisplayYUnit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_DisplayYUnit" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>Queries the units of the main scale of the
+level axis.
+DBM = dBm
+W = W
+DBM/NM = dBm/nm or dBm/THz
+W/NM = W/nm or W/THz
+Response 0 = dBm</p>
+<blockquote>
+<div><p>1 = W
+2 = DBM/NM
+3 = W/NM</p>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_SamplePoints">
+<span class="sig-name descname"><span class="pre">ask_SamplePoints</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_SamplePoints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_SamplePoints" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the number of samples measured</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_SamplePointsAuto">
+<span class="sig-name descname"><span class="pre">ask_SamplePointsAuto</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_SamplePointsAuto"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_SamplePointsAuto" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>Queries the function of automatically
+setting the sampling number to be measured</p>
+<p>Response 0 = OFF, 1 = ON</p>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_SegmentPoints">
+<span class="sig-name descname"><span class="pre">ask_SegmentPoints</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_SegmentPoints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_SegmentPoints" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the number of sampling points
+to be measured at one time when performing
+SEGMENT MEASURE.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_Sensitivity">
+<span class="sig-name descname"><span class="pre">ask_Sensitivity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_Sensitivity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_Sensitivity" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the measurement sensitivity.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_Span">
+<span class="sig-name descname"><span class="pre">ask_Span</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_Span"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_Span" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the measurement condition
+measurement span.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_SweepMode">
+<span class="sig-name descname"><span class="pre">ask_SweepMode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_SweepMode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_SweepMode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the sweep mode
+[‘SINGle’,’REPeat’,’AUTO’,’SEGMent’]</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_SweepSpeed">
+<span class="sig-name descname"><span class="pre">ask_SweepSpeed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_SweepSpeed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_SweepSpeed" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the sweep speed
+1x|0: Standard
+2x|1: Twice as fast as standard</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_TraceActive">
+<span class="sig-name descname"><span class="pre">ask_TraceActive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_TraceActive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_TraceActive" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>Queries the trace to be transferred.</p>
+<p>Outputs - (TRA|TRB|TRC|TRD|TRE|TRF|TRG)</p>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_TraceAttribute">
+<span class="sig-name descname"><span class="pre">ask_TraceAttribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_TraceAttribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_TraceAttribute" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Name of the trace that should be extractselected.
+sState = [‘TRA’,’TRB’,’TRC’,’TRD’,’TRE’,’TRF’,’TRG’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the attributes of the specified
+trace
+[‘WRITe’,’FIX’,’MAX’,’MIN’,’RAVG’,’CALC’]
+WRITe = WRITE
+FIX = FIX
+MAX = MAX HOLD
+MIN = MIN HOLD
+RAVG = ROLL AVG
+CALC = CALC</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_TraceDataX">
+<span class="sig-name descname"><span class="pre">ask_TraceDataX</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_TraceDataX"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_TraceDataX" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Name of the trace that should be extractselected.
+state = [TRA|TRB|TRC|TRD|TRE|TRF|TRG]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the wavelength axis data of the
+specified trace.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of floats</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_TraceDataY">
+<span class="sig-name descname"><span class="pre">ask_TraceDataY</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_TraceDataY"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_TraceDataY" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Name of the trace that should be extractselected.
+state = [TRA|TRB|TRC|TRD|TRE|TRF|TRG]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – Queries the level axis data of specified trace.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of floats</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_TraceResolution">
+<span class="sig-name descname"><span class="pre">ask_TraceResolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_TraceResolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_TraceResolution" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Trace selected - [‘TRA’,’TRB’,’TRC’,’TRD’,’TRE’,’TRF’,’TRG’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the actual resolution data of the
+specified trace.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of floats</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_TraceState">
+<span class="sig-name descname"><span class="pre">ask_TraceState</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_TraceState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_TraceState" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the display status of the specified
+trace.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_UnitX">
+<span class="sig-name descname"><span class="pre">ask_UnitX</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_UnitX"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_UnitX" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the units for the X axis.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>str</p>
+<p>For AQ6370C, AQ6373 or AQ6373B
+WAVelength = Wavelength
+FREQuency = Frequency</p>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_WavelengthStart">
+<span class="sig-name descname"><span class="pre">ask_WavelengthStart</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_WavelengthStart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_WavelengthStart" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the measurement condition
+measurement start wavelength</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.ask_WavelengthStop">
+<span class="sig-name descname"><span class="pre">ask_WavelengthStop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_WavelengthStop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_WavelengthStop" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the measurement condition
+measurement start wavelength</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dloat</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.get_Data">
+<span class="sig-name descname"><span class="pre">get_Data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.get_Data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.get_Data" title="Link to this definition"></a></dt>
+<dd><p>Get data on X and Y Traces from OSA.
+Data Output is CST File.
+Data is Saved in X Column and Y Column
+state = ‘TRA’,’TRB’,’TRC’,’TRD’,’TRE’,’TRF’,’TRG’</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.get_ParamsOSA">
+<span class="sig-name descname"><span class="pre">get_ParamsOSA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.get_ParamsOSA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.get_ParamsOSA" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Parameters set on the Yokogawa AQ6370D</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>srt</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.print_ParamsOSA">
+<span class="sig-name descname"><span class="pre">print_ParamsOSA</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.print_ParamsOSA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.print_ParamsOSA" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Parameters set on the Yokogawa AQ6370D</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>srt</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.query">
+<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.query" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.set_AverageCount">
+<span class="sig-name descname"><span class="pre">set_AverageCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.set_AverageCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.set_AverageCount" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – Set the number of times averaging for
+each measured point.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.set_BWResolution">
+<span class="sig-name descname"><span class="pre">set_BWResolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.set_BWResolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.set_BWResolution" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>int/float</em>) – Set the measurment resolution</p></li>
+<li><p><strong>unit</strong> (<em>str</em>) – sUnit = [‘M’,’HZ’]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.set_CenterWavelenght">
+<span class="sig-name descname"><span class="pre">set_CenterWavelenght</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.set_CenterWavelenght"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.set_CenterWavelenght" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>int/float</em>) – Set the center wavelength of the
+X-axis of the display scale</p></li>
+<li><p><strong>unit</strong> (<em>str</em>) – sUnits = [‘M’,’HZ’]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.set_DataFormat">
+<span class="sig-name descname"><span class="pre">set_DataFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.set_DataFormat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.set_DataFormat" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>unit</strong> – sUnit = [‘ASCii’, ‘REAL[,64]’, ‘REAL,32’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.set_DisplayYUnit">
+<span class="sig-name descname"><span class="pre">set_DisplayYUnit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.set_DisplayYUnit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.set_DisplayYUnit" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Set the units of the main scale of the
+level axis
+[‘dBm’,’W’,’DBM/NM’,’W/NM’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.set_SamplePoints">
+<span class="sig-name descname"><span class="pre">set_SamplePoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.set_SamplePoints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.set_SamplePoints" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – Set the number of samples measured</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.set_SamplePointsAuto">
+<span class="sig-name descname"><span class="pre">set_SamplePointsAuto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.set_SamplePointsAuto"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.set_SamplePointsAuto" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Set the function of automatically
+setting the sampling number to be measured
+[‘ON’|’OFF’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.set_SegmentPoints">
+<span class="sig-name descname"><span class="pre">set_SegmentPoints</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.set_SegmentPoints"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.set_SegmentPoints" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – Set the number of sampling points
+to be measured at one time when performing
+SEGMENT MEASURE.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.set_Sensitivity">
+<span class="sig-name descname"><span class="pre">set_Sensitivity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.set_Sensitivity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.set_Sensitivity" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>unit</strong> (<em>str</em>) – <dl class="simple">
+<dt>Set the measurement sensitivity.</dt><dd><p>NHLD = NORMAL HOLD
+NAUT = NORMAL AUTO
+NORMal = NORMAL
+MID = MID
+HIGH1 = HIGH1 or HIGH1/CHOP
+HIGH2 = HIGH2 or HIGH2/CHOP
+HIGH3 = HIGH3 or HIGH3/CHOP</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.set_Span">
+<span class="sig-name descname"><span class="pre">set_Span</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.set_Span"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.set_Span" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>int/float</em>) – Set the measurement condition</p></li>
+<li><p><strong>span.</strong> (<em>measurement</em>) – </p></li>
+<li><p><strong>unit</strong> (<em>str</em>) – sUnits = [‘M’,’HZ’]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.set_SweepMode">
+<span class="sig-name descname"><span class="pre">set_SweepMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.set_SweepMode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.set_SweepMode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Set the sweep mode
+[‘SINGle’,’REPeat’,’AUTO’,’SEGMent’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.set_SweepSpeed">
+<span class="sig-name descname"><span class="pre">set_SweepSpeed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.set_SweepSpeed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.set_SweepSpeed" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – Set the sweep speed.
+1 - Standard
+2 - Twice as fast as standard</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.set_TraceActive">
+<span class="sig-name descname"><span class="pre">set_TraceActive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.set_TraceActive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.set_TraceActive" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Sets the active trace.
+sState = [‘TRA’,’TRB’,’TRC’,’TRD’,’TRE’,’TRF’,’TRG’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.set_TraceAttribute">
+<span class="sig-name descname"><span class="pre">set_TraceAttribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trace</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.set_TraceAttribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.set_TraceAttribute" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trace</strong> (<em>str</em>) – Sets the active trace.
+sState = [‘TRA’,’TRB’,’TRC’,’TRD’,’TRE’,’TRF’,’TRG’]</p></li>
+<li><p><strong>state</strong> (<em>str</em>) – <p>Set the attributes of the specified
+trace
+[‘WRITe’,’FIX’,’MAX’,’MIN’,’RAVG’,’CALC’]</p>
+<p>WRITe = WRITE
+FIX = FIX
+MAX = MAX HOLD
+MIN = MIN HOLD
+RAVG = ROLL AVG
+CALC = CALC</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.set_UnitX">
+<span class="sig-name descname"><span class="pre">set_UnitX</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.set_UnitX"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.set_UnitX" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>unit</strong> (<em>str</em>) – Set the units for the X axis.
+sUnit = [‘WAV’,’FREQ’,’WNUM’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.set_WavelengthStart">
+<span class="sig-name descname"><span class="pre">set_WavelengthStart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.set_WavelengthStart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.set_WavelengthStart" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>int/float</em>) – Set the measurement condition</p></li>
+<li><p><strong>unit</strong> (<em>str</em>) – units - [M|HZ].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="AQ6370D.AQ6370D.set_WavelengthStop">
+<span class="sig-name descname"><span class="pre">set_WavelengthStop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.set_WavelengthStop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.set_WavelengthStop" title="Link to this definition"></a></dt>
+<dd><p>Set the measurement condition
+measurement stop wavelength</p>
+<p>[M|HZ]</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Martin.Mihaylov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

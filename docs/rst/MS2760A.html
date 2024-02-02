@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anritsu Vectro Analyzer MS2760A module &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Instruments Automatisation Libraries
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Anritsu Vectro Analyzer MS2760A module</a><ul>
+<li><a class="reference internal" href="#MS2760A.MS2760A"><code class="docutils literal notranslate"><span class="pre">MS2760A</span></code></a><ul>
+<li><a class="reference internal" href="#MS2760A.MS2760A.Close"><code class="docutils literal notranslate"><span class="pre">MS2760A.Close()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ExtractTtraceData"><code class="docutils literal notranslate"><span class="pre">MS2760A.ExtractTtraceData()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.Init"><code class="docutils literal notranslate"><span class="pre">MS2760A.Init()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.OPC"><code class="docutils literal notranslate"><span class="pre">MS2760A.OPC()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.abort"><code class="docutils literal notranslate"><span class="pre">MS2760A.abort()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ask_CHPowerState"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_CHPowerState()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ask_CenterFreq"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_CenterFreq()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ask_Configuration"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_Configuration()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ask_DataFormat"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_DataFormat()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ask_DataPointCount"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_DataPointCount()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ask_MarkerExcursion"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_MarkerExcursion()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ask_MarkerExcursionState"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_MarkerExcursionState()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ask_ResBwidth"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_ResBwidth()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ask_ResBwidthAuto"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_ResBwidthAuto()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ask_SingleOrContinuesMeas"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_SingleOrContinuesMeas()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ask_TraceData"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_TraceData()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ask_TraceSelected"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_TraceSelected()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ask_TraceState"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_TraceState()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ask_TraceType"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_TraceType()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ask_freq_Start"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_freq_Start()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ask_freq_Stop"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_freq_Stop()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ask_sweepTime"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_sweepTime()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.get_Data"><code class="docutils literal notranslate"><span class="pre">MS2760A.get_Data()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.query"><code class="docutils literal notranslate"><span class="pre">MS2760A.query()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_CHPowerState"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_CHPowerState()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_CenterFreq"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_CenterFreq()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_Continuous"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_Continuous()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_ContinuousMeas"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_ContinuousMeas()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_DataFormat"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_DataFormat()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_DataPointCount"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_DataPointCount()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_MarkerExcursion"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_MarkerExcursion()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_MarkerExcursionState"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_MarkerExcursionState()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_MarkerPreset"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_MarkerPreset()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_MaxPeak"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_MaxPeak()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_NextPeak"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_NextPeak()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_ResBwidth"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_ResBwidth()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_ResBwidthAuto"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_ResBwidthAuto()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_TraceSelected"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_TraceSelected()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_TraceState"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_TraceState()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_TraceType"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_TraceType()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_freq_Start"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_freq_Start()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_freq_Stop"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_freq_Stop()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.write"><code class="docutils literal notranslate"><span class="pre">MS2760A.write()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Instruments Automatisation Libraries</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Anritsu Vectro Analyzer MS2760A module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/rst/MS2760A.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="anritsu-vectro-analyzer-ms2760a-module">
+<h1>Anritsu Vectro Analyzer MS2760A module<a class="headerlink" href="#anritsu-vectro-analyzer-ms2760a-module" title="Link to this heading"></a></h1>
+<p id="module-MS2760A">Created on Wed Dec  1 13:11:32 2021</p>
+<p>&#64;author: Martin.Mihaylov</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="MS2760A.MS2760A">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MS2760A.</span></span><span class="sig-name descname"><span class="pre">MS2760A</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.Close">
+<span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.Close" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ExtractTtraceData">
+<span class="sig-name descname"><span class="pre">ExtractTtraceData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ExtractTtraceData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ExtractTtraceData" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>int</em>) – </p></li>
+<li><p><strong>function</strong> (<em>!!!!!USE IT AT YOUR OWN RISK is not an official</em>) – <dl class="simple">
+<dt>Trace Number from which the data is taken:</dt><dd><p>Can be set to  [1,2,3,4,5,6].</p>
+</dd>
+</dl>
+<p>1 - This Function will set the continues measurment to ‘OFF’.
+2 - Will set the Data Format to ASCii. This is needed since
+:TREACE:DATA? &lt;num&gt; is defect!!
+3 - Will write TRACE:DATA? &lt;num&gt;. Will return only 3 bits. The rest
+will be packed in the next command asked.
+4 - Will ask for the Data Format. This is dummy command that will
+have the data and the Data Format.
+5 - Make manupulations to separate the actual data from the rest and
+return the data in Output np.array() form.</p>
+</p></li>
+<li><p><strong>workaround!!!!!</strong> (<em>but a</em>) – <dl class="simple">
+<dt>Trace Number from which the data is taken:</dt><dd><p>Can be set to  [1,2,3,4,5,6].</p>
+</dd>
+</dl>
+<p>1 - This Function will set the continues measurment to ‘OFF’.
+2 - Will set the Data Format to ASCii. This is needed since
+:TREACE:DATA? &lt;num&gt; is defect!!
+3 - Will write TRACE:DATA? &lt;num&gt;. Will return only 3 bits. The rest
+will be packed in the next command asked.
+4 - Will ask for the Data Format. This is dummy command that will
+have the data and the Data Format.
+5 - Make manupulations to separate the actual data from the rest and
+return the data in Output np.array() form.</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Output</strong> – DESCRIPTION.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TYPE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.Init">
+<span class="sig-name descname"><span class="pre">Init</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.Init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.Init" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Initialize meas</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.OPC">
+<span class="sig-name descname"><span class="pre">OPC</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.OPC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.OPC" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Places a “1” into the output queue when all device
+operations have been completed</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.abort">
+<span class="sig-name descname"><span class="pre">abort</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.abort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.abort" title="Link to this definition"></a></dt>
+<dd><p>Description: Resets the trigger system. This has the effect of aborting the sweep or any measurement
+that is currently in progress.
+Additionally, any pending operation flags that were set by initiation of the trigger system
+will be set to false.
+If :INITiate:CONTinuous is OFF (i.e. the instrument is in single sweep mode), send the
+command :INITiate[:IMMediate] to trigger the next sweep.
+If :INITiate:CONTinuous is ON (i.e. the instrument is in continuous sweep mode) a new
+sweep will start immediately</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ask_CHPowerState">
+<span class="sig-name descname"><span class="pre">ask_CHPowerState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ask_CHPowerState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ask_CHPowerState" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str/int</em>) – Channel Power State
+Sets the state of the channel power measurement, ON or OFF. When using
+:CONFigure:CHPower,the state is automatically set to ON
+state = [‘ON’,’OFF’,1,0]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>State ON or OFF</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ask_CenterFreq">
+<span class="sig-name descname"><span class="pre">ask_CenterFreq</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ask_CenterFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ask_CenterFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the Central Frequency
+Numeric (Hz)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ask_Configuration">
+<span class="sig-name descname"><span class="pre">ask_Configuration</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ask_Configuration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ask_Configuration" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Title: Option Configuration
+Description: This command returns a quoted string of characters readable only by Anritsu Customer
+Service. Only instrument configuration information is returned. No setup information is
+included.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ask_DataFormat">
+<span class="sig-name descname"><span class="pre">ask_DataFormat</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ask_DataFormat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ask_DataFormat" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the data format</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ask_DataPointCount">
+<span class="sig-name descname"><span class="pre">ask_DataPointCount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ask_DataPointCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ask_DataPointCount" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the data point count.
+Title: Display Point Count
+Query Return: Numeric</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ask_MarkerExcursion">
+<span class="sig-name descname"><span class="pre">ask_MarkerExcursion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ask_MarkerExcursion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ask_MarkerExcursion" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the excursion for a marker. The excursion is the vertical distance from the peak to
+the next highest valley which must be exceeded for a peak to be considered a peak in
+marker max commands</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ask_MarkerExcursionState">
+<span class="sig-name descname"><span class="pre">ask_MarkerExcursionState</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ask_MarkerExcursionState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ask_MarkerExcursionState" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Turn on/off excursion checking for marker max commands</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ask_ResBwidth">
+<span class="sig-name descname"><span class="pre">ask_ResBwidth</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ask_ResBwidth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ask_ResBwidth" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Ask the resolution bandwidth.
+Query Return: Numeric (Hz)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ask_ResBwidthAuto">
+<span class="sig-name descname"><span class="pre">ask_ResBwidthAuto</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ask_ResBwidthAuto"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ask_ResBwidthAuto" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>val</strong> – Query the resolution bandwidth.
+Defaoulf: ON</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ask_SingleOrContinuesMeas">
+<span class="sig-name descname"><span class="pre">ask_SingleOrContinuesMeas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ask_SingleOrContinuesMeas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ask_SingleOrContinuesMeas" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – The query version of the command returns a 1 if the instrument is
+continuously sweeping/measuring and returns a 0 if the instrument is in single
+sweep/measurement mode.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ask_TraceData">
+<span class="sig-name descname"><span class="pre">ask_TraceData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">traceNumber</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ask_TraceData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ask_TraceData" title="Link to this definition"></a></dt>
+<dd><p>!!!!!DONT USE IT!!!!!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>traceNumber</strong> (<em>int</em>) – Description: This command transfers trace data from the instrument to the controller. Data are
+transferred from the instrument as an IEEE definite length arbitrary block response,
+which has the form &lt;header&gt;&lt;block&gt;.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Trace Data</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ask_TraceSelected">
+<span class="sig-name descname"><span class="pre">ask_TraceSelected</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ask_TraceSelected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ask_TraceSelected" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query selected trace will be used by operations that use a single trace. The max number of
+traces available to select is model specific</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ask_TraceState">
+<span class="sig-name descname"><span class="pre">ask_TraceState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ask_TraceState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ask_TraceState" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>number</strong> (<em>int</em>) – <p>Description: The trace visibility state. If it is OFF, the :TRAC:DATA? command will return nan.
+Trace Number:</p>
+<blockquote>
+<div><p>int. [1,2,3,4,5,6]</p>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>State ON or OFF</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ask_TraceType">
+<span class="sig-name descname"><span class="pre">ask_TraceType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ask_TraceType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ask_TraceType" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>number</strong> (<em>int</em>) – Specifies how successive sweeps are combined to produce the resulting display value.
+Setting the TYPE to NORMal will cause the displayed value for a point to be the current
+measured value for that point. Setting the TYPE to AVERage will cause the displayed
+value for a point to be the average of the last &lt;integer&gt; measured values where &lt;integer&gt;
+is set by [:SENSe]:AVERage:COUNt. Setting the TYPE to MAXimum will cause the
+displayed value for a point is the maximum measured value for that point over sweeps.
+Setting the TYPE to MINimum will cause the displayed value for a point is the minimum
+measured value for that point over sweeps.Setting the TYPE to RMAXimum will cause
+the displayed value for a point to be the maximum of the last &lt;integer&gt; measured values
+where &lt;integer&gt; is set by [:SENSe]:AVERage:COUNt.Setting the TYPE to RMINimum
+will cause the displayed value for a point to be the minimum of the last &lt;integer&gt;
+measured values where &lt;integer&gt; is set by [:SENSe]:AVERage:COUNt. This command
+will be ignored when spectrogram is disabled by DISPlay:VIEW.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query Return: NORM|MIN|MAX|AVER|RMAX|RMIN|RAV</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ask_freq_Start">
+<span class="sig-name descname"><span class="pre">ask_freq_Start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ask_freq_Start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ask_freq_Start" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query return set start Frequency.
+Numeric (Hz)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ask_freq_Stop">
+<span class="sig-name descname"><span class="pre">ask_freq_Stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ask_freq_Stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ask_freq_Stop" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query return set stop Frequency.
+Numeric (Hz)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ask_sweepTime">
+<span class="sig-name descname"><span class="pre">ask_sweepTime</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ask_sweepTime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ask_sweepTime" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Title: Measured Sweep Time
+Description: This command queries the measured sweep time, in number of milliseconds. This
+command will return “nan” if no measured sweep time is available, which happens if the
+sweep was reset and the instrument has not yet swept enough to measure a full sweep.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.get_Data">
+<span class="sig-name descname"><span class="pre">get_Data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.get_Data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.get_Data" title="Link to this definition"></a></dt>
+<dd><p>This function will stop temporally set Continuous Measurment to OFF, extract
+the max.peak value and frequency and restore the Continuous Measurment to ON.
+:returns: <strong>OutPut</strong> – Return a dictionary whit the measured voltage and current.
+:rtype: dict</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.query">
+<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.query" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_CHPowerState">
+<span class="sig-name descname"><span class="pre">set_CHPowerState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_CHPowerState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_CHPowerState" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Sets the state of the channel power measurement, ON or OFF. When using
+:CONFigure:CHPower,the state is automatically set to ON
+state = [‘ON’,’OFF’,1,0]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_CenterFreq">
+<span class="sig-name descname"><span class="pre">set_CenterFreq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_CenterFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_CenterFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>float</em>) – Sets the center frequency. Note that changing the value of the center frequency will
+change the value of the coupled parameters Start Frequency and Stop Frequency. It
+might also change the value of the span.</p></li>
+<li><p><strong>unit</strong> (<em>str</em>) – Unit value. Can be [‘HZ’,’KHZ’,’MHZ’,’GHZ’]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_Continuous">
+<span class="sig-name descname"><span class="pre">set_Continuous</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_Continuous"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_Continuous" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>status</strong> (<em>str/int</em>) – Stop/start Sweep. Can be [‘ON’, ‘OFF’, 1, 0]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_ContinuousMeas">
+<span class="sig-name descname"><span class="pre">set_ContinuousMeas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_ContinuousMeas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_ContinuousMeas" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str/int</em>) – Title: Sweep Type
+Description: Specifies whether the sweep/measurement is triggered continuously. If the value is set to
+ON or 1, another sweep/measurement is triggered as soon as the current one completes.
+If continuous is set to OFF or 0, the instrument remains initiated until the current
+sweep/measurement completes, then enters the ‘idle’ state and waits for the
+:INITiate[:IMMediate] command or for :INITiate:CONTinuous ON.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_DataFormat">
+<span class="sig-name descname"><span class="pre">set_DataFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_DataFormat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_DataFormat" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>status</strong> (<em>str</em>) – Set Data Format status =  [‘ASCii’,’INTeger’,’REAL’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_DataPointCount">
+<span class="sig-name descname"><span class="pre">set_DataPointCount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_DataPointCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_DataPointCount" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int</em>) – <dl class="simple">
+<dt>Title: Display Point Count</dt><dd><p>Description: Changes the number of display points the instrument currently measures. Increasing the
+number of display points can improve the resolution of measurements but will also
+increase sweep time.</p>
+</dd>
+</dl>
+<p>Default Value: 501
+Range: 10 to 10001</p>
+</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_MarkerExcursion">
+<span class="sig-name descname"><span class="pre">set_MarkerExcursion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_MarkerExcursion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_MarkerExcursion" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Sets the excursion for a marker. The excursion is the vertical distance from the peak to
+the next highest valley which must be exceeded for a peak to be considered a peak in
+marker max commands</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_MarkerExcursionState">
+<span class="sig-name descname"><span class="pre">set_MarkerExcursionState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_MarkerExcursionState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_MarkerExcursionState" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str/int</em>) – Turn on/off excursion checking for marker max commands.
+Can be state = [‘ON’,’OFF’,1,0]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_MarkerPreset">
+<span class="sig-name descname"><span class="pre">set_MarkerPreset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_MarkerPreset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_MarkerPreset" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Presets all markers to their preset values.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_MaxPeak">
+<span class="sig-name descname"><span class="pre">set_MaxPeak</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_MaxPeak"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_MaxPeak" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Moves the marker X value to the point in the marker’s assigned
+trace that has the highest peak.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_NextPeak">
+<span class="sig-name descname"><span class="pre">set_NextPeak</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_NextPeak"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_NextPeak" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Moves the marker X value to the point in the marker’s assigned
+trace that is the next highest peak</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_ResBwidth">
+<span class="sig-name descname"><span class="pre">set_ResBwidth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_ResBwidth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_ResBwidth" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>int/float</em>) – Description: Sets the resolution bandwidth.
+Note that using this command turns the automatic resolution bandwidth setting OFF.
+In Zero Span, the range will change to allow a mininum of 5 KHz to the maximum of 20
+MHz.</p></li>
+<li><p><strong>unit</strong> (<em>str</em>) – Parameters: &lt;numeric_value&gt; {HZ | KHZ | MHZ | GHZ}
+Default Unit: Hz</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_ResBwidthAuto">
+<span class="sig-name descname"><span class="pre">set_ResBwidthAuto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_ResBwidthAuto"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_ResBwidthAuto" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>int/str</em>) – Title:RBW AutoDescription:Sets the state of the coupling of the resolution bandwidth
+to the frequency span. Setting the value to ON or 1 will result in the resolution
+bandwidth being coupled to the span. That is, when the span changes, the
+resolution bandwidth changes. Setting the value to OFF or 0 will result in the
+resolution bandwidth being decoupled from the span. That is, changing the span
+will not change the resolution bandwidth. When this command is issued, the resolution
+bandwidth setting itself will not change.
+Parameters:&lt;1 | 0 | ON | OFF&gt;
+Default Value:ON</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_TraceSelected">
+<span class="sig-name descname"><span class="pre">set_TraceSelected</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_TraceSelected"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_TraceSelected" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>number</strong> (<em>int</em>) – <p>The selected trace will be used by operations that use a single trace. The max number of
+traces available to select is model specific.
+Trace number:</p>
+<blockquote>
+<div><p>Can be set to [1,2,3,4,5,6]</p>
+</div></blockquote>
+</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_TraceState">
+<span class="sig-name descname"><span class="pre">set_TraceState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_TraceState"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_TraceState" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>str</em>) – The trace visibility state status. If it is OFF, the :TRAC:DATA?
+command will return NaN.
+[‘ON’,’OFF’,0,1]</p></li>
+<li><p><strong>number</strong> (<em>int</em>) – <dl class="simple">
+<dt>Trace Number:</dt><dd><p>Can be set to  [1,2,3,4,5,6]</p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_TraceType">
+<span class="sig-name descname"><span class="pre">set_TraceType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_TraceType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_TraceType" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>str</em>) – <dl class="simple">
+<dt>Sets Trace Type:</dt><dd><p>Normal - NORM
+Hold the Minimmum - MIN
+Hold the Maximum - MAX
+Average - AVER
+Rolling Max Hold - RMAX
+Rolling Min Hold - RMIN
+Rolling Avarage - RAV</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>number</strong> (<em>int</em>) – <dl class="simple">
+<dt>Trace number:</dt><dd><p>Can be set to [1,2,3,4,5,6]</p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_freq_Start">
+<span class="sig-name descname"><span class="pre">set_freq_Start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_freq_Start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_freq_Start" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>int/float</em>) – Description: Sets the start frequency. Note that in the spectrum analyzer, changing the value of the
+start frequency will change the value of the coupled parameters, Center Frequency and
+Span.</p></li>
+<li><p><strong>unit</strong> (<em>str</em>) – Parameters: &lt;numeric_value&gt; {HZ | KHZ | MHZ | GHZ}</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_freq_Stop">
+<span class="sig-name descname"><span class="pre">set_freq_Stop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_freq_Stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_freq_Stop" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>int/float</em>) – Description: Sets the start frequency. Note that in the spectrum analyzer, changing the value of the
+start frequency will change the value of the coupled parameters, Center Frequency and
+Span.</p></li>
+<li><p><strong>unit</strong> (<em>str</em>) – Parameters: &lt;numeric_value&gt; {HZ | KHZ | MHZ | GHZ}</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.write" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Martin.Mihaylov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

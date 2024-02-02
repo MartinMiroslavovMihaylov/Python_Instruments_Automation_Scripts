@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MG3694C &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Instruments Automatisation Libraries
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Instruments Automatisation Libraries</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">MG3694C</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for MG3694C</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Wed Dec  1 07:00:19 2021</span>
+
+<span class="sd">@author: Martin.Mihylov</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">vxi11</span>
+
+
+
+<span class="nb">print</span><span class="p">(</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="sd">#####################################################################################</span>
+
+<span class="sd">Befor using the MG3694C you need to:</span>
+<span class="sd">    1) Make sure Instrument and PC are connected vie ethernet  cable.</span>
+<span class="sd">    2) Hold Windows + R keys and type ncpa.cpl</span>
+<span class="sd">    3) Search for your Ethernet  Adapter and go to Properties</span>
+<span class="sd">    4) Go to &#39;Internetprotocoll, Version 4(TCP/IPv4)&#39;</span>
+<span class="sd">    5) Chnage the IP-Address from &#39;automatic&#39; to &#39;static&#39; and give the IP:192.168.0.1</span>
+<span class="sd">    6) DNS will be filled automatically! Press &#39;OK&#39; and leave. </span>
+<span class="sd">    7) After your measurement dont forget to change the IP back to &#39;automatic&#39;!</span>
+<span class="sd">    </span>
+<span class="sd">#####################################################################################</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+ <span class="p">)</span>
+
+<div class="viewcode-block" id="MG3694C">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C">[docs]</a>
+<span class="k">class</span> <span class="nc">MG3694C</span><span class="p">(</span><span class="n">vxi11</span><span class="o">.</span><span class="n">Instrument</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    A class thats uses vxi11 library to interface a Anritsu MG3694C.</span>
+<span class="sd">    Need to have python &#39;vxi11&#39; library installed!</span>
+<span class="sd">    </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hostname</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Get name and identification.</span>
+<span class="sd">        Make a restart of the instrument in the beginning to get the instrument </span>
+<span class="sd">        to default settings.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">hostname</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;*RST&#39;</span><span class="p">)</span>
+        
+<div class="viewcode-block" id="MG3694C.query">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.query">[docs]</a>
+    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="MG3694C.Close">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.Close">[docs]</a>
+    <span class="k">def</span> <span class="nf">Close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Abort Command</span>
+<span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="MG3694C.abort">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.abort">[docs]</a>
+    <span class="k">def</span> <span class="nf">abort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Description: Forces the trigger system to the idle state. Any sweep in </span>
+<span class="sd">        progress is aborted as soon as possible</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters: None</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:ABORt&#39;</span><span class="p">)</span></div>
+
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Ask Instrument about Stats and Parameters</span>
+<span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="MG3694C.ask_output_protection">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_output_protection">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_output_protection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the currently programmed state of the MG369xC RF output during </span>
+<span class="sd">            frequency changes in CW or step sweep mode.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:OUTPut:PROTection?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_output_retrace">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_output_retrace">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_output_retrace</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the currently programmed state of the MG369xC RF output during </span>
+<span class="sd">            sweep retrace</span>
+<span class="sd">            </span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:OUTPut:PROTection:RETRace?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_output_impedance">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_output_impedance">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_output_impedance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Description: Queries the MG369xC RF output impedance. The impedance is </span>
+<span class="sd">            nominally 50 ohms and is not settable.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:OUTPut:IMPedance?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_OutputPowerLevel">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_OutputPowerLevel">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_OutputPowerLevel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the value currently programmed for the RF output power level</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:POWer:LEVel:IMMediate:AMPLitude?&#39;</span><span class="p">))</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_MaximalPowerLevel">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_MaximalPowerLevel">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_MaximalPowerLevel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the maximum RF output power level value that can be programmed for the</span>
+<span class="sd">            particular MG369xC model</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:POWer? MAX&#39;</span><span class="p">)</span></div>
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Ask Source Amplitude Modulation</span>
+<span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="MG3694C.ask_am_logsens">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_am_logsens">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_am_logsens</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query</span>
+<span class="sd">            Requests the currently programmed AM sensitivity value for the external AM Log mode.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:AM:LOGSens?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_am_logDepth">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_am_logDepth">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_am_logDepth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the currently programmed modulation depth value for the internal </span>
+<span class="sd">            AM Log mode.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:AM:LOGDepth?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_am_internalWave">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_am_internalWave">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_am_internalWave</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the currently selected modulating waveform for the internal AM function.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:AM:INTernal:WAVE?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_am_internalFreq">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_am_internalFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_am_internalFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the currently programmed modulating waveform frequency value for the</span>
+<span class="sd">            internal AM function.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:AM:INTernal:FREQuency?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_am_state">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_am_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_am_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">           Requests currently programmed amplitude modulation state (on/off)</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:AM:STATe?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_am_type">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_am_type">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_am_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the currently programmed AM operating mode.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:AM:TYPE?&#39;</span><span class="p">)</span></div>
+
+        
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Frequency Modulation</span>
+<span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="MG3694C.ask_fm_internalWave">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_fm_internalWave">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_fm_internalWave</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the currently selected modulating waveform for the internal FM function.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:FM:INTernal:WAVE?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_fm_internalFreq">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_fm_internalFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_fm_internalFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the currently programmed modulating waveform frequency value for the</span>
+<span class="sd">            internal FM function.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:FM:INTernal:FREQuency?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_fm_mode">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_fm_mode">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_fm_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">             Requests the currently programmed synthesis mode used to generate the FM signal.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:FM:MODE?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_fm_Bwidth">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_fm_Bwidth">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_fm_Bwidth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the currently programmed Unlocked FM synthesis mode of operation</span>
+<span class="sd">            (narrow or wide)</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:FM:BWIDth?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_fm_state">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_fm_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_fm_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the currently programmed frequency modulation state (on/off).</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:FM:STATe?&#39;</span><span class="p">)</span></div>
+
+
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Frequency Commands</span>
+<span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="MG3694C.ask_freq_CW">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_freq_CW">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_freq_CW</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the current value of the frequency parameter.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:FREQuency:CW?&#39;</span><span class="p">))</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_freq_step">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_freq_step">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_freq_step</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the current step increment value of the frequency parameter.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:FREQuency:CW:STEP:INCRement?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_freq_centerFreq">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_freq_centerFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_freq_centerFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the current value of the RF output center frequency.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:FREQuency:CENTer?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_freq_mode">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_freq_mode">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_freq_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the currently selected programming mode for frequency control.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+      
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:FREQuency:MODE?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_freq_span">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_freq_span">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_freq_span</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the current value for SWEep[1] sweep span</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:FREQuencySPAN:?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_freq_start">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_freq_start">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_freq_start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the current value for SWEep[1] start frequency.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:FREQuency:STARt?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_freq_stop">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_freq_stop">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_freq_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">         Query str</span>
+<span class="sd">            Requests the current value for SWEep[1] stop frequency.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:FREQuency:STOP?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_freq_unit">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_freq_unit">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_freq_unit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Query str</span>
+<span class="sd">            Requests the currently selected frequency unit.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;UNIT:FREQuency?&#39;</span><span class="p">)</span></div>
+
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Pulse Modulation</span>
+<span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="MG3694C.ask_pm_Bwidth">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_pm_Bwidth">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_pm_Bwidth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the currently programmed phase modulation operating mode.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:PM:BWIDth?&#39;</span><span class="p">)</span></div>
+
+
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_pm_internalWave">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_pm_internalWave">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_pm_internalWave</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the currently selected modulating waveform for the internal phase modulation</span>
+<span class="sd">            function.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:PM:INTernal:WAVE?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_pm_internalFreq">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_pm_internalFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_pm_internalFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">             Requests the currently programmed modulating waveform frequency value for the</span>
+<span class="sd">             internal phase modulation function.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:PM:INTernal:FREQuency?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.ask_pm_state">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.ask_pm_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_pm_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Query str</span>
+<span class="sd">            Requests the currently programmed phase modulation state (on/off).</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SOURce:PM:STATe?&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Set Output</span>
+<span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="MG3694C.set_output">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_output">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str/int</span>
+<span class="sd">                Description: Turns MG369xC RF output power on/off.</span>
+<span class="sd">                Parameters: ON | OFF | 1 | 0</span>
+<span class="sd">                Default: OFF </span>
+<span class="sd">                </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+   
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:OUTPut:STATe &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+      
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_output_protection">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_output_protection">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_output_protection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str/int</span>
+<span class="sd">               Description: ON causes the MG369xC RF output to be turned off (blanked) </span>
+<span class="sd">               during frequency changes in CW or step sweep mode.</span>
+<span class="sd">               OFF leaves RF output turned on (unblanked).</span>
+<span class="sd">               Parameters: ON | OFF | 1 | 0</span>
+<span class="sd">               Default: ON</span>
+<span class="sd">               </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:OUTPut:PROTection &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_output_retrace">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_output_retrace">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_output_retrace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state :  str/int</span>
+<span class="sd">                Description: ON causes the MG369xC RF output to be turned off during </span>
+<span class="sd">                sweep retrace. </span>
+<span class="sd">                OFF leaves RF output turned on</span>
+<span class="sd">                Parameters: ON | OFF | 1 | 0</span>
+<span class="sd">                Default: OFF</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:OUTPut:PROTection:RETRace &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+     
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_OutputPowerLevel">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_OutputPowerLevel">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_OutputPowerLevel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float/int</span>
+<span class="sd">                Description: Sets the power level of the unswept RF output signal.</span>
+<span class="sd">                Parameters: Power level (in dBm) | UP | DOWN | MIN | MAX</span>
+<span class="sd">                Range: MIN to MAX (see notes below)</span>
+<span class="sd">                Default: 0 dBm</span>
+<span class="sd">                </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE</span>
+<span class="sd">            DESCRIPTION.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">unit</span>  <span class="o">=</span> <span class="s1">&#39;dBm&#39;</span>
+        <span class="n">minVal</span> <span class="o">=</span> <span class="o">-</span><span class="mf">20.0</span>
+        <span class="n">maxVal</span> <span class="o">=</span> <span class="mf">30.0</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">maxVal</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">minVal</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:POWer:LEVel:IMMediate:AMPLitude &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">unit</span><span class="p">)</span></div>
+
+     
+    
+    
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Set Control system commands:</span>
+<span class="c1">#            Amplitude Modulation</span>
+<span class="c1">#            Correction Commands</span>
+<span class="c1">#            Frequency Modulation</span>
+<span class="c1">#            Frequency Commands</span>
+<span class="c1">#            Pulse Modulation</span>
+<span class="c1">#            </span>
+<span class="c1"># =============================================================================</span>
+    <span class="c1"># =============================================================================</span>
+    <span class="c1">#   Source - AM</span>
+    <span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="MG3694C.set_am_logsens">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_am_logsens">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_am_logsens</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">                Description: Sets the AM sensitivity for the external AM Log mode.</span>
+<span class="sd">                Parameters: Sensitivity (in dB/V)</span>
+<span class="sd">                Range: 0 to 25 dB/V</span>
+<span class="sd">                Default: 3 dB/V</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">26</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:AM:LOGSens &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; dB/V&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_am_logDepth">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_am_logDepth">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_am_logDepth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">                Description: Sets the modulation depth of the AM signal in the internal AM Log mode.</span>
+<span class="sd">                Parameters: Modulation depth (in dB)</span>
+<span class="sd">                Range: 0 to 25 dB</span>
+<span class="sd">                Default: 3 dB</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">             Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">26</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:AM:LOGDepth &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; dB&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+          
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_am_internalWave">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_am_internalWave">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_am_internalWave</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">                Description: Selects the modulating waveform (from the internal AM generator) for the internal AM</span>
+<span class="sd">                function, as follows:</span>
+<span class="sd">                SINE = Sine wave</span>
+<span class="sd">                GAUSsian = Guassian noise</span>
+<span class="sd">                RDOWn = Negative ramp</span>
+<span class="sd">                RUP = Positive ramp</span>
+<span class="sd">                SQUare = Square wave</span>
+<span class="sd">                TRIangle = Triangle wave</span>
+<span class="sd">                UNIForm = Uniform noiseParameters:</span>
+<span class="sd">                Parameters: SINE | GAUSsian | RDOWn | RUP | SQUare | TRIangle | UNIForm</span>
+<span class="sd">                Default: SINE</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">stList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SINE&#39;</span><span class="p">,</span><span class="s1">&#39;GAUSsian&#39;</span><span class="p">,</span><span class="s1">&#39;RDOWn&#39;</span><span class="p">,</span><span class="s1">&#39;RUP&#39;</span><span class="p">,</span><span class="s1">&#39;SQUare&#39;</span><span class="p">,</span><span class="s1">&#39;TRIangle&#39;</span><span class="p">,</span><span class="s1">&#39;UNIForm&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stList</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:AM:INTernal:WAVE &#39;</span> <span class="o">+</span> <span class="n">state</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+         
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_am_internalFreq">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_am_internalFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_am_internalFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : str</span>
+<span class="sd">            Description: Sets the frequency of the modulating waveform for the internal AM function</span>
+<span class="sd">            (see :AM:INTernal:WAVE).</span>
+<span class="sd">            Parameters: Frequency</span>
+<span class="sd">        unit : int/float</span>
+<span class="sd">            Range: 0.1 Hz to 1 MHz for sine wave</span>
+<span class="sd">            0.1 Hz to 100 kHz for square, triangle, and ramp waveforms</span>
+<span class="sd">            Default: 1 kHz</span>
+
+<span class="sd">         Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_am_internalFreq</span><span class="p">()</span>
+        <span class="n">sinUnit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hz&#39;</span><span class="p">,</span><span class="s1">&#39;kHz&#39;</span><span class="p">,</span><span class="s1">&#39;MHz&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s1">&#39;SINE&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span><span class="mf">0.1</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">sinUnit</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:AM:INTernal:FREQuency &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">unit</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span><span class="mf">0.1</span> <span class="ow">or</span> <span class="n">value</span><span class="o">&lt;=</span><span class="mi">100</span> <span class="ow">and</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">sinUnit</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:AM:INTernal:FREQuency &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">unit</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+          
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_am_state">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_am_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_am_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str/int</span>
+<span class="sd">                Description: Enable/disable amplitude modulation of MG369xC RF output signal.</span>
+<span class="sd">                Parameters: ON | OFF | 1 | 0</span>
+<span class="sd">                Default: OFF</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:AM:STATe &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_am_type">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_am_type">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_am_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">                Description: Selects the AM operating mode.</span>
+<span class="sd">                Parameters: LINear | LOGarithmic</span>
+<span class="sd">                Default: LINear</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;LINear&#39;</span><span class="p">,</span><span class="s1">&#39;LOGarithmic&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wrtie</span><span class="p">(</span><span class="s1">&#39;:SOURce:AM:TYPE &#39;</span> <span class="o">+</span> <span class="n">state</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1">#     Correction Commands</span>
+<span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="MG3694C.set_correctionCommands">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_correctionCommands">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_correctionCommands</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str/int</span>
+<span class="sd">                Description: Turns the selected user level flatness correction power-offset table on/off.</span>
+<span class="sd">                Parameters: ON | OFF | 1 | 0</span>
+<span class="sd">                Default: OFF</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:CORRection:STATe &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Frequency Modulation</span>
+<span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="MG3694C.set_fm_internalWave">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_fm_internalWave">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_fm_internalWave</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">                Description: Selects the modulating waveform (from the internal FM generator) for the internal</span>
+<span class="sd">                FM function, as follows:</span>
+<span class="sd">                SINE = Sine wave</span>
+<span class="sd">                GAUSsian = Guassian noise</span>
+<span class="sd">                RDOWn = Negative ramp</span>
+<span class="sd">                RUP =Positive ramp</span>
+<span class="sd">                SQUare = Square wave</span>
+<span class="sd">                TRIangle = Triangle wave</span>
+<span class="sd">                UNIForm = Uniform noise</span>
+<span class="sd">                Parameters: SINE | GAUSsian | RDOWn | RUP | SQUare | TRIangle | UNIForm</span>
+<span class="sd">                Default: SINE</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SINE&#39;</span><span class="p">,</span><span class="s1">&#39;GAUSsian&#39;</span><span class="p">,</span><span class="s1">&#39;RDOWn&#39;</span><span class="p">,</span><span class="s1">&#39;RUP&#39;</span><span class="p">,</span><span class="s1">&#39;SQUare&#39;</span><span class="p">,</span><span class="s1">&#39;TRIangle&#39;</span><span class="p">,</span><span class="s1">&#39;UNIForm&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stList</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:FM:INTernal:WAVE &#39;</span><span class="o">+</span> <span class="n">state</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+         
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_fm_internalFreq">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_fm_internalFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_fm_internalFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">            Range: 0.1 Hz to 1 MHz for sine wave</span>
+<span class="sd">        unit : str</span>
+<span class="sd">            Parameters: Frequency</span>
+<span class="sd">            Description: Sets the frequency of the modulating waveform for the internal FM function</span>
+<span class="sd">            (see :FM:INTernal:WAVE).</span>
+<span class="sd">            Default: 1 kHz</span>
+
+<span class="sd">       Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_fm_internalFreq</span><span class="p">()</span>
+        <span class="n">sinUnit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hz&#39;</span><span class="p">,</span><span class="s1">&#39;kHz&#39;</span><span class="p">,</span><span class="s1">&#39;MHz&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s1">&#39;SINE&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span><span class="mf">0.1</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">sinUnit</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:FM:INTernal:FREQuency &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">unit</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span><span class="mf">0.1</span> <span class="ow">or</span> <span class="n">value</span><span class="o">&lt;=</span><span class="mi">100</span> <span class="ow">and</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">sinUnit</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:FM:INTernal:FREQuency &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">unit</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+           
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_fm_mode">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_fm_mode">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_fm_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">                Description: Sets the synthesis mode employed in generating the FM signal, as follows:</span>
+<span class="sd">                LOCKed[1] = Locked Narrow FM</span>
+<span class="sd">                LOCKed2 = Locked Narrow Low-Noise FM</span>
+<span class="sd">                UNLocked = Unlocked FM</span>
+<span class="sd">                If LOCKed[1] or LOCKed2 is set, the YIG phase-locked loop is used in synthesizing the</span>
+<span class="sd">                FM signal. If UNLocked is set, the YIG phase-lock loop is disabled and the FM signal is</span>
+<span class="sd">                obtained by applying the modulating signal to the tuning coils of the YIG-tuned</span>
+<span class="sd">                oscillator.</span>
+<span class="sd">                Parameters: LOCKed[1] | LOCKed2 | UNLocked</span>
+<span class="sd">                Default: UNLocked</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">modList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;LOCKed[1]&#39;</span><span class="p">,</span><span class="s1">&#39;LOCKed2&#39;</span><span class="p">,</span><span class="s1">&#39;UNLocked&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">modList</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:FM:MODE &#39;</span> <span class="o">+</span> <span class="n">state</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_fm_Bwidth">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_fm_Bwidth">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_fm_Bwidth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Description: Sets the Unlocked FM synthesis mode to wide or narrow mode of operation.</span>
+<span class="sd">            The Unlocked Wide FM synthesis mode allows maximum deviations of ±100 MHz for</span>
+<span class="sd">            DC to 100 Hz rates.</span>
+<span class="sd">            The Unlocked Narrow FM synthesis mode allows maximum deviations of ±10 MHz for</span>
+<span class="sd">            DC to 8 MHz rates.</span>
+<span class="sd">            Parameters: MIN | MAX</span>
+<span class="sd">            Range: MIN = narrow mode; MAX = wide mode</span>
+<span class="sd">            Default: MIN</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;MIN&#39;</span><span class="p">,</span><span class="s1">&#39;MAX&#39;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:FM:BWIDth &#39;</span> <span class="o">+</span> <span class="n">state</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+         
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_fm_steta">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_fm_steta">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_fm_steta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str/int</span>
+<span class="sd">                Description: Enable/disable frequency modulation of MG369xC RF output signal.</span>
+<span class="sd">                Parameters: ON | OFF | 1 | 0</span>
+<span class="sd">                Default: OFF</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:FM:STATe &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+           
+    
+    
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Frequency Commands </span>
+<span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="MG3694C.set_freq_CW">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_freq_CW">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_freq_CW</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span> <span class="p">,</span><span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">            Description: Sets the RF output frequency of the MG369xC to the value entered.</span>
+<span class="sd">            Parameters UP | DOWN increment/decrement the frequency by the value set by</span>
+<span class="sd">            [:SOURce]:FREQuency:STEP:INCRement command.</span>
+<span class="sd">            Parameters: Frequency (in Hz) | UP | DOWN | MIN | MAX</span>
+<span class="sd">            Range: MIN to MAX (see note below)</span>
+<span class="sd">            Default: (MIN + MAX) / 2</span>
+<span class="sd">            </span>
+<span class="sd">            Model   Minimum Frequency*      Maximum Frequency</span>
+<span class="sd">            MG3691C 10 MHz                  10 GHz</span>
+<span class="sd">            MG3692C 10 MHz                  20 GHz</span>
+<span class="sd">            MG3693C 10 MHz                  31.8 GHz</span>
+<span class="sd">            MG3694C 10 MHz                  40 GHz</span>
+<span class="sd">            MG3695C 10 MHz                  50 GHz</span>
+<span class="sd">            MG3697C 10 MHz                  70 GHz</span>
+<span class="sd">        unit : str</span>
+<span class="sd">            Parameter Frequency.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        
+        <span class="n">minFreq</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">maxFreq</span> <span class="o">=</span> <span class="mi">40</span> 
+        <span class="n">stUnit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MHz&#39;</span><span class="p">,</span><span class="s1">&#39;GHz&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="s1">&#39;MHz&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">40</span><span class="o">*</span><span class="mf">1e9</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:FREQuency:CW &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">unit</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Warning !! Minimum Frequency = 10 MHz and Maximum Frequency = 40*1e9 MHz&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">unit</span> <span class="o">==</span> <span class="s1">&#39;GHz&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">40</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mf">0.01</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:FREQuency:CW &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">unit</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Warning !! Minimum Frequency = 0.01 GHz and Maximum Frequency = 40 GHz&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_freq_step">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_freq_step">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_freq_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">                 Description: Sets the step increment size used with the :FREQuency:CW command.</span>
+<span class="sd">                 Range: 0.01 Hz to (MAX  MIN) </span>
+<span class="sd">                 Default: 0.1 GHz</span>
+<span class="sd">        unit : str</span>
+<span class="sd">                Parameters: Frequency (in Hz)</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stUnit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hz&#39;</span><span class="p">,</span><span class="s1">&#39;kHz&#39;</span><span class="p">,</span><span class="s1">&#39;MHz&#39;</span><span class="p">,</span><span class="s1">&#39;GHz&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">stUnit</span> <span class="ow">and</span> <span class="n">value</span><span class="o">&gt;</span><span class="mf">0.01</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:FREQuency:CW:STEP:INCRement &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">unit</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_freq_cent">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_freq_cent">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_freq_cent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value :  int/float</span>
+<span class="sd">                   Description: Sets the MG369xC RF output center frequency to the value entered. :CENTER and :SPAN</span>
+<span class="sd">                   frequencies are coupled values. Entering the value for one will cause the other to be</span>
+<span class="sd">                   recalculated. (See notes under :FREQuency:SPAN)</span>
+<span class="sd">        unit : str</span>
+<span class="sd">            Parameters: Frequency (in Hz)</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stUnit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hz&#39;</span><span class="p">,</span><span class="s1">&#39;kHz&#39;</span><span class="p">,</span><span class="s1">&#39;MHz&#39;</span><span class="p">,</span><span class="s1">&#39;GHz&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">stUnit</span> <span class="ow">and</span> <span class="n">value</span><span class="o">&gt;</span><span class="mf">0.01</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:FREQuency:CENTer &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">unit</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+      
+    
+    
+    
+     
+<div class="viewcode-block" id="MG3694C.set_freq_mode">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_freq_mode">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_freq_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">                Description: Specifies which command subsystem controls the MG369xC frequency, as follows:</span>
+<span class="sd">                CW|FIXed = [:SOURce]:FREQuency:CW|FIXed</span>
+<span class="sd">                SWEep[1] = [:SOURce]:SWEep[1] (see Datasheet)</span>
+<span class="sd">                SWCW = (see notes)</span>
+<span class="sd">                ALSW = (see notes)</span>
+<span class="sd">                LIST&lt;n&gt; = [:SOURce]:LIST&lt;n&gt; (see DataSheet)</span>
+<span class="sd">                :SWEep and :SWEep1may be used interchangeably</span>
+<span class="sd">                </span>
+<span class="sd">                Parameters: CW | FIXed | SWEep[1] | SWCW | ALSW | LIST[1] | LIST2 | LIST3 | LIST4</span>
+<span class="sd">                Default: CW</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stState</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;CW&#39;</span><span class="p">,</span><span class="s1">&#39;FIXed&#39;</span><span class="p">,</span><span class="s1">&#39;SWEep[1]&#39;</span><span class="p">,</span><span class="s1">&#39;SWCW&#39;</span><span class="p">,</span><span class="s1">&#39;ALSW&#39;</span><span class="p">,</span><span class="s1">&#39;LIST[1]&#39;</span><span class="p">,</span><span class="s1">&#39;LIST2&#39;</span><span class="p">,</span><span class="s1">&#39;LIST3&#39;</span><span class="p">,</span><span class="s1">&#39;LIST4&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stState</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:FREQuency:MODE &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+    
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_freq_span">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_freq_span">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_freq_span</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">            Description: Sets sweep span for SWEep[1] to value entered. :SPAN and :CENTer are coupled values</span>
+<span class="sd">            Range: 1 kHz to (MAX  MIN)</span>
+<span class="sd">            Default: MAX  MIN</span>
+<span class="sd">        unit : str</span>
+<span class="sd">            Parameters: Frequency (in Hz)</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Description: Sets sweep span for SWEep[1] to value entered. :SPAN and :CENTer are coupled values</span>
+<span class="sd">        Parameters: Frequency (in Hz)</span>
+<span class="sd">        Range: 1 kHz to (MAX  MIN)</span>
+<span class="sd">        Default: MAX  MIN</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stUnit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hz&#39;</span><span class="p">,</span><span class="s1">&#39;kHz&#39;</span><span class="p">,</span><span class="s1">&#39;MHz&#39;</span><span class="p">,</span><span class="s1">&#39;GHz&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">stUnit</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:FREQuency:SPAN &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+         
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_freq_start">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_freq_start">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_freq_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">            Description: Sets start frequency for SWEep[1] to the value entered. (MIN is defined in the notes</span>
+<span class="sd">             Range: MIN to MAX</span>
+<span class="sd">             Default: MIN</span>
+<span class="sd">        unit : str</span>
+<span class="sd">            Parameters: Frequency (in Hz) | MIN</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stUnit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hz&#39;</span><span class="p">,</span><span class="s1">&#39;kHz&#39;</span><span class="p">,</span><span class="s1">&#39;MHz&#39;</span><span class="p">,</span><span class="s1">&#39;GHz&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">stUnit</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:FREQuency:STARt &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+          
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_freq_stop">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_freq_stop">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_freq_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : int/float</span>
+<span class="sd">                Description: Sets stop frequency for SWEep[1] to the value entered. (MAX is defined in the notes</span>
+<span class="sd">                under [:SOURce]:FREQuency:CW|FIXed).</span>
+<span class="sd">                Range: MIN to MAX </span>
+<span class="sd">                Default: MAX</span>
+<span class="sd">        unit : str</span>
+<span class="sd">            Parameters: Frequency (in Hz) | MAX</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stUnit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hz&#39;</span><span class="p">,</span><span class="s1">&#39;kHz&#39;</span><span class="p">,</span><span class="s1">&#39;MHz&#39;</span><span class="p">,</span><span class="s1">&#39;GHz&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">stUnit</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:FREQuency:STOP &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+    
+    
+    
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Pulse Modulation</span>
+<span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="MG3694C.set_pm_Bwidth">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_pm_Bwidth">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_pm_Bwidth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">            Description: Selects the phase modulation (ΦM) operating mode.</span>
+<span class="sd">            The Narrow ΦM mode allows maximum deviations of ±3 radians for DC to 8 MHz rates.</span>
+<span class="sd">            The Wide ΦM mode allows maximum deviations of ±400 radians for DC to 1 MHz rates.</span>
+<span class="sd">            Parameters: MIN | MAX</span>
+<span class="sd">            Range: MIN = narrow mode</span>
+<span class="sd">            MAX = wide mode</span>
+<span class="sd">            Default: MIN</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MIN&#39;</span><span class="p">,</span><span class="s1">&#39;MAX&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stList</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:PM:BWIDth &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+           
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_pm_internalWave">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_pm_internalWave">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_pm_internalWave</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str</span>
+<span class="sd">                Description: Selects the modulating waveform (from the internal ΦM generator) for the internal phase</span>
+<span class="sd">                modulation function, as follows:</span>
+<span class="sd">                SINE = Sine wave</span>
+<span class="sd">                GAUSsian = Gaussian noise</span>
+<span class="sd">                RDOWn = Negative ramp</span>
+<span class="sd">                RUP = Positive ramp</span>
+<span class="sd">                SQUare = Square wave</span>
+<span class="sd">                TRIangle = Triangle wave</span>
+<span class="sd">                UNIForm = Uniform noise</span>
+<span class="sd">                Parameters: SINE | GAUSsian | RDOWn | RUP | SQUare | TRIangle | UNIForm</span>
+<span class="sd">                Default: SINE</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">             Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">stList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SINE&#39;</span><span class="p">,</span><span class="s1">&#39;GAUSsian&#39;</span><span class="p">,</span><span class="s1">&#39;RDOWn&#39;</span><span class="p">,</span><span class="s1">&#39;RUP&#39;</span><span class="p">,</span><span class="s1">&#39;SQUare&#39;</span><span class="p">,</span><span class="s1">&#39;TRIangle&#39;</span><span class="p">,</span><span class="s1">&#39;UNIForm&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stList</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:PM:INTernal:WAVE &#39;</span><span class="o">+</span> <span class="n">state</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+           
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_pm_internalFreq">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_pm_internalFreq">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_pm_internalFreq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : str</span>
+<span class="sd">            Parameter: Frequency (in Hz)</span>
+<span class="sd">        unit : int/float</span>
+<span class="sd">            Description: Sets the frequency of the modulating waveform for the internal phase modulation</span>
+<span class="sd">            (see :PM:INTernal:WAVE)</span>
+<span class="sd">            Range: 0.1 Hz to 1 MHz for sine wave;</span>
+<span class="sd">            0.1 Hz to 100 kHz for square, triangle, and ramp waveforms.</span>
+<span class="sd">            Default: 1 kHz</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">             Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+       
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_pm_internalFreq</span><span class="p">()</span>
+        <span class="n">sinUnit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hz&#39;</span><span class="p">,</span><span class="s1">&#39;kHz&#39;</span><span class="p">,</span><span class="s1">&#39;MHz&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="s1">&#39;SINE&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span><span class="mf">0.1</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">sinUnit</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:PM:INTernal:FREQuency &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">unit</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span><span class="mf">0.1</span> <span class="ow">or</span> <span class="n">value</span><span class="o">&lt;=</span><span class="mi">100</span> <span class="ow">and</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">sinUnit</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:PM:INTernal:FREQuency &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">unit</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.set_pm_state">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.set_pm_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_pm_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        state : str/int</span>
+<span class="sd">            Description: Enable/disable phase modulation of the MG369xC RF output signal.</span>
+<span class="sd">            Parameters: ON | OFF | 1 | 0</span>
+<span class="sd">            Default: OFF</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            v</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:PM:STATe &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+        
+    
+    
+    
+<div class="viewcode-block" id="MG3694C.DisplayParamDict">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.DisplayParamDict">[docs]</a>
+    <span class="k">def</span> <span class="nf">DisplayParamDict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Type</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This function will print all the adjusted parameters.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">Headers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Params&#39;</span><span class="p">,</span><span class="s1">&#39;Vaue/Type/Info&#39;</span><span class="p">]</span>
+        <span class="n">Params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Adapter Type&#39;</span><span class="p">,</span><span class="s1">&#39;Max Frequency range&#39;</span><span class="p">,</span><span class="s1">&#39;Min Frequency range&#39;</span><span class="p">,</span><span class="s1">&#39;Waveelength&#39;</span><span class="p">]</span>
+        <span class="n">Data</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_AdapterType</span><span class="p">(),</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_freqRange</span><span class="p">(</span><span class="s1">&#39;MAX&#39;</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_freqRange</span><span class="p">(</span><span class="s1">&#39;MIN&#39;</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_Wavelength</span><span class="p">()]</span>
+    
+        <span class="n">meas</span> <span class="o">=</span> <span class="n">Type</span>
+        <span class="n">measList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Power&#39;</span><span class="p">,</span><span class="s1">&#39;Energy&#39;</span><span class="p">,</span><span class="s1">&#39;Current&#39;</span><span class="p">,</span><span class="s1">&#39;Voltage&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">meas</span> <span class="ow">in</span> <span class="n">measList</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">meas</span> <span class="o">==</span> <span class="s1">&#39;Power&#39;</span><span class="p">:</span> 
+                <span class="n">Params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Power Unit set&#39;</span><span class="p">)</span>
+                <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_PowerUnits</span><span class="p">())</span>
+                <span class="n">Params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Power range auto&#39;</span><span class="p">)</span>
+                <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_AutoPowerRange</span><span class="p">())</span>
+                <span class="n">Params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Power Range set&#39;</span><span class="p">)</span>
+                <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_PowerRange</span><span class="p">())</span> 
+             
+            <span class="k">elif</span> <span class="n">meas</span> <span class="o">==</span> <span class="s1">&#39;Energy&#39;</span><span class="p">:</span>
+                <span class="n">Params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Energy range auto&#39;</span><span class="p">)</span>
+                <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_energyRange</span><span class="p">())</span>
+                
+            <span class="k">elif</span> <span class="n">meas</span> <span class="o">==</span> <span class="s1">&#39;Voltage&#39;</span><span class="p">:</span>
+                <span class="n">Params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Voltage range auto&#39;</span><span class="p">)</span>
+                <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_AutoVoltageRange</span><span class="p">())</span>
+                <span class="n">Params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Voltage range&#39;</span><span class="p">)</span>
+                <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_voltRange</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="n">meas</span> <span class="o">==</span> <span class="s1">&#39;Current&#39;</span><span class="p">:</span>
+                <span class="n">Params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Current range auto&#39;</span><span class="p">)</span>
+                <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_AutoCurrentRange</span><span class="p">())</span>
+                <span class="n">Params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Current range&#39;</span><span class="p">)</span>
+                <span class="n">Data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_currentRange</span><span class="p">())</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid Value! Function will be terminated.&#39;</span><span class="p">)</span>
+            
+        <span class="k">return</span> <span class="n">Headers</span><span class="p">,</span><span class="n">Data</span><span class="p">,</span><span class="n">Params</span></div>
+
+        
+    
+<span class="c1"># =============================================================================</span>
+<span class="c1"># Get/Save Data</span>
+<span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="MG3694C.get_Data">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.get_Data">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_Data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        OutPut : dict</span>
+<span class="sd">            Return a dictionary whit the measured Power and CW Frequency.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">OutPut</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">Freq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_freq_CW</span><span class="p">()</span>
+        <span class="n">Power</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_OutputPowerLevel</span><span class="p">()</span>
+        <span class="n">OutPut</span><span class="p">[</span><span class="s1">&#39;Power/dBm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Power</span>
+        <span class="n">OutPut</span><span class="p">[</span><span class="s1">&#39;CW Frequency/&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_freq_unit</span><span class="p">()]</span> <span class="o">=</span> <span class="n">Freq</span>
+        <span class="k">return</span> <span class="n">OutPut</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Martin.Mihaylov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

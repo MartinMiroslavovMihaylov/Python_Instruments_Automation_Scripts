@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoBrite Tunable Laser module &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Instruments Automatisation Libraries
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">CoBrite Tunable Laser module</a><ul>
+<li><a class="reference internal" href="#CoBrite.CoBrite"><code class="docutils literal notranslate"><span class="pre">CoBrite</span></code></a><ul>
+<li><a class="reference internal" href="#CoBrite.CoBrite.Close"><code class="docutils literal notranslate"><span class="pre">CoBrite.Close()</span></code></a></li>
+<li><a class="reference internal" href="#CoBrite.CoBrite.Identification"><code class="docutils literal notranslate"><span class="pre">CoBrite.Identification()</span></code></a></li>
+<li><a class="reference internal" href="#CoBrite.CoBrite.ask_ActualPower"><code class="docutils literal notranslate"><span class="pre">CoBrite.ask_ActualPower()</span></code></a></li>
+<li><a class="reference internal" href="#CoBrite.CoBrite.ask_Configuration"><code class="docutils literal notranslate"><span class="pre">CoBrite.ask_Configuration()</span></code></a></li>
+<li><a class="reference internal" href="#CoBrite.CoBrite.ask_FreqTHz"><code class="docutils literal notranslate"><span class="pre">CoBrite.ask_FreqTHz()</span></code></a></li>
+<li><a class="reference internal" href="#CoBrite.CoBrite.ask_LaserLim"><code class="docutils literal notranslate"><span class="pre">CoBrite.ask_LaserLim()</span></code></a></li>
+<li><a class="reference internal" href="#CoBrite.CoBrite.ask_LaserOutput"><code class="docutils literal notranslate"><span class="pre">CoBrite.ask_LaserOutput()</span></code></a></li>
+<li><a class="reference internal" href="#CoBrite.CoBrite.ask_Offset"><code class="docutils literal notranslate"><span class="pre">CoBrite.ask_Offset()</span></code></a></li>
+<li><a class="reference internal" href="#CoBrite.CoBrite.ask_Power"><code class="docutils literal notranslate"><span class="pre">CoBrite.ask_Power()</span></code></a></li>
+<li><a class="reference internal" href="#CoBrite.CoBrite.ask_Wavelength"><code class="docutils literal notranslate"><span class="pre">CoBrite.ask_Wavelength()</span></code></a></li>
+<li><a class="reference internal" href="#CoBrite.CoBrite.query"><code class="docutils literal notranslate"><span class="pre">CoBrite.query()</span></code></a></li>
+<li><a class="reference internal" href="#CoBrite.CoBrite.read"><code class="docutils literal notranslate"><span class="pre">CoBrite.read()</span></code></a></li>
+<li><a class="reference internal" href="#CoBrite.CoBrite.set_Configuration"><code class="docutils literal notranslate"><span class="pre">CoBrite.set_Configuration()</span></code></a></li>
+<li><a class="reference internal" href="#CoBrite.CoBrite.set_FreqTHz"><code class="docutils literal notranslate"><span class="pre">CoBrite.set_FreqTHz()</span></code></a></li>
+<li><a class="reference internal" href="#CoBrite.CoBrite.set_LaserOutput"><code class="docutils literal notranslate"><span class="pre">CoBrite.set_LaserOutput()</span></code></a></li>
+<li><a class="reference internal" href="#CoBrite.CoBrite.set_Offset"><code class="docutils literal notranslate"><span class="pre">CoBrite.set_Offset()</span></code></a></li>
+<li><a class="reference internal" href="#CoBrite.CoBrite.set_Power"><code class="docutils literal notranslate"><span class="pre">CoBrite.set_Power()</span></code></a></li>
+<li><a class="reference internal" href="#CoBrite.CoBrite.set_Wavelength"><code class="docutils literal notranslate"><span class="pre">CoBrite.set_Wavelength()</span></code></a></li>
+<li><a class="reference internal" href="#CoBrite.CoBrite.write"><code class="docutils literal notranslate"><span class="pre">CoBrite.write()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Instruments Automatisation Libraries</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">CoBrite Tunable Laser module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/rst/CoBrite.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cobrite-tunable-laser-module">
+<h1>CoBrite Tunable Laser module<a class="headerlink" href="#cobrite-tunable-laser-module" title="Link to this heading"></a></h1>
+<p id="module-CoBrite">Created on Mon Feb 14 13:54:49 2022</p>
+<p>&#64;author: Martin.Mihaylov</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="CoBrite.CoBrite">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CoBrite.</span></span><span class="sig-name descname"><span class="pre">CoBrite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.Close">
+<span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.Close" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.Identification">
+<span class="sig-name descname"><span class="pre">Identification</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.Identification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.Identification" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Identification name and model of the instrument.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.ask_ActualPower">
+<span class="sig-name descname"><span class="pre">ask_ActualPower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.ask_ActualPower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.ask_ActualPower" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the current optical output power reading of a tunable laser
+port. Value format is in dBm.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.ask_Configuration">
+<span class="sig-name descname"><span class="pre">ask_Configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.ask_Configuration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.ask_Configuration" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>DataDic</strong> – Query current configuration of Laser in location C-S-D in csv format</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.ask_FreqTHz">
+<span class="sig-name descname"><span class="pre">ask_FreqTHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.ask_FreqTHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.ask_FreqTHz" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the wavelength setting of a tunable laser port.
+Value format is in THz.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.ask_LaserLim">
+<span class="sig-name descname"><span class="pre">ask_LaserLim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.ask_LaserLim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.ask_LaserLim" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>DataDic</strong> – Query maximum tuning Parameters of Laser in location C-S-D in csv
+format.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.ask_LaserOutput">
+<span class="sig-name descname"><span class="pre">ask_LaserOutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.ask_LaserOutput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.ask_LaserOutput" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query if laser is ON or OFF.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.ask_Offset">
+<span class="sig-name descname"><span class="pre">ask_Offset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.ask_Offset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.ask_Offset" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the frequency offset setting of a tunable laser port.
+Value format is in GHz.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>flaot</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.ask_Power">
+<span class="sig-name descname"><span class="pre">ask_Power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.ask_Power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.ask_Power" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the optical output power target setting of a tunable laser
+port. Value format is in dBm.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.ask_Wavelength">
+<span class="sig-name descname"><span class="pre">ask_Wavelength</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.ask_Wavelength"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.ask_Wavelength" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the wavelength setting of a tunable laser port.
+Value format is in Nanometer.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.query">
+<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.query" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.read" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>This function must be set after each set_() function. CoBrite
+writes the set_() to register and returns ;/r/n to the user. The
+;/r/n command will mess up the next data sent to CoBrite from the user.
+An empty read() is required after each set_() function sendet to the
+laser.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.set_Configuration">
+<span class="sig-name descname"><span class="pre">set_Configuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">power</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.set_Configuration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.set_Configuration" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p></li>
+<li><p><strong>freq</strong> (<em>float</em>) – Sets frequency in Thz format. For example freq = 192.2345</p></li>
+<li><p><strong>power</strong> (<em>float</em>) – Sets the power to dBm. For example power = 9.8.
+min Power = 8.8
+max Power = 17.8
+Check ask_LaserLim() for more info.</p></li>
+<li><p><strong>offset</strong> (<em>float</em>) – Sets offset Freq in range Ghz.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.set_FreqTHz">
+<span class="sig-name descname"><span class="pre">set_FreqTHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.set_FreqTHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.set_FreqTHz" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – Sets or queries the wavelength setting of a tunable laser port.
+Value format is in Tera Hertz.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.set_LaserOutput">
+<span class="sig-name descname"><span class="pre">set_LaserOutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.set_LaserOutput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.set_LaserOutput" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p></li>
+<li><p><strong>state</strong> (<em>float/int</em>) – Set if laser is ON or OFF. Can be integer 0 or 1, but can be a str
+ON and OFF.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.set_Offset">
+<span class="sig-name descname"><span class="pre">set_Offset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.set_Offset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.set_Offset" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – Sets the frequency offset setting of a tunable laser port.
+Value format is in Giga Hertz.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.set_Power">
+<span class="sig-name descname"><span class="pre">set_Power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.set_Power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.set_Power" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – Sets the optical output power target setting of a tunable laser port.
+Value format is in dBm.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.set_Wavelength">
+<span class="sig-name descname"><span class="pre">set_Wavelength</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.set_Wavelength"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.set_Wavelength" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – Sets the wavelength setting of a tunable laser port. Value format
+is in Nanometer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="CoBrite.CoBrite.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/CoBrite.html#CoBrite.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.write" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Martin.Mihaylov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

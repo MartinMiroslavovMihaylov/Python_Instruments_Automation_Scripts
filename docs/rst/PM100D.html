@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Power Meter ThorLabs PM100D module &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Instruments Automatisation Libraries
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Power Meter ThorLabs PM100D module</a><ul>
+<li><a class="reference internal" href="#PM100D.PM100D"><code class="docutils literal notranslate"><span class="pre">PM100D</span></code></a><ul>
+<li><a class="reference internal" href="#PM100D.PM100D.Abort"><code class="docutils literal notranslate"><span class="pre">PM100D.Abort()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.Close"><code class="docutils literal notranslate"><span class="pre">PM100D.Close()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ConfigCurrent"><code class="docutils literal notranslate"><span class="pre">PM100D.ConfigCurrent()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ConfigEnergy"><code class="docutils literal notranslate"><span class="pre">PM100D.ConfigEnergy()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ConfigEnergyDensity"><code class="docutils literal notranslate"><span class="pre">PM100D.ConfigEnergyDensity()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ConfigFreq"><code class="docutils literal notranslate"><span class="pre">PM100D.ConfigFreq()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ConfigPower"><code class="docutils literal notranslate"><span class="pre">PM100D.ConfigPower()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ConfigPowerDensity"><code class="docutils literal notranslate"><span class="pre">PM100D.ConfigPowerDensity()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ConfigResistance"><code class="docutils literal notranslate"><span class="pre">PM100D.ConfigResistance()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ConfigTemp"><code class="docutils literal notranslate"><span class="pre">PM100D.ConfigTemp()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ConfigVoltage"><code class="docutils literal notranslate"><span class="pre">PM100D.ConfigVoltage()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.DefaultPowerMeas"><code class="docutils literal notranslate"><span class="pre">PM100D.DefaultPowerMeas()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.DisplayParam"><code class="docutils literal notranslate"><span class="pre">PM100D.DisplayParam()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.DisplayParamDict"><code class="docutils literal notranslate"><span class="pre">PM100D.DisplayParamDict()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.Init"><code class="docutils literal notranslate"><span class="pre">PM100D.Init()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.MeasCurrent"><code class="docutils literal notranslate"><span class="pre">PM100D.MeasCurrent()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.MeasEnergy"><code class="docutils literal notranslate"><span class="pre">PM100D.MeasEnergy()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.MeasEnergyDensity"><code class="docutils literal notranslate"><span class="pre">PM100D.MeasEnergyDensity()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.MeasFreq"><code class="docutils literal notranslate"><span class="pre">PM100D.MeasFreq()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.MeasPower"><code class="docutils literal notranslate"><span class="pre">PM100D.MeasPower()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.MeasPowerDensity"><code class="docutils literal notranslate"><span class="pre">PM100D.MeasPowerDensity()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.MeasResistance"><code class="docutils literal notranslate"><span class="pre">PM100D.MeasResistance()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.MeasTemp"><code class="docutils literal notranslate"><span class="pre">PM100D.MeasTemp()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.MeasVoltage"><code class="docutils literal notranslate"><span class="pre">PM100D.MeasVoltage()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.OPC"><code class="docutils literal notranslate"><span class="pre">PM100D.OPC()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.PowerMeas"><code class="docutils literal notranslate"><span class="pre">PM100D.PowerMeas()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.PowerSpecifications"><code class="docutils literal notranslate"><span class="pre">PM100D.PowerSpecifications()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ReadConfig"><code class="docutils literal notranslate"><span class="pre">PM100D.ReadConfig()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.adjustCurrentRange"><code class="docutils literal notranslate"><span class="pre">PM100D.adjustCurrentRange()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.adjustEnergyMeas"><code class="docutils literal notranslate"><span class="pre">PM100D.adjustEnergyMeas()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.adjustPowerMeas"><code class="docutils literal notranslate"><span class="pre">PM100D.adjustPowerMeas()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.adjustVoltageRange"><code class="docutils literal notranslate"><span class="pre">PM100D.adjustVoltageRange()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ask_AdapterType"><code class="docutils literal notranslate"><span class="pre">PM100D.ask_AdapterType()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ask_AutoCurrentRange"><code class="docutils literal notranslate"><span class="pre">PM100D.ask_AutoCurrentRange()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ask_AutoPowerRange"><code class="docutils literal notranslate"><span class="pre">PM100D.ask_AutoPowerRange()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ask_AutoVoltageRange"><code class="docutils literal notranslate"><span class="pre">PM100D.ask_AutoVoltageRange()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ask_Average"><code class="docutils literal notranslate"><span class="pre">PM100D.ask_Average()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ask_BeamDiameter"><code class="docutils literal notranslate"><span class="pre">PM100D.ask_BeamDiameter()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ask_PDPower"><code class="docutils literal notranslate"><span class="pre">PM100D.ask_PDPower()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ask_PowerRange"><code class="docutils literal notranslate"><span class="pre">PM100D.ask_PowerRange()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ask_PowerUnits"><code class="docutils literal notranslate"><span class="pre">PM100D.ask_PowerUnits()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ask_Pyro"><code class="docutils literal notranslate"><span class="pre">PM100D.ask_Pyro()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ask_Thermopile"><code class="docutils literal notranslate"><span class="pre">PM100D.ask_Thermopile()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ask_Wavelength"><code class="docutils literal notranslate"><span class="pre">PM100D.ask_Wavelength()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ask_beeper"><code class="docutils literal notranslate"><span class="pre">PM100D.ask_beeper()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ask_calibration"><code class="docutils literal notranslate"><span class="pre">PM100D.ask_calibration()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ask_currentRange"><code class="docutils literal notranslate"><span class="pre">PM100D.ask_currentRange()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ask_energyRange"><code class="docutils literal notranslate"><span class="pre">PM100D.ask_energyRange()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ask_freqRange"><code class="docutils literal notranslate"><span class="pre">PM100D.ask_freqRange()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.ask_voltRange"><code class="docutils literal notranslate"><span class="pre">PM100D.ask_voltRange()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.fetchData"><code class="docutils literal notranslate"><span class="pre">PM100D.fetchData()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.query"><code class="docutils literal notranslate"><span class="pre">PM100D.query()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.self_test"><code class="docutils literal notranslate"><span class="pre">PM100D.self_test()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.set_AdapterType"><code class="docutils literal notranslate"><span class="pre">PM100D.set_AdapterType()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.set_AutoCurrentRange"><code class="docutils literal notranslate"><span class="pre">PM100D.set_AutoCurrentRange()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.set_AutoPowerRange"><code class="docutils literal notranslate"><span class="pre">PM100D.set_AutoPowerRange()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.set_AutoVoltageRange"><code class="docutils literal notranslate"><span class="pre">PM100D.set_AutoVoltageRange()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.set_Average"><code class="docutils literal notranslate"><span class="pre">PM100D.set_Average()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.set_PD"><code class="docutils literal notranslate"><span class="pre">PM100D.set_PD()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.set_Parameters"><code class="docutils literal notranslate"><span class="pre">PM100D.set_Parameters()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.set_PowerRange"><code class="docutils literal notranslate"><span class="pre">PM100D.set_PowerRange()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.set_PowerUnits"><code class="docutils literal notranslate"><span class="pre">PM100D.set_PowerUnits()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.set_WaveLength"><code class="docutils literal notranslate"><span class="pre">PM100D.set_WaveLength()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.set_currentRange"><code class="docutils literal notranslate"><span class="pre">PM100D.set_currentRange()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.set_energyRange"><code class="docutils literal notranslate"><span class="pre">PM100D.set_energyRange()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.set_voltageRange"><code class="docutils literal notranslate"><span class="pre">PM100D.set_voltageRange()</span></code></a></li>
+<li><a class="reference internal" href="#PM100D.PM100D.write"><code class="docutils literal notranslate"><span class="pre">PM100D.write()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Instruments Automatisation Libraries</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Power Meter ThorLabs PM100D module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/rst/PM100D.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="power-meter-thorlabs-pm100d-module">
+<h1>Power Meter ThorLabs PM100D module<a class="headerlink" href="#power-meter-thorlabs-pm100d-module" title="Link to this heading"></a></h1>
+<p id="module-PM100D">Created on Thu Dec  2 08:27:01 2021</p>
+<p>&#64;author: MartinMihaylov</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="PM100D.PM100D">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PM100D.</span></span><span class="sig-name descname"><span class="pre">PM100D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.Abort">
+<span class="sig-name descname"><span class="pre">Abort</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.Abort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.Abort" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Abort measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.Close">
+<span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.Close" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ConfigCurrent">
+<span class="sig-name descname"><span class="pre">ConfigCurrent</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ConfigCurrent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ConfigCurrent" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Configure for current measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ConfigEnergy">
+<span class="sig-name descname"><span class="pre">ConfigEnergy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ConfigEnergy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ConfigEnergy" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Configure for energy measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ConfigEnergyDensity">
+<span class="sig-name descname"><span class="pre">ConfigEnergyDensity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ConfigEnergyDensity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ConfigEnergyDensity" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Configure for energy density measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ConfigFreq">
+<span class="sig-name descname"><span class="pre">ConfigFreq</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ConfigFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ConfigFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Configure for frequency measuremen</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ConfigPower">
+<span class="sig-name descname"><span class="pre">ConfigPower</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ConfigPower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ConfigPower" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Configure for power measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ConfigPowerDensity">
+<span class="sig-name descname"><span class="pre">ConfigPowerDensity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ConfigPowerDensity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ConfigPowerDensity" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Configure for power density measuremen</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ConfigResistance">
+<span class="sig-name descname"><span class="pre">ConfigResistance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ConfigResistance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ConfigResistance" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Configure for sensor presence resistance measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ConfigTemp">
+<span class="sig-name descname"><span class="pre">ConfigTemp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ConfigTemp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ConfigTemp" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Configure for sensor temperature measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ConfigVoltage">
+<span class="sig-name descname"><span class="pre">ConfigVoltage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ConfigVoltage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ConfigVoltage" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Configure for voltage measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.DefaultPowerMeas">
+<span class="sig-name descname"><span class="pre">DefaultPowerMeas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">WaveLength</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.DefaultPowerMeas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.DefaultPowerMeas" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Performs a power measurement whit hard codded parameter!.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE Data from the measurment</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.DisplayParam">
+<span class="sig-name descname"><span class="pre">DisplayParam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.DisplayParam"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.DisplayParam" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Type</strong> (<em>str</em>) – This function will print all the adjusted parameters.
+Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.DisplayParamDict">
+<span class="sig-name descname"><span class="pre">DisplayParamDict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.DisplayParamDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.DisplayParamDict" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Type</strong> (<em>str</em>) – This function will print all the adjusted parameters.
+Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>Headers</strong> (<em>str</em>) – String with [‘Power’,’Energy’,’Current’,’Voltage’]</p></li>
+<li><p><strong>Data</strong> (<em>lidt</em>) – Data from the instrument.</p></li>
+<li><p><strong>Params</strong> (<em>list</em>) – List with str for different data that are extractet from the instrument.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.Init">
+<span class="sig-name descname"><span class="pre">Init</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.Init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.Init" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Start measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.MeasCurrent">
+<span class="sig-name descname"><span class="pre">MeasCurrent</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.MeasCurrent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.MeasCurrent" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Performs a current measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.MeasEnergy">
+<span class="sig-name descname"><span class="pre">MeasEnergy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.MeasEnergy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.MeasEnergy" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Performs a energy measuremen</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.MeasEnergyDensity">
+<span class="sig-name descname"><span class="pre">MeasEnergyDensity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.MeasEnergyDensity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.MeasEnergyDensity" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Performs a energy density measuremen</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.MeasFreq">
+<span class="sig-name descname"><span class="pre">MeasFreq</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.MeasFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.MeasFreq" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Performs a frequency measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.MeasPower">
+<span class="sig-name descname"><span class="pre">MeasPower</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.MeasPower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.MeasPower" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Perform Power meas</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.MeasPowerDensity">
+<span class="sig-name descname"><span class="pre">MeasPowerDensity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.MeasPowerDensity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.MeasPowerDensity" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Performs a power density measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.MeasResistance">
+<span class="sig-name descname"><span class="pre">MeasResistance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.MeasResistance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.MeasResistance" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Performs a sensor presence resistance measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.MeasTemp">
+<span class="sig-name descname"><span class="pre">MeasTemp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.MeasTemp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.MeasTemp" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Performs a sensor temperature measuremen</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.MeasVoltage">
+<span class="sig-name descname"><span class="pre">MeasVoltage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.MeasVoltage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.MeasVoltage" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Performs a voltage measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.OPC">
+<span class="sig-name descname"><span class="pre">OPC</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.OPC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.OPC" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the OPC value</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.PowerMeas">
+<span class="sig-name descname"><span class="pre">PowerMeas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.PowerMeas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.PowerMeas" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> – Performs a power measurement</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Data from the measurment</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.PowerSpecifications">
+<span class="sig-name descname"><span class="pre">PowerSpecifications</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.PowerSpecifications"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.PowerSpecifications" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Return Instrument parameters</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ReadConfig">
+<span class="sig-name descname"><span class="pre">ReadConfig</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ReadConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ReadConfig" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the current measurement configuration</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.adjustCurrentRange">
+<span class="sig-name descname"><span class="pre">adjustCurrentRange</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.adjustCurrentRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.adjustCurrentRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Adjust the Voltage Measurment.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.adjustEnergyMeas">
+<span class="sig-name descname"><span class="pre">adjustEnergyMeas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.adjustEnergyMeas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.adjustEnergyMeas" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Adjust the Energy Measurment.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.adjustPowerMeas">
+<span class="sig-name descname"><span class="pre">adjustPowerMeas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.adjustPowerMeas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.adjustPowerMeas" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Adjust the Power Measurments</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.adjustVoltageRange">
+<span class="sig-name descname"><span class="pre">adjustVoltageRange</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.adjustVoltageRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.adjustVoltageRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Adjust the Voltage Measurments.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ask_AdapterType">
+<span class="sig-name descname"><span class="pre">ask_AdapterType</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_AdapterType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_AdapterType" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries default sensor adapter type</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ask_AutoCurrentRange">
+<span class="sig-name descname"><span class="pre">ask_AutoCurrentRange</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_AutoCurrentRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_AutoCurrentRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the auto-ranging function state</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ask_AutoPowerRange">
+<span class="sig-name descname"><span class="pre">ask_AutoPowerRange</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_AutoPowerRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_AutoPowerRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>status</strong> – Queries the auto-ranging function state</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>print massage str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ask_AutoVoltageRange">
+<span class="sig-name descname"><span class="pre">ask_AutoVoltageRange</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_AutoVoltageRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_AutoVoltageRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the auto-ranging function state</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ask_Average">
+<span class="sig-name descname"><span class="pre">ask_Average</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_Average"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_Average" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the averaging rate</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ask_BeamDiameter">
+<span class="sig-name descname"><span class="pre">ask_BeamDiameter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_BeamDiameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_BeamDiameter" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the beam diameter</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ask_PDPower">
+<span class="sig-name descname"><span class="pre">ask_PDPower</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_PDPower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_PDPower" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the photodiode response value.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ask_PowerRange">
+<span class="sig-name descname"><span class="pre">ask_PowerRange</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_PowerRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_PowerRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the power range.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ask_PowerUnits">
+<span class="sig-name descname"><span class="pre">ask_PowerUnits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_PowerUnits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_PowerUnits" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the power unit</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ask_Pyro">
+<span class="sig-name descname"><span class="pre">ask_Pyro</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_Pyro"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_Pyro" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the pyro-detectro response value</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ask_Thermopile">
+<span class="sig-name descname"><span class="pre">ask_Thermopile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_Thermopile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_Thermopile" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the thermopile response value</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ask_Wavelength">
+<span class="sig-name descname"><span class="pre">ask_Wavelength</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_Wavelength"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_Wavelength" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the operation wavelength</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ask_beeper">
+<span class="sig-name descname"><span class="pre">ask_beeper</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_beeper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_beeper" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Return the state of the the beeper</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Type print str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ask_calibration">
+<span class="sig-name descname"><span class="pre">ask_calibration</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_calibration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_calibration" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns a human readable calibration string. This is a query
+only command. The response is formatted as string response
+data.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ask_currentRange">
+<span class="sig-name descname"><span class="pre">ask_currentRange</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_currentRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_currentRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the current curent range</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ask_energyRange">
+<span class="sig-name descname"><span class="pre">ask_energyRange</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_energyRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_energyRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the energy range</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ask_freqRange">
+<span class="sig-name descname"><span class="pre">ask_freqRange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_freqRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_freqRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Queries the frequency range.
+Can be  [‘MAX’,’MIN’]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the frequency range</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.ask_voltRange">
+<span class="sig-name descname"><span class="pre">ask_voltRange</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_voltRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_voltRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the current voltage range</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.fetchData">
+<span class="sig-name descname"><span class="pre">fetchData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.fetchData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.fetchData" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Read last measurement data. WILL NOT START THE MEASURMENT</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.query">
+<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.query" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.self_test">
+<span class="sig-name descname"><span class="pre">self_test</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.self_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.self_test" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Use this query command to perform the instrument self-test routine. The command
+places the coded result in the Output Queue. A returned value of zero (0) indicates
+that the test passed, other values indicate that the test failed.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.set_AdapterType">
+<span class="sig-name descname"><span class="pre">set_AdapterType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.set_AdapterType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.set_AdapterType" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – <dl class="simple">
+<dt>Sets default sensor adapter type:</dt><dd><p>Allow senor types are: [‘PHOTodiode’,’THERmal’,’PYRo’]</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.set_AutoCurrentRange">
+<span class="sig-name descname"><span class="pre">set_AutoCurrentRange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.set_AutoCurrentRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.set_AutoCurrentRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Switches the auto-ranging function on and off. Can be set to [‘ON’,’OFF’,1,0].</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.set_AutoPowerRange">
+<span class="sig-name descname"><span class="pre">set_AutoPowerRange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.set_AutoPowerRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.set_AutoPowerRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> – Switches the auto-ranging function on and off. Can be set to [‘ON’,’OFF’,1,0].</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.set_AutoVoltageRange">
+<span class="sig-name descname"><span class="pre">set_AutoVoltageRange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.set_AutoVoltageRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.set_AutoVoltageRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str/int</em>) – witches the auto-ranging function on and off. Can be [‘ON’,’OFF’,1,0]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.set_Average">
+<span class="sig-name descname"><span class="pre">set_Average</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.set_Average"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.set_Average" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Sets the averaging rate (1 sample takes approx. 3ms)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.set_PD">
+<span class="sig-name descname"><span class="pre">set_PD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.set_PD"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.set_PD" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str/int</em>) – <dl class="simple">
+<dt>Sets the bandwidth of the photodiode input stage.</dt><dd><p>Can be [‘ON’,’OFF’,1,0]</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DESCRIPTION.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.set_Parameters">
+<span class="sig-name descname"><span class="pre">set_Parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.set_Parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.set_Parameters" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Type</strong> (<em>str</em>) – This function will set the measurments parameters.
+Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.set_PowerRange">
+<span class="sig-name descname"><span class="pre">set_PowerRange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.set_PowerRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.set_PowerRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Sets the current range in W</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.set_PowerUnits">
+<span class="sig-name descname"><span class="pre">set_PowerUnits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.set_PowerUnits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.set_PowerUnits" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Sets the power unit W or dBm. Can be [‘W’,’dBm’].</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.set_WaveLength">
+<span class="sig-name descname"><span class="pre">set_WaveLength</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.set_WaveLength"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.set_WaveLength" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Sets the operation wavelength in nm.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.set_currentRange">
+<span class="sig-name descname"><span class="pre">set_currentRange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.set_currentRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.set_currentRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Sets the current range in A.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.set_energyRange">
+<span class="sig-name descname"><span class="pre">set_energyRange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.set_energyRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.set_energyRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Sets the voltage range in J</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.set_voltageRange">
+<span class="sig-name descname"><span class="pre">set_voltageRange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.set_voltageRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.set_voltageRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Sets the voltage range in V</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="PM100D.PM100D.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.write" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Martin.Mihaylov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
