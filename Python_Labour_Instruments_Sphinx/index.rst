@@ -10,7 +10,7 @@ This is a python Library that allow the users to controll the following
 Instruments:
 	- Anrtisu Spectrum Analyzer MS2760A
 	- Anritsu Signal Generator MG3694C
-	- Anritsu Vectro Analyzer MS4647B
+	- Anritsu Vector Network Analyzer MS4647B
 	- Yokogawa Optical Spectrum Analyzer AQ6370D
 	- Power Meter ThorLabs PM100D
 	- KEITHLEY Source Meter 2612
@@ -40,6 +40,7 @@ For the Moment you will need the following python Libraries. ::
 	pip install pandas
 	pip install matplotlib
 	pip install numpy
+	pip install matplotlib
 
 How to use 
 ===================================================================

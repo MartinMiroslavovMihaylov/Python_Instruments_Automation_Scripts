@@ -341,9 +341,9 @@ class Instruments:
         print('''
             ########### Set the correct network settings ###########
             
-                Follow the instrictions to set the network
-                addapter and ip. After you are done confurm 
-                to continuen!
+                Follow the instructions to set the network
+                adapter and ip. After you are done confirm 
+                to continue!
                 
             ########### Set the correct network settings ###########
             ''')

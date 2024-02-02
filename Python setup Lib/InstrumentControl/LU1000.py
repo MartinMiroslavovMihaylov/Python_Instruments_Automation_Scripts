@@ -22,6 +22,10 @@ def Paths():
     import tkinter as tk 
     from tkinter import filedialog
 
+    # =============================================================================
+    # Automatic Paths selection to COM and OCT6
+    # =============================================================================
+
 
     # =============================================================================
     # Select the Paths to COM and OCT6
@@ -36,19 +40,18 @@ def Paths():
           ''')
     #Path COM
     root = tk.Tk()
-    COM = filedialog.askdirectory(parent = root,title = 'Select COM Diretory: ')
+    COM = filedialog.askdirectory(parent = root,title = 'Select COM Directory: ')
     root.destroy()
     
     
     
     #Path OCT6
     root = tk.Tk()
-    OCT6 = filedialog.askdirectory(parent = root,title = 'Select COM Diretory: ')
+    OCT6 = filedialog.askdirectory(parent = root,title = 'Select COM Directory: ')
     root.destroy()
     
     return COM, OCT6
     
-
 
 path = os.getcwd()
 nameCOM = '\COM'
@@ -78,11 +81,11 @@ class LU1000:
         '''
         ################ ATTENTION ################
         
-        Befor using the Librarys you need to:
+        Before using this Library you need to:
 
-           1 - Octave 6.1.0 needed!!!
-           2 - PATH env to 'C:\Program Files\GNU Octave\Octave-6.1.0\mingw64\bin'
-           3 - pip install ftd2xx , pip install pypiwin32
+           1 - Install Octave 6.1.!!!
+           2 - Set PATH env to 'C:\Program Files\GNU Octave\Octave-6.1.0\mingw64\bin' if not set.
+           3 - pip install ftd2xx , pip install pypiwin32, pip install oct2py
            
        For more information see: Python script by https://www.novoptel.de/Home/Downloads_en.php 
          
@@ -94,7 +97,7 @@ class LU1000:
             '''
             
             In the Class Lib ypu need to give the Paths to COM and OCT6 folders.
-            The folders are comming together whit the lib. If not download them from:
+            The folders are coming together whit the lib. If not download them from:
                 https://www.novoptel.de/Home/Downloads_en.php 
                 
             '''
@@ -147,7 +150,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -182,7 +185,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -192,7 +195,7 @@ class LU1000:
         Returns
         -------
         str 
-            Laser emable('ON') or laser diseble('OFF') 
+            Laser enable('ON') or laser disable('OFF')
 
         '''
         if laser == 1:
@@ -221,7 +224,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -255,7 +258,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -290,7 +293,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -325,7 +328,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -359,7 +362,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -393,7 +396,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -427,7 +430,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -461,7 +464,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser out selected - 1 or 2
 
         Raises
         ------
@@ -530,7 +533,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -564,7 +567,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -596,7 +599,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser out selected - 1 or 2
 
         Raises
         ------
@@ -628,7 +631,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -662,7 +665,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
 
         Raises
@@ -695,7 +698,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -727,7 +730,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -761,7 +764,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -794,7 +797,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
 
         Raises
@@ -804,7 +807,7 @@ class LU1000:
 
         Returns
         -------
-        res : foat
+        res : float
             Selected Channel Number
 
         '''
@@ -827,7 +830,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -836,7 +839,7 @@ class LU1000:
 
         Returns
         -------
-        res : foat
+        res : float
             Whispermode Status
 
 
@@ -868,7 +871,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
         value : float
             Sets the laser module’s current optical power
             in dBm
@@ -889,7 +892,7 @@ class LU1000:
         if laser == 1:
             if value>10:
                 print('''
-                      ################# Worning #################
+                      ################# Warning #################
                       
                       More then 10dBm is critical for some devices!
                       ''')
@@ -910,7 +913,7 @@ class LU1000:
         elif laser == 2:
             if value>10:
                 print('''
-                      ################# Worning #################
+                      ################# Warning #################
                       
                       More then 10dBm is critical for some devices!
                       ''')
@@ -942,7 +945,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
         value : int
             Sets or returns the laser module’s current channel
              value = select channel value
@@ -977,7 +980,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected -  1 or 2
         value : int/str
             Turn Laser N output ON/OFF
             value = 'ON'|'OFF'|1|0
@@ -1027,9 +1030,9 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
         value : int
-            Set Grid spacing. Smalles possible value = 1
+            Set Grid spacing. Smallest possible value = 1
 
         Raises
         ------
@@ -1063,7 +1066,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -1093,7 +1096,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -1124,7 +1127,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
         value : float
             Set Laser Frequency.
             value in form value = 192.876
@@ -1161,7 +1164,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
         state : str
             ['ON','OFF']
 
@@ -1214,9 +1217,9 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
         value : int
-            Fine tunning set the frequency in MHz steps
+            Fine-tuning set the frequency in MHz steps
 
         Returns
         -------
@@ -1241,7 +1244,7 @@ class LU1000:
         Parameters
         ----------
         laser : int
-            Laser seleected. 1 or 2
+            Laser output selected - 1 or 2
 
         Raises
         ------
@@ -1251,7 +1254,7 @@ class LU1000:
         Returns
         -------
         OutPut : dict
-            Return a dictionary whit the measured power and set frequency.
+            Return a dictionary with the measured power and set frequency.
 
         '''
         

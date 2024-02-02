@@ -159,7 +159,7 @@ class KA3005:
 
         Parameters
         ----------
-        voltage : int/float
+        amp : int/float
             Set the current on the Display
             
         delay : 0.01s Delay 
@@ -192,7 +192,7 @@ class KA3005:
         Returns
         -------
         TYPE float
-            Current Measured
+            Current measured
 
         '''
         return float(self.serWriteAndRecieve("IOUT1?"))
@@ -223,7 +223,7 @@ class KA3005:
         Parameters
         ----------
         state : str (ON/OFF)
-            Set the state of the over current protection ON and OFF
+            Set the state of the overcurrent protection ON and OFF
 
         Returns
         -------
@@ -267,7 +267,7 @@ class KA3005:
         Returns
         -------
         OutPut : dict
-            Return a dictionary whit the measured voltage and current. 
+            Return a dictionary with the measured voltage and current.
 
         '''
         OutPut = {}
@@ -276,6 +276,6 @@ class KA3005:
         OutPut['Voltage/V'] = Voltage
         OutPut['Current/A'] = Current
         
-        return  OutPut       
+        return OutPut
         
     

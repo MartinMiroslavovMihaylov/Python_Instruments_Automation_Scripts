@@ -18,6 +18,9 @@ Serien_Nummer = ['P0024970','P0033858']
 
     
 class PM100D:
+    '''
+    This Class is using pyvisa to connect to instruments. Please install PyVisa before using it.
+    '''
     def __init__(self, resource_str):
 
         self._resource = visa.ResourceManager().open_resource('USB0::0x1313::0x8078::' + str(resource_str) + '::INSTR')
@@ -89,7 +92,7 @@ class PM100D:
         Returns
         -------
         TYPE float
-            Read last measurement data. WILL NOT START THE MEASURMENT
+            Read last measurement data. WILL NOT START THE MEASUREMENT
         '''
         return float(self.query(':FETCh?').split('\n')[0])
     
@@ -197,7 +200,7 @@ class PM100D:
         Parameters
         ----------
         state : str/int
-            Sets the bandwidth of the photodiode input stage. 
+            Sets the bandwidth of the photodiode input stage.
                 Can be ['ON','OFF',1,0]
         Raises
         ------
@@ -228,7 +231,7 @@ class PM100D:
         Returns
         -------
         Type print str
-            Return the state of the the beeper
+            Return the state of the beeper
 
         '''
         status = self.query('SYSTem:BEEPer:STATe?').split('\n')[0]
@@ -297,7 +300,7 @@ class PM100D:
         Returns
         -------
         TYPE str
-            Queries the pyro-detectro response value
+            Queries the pyro-detectr response value
 
         '''
         
@@ -327,7 +330,7 @@ class PM100D:
         Returns
         -------
         TYPE str
-            Queries the current curent range
+            Queries the actual current range
 
         '''
         return self.query('CURRent:DC:UPPer?').split('\n')[0]
@@ -878,7 +881,7 @@ class PM100D:
         Returns
         -------
         None.
-            Configure for frequency measuremen
+            Configure for frequency measurement
         '''
         
         self.write(':CONFigure:FREQuency')
@@ -893,7 +896,7 @@ class PM100D:
         Returns
         -------
         None.
-            Configure for power density measuremen
+            Configure for power density measurement
 
         '''
         self.write(':CONFigure:PDENsity')
@@ -1000,7 +1003,7 @@ class PM100D:
         Returns
         -------
         None.
-            Performs a energy measuremen
+            Performs a energy measurement
 
         '''
         self.write('MEASure:ENERgy')
@@ -1030,7 +1033,7 @@ class PM100D:
         Returns
         -------
         None.
-            Performs a energy density measuremen
+            Performs a energy density measurement
 
         '''
         self.write('MEASure:EDENsity')
@@ -1061,7 +1064,7 @@ class PM100D:
         Returns
         -------
         None.
-             Performs a sensor temperature measuremen
+             Performs a sensor temperature measurement
 
         '''
         self.write('MEASure:TEMPerature')
@@ -1093,12 +1096,12 @@ class PM100D:
         Returns
         -------
         None.
-            Adjust the Power Measurments
+            Adjust the power measurement
 
         '''
         un = input('Set Power unit W/dBm: ')
         self.set_PowerUnits(un)
-        dis = input('Set Power Measurment Range auto/manual: ')
+        dis = input('Set Power Measurement Range auto/manual: ')
         disList = ['auto','manual']
         if dis in disList:
             if dis == 'auto':
@@ -1108,7 +1111,7 @@ class PM100D:
                 val = float(input('Sets the upper Power range in W to: '))
                 self.set_PowerRange(val)
         else:
-            print('Invalid input! adjustPowerMeas() is stoped!')
+            print('Invalid input! adjustPowerMeas() is stopped!')
       
             
       
@@ -1120,7 +1123,7 @@ class PM100D:
         Returns
         -------
         None.
-           Adjust the Energy Measurment.
+           Adjust the Energy Measurement
 
         '''
         print('Energy is measured in J')
@@ -1139,10 +1142,10 @@ class PM100D:
         Returns
         -------
         None.
-            Adjust the Voltage Measurments.
+            Adjust the Voltage Measurement
 
         '''
-        dis = input('Set Voltage Measurment Range auto/manual: ')
+        dis = input('Set Voltage Measurement Range auto/manual: ')
         disList = ['auto','manual']
         if dis in disList:
             if dis == 'auto':
@@ -1152,7 +1155,7 @@ class PM100D:
                 value = float(input('Sets the upper range to: '))
                 self.set_voltageRange(value)
         else:
-            print('Invalid input! adjustVoltageRange() is stoped!')
+            print('Invalid input! adjustVoltageRange() is stopped!')
         
     
     
@@ -1166,10 +1169,10 @@ class PM100D:
         Returns
         -------
         None.
-            Adjust the Voltage Measurment.
+            Adjust the Voltage Measurement
 
         '''
-        dis = input('Set Current Measurment Range auto/manual: ')
+        dis = input('Set Current Measurement Range auto/manual: ')
         disList = ['auto','manual']
         if dis in disList:
             if dis == 'auto':
@@ -1179,7 +1182,7 @@ class PM100D:
                 value = float(input('Sets the upper range to: '))
                 self.set_currentRange(value)
         else:
-            print('Invalid input! adjustVoltageRange() is stoped!')
+            print('Invalid input! adjustVoltageRange() is stopped!')
         
       
            
@@ -1192,7 +1195,7 @@ class PM100D:
         Parameters
         ----------
         Type : str
-            This function will set the measurments parameters.
+            This function will set the measurement parameters.
             Can be set to Type = ['Power','Energy','Current','Voltage']
 
         Returns
@@ -1216,7 +1219,7 @@ class PM100D:
             else:
                 self.adjustCurrentRange()
         else:
-            print('Invalid input! Function will be stoped!')
+            print('Invalid input! Function will be stopped!')
             
         
         
@@ -1243,7 +1246,7 @@ class PM100D:
         print('Adapter Type: ',self.ask_AdapterType())
         print('Max Frequency range: ',self.ask_freqRange('MAX'))
         print('Min Frequency range: ',self.ask_freqRange('MIN'))
-        print('Waveelength: ',self.ask_Wavelength())
+        print('Wavelength: ',self.ask_Wavelength())
         
         meas = Type
         measList = ['Power','Energy','Current','Voltage']
@@ -1282,17 +1285,17 @@ class PM100D:
         -------
         Headers : str
             String with ['Power','Energy','Current','Voltage']
-        Data : lidt
+        Data : list
             Data from the instrument.
         Params : list
-            List with str for different data that are extractet from the instrument.
+            List with str for different data that are extracted from the instrument.
 
         '''
         '''
         This function will print all the adjusted parameters.
         '''
         Headers = ['Power','Energy','Current','Voltage']
-        Params = ['Adapter Type','Max Frequency range','Min Frequency range','Waveelength']
+        Params = ['Adapter Type','Max Frequency range','Min Frequency range','Wavelength']
         Data = [self.ask_AdapterType(),self.ask_freqRange('MAX'),self.ask_freqRange('MIN'),self.ask_Wavelength()]
     
         meas = Type
@@ -1337,21 +1340,21 @@ class PM100D:
 
         Returns
         -------
-        data : Data from the measurment 
+        data : Data from the Measurement
             Performs a power measurement
 
         '''
         '''
         Performs a power measurement
         '''
-        print('This Function prtforme Power measurments.')
+        print('This Function performs Power measurements.')
         #print('To go on whit the measurments please check again the parameters set!')
         self.set_Parameters('Power')
         print('#####################################')
         self.DisplayParam('Power')
         print('#####################################')
 
-        com = input('Should the measurment proceed yes/no: ')
+        com = input('Should the measurement proceed yes/no: ')
         if com == 'yes':
             
             self.Init()
@@ -1365,7 +1368,7 @@ class PM100D:
             
             return data
         else:
-            print('Measurment is canceled!')
+            print('Measurement is canceled!')
 
              
 
@@ -1375,7 +1378,7 @@ class PM100D:
 
         Returns
         -------
-        TYPE Data from the measurment 
+        TYPE Data from the measurement
             Performs a power measurement whit hard codded parameter!.
 
         '''

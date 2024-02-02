@@ -12,6 +12,9 @@ import pyvisa as visa
 
     
 class MS2760A:
+    '''
+    This function is using pyvisa to connect to Instruments. Please install PyVisa before using it.
+    '''
     def __init__(self, resource_str):
 
         # self._resource = visa.ResourceManager().open_resource('TCPIP::' + str(resource_str) + '::9001::SOCKET',read_termination = '\n',query_delay  = 0.5)
@@ -602,7 +605,7 @@ class MS2760A:
         value : int/float
             Description: Sets the resolution bandwidth.
             Note that using this command turns the automatic resolution bandwidth setting OFF.
-            In Zero Span, the range will change to allow a mininum of 5 KHz to the maximum of 20
+            In Zero Span, the range will change to allow a minimum of 5 KHz to the maximum of 20
             MHz.
         unit : str
             Parameters: <numeric_value> {HZ | KHZ | MHZ | GHZ}
@@ -940,12 +943,12 @@ class MS2760A:
         state : str
              Sets Trace Type:
                             Normal - NORM
-                            Hold the Minimmum - MIN
+                            Hold the Minimum - MIN
                             Hold the Maximum - MAX
                             Average - AVER
                             Rolling Max Hold - RMAX
                             Rolling Min Hold - RMIN
-                            Rolling Avarage - RAV
+                            Rolling Average - RAV
         number : int
             Trace number:
                         Can be set to [1,2,3,4,5,6]
@@ -1057,12 +1060,12 @@ class MS2760A:
     def get_Data(self):
         '''
         
-        This function will stop temporally set Continuous Measurment to OFF, extract 
-        the max.peak value and frequency and restore the Continuous Measurment to ON.
+        This function will stop temporally set Continuous Measurement to OFF, extract
+        the max. peak value and frequency and restore the Continuous Measurement to ON.
         Returns
         -------
         OutPut : dict
-            Return a dictionary whit the measured voltage and current.
+            Return a dictionary with the measured voltage and current.
 
         '''
         OutPut = {}
@@ -1092,7 +1095,7 @@ class MS2760A:
         
             Trace Number from which the data is taken:
                 Can be set to  [1,2,3,4,5,6].
-            1 - This Function will set the continues measurment to 'OFF'.
+            1 - This Function will set the continues Measurement to 'OFF'.
             2 - Will set the Data Format to ASCii. This is needed since
             :TREACE:DATA? <num> is defect!! 
             3 - Will write TRACE:DATA? <num>. Will return only 3 bits. The rest
