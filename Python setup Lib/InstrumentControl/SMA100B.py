@@ -102,7 +102,7 @@ class SMA100B(vxi11.Instrument):
 # SOURce:FREQuency subsystem
 # =============================================================================
 
-    def set_frequency_mode(self, MODE: str):
+    def set_frequency_mode(self, MODE):
         '''
         Parameters
         ----------
@@ -130,7 +130,7 @@ class SMA100B(vxi11.Instrument):
         '''
         self.write(':FREQuency:MODE ' + MODE)
 
-    def set_freq_CW(self, value: float, unit: str):
+    def set_freq_CW(self, value, unit):
         '''
         Parameters
         ----------
@@ -171,7 +171,7 @@ class SMA100B(vxi11.Instrument):
 # SOURce:POWer subsystem
 # =============================================================================
 
-    def set_rf_power(self, value: float):
+    def set_rf_power(self, value):
         """Sets the Signal Generator Output Power in dBm
 
         Parameters
