@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anritsu Vectro Analyzer MS2760A module &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+  <title>Anritsu Vector Network Analyzer MS2760A module &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -44,7 +44,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <!-- Local TOC -->
               <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Anritsu Vectro Analyzer MS2760A module</a><ul>
+<li><a class="reference internal" href="#">Anritsu Vector Network Analyzer MS2760A module</a><ul>
 <li><a class="reference internal" href="#MS2760A.MS2760A"><code class="docutils literal notranslate"><span class="pre">MS2760A</span></code></a><ul>
 <li><a class="reference internal" href="#MS2760A.MS2760A.Close"><code class="docutils literal notranslate"><span class="pre">MS2760A.Close()</span></code></a></li>
 <li><a class="reference internal" href="#MS2760A.MS2760A.ExtractTtraceData"><code class="docutils literal notranslate"><span class="pre">MS2760A.ExtractTtraceData()</span></code></a></li>
@@ -109,7 +109,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Anritsu Vectro Analyzer MS2760A module</li>
+      <li class="breadcrumb-item active">Anritsu Vector Network Analyzer MS2760A module</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/rst/MS2760A.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -119,14 +119,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="anritsu-vectro-analyzer-ms2760a-module">
-<h1>Anritsu Vectro Analyzer MS2760A module<a class="headerlink" href="#anritsu-vectro-analyzer-ms2760a-module" title="Link to this heading"></a></h1>
+  <section id="anritsu-vector-network-analyzer-ms2760a-module">
+<h1>Anritsu Vector Network Analyzer MS2760A module<a class="headerlink" href="#anritsu-vector-network-analyzer-ms2760a-module" title="Link to this heading"></a></h1>
 <p id="module-MS2760A">Created on Wed Dec  1 13:11:32 2021</p>
 <p>&#64;author: Martin.Mihaylov</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="MS2760A.MS2760A">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MS2760A.</span></span><span class="sig-name descname"><span class="pre">MS2760A</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This function is using pyvisa to connect to Instruments. Please install PyVisa before using it.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="MS2760A.MS2760A.Close">
 <span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.Close" title="Link to this definition"></a></dt>
@@ -143,7 +144,7 @@
 <dt>Trace Number from which the data is taken:</dt><dd><p>Can be set to  [1,2,3,4,5,6].</p>
 </dd>
 </dl>
-<p>1 - This Function will set the continues measurment to ‘OFF’.
+<p>1 - This Function will set the continues Measurement to ‘OFF’.
 2 - Will set the Data Format to ASCii. This is needed since
 :TREACE:DATA? &lt;num&gt; is defect!!
 3 - Will write TRACE:DATA? &lt;num&gt;. Will return only 3 bits. The rest
@@ -157,7 +158,7 @@ return the data in Output np.array() form.</p>
 <dt>Trace Number from which the data is taken:</dt><dd><p>Can be set to  [1,2,3,4,5,6].</p>
 </dd>
 </dl>
-<p>1 - This Function will set the continues measurment to ‘OFF’.
+<p>1 - This Function will set the continues Measurement to ‘OFF’.
 2 - Will set the Data Format to ASCii. This is needed since
 :TREACE:DATA? &lt;num&gt; is defect!!
 3 - Will write TRACE:DATA? &lt;num&gt;. Will return only 3 bits. The rest
@@ -501,9 +502,9 @@ sweep was reset and the instrument has not yet swept enough to measure a full sw
 <dl class="py method">
 <dt class="sig sig-object py" id="MS2760A.MS2760A.get_Data">
 <span class="sig-name descname"><span class="pre">get_Data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.get_Data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.get_Data" title="Link to this definition"></a></dt>
-<dd><p>This function will stop temporally set Continuous Measurment to OFF, extract
-the max.peak value and frequency and restore the Continuous Measurment to ON.
-:returns: <strong>OutPut</strong> – Return a dictionary whit the measured voltage and current.
+<dd><p>This function will stop temporally set Continuous Measurement to OFF, extract
+the max. peak value and frequency and restore the Continuous Measurement to ON.
+:returns: <strong>OutPut</strong> – Return a dictionary with the measured voltage and current.
 :rtype: dict</p>
 </dd></dl>
 
@@ -709,7 +710,7 @@ trace that is the next highest peak</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>value</strong> (<em>int/float</em>) – Description: Sets the resolution bandwidth.
 Note that using this command turns the automatic resolution bandwidth setting OFF.
-In Zero Span, the range will change to allow a mininum of 5 KHz to the maximum of 20
+In Zero Span, the range will change to allow a minimum of 5 KHz to the maximum of 20
 MHz.</p></li>
 <li><p><strong>unit</strong> (<em>str</em>) – Parameters: &lt;numeric_value&gt; {HZ | KHZ | MHZ | GHZ}
 Default Unit: Hz</p></li>
@@ -803,12 +804,12 @@ command will return NaN.
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>state</strong> (<em>str</em>) – <dl class="simple">
 <dt>Sets Trace Type:</dt><dd><p>Normal - NORM
-Hold the Minimmum - MIN
+Hold the Minimum - MIN
 Hold the Maximum - MAX
 Average - AVER
 Rolling Max Hold - RMAX
 Rolling Min Hold - RMIN
-Rolling Avarage - RAV</p>
+Rolling Average - RAV</p>
 </dd>
 </dl>
 </p></li>

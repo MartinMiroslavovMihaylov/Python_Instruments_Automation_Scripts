@@ -46,12 +46,13 @@
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">Welcome to Instruments Automatisation Libraries’s documentation!</a></li>
 <li><a class="reference internal" href="#python-libraries">Python Libraries</a></li>
+<li><a class="reference internal" href="#programms-needed-when-using-the-novoptel-laser">Programms needed when using the Novoptel Laser</a></li>
 <li><a class="reference internal" href="#how-to-use">How to use</a><ul>
 <li><a class="reference internal" href="#python-code-example-to-how-to-connect-to-thorlabs-power-meter-pm100d">Python code example to how to connect to ThorLabs Power Meter PM100D</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#instruments">Instruments</a></li>
-<li><a class="reference internal" href="#anritsu-vectro-analyzer-ms2760a-module">Anritsu Vectro Analyzer MS2760A module</a><ul>
+<li><a class="reference internal" href="#anritsu-vector-network-analyzer-ms2760a-module">Anritsu Vector Network Analyzer MS2760A module</a><ul>
 <li><a class="reference internal" href="#MS2760A.MS2760A"><code class="docutils literal notranslate"><span class="pre">MS2760A</span></code></a><ul>
 <li><a class="reference internal" href="#MS2760A.MS2760A.Close"><code class="docutils literal notranslate"><span class="pre">MS2760A.Close()</span></code></a></li>
 <li><a class="reference internal" href="#MS2760A.MS2760A.ExtractTtraceData"><code class="docutils literal notranslate"><span class="pre">MS2760A.ExtractTtraceData()</span></code></a></li>
@@ -162,6 +163,20 @@
 <li><a class="reference internal" href="#MG3694C.MG3694C.set_pm_internalFreq"><code class="docutils literal notranslate"><span class="pre">MG3694C.set_pm_internalFreq()</span></code></a></li>
 <li><a class="reference internal" href="#MG3694C.MG3694C.set_pm_internalWave"><code class="docutils literal notranslate"><span class="pre">MG3694C.set_pm_internalWave()</span></code></a></li>
 <li><a class="reference internal" href="#MG3694C.MG3694C.set_pm_state"><code class="docutils literal notranslate"><span class="pre">MG3694C.set_pm_state()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rohde-and-schwarz-signal-generator-sma100b-module">Rohde and Schwarz Signal Generator SMA100B module</a><ul>
+<li><a class="reference internal" href="#SMA100B.SMA100B"><code class="docutils literal notranslate"><span class="pre">SMA100B</span></code></a><ul>
+<li><a class="reference internal" href="#SMA100B.SMA100B.Close"><code class="docutils literal notranslate"><span class="pre">SMA100B.Close()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.query"><code class="docutils literal notranslate"><span class="pre">SMA100B.query()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.reset"><code class="docutils literal notranslate"><span class="pre">SMA100B.reset()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.set_freq_CW"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_freq_CW()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.set_frequency_mode"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_frequency_mode()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.set_rf_output"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_rf_output()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.set_rf_output_all"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_rf_output_all()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.set_rf_power"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_rf_power()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -371,7 +386,6 @@
 <li><a class="reference internal" href="#keithley-source-meter-2612-module">KEITHLEY Source Meter 2612 module</a><ul>
 <li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612</span></code></a><ul>
 <li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.Close"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.Close()</span></code></a></li>
-<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.Identification"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.Identification()</span></code></a></li>
 <li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.Reset"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.Reset()</span></code></a></li>
 <li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.ask_Current"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.ask_Current()</span></code></a></li>
 <li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.ask_LimitReached"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.ask_LimitReached()</span></code></a></li>
@@ -379,6 +393,7 @@
 <li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.ask_Resistance"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.ask_Resistance()</span></code></a></li>
 <li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.ask_Voltage"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.ask_Voltage()</span></code></a></li>
 <li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.ask_readBuffer"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.ask_readBuffer()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.getIdn"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.getIdn()</span></code></a></li>
 <li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.get_Data"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.get_Data()</span></code></a></li>
 <li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.query"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.query()</span></code></a></li>
 <li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_AutoCurrentRange"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_AutoCurrentRange()</span></code></a></li>
@@ -399,46 +414,7 @@
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#novoptel-laser-lu1000-module">Novoptel Laser LU1000 module</a><ul>
-<li><a class="reference internal" href="#LU1000.LU1000"><code class="docutils literal notranslate"><span class="pre">LU1000</span></code></a><ul>
-<li><a class="reference internal" href="#LU1000.LU1000.Close"><code class="docutils literal notranslate"><span class="pre">LU1000.Close()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_ChannelFreqGHz"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_ChannelFreqGHz()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_ChannelFreqTHz"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_ChannelFreqTHz()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_ControllerTemp"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_ControllerTemp()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_FirstChannFreqGHz"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_FirstChannFreqGHz()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_FirstChannFreqTHz"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_FirstChannFreqTHz()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_Frequency"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_Frequency()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_Gridspacing"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_Gridspacing()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_LaserChannel"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_LaserChannel()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_LaserFirstFreqGHz"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_LaserFirstFreqGHz()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_LaserFirstFreqTHz"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_LaserFirstFreqTHz()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_LaserLastFreqGHz"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_LaserLastFreqGHz()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_LaserLastFreqTHz"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_LaserLastFreqTHz()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_LaserMinGridFreq"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_LaserMinGridFreq()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_LaserOutput"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_LaserOutput()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_MaxOpticalOutputPower"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_MaxOpticalOutputPower()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_MinOpticalOutputPower"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_MinOpticalOutputPower()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_OpticalPower"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_OpticalPower()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_Power"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_Power()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_Temperature"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_Temperature()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_Whispermode"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_Whispermode()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_maxFreqLaser"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_maxFreqLaser()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.ask_minFreqLaser"><code class="docutils literal notranslate"><span class="pre">LU1000.ask_minFreqLaser()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.get_Data"><code class="docutils literal notranslate"><span class="pre">LU1000.get_Data()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.set_FineTune"><code class="docutils literal notranslate"><span class="pre">LU1000.set_FineTune()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.set_FirstChannFreqGHz"><code class="docutils literal notranslate"><span class="pre">LU1000.set_FirstChannFreqGHz()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.set_FirstChannFreqTHz"><code class="docutils literal notranslate"><span class="pre">LU1000.set_FirstChannFreqTHz()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.set_Frequency"><code class="docutils literal notranslate"><span class="pre">LU1000.set_Frequency()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.set_Gridspacing"><code class="docutils literal notranslate"><span class="pre">LU1000.set_Gridspacing()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.set_LaserChannel"><code class="docutils literal notranslate"><span class="pre">LU1000.set_LaserChannel()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.set_LaserOutput"><code class="docutils literal notranslate"><span class="pre">LU1000.set_LaserOutput()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.set_Power"><code class="docutils literal notranslate"><span class="pre">LU1000.set_Power()</span></code></a></li>
-<li><a class="reference internal" href="#LU1000.LU1000.set_Whispermode"><code class="docutils literal notranslate"><span class="pre">LU1000.set_Whispermode()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#LU1000.Paths"><code class="docutils literal notranslate"><span class="pre">Paths()</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#novoptel-laser-lu1000-module">Novoptel Laser LU1000 module</a></li>
 <li><a class="reference internal" href="#cobrite-tunable-laser-module">CoBrite Tunable Laser module</a><ul>
 <li><a class="reference internal" href="#CoBrite.CoBrite"><code class="docutils literal notranslate"><span class="pre">CoBrite</span></code></a><ul>
 <li><a class="reference internal" href="#CoBrite.CoBrite.Close"><code class="docutils literal notranslate"><span class="pre">CoBrite.Close()</span></code></a></li>
@@ -667,7 +643,8 @@ Instruments:</p>
 <div><ul class="simple">
 <li><p>Anrtisu Spectrum Analyzer MS2760A</p></li>
 <li><p>Anritsu Signal Generator MG3694C</p></li>
-<li><p>Anritsu Vectro Analyzer MS4647B</p></li>
+<li><p>Rohde and Schwarz Signal Generator SMA100B</p></li>
+<li><p>Anritsu Vector Network Analyzer MS4647B</p></li>
 <li><p>Yokogawa Optical Spectrum Analyzer AQ6370D</p></li>
 <li><p>Power Meter ThorLabs PM100D</p></li>
 <li><p>KEITHLEY Source Meter 2612</p></li>
@@ -688,14 +665,25 @@ For the Moment you will need the following python Libraries.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">ftd2xx</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">oct2py</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">pyserial</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">serial</span><span class="o">-</span><span class="n">tool</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">vxi11</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">PyVISA</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">sockets</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">pandas</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">matplotlib</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">matplotlib</span>
 </pre></div>
 </div>
+</section>
+<section id="programms-needed-when-using-the-novoptel-laser">
+<h1>Programms needed when using the Novoptel Laser<a class="headerlink" href="#programms-needed-when-using-the-novoptel-laser" title="Link to this heading"></a></h1>
+<p>To use the Novoptel Laser LU1000, the user must install octave. At the
+moment what the Novoptel documentation mentions, is that Octave version
+6.1.0 is required. Furthermore, the user must check in the path variables
+of the operating system whether the Octave path is set correctly…
+Windows Path - ‘C:Program FilesGNU OctaveOctave-6.1.0mingw64bin’
+For more information see: Python script by https://www.novoptel.de/Home/Downloads_en.php</p>
 </section>
 <section id="how-to-use">
 <h1>How to use<a class="headerlink" href="#how-to-use" title="Link to this heading"></a></h1>
@@ -713,14 +701,15 @@ For the Moment you will need the following python Libraries.</p>
 <section id="instruments">
 <h1>Instruments<a class="headerlink" href="#instruments" title="Link to this heading"></a></h1>
 </section>
-<section id="anritsu-vectro-analyzer-ms2760a-module">
-<h1>Anritsu Vectro Analyzer MS2760A module<a class="headerlink" href="#anritsu-vectro-analyzer-ms2760a-module" title="Link to this heading"></a></h1>
+<section id="anritsu-vector-network-analyzer-ms2760a-module">
+<h1>Anritsu Vector Network Analyzer MS2760A module<a class="headerlink" href="#anritsu-vector-network-analyzer-ms2760a-module" title="Link to this heading"></a></h1>
 <p id="module-MS2760A">Created on Wed Dec  1 13:11:32 2021</p>
 <p>&#64;author: Martin.Mihaylov</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="MS2760A.MS2760A">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MS2760A.</span></span><span class="sig-name descname"><span class="pre">MS2760A</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MS2760A.html#MS2760A"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This function is using pyvisa to connect to Instruments. Please install PyVisa before using it.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="MS2760A.MS2760A.Close">
 <span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/MS2760A.html#MS2760A.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.Close" title="Link to this definition"></a></dt>
@@ -737,7 +726,7 @@ For the Moment you will need the following python Libraries.</p>
 <dt>Trace Number from which the data is taken:</dt><dd><p>Can be set to  [1,2,3,4,5,6].</p>
 </dd>
 </dl>
-<p>1 - This Function will set the continues measurment to ‘OFF’.
+<p>1 - This Function will set the continues Measurement to ‘OFF’.
 2 - Will set the Data Format to ASCii. This is needed since
 :TREACE:DATA? &lt;num&gt; is defect!!
 3 - Will write TRACE:DATA? &lt;num&gt;. Will return only 3 bits. The rest
@@ -751,7 +740,7 @@ return the data in Output np.array() form.</p>
 <dt>Trace Number from which the data is taken:</dt><dd><p>Can be set to  [1,2,3,4,5,6].</p>
 </dd>
 </dl>
-<p>1 - This Function will set the continues measurment to ‘OFF’.
+<p>1 - This Function will set the continues Measurement to ‘OFF’.
 2 - Will set the Data Format to ASCii. This is needed since
 :TREACE:DATA? &lt;num&gt; is defect!!
 3 - Will write TRACE:DATA? &lt;num&gt;. Will return only 3 bits. The rest
@@ -1095,9 +1084,9 @@ sweep was reset and the instrument has not yet swept enough to measure a full sw
 <dl class="py method">
 <dt class="sig sig-object py" id="MS2760A.MS2760A.get_Data">
 <span class="sig-name descname"><span class="pre">get_Data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/MS2760A.html#MS2760A.get_Data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.get_Data" title="Link to this definition"></a></dt>
-<dd><p>This function will stop temporally set Continuous Measurment to OFF, extract
-the max.peak value and frequency and restore the Continuous Measurment to ON.
-:returns: <strong>OutPut</strong> – Return a dictionary whit the measured voltage and current.
+<dd><p>This function will stop temporally set Continuous Measurement to OFF, extract
+the max. peak value and frequency and restore the Continuous Measurement to ON.
+:returns: <strong>OutPut</strong> – Return a dictionary with the measured voltage and current.
 :rtype: dict</p>
 </dd></dl>
 
@@ -1303,7 +1292,7 @@ trace that is the next highest peak</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>value</strong> (<em>int/float</em>) – Description: Sets the resolution bandwidth.
 Note that using this command turns the automatic resolution bandwidth setting OFF.
-In Zero Span, the range will change to allow a mininum of 5 KHz to the maximum of 20
+In Zero Span, the range will change to allow a minimum of 5 KHz to the maximum of 20
 MHz.</p></li>
 <li><p><strong>unit</strong> (<em>str</em>) – Parameters: &lt;numeric_value&gt; {HZ | KHZ | MHZ | GHZ}
 Default Unit: Hz</p></li>
@@ -1397,12 +1386,12 @@ command will return NaN.
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>state</strong> (<em>str</em>) – <dl class="simple">
 <dt>Sets Trace Type:</dt><dd><p>Normal - NORM
-Hold the Minimmum - MIN
+Hold the Minimum - MIN
 Hold the Maximum - MAX
 Average - AVER
 Rolling Max Hold - RMAX
 Rolling Min Hold - RMIN
-Rolling Avarage - RAV</p>
+Rolling Average - RAV</p>
 </dd>
 </dl>
 </p></li>
@@ -1480,7 +1469,7 @@ Span.</p></li>
 <dt class="sig sig-object py" id="MG3694C.MG3694C">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MG3694C.</span></span><span class="sig-name descname"><span class="pre">MG3694C</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MG3694C.html#MG3694C"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MG3694C.MG3694C" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Instrument</span></code></p>
-<p>A class thats uses vxi11 library to interface a Anritsu MG3694C.
+<p>This class uses vxi11 library to connect to Anritsu MG3694C.
 Need to have python ‘vxi11’ library installed!</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="MG3694C.MG3694C.Close">
@@ -1880,7 +1869,7 @@ function.</p>
 <span class="sig-name descname"><span class="pre">get_Data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/MG3694C.html#MG3694C.get_Data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MG3694C.MG3694C.get_Data" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>OutPut</strong> – Return a dictionary whit the measured Power and CW Frequency.</p>
+<dd class="field-odd"><p><strong>OutPut</strong> – Return a dictionary with the measured Power and CW Frequency.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>dict</p>
@@ -1946,7 +1935,7 @@ Default: 1 kHz</p>
 <dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Description: Selects the modulating waveform (from the internal AM generator) for the internal AM
 function, as follows:
 SINE = Sine wave
-GAUSsian = Guassian noise
+GAUSsian = Gaussian noise
 RDOWn = Negative ramp
 RUP = Positive ramp
 SQUare = Square wave
@@ -2111,7 +2100,7 @@ Default: 1 kHz</p>
 <dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Description: Selects the modulating waveform (from the internal FM generator) for the internal
 FM function, as follows:
 SINE = Sine wave
-GAUSsian = Guassian noise
+GAUSsian = Gaussian noise
 RDOWn = Negative ramp
 RUP =Positive ramp
 SQUare = Square wave
@@ -2360,7 +2349,7 @@ Default: OFF</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>state</strong> (<em>str/int</em>) – Description: ON causes the MG369xC RF output to be turned off (blanked)
 during frequency changes in CW or step sweep mode.
-OFF leaves RF output turned on (unblanked).
+OFF leaves RF output turned on (un blanked).
 Parameters: ON | OFF | 1 | 0
 Default: ON</p>
 </dd>
@@ -2485,6 +2474,118 @@ Default: OFF</p>
 </dd></dl>
 
 </section>
+<section id="rohde-and-schwarz-signal-generator-sma100b-module">
+<h1>Rohde and Schwarz Signal Generator SMA100B module<a class="headerlink" href="#rohde-and-schwarz-signal-generator-sma100b-module" title="Link to this heading"></a></h1>
+<p id="module-SMA100B">”
+Created on Fir Feb 02 13:00:00 2024</p>
+<p>&#64;author: mweizel</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="SMA100B.SMA100B">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SMA100B.</span></span><span class="sig-name descname"><span class="pre">SMA100B</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SMA100B.html#SMA100B"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Instrument</span></code></p>
+<p>A class thats uses vxi11 library to interface a SMA100B
+Need to have python ‘vxi11’ library installed!</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.Close">
+<span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/SMA100B.html#SMA100B.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.Close" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.query">
+<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SMA100B.html#SMA100B.query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.query" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/SMA100B.html#SMA100B.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.reset" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.set_freq_CW">
+<span class="sig-name descname"><span class="pre">set_freq_CW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SMA100B.html#SMA100B.set_freq_CW"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.set_freq_CW" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>int/float</em>) – Parameter Frequency</p></li>
+<li><p><strong>unit</strong> (<em>str</em>) – Frequency Unit: ‘GHz’ or ‘MHz’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.set_frequency_mode">
+<span class="sig-name descname"><span class="pre">set_frequency_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MODE</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SMA100B.html#SMA100B.set_frequency_mode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.set_frequency_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>MODE</strong> (<em>str</em>) – <p>&lt;Mode&gt; CW | FIXed | SWEep | LIST | COMBined</p>
+<dl class="simple">
+<dt>CW|FIXed</dt><dd><p>Sets the fixed frequency mode. CW and FIXed are synonyms.
+The instrument operates at a defined frequency.</p>
+</dd>
+<dt>SWEep</dt><dd><p>Sets sweep mode.
+The instrument processes frequency (and level) settings in
+defined sweep steps.</p>
+</dd>
+<dt>LIST</dt><dd><p>Sets list mode.
+The instrument processes frequency and level settings by
+means of values loaded from a list.</p>
+</dd>
+<dt>COMBined</dt><dd><p>Sets the combined RF frequency / level sweep mode.
+The instrument processes frequency and level settings in
+defined sweep steps.</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.set_rf_output">
+<span class="sig-name descname"><span class="pre">set_rf_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SMA100B.html#SMA100B.set_rf_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.set_rf_output" title="Link to this definition"></a></dt>
+<dd><p>Activates the Signal Genrator RF Output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>str/int</em>) – ‘ON’ 1 or ‘OFF’ 0</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Valid values are: ‘ON’, ‘OFF’, 1, 0</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.set_rf_output_all">
+<span class="sig-name descname"><span class="pre">set_rf_output_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SMA100B.html#SMA100B.set_rf_output_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.set_rf_output_all" title="Link to this definition"></a></dt>
+<dd><p>Activates all Signal Genrator RF Outputs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>str/int</em>) – ‘ON’ 1 or ‘OFF’ 0</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Valid values are: ‘ON’, ‘OFF’, 1, 0</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.set_rf_power">
+<span class="sig-name descname"><span class="pre">set_rf_power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SMA100B.html#SMA100B.set_rf_power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.set_rf_power" title="Link to this definition"></a></dt>
+<dd><p>Sets the Signal Generator Output Power in dBm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Output Power in dBm</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="anritsu-vectro-analyzer-ms4647b-module">
 <h1>Anritsu Vectro Analyzer MS4647B module<a class="headerlink" href="#anritsu-vectro-analyzer-ms4647b-module" title="Link to this heading"></a></h1>
 <p id="module-MS4647B">Created on Mon Dec 13 10:40:31 2021</p>
@@ -2493,6 +2594,7 @@ Default: OFF</p>
 <dt class="sig sig-object py" id="MS4647B.MS4647B">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MS4647B.</span></span><span class="sig-name descname"><span class="pre">MS4647B</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MS4647B.html#MS4647B"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This function is using pyvisa to connect to Instruments. Please install PyVisa before using it.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="MS4647B.MS4647B.Close">
 <span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/MS4647B.html#MS4647B.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.Close" title="Link to this definition"></a></dt>
@@ -2612,7 +2714,7 @@ extension.No query.</p></li>
 <li><p><strong>path</strong> (<em>str</em>) – Where on the PC to save the data</p></li>
 <li><p><strong>name</strong> (<em>str</em>) – Name of the File</p></li>
 <li><p><strong>portNumb</strong> (<em>int/str</em>) – <p>The N(ports number) for the .sNp data output.</p>
-<p>Write a text File whit the transfered Data</p>
+<p>Write a text File with the transferred data</p>
 </p></li>
 </ul>
 </dd>
@@ -2632,7 +2734,7 @@ extension.No query.</p></li>
 <li><p><strong>path</strong> (<em>str</em>) – Where on the PC to save the data</p></li>
 <li><p><strong>name</strong> (<em>str</em>) – Name of the File</p></li>
 <li><p><strong>portNumb</strong> (<em>int/str</em>) – <p>The N(ports number) for the .sNp data output.</p>
-<p>Write a text File whit the transfered Data</p>
+<p>Write a text File with the transferred data</p>
 </p></li>
 </ul>
 </dd>
@@ -2770,7 +2872,7 @@ Frequency as:</p>
 <span class="sig-name descname"><span class="pre">ask_DisplayCount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/MS4647B.html#MS4647B.ask_DisplayCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_DisplayCount" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Quuery the number of displayed channels.</p>
+<dd class="field-odd"><p>Query the number of displayed channels.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE</p>
@@ -2845,7 +2947,7 @@ Start Frequency. The query returns the resulting span in Hertz.</p>
 <dd class="field-even"><p><strong>Value</strong> – Outputs the power level of the indicated port on the indicated channel.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>flaot</p>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -3087,10 +3189,7 @@ GPIB. The file must exist</p>
 <span class="sig-name descname"><span class="pre">ask_TransferDataCSV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MS4647B.html#MS4647B.ask_TransferDataCSV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_TransferDataCSV" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) – File Name</p></li>
-<li><p><strong>portNumb</strong> (<em>int</em>) – the N(ports number) for the .sNp data output.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – File Name</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>TYPE</strong> – The query outputs the disk file data to the
@@ -3479,7 +3578,7 @@ bandwidth for the indicated channel.</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p></li>
-<li><p><strong>value</strong> (<em>int</em>) – Procentge smoothing between 0 to 100</p></li>
+<li><p><strong>value</strong> (<em>int</em>) – Percentage smoothing between 0 to 100</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -3690,8 +3789,8 @@ control the VectorStar ME7838x  Broadband/Millimeter-Wave 3738A Test Set.</p>
 <dt class="sig sig-object py" id="AQ6370D.AQ6370D">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AQ6370D.</span></span><span class="sig-name descname"><span class="pre">AQ6370D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AQ6370D.html#AQ6370D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Instrument</span></code></p>
-<p>A class thats uses vxi11 library to interface a Yokogawa AQ6370D.
-Need to have python ‘vxi11’, ‘pandas’ and ‘numpy’ librarys installed!</p>
+<p>This class uses vxi11 library to connect to a Yokogawa AQ6370D.
+Need to have python ‘vxi11’, ‘pandas’ and ‘numpy’ libraries installed!</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="AQ6370D.AQ6370D.Close">
 <span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/AQ6370D.html#AQ6370D.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.Close" title="Link to this definition"></a></dt>
@@ -3735,7 +3834,7 @@ each measured point.</p>
 <span class="sig-name descname"><span class="pre">ask_BWResolution</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/AQ6370D.html#AQ6370D.ask_BWResolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_BWResolution" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Queries the measurment resolution</p>
+<dd class="field-odd"><p>Queries the measurement resolution.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>float</p>
@@ -3794,7 +3893,7 @@ REAL,32 = REAL format (32bits)</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Queries the automatic setting function of
-the sub scale of the level axis.
+the subscale of the level axis.
 Response 0 = OFF, 1 = ON</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -3948,7 +4047,7 @@ measurement span.</p>
 <span class="sig-name descname"><span class="pre">ask_TraceAttribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AQ6370D.html#AQ6370D.ask_TraceAttribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_TraceAttribute" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Name of the trace that should be extractselected.
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Name of the trace that should be extract/selected.
 sState = [‘TRA’,’TRB’,’TRC’,’TRD’,’TRE’,’TRF’,’TRG’]</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -3976,7 +4075,7 @@ CALC = CALC</p>
 <span class="sig-name descname"><span class="pre">ask_TraceDataX</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AQ6370D.html#AQ6370D.ask_TraceDataX"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_TraceDataX" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Name of the trace that should be extractselected.
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Name of the trace that should be extract/selected.
 state = [TRA|TRB|TRC|TRD|TRE|TRF|TRG]</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -3997,7 +4096,7 @@ specified trace.</p>
 <span class="sig-name descname"><span class="pre">ask_TraceDataY</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AQ6370D.html#AQ6370D.ask_TraceDataY"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_TraceDataY" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Name of the trace that should be extractselected.
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Name of the trace that should be extract/selected.
 state = [TRA|TRB|TRC|TRD|TRE|TRF|TRG]</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -4086,7 +4185,7 @@ measurement start wavelength</p>
 measurement start wavelength</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>dloat</p>
+<dd class="field-even"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -4151,7 +4250,7 @@ each measured point.</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>value</strong> (<em>int/float</em>) – Set the measurment resolution</p></li>
+<li><p><strong>value</strong> (<em>int/float</em>) – Set the measurement resolution.</p></li>
 <li><p><strong>unit</strong> (<em>str</em>) – sUnit = [‘M’,’HZ’]</p></li>
 </ul>
 </dd>
@@ -4172,7 +4271,7 @@ each measured point.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>value</strong> (<em>int/float</em>) – Set the center wavelength of the
 X-axis of the display scale</p></li>
-<li><p><strong>unit</strong> (<em>str</em>) – sUnits = [‘M’,’HZ’]</p></li>
+<li><p><strong>unit</strong> (<em>str</em>) – Units = [‘M’,’HZ’]</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -4296,8 +4395,7 @@ HIGH3 = HIGH3 or HIGH3/CHOP</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>value</strong> (<em>int/float</em>) – Set the measurement condition</p></li>
-<li><p><strong>span.</strong> (<em>measurement</em>) – </p></li>
+<li><p><strong>value</strong> (<em>int/float</em>) – Set the measurement span.</p></li>
 <li><p><strong>unit</strong> (<em>str</em>) – sUnits = [‘M’,’HZ’]</p></li>
 </ul>
 </dd>
@@ -4440,6 +4538,7 @@ measurement stop wavelength</p>
 <dt class="sig sig-object py" id="PM100D.PM100D">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PM100D.</span></span><span class="sig-name descname"><span class="pre">PM100D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM100D.html#PM100D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This Class is using pyvisa to connect to instruments. Please install PyVisa before using it.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="PM100D.PM100D.Abort">
 <span class="sig-name descname"><span class="pre">Abort</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM100D.html#PM100D.Abort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.Abort" title="Link to this definition"></a></dt>
@@ -4502,7 +4601,7 @@ measurement stop wavelength</p>
 <span class="sig-name descname"><span class="pre">ConfigFreq</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM100D.html#PM100D.ConfigFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ConfigFreq" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Configure for frequency measuremen</p>
+<dd class="field-odd"><p>Configure for frequency measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -4528,7 +4627,7 @@ measurement stop wavelength</p>
 <span class="sig-name descname"><span class="pre">ConfigPowerDensity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM100D.html#PM100D.ConfigPowerDensity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ConfigPowerDensity" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Configure for power density measuremen</p>
+<dd class="field-odd"><p>Configure for power density measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -4583,7 +4682,7 @@ measurement stop wavelength</p>
 <dd class="field-odd"><p>Performs a power measurement whit hard codded parameter!.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>TYPE Data from the measurment</p>
+<dd class="field-even"><p>TYPE Data from the measurement</p>
 </dd>
 </dl>
 </dd></dl>
@@ -4613,8 +4712,8 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>Headers</strong> (<em>str</em>) – String with [‘Power’,’Energy’,’Current’,’Voltage’]</p></li>
-<li><p><strong>Data</strong> (<em>lidt</em>) – Data from the instrument.</p></li>
-<li><p><strong>Params</strong> (<em>list</em>) – List with str for different data that are extractet from the instrument.</p></li>
+<li><p><strong>Data</strong> (<em>list</em>) – Data from the instrument.</p></li>
+<li><p><strong>Params</strong> (<em>list</em>) – List with str for different data that are extracted from the instrument.</p></li>
 </ul>
 </p>
 </dd>
@@ -4652,7 +4751,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">MeasEnergy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM100D.html#PM100D.MeasEnergy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.MeasEnergy" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Performs a energy measuremen</p>
+<dd class="field-odd"><p>Performs a energy measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -4665,7 +4764,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">MeasEnergyDensity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM100D.html#PM100D.MeasEnergyDensity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.MeasEnergyDensity" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Performs a energy density measuremen</p>
+<dd class="field-odd"><p>Performs a energy density measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -4730,7 +4829,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">MeasTemp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM100D.html#PM100D.MeasTemp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.MeasTemp" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Performs a sensor temperature measuremen</p>
+<dd class="field-odd"><p>Performs a sensor temperature measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -4772,7 +4871,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <dd class="field-odd"><p><strong>data</strong> – Performs a power measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Data from the measurment</p>
+<dd class="field-even"><p>Data from the Measurement</p>
 </dd>
 </dl>
 </dd></dl>
@@ -4808,7 +4907,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">adjustCurrentRange</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM100D.html#PM100D.adjustCurrentRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.adjustCurrentRange" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Adjust the Voltage Measurment.</p>
+<dd class="field-odd"><p>Adjust the Voltage Measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -4821,7 +4920,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">adjustEnergyMeas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM100D.html#PM100D.adjustEnergyMeas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.adjustEnergyMeas" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Adjust the Energy Measurment.</p>
+<dd class="field-odd"><p>Adjust the Energy Measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -4834,7 +4933,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">adjustPowerMeas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM100D.html#PM100D.adjustPowerMeas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.adjustPowerMeas" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Adjust the Power Measurments</p>
+<dd class="field-odd"><p>Adjust the power measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -4847,7 +4946,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">adjustVoltageRange</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM100D.html#PM100D.adjustVoltageRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.adjustVoltageRange" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Adjust the Voltage Measurments.</p>
+<dd class="field-odd"><p>Adjust the Voltage Measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -4977,7 +5076,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">ask_Pyro</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM100D.html#PM100D.ask_Pyro"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_Pyro" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Queries the pyro-detectro response value</p>
+<dd class="field-odd"><p>Queries the pyro-detectr response value</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE str</p>
@@ -5016,7 +5115,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">ask_beeper</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM100D.html#PM100D.ask_beeper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_beeper" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Return the state of the the beeper</p>
+<dd class="field-odd"><p>Return the state of the beeper</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>Type print str</p>
@@ -5044,7 +5143,7 @@ data.</p>
 <span class="sig-name descname"><span class="pre">ask_currentRange</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM100D.html#PM100D.ask_currentRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_currentRange" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Queries the current curent range</p>
+<dd class="field-odd"><p>Queries the actual current range</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE str</p>
@@ -5103,7 +5202,7 @@ Can be  [‘MAX’,’MIN’]</p>
 <span class="sig-name descname"><span class="pre">fetchData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM100D.html#PM100D.fetchData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.fetchData" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Read last measurement data. WILL NOT START THE MEASURMENT</p>
+<dd class="field-odd"><p>Read last measurement data. WILL NOT START THE MEASUREMENT</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE float</p>
@@ -5239,7 +5338,7 @@ that the test passed, other values indicate that the test failed.</p>
 <span class="sig-name descname"><span class="pre">set_Parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM100D.html#PM100D.set_Parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.set_Parameters" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>Type</strong> (<em>str</em>) – This function will set the measurments parameters.
+<dd class="field-odd"><p><strong>Type</strong> (<em>str</em>) – This function will set the measurement parameters.
 Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -5357,14 +5456,10 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">KEITHLEY2612.</span></span><span class="sig-name descname"><span class="pre">KEITHLEY2612</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/KEITHLEY2612.html#KEITHLEY2612"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This function is using pyvisa. Please install PyVisa before you use it.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.Close">
 <span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/KEITHLEY2612.html#KEITHLEY2612.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.Close" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.Identification">
-<span class="sig-name descname"><span class="pre">Identification</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/KEITHLEY2612.html#KEITHLEY2612.Identification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.Identification" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -5372,7 +5467,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">Reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/KEITHLEY2612.html#KEITHLEY2612.Reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.Reset" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>chan</strong> (<em>str</em>) – Select Channel A or B and restore to defaults channel settings.</p>
+<dd class="field-odd"><p><strong>chan</strong> (<em>str</em>) – Select Channel A or B and restore to default channel settings.</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
@@ -5394,7 +5489,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Return float whit the measured value on the channel</p>
+<dd class="field-odd"><p>Return float with the measured value on the channel</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE  float</p>
@@ -5430,7 +5525,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>TYPE</strong> – Return float whit the measured value on the channel</p>
+<dd class="field-odd"><p><strong>TYPE</strong> – Return float with the measured value on the channel</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>float</p>
@@ -5449,7 +5544,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>TYPE</strong> – Return float whit the measured value on the channel</p>
+<dd class="field-odd"><p><strong>TYPE</strong> – Return float with the measured value on the channel</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>float</p>
@@ -5468,7 +5563,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>TYPE</strong> – Return float whit the measured value on the channel</p>
+<dd class="field-odd"><p><strong>TYPE</strong> – Return float with the measured value on the channel</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>float</p>
@@ -5503,6 +5598,19 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.getIdn">
+<span class="sig-name descname"><span class="pre">getIdn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/KEITHLEY2612.html#KEITHLEY2612.getIdn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.getIdn" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instrument identification</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE  str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.get_Data">
 <span class="sig-name descname"><span class="pre">get_Data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/KEITHLEY2612.html#KEITHLEY2612.get_Data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.get_Data" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
@@ -5510,7 +5618,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <dd class="field-odd"><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>OutPut</strong> – Return a dictionary whit the measured voltage and current.</p>
+<dd class="field-even"><p><strong>OutPut</strong> – Return a dictionary with the measured voltage and current.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
@@ -5530,7 +5638,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p></li>
-<li><p><strong>state</strong> (<em>str</em>) – ON/OFF current source autorange</p></li>
+<li><p><strong>state</strong> (<em>str</em>) – ON/OFF current source automatic range</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -5549,7 +5657,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p></li>
-<li><p><strong>state</strong> (<em>str</em>) – ON/OFF voltage source autorange</p></li>
+<li><p><strong>state</strong> (<em>str</em>) – ON/OFF voltage source automatic range</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -5568,8 +5676,8 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p></li>
-<li><p><strong>double</strong> (<em>boolen</em><em>, </em><em>optional</em>) – <p>Displays source-measure for SMU A and SMU B.
-double = None per defould.
+<li><p><strong>double</strong> (<em>boolean</em><em>, </em><em>optional</em>) – <p>Displays source-measure for SMU A and SMU B.
+double = None per default.
 if double = True:</p>
 <blockquote>
 <div><p>Display Chan A and B</p>
@@ -5616,7 +5724,7 @@ if double = True:</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>chan</strong> (<em>str</em>) – Select Channel A or B</p></li>
-<li><p><strong>value</strong> (<em>int/float</em>) – Sets the current limitof channel X to V.</p></li>
+<li><p><strong>value</strong> (<em>int/float</em>) – Sets the current limit of channel X to V.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -5674,7 +5782,7 @@ SMU A and SMU B can be set for different measurement functions!</p></li>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>chan</strong> (<em>str</em>) – Select channl A or B</p></li>
+<li><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p></li>
 <li><p><strong>typ</strong> (<em>str</em>) – The source function. Set to one of the following values:
 typ = ‘volt’ for Selects voltage source function
 typ = ‘amp’ for Selects voltage source function</p></li>
@@ -5755,7 +5863,7 @@ typ = ‘amp’ for Selects voltage source function</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>chan</strong> (<em>str</em>) – Select Channel A or B</p></li>
-<li><p><strong>value</strong> (<em>int/float</em>) – Sets the voltage limitof channel X to V.</p></li>
+<li><p><strong>value</strong> (<em>int/float</em>) – Sets the voltage limit of channel X to V.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -5796,627 +5904,6 @@ typ = ‘amp’ for Selects voltage source function</p></li>
 </section>
 <section id="novoptel-laser-lu1000-module">
 <h1>Novoptel Laser LU1000 module<a class="headerlink" href="#novoptel-laser-lu1000-module" title="Link to this heading"></a></h1>
-<p id="module-LU1000">Created on Tue Dec 14 11:04:21 2021</p>
-<p>&#64;author: Martin.Mihaylov</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="LU1000.LU1000">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LU1000.</span></span><span class="sig-name descname"><span class="pre">LU1000</span></span><a class="reference internal" href="_modules/LU1000.html#LU1000"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.Close">
-<span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.Close" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Close connection</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_ChannelFreqGHz">
-<span class="sig-name descname"><span class="pre">ask_ChannelFreqGHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_ChannelFreqGHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_ChannelFreqGHz" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Returns channel’s frequency as GHZ*10</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_ChannelFreqTHz">
-<span class="sig-name descname"><span class="pre">ask_ChannelFreqTHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_ChannelFreqTHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_ChannelFreqTHz" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Ask channel Frequency in THz</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_ControllerTemp">
-<span class="sig-name descname"><span class="pre">ask_ControllerTemp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_ControllerTemp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_ControllerTemp" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>res</strong> – Controller module temperature in Celsiusx16</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_FirstChannFreqGHz">
-<span class="sig-name descname"><span class="pre">ask_FirstChannFreqGHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_FirstChannFreqGHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_FirstChannFreqGHz" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>res</strong> – First channel’s frequency, GHz*10</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_FirstChannFreqTHz">
-<span class="sig-name descname"><span class="pre">ask_FirstChannFreqTHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_FirstChannFreqTHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_FirstChannFreqTHz" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>res</strong> – First channel’s frequency, THz</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_Frequency">
-<span class="sig-name descname"><span class="pre">ask_Frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_Frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_Frequency" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>Freq</strong> – Calculate and return Frequency on the selected channel</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_Gridspacing">
-<span class="sig-name descname"><span class="pre">ask_Gridspacing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_Gridspacing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_Gridspacing" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Grid spacing in GHz*10</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_LaserChannel">
-<span class="sig-name descname"><span class="pre">ask_LaserChannel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_LaserChannel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_LaserChannel" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>res</strong> – Selected Channel Number</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>foat</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_LaserFirstFreqGHz">
-<span class="sig-name descname"><span class="pre">ask_LaserFirstFreqGHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_LaserFirstFreqGHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_LaserFirstFreqGHz" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>res</strong> – Laser’s first frequency, GHz*10</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_LaserFirstFreqTHz">
-<span class="sig-name descname"><span class="pre">ask_LaserFirstFreqTHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_LaserFirstFreqTHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_LaserFirstFreqTHz" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>res</strong> – Laser’s first frequency, THz</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_LaserLastFreqGHz">
-<span class="sig-name descname"><span class="pre">ask_LaserLastFreqGHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_LaserLastFreqGHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_LaserLastFreqGHz" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>res</strong> – Laser’s last frequency, GHz*10</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_LaserLastFreqTHz">
-<span class="sig-name descname"><span class="pre">ask_LaserLastFreqTHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_LaserLastFreqTHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_LaserLastFreqTHz" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>res</strong> – Laser’s last frequency, THz</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_LaserMinGridFreq">
-<span class="sig-name descname"><span class="pre">ask_LaserMinGridFreq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_LaserMinGridFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_LaserMinGridFreq" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Laser’s minimum supported grid spacing, GHz*10</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_LaserOutput">
-<span class="sig-name descname"><span class="pre">ask_LaserOutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_LaserOutput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_LaserOutput" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Laser emable(‘ON’) or laser diseble(‘OFF’)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_MaxOpticalOutputPower">
-<span class="sig-name descname"><span class="pre">ask_MaxOpticalOutputPower</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_MaxOpticalOutputPower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_MaxOpticalOutputPower" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>res</strong> – Maximum possible optical power setting</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_MinOpticalOutputPower">
-<span class="sig-name descname"><span class="pre">ask_MinOpticalOutputPower</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_MinOpticalOutputPower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_MinOpticalOutputPower" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>res</strong> – Ask minimum possible optical power setting</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_OpticalPower">
-<span class="sig-name descname"><span class="pre">ask_OpticalPower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_OpticalPower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_OpticalPower" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>res</strong> – Returns the optical power encoded as dBm*100</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_Power">
-<span class="sig-name descname"><span class="pre">ask_Power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_Power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_Power" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Ask Sets or returns the laser module’s current optical power
-in dBm*100</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_Temperature">
-<span class="sig-name descname"><span class="pre">ask_Temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_Temperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_Temperature" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>res</strong> – Returns the current temperature encoded as °C*100.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_Whispermode">
-<span class="sig-name descname"><span class="pre">ask_Whispermode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_Whispermode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_Whispermode" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>res</strong> – Whispermode Status</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>foat</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_maxFreqLaser">
-<span class="sig-name descname"><span class="pre">ask_maxFreqLaser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_maxFreqLaser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_maxFreqLaser" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>max possible frequency</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.ask_minFreqLaser">
-<span class="sig-name descname"><span class="pre">ask_minFreqLaser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.ask_minFreqLaser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.ask_minFreqLaser" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>min possible frequency.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.get_Data">
-<span class="sig-name descname"><span class="pre">get_Data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.get_Data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.get_Data" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – DESCRIPTION.</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>OutPut</strong> – Return a dictionary whit the measured power and set frequency.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.set_FineTune">
-<span class="sig-name descname"><span class="pre">set_FineTune</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.set_FineTune"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.set_FineTune" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p></li>
-<li><p><strong>value</strong> (<em>int</em>) – Fine tunning set the frequency in MHz steps</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.set_FirstChannFreqGHz">
-<span class="sig-name descname"><span class="pre">set_FirstChannFreqGHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.set_FirstChannFreqGHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.set_FirstChannFreqGHz" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>res</strong> – First channel’s frequency, GHz*10</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.set_FirstChannFreqTHz">
-<span class="sig-name descname"><span class="pre">set_FirstChannFreqTHz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.set_FirstChannFreqTHz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.set_FirstChannFreqTHz" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>res</strong> – First channel’s frequency, THz</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.set_Frequency">
-<span class="sig-name descname"><span class="pre">set_Frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.set_Frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.set_Frequency" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p></li>
-<li><p><strong>value</strong> (<em>float</em>) – Set Laser Frequency.
-value in form value = 192.876</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.set_Gridspacing">
-<span class="sig-name descname"><span class="pre">set_Gridspacing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.set_Gridspacing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.set_Gridspacing" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p></li>
-<li><p><strong>value</strong> (<em>int</em>) – Set Grid spacing. Smalles possible value = 1</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.set_LaserChannel">
-<span class="sig-name descname"><span class="pre">set_LaserChannel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.set_LaserChannel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.set_LaserChannel" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p></li>
-<li><p><strong>value</strong> (<em>int</em>) – <dl class="simple">
-<dt>Sets or returns the laser module’s current channel</dt><dd><p>value = select channel value</p>
-</dd>
-</dl>
-</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.set_LaserOutput">
-<span class="sig-name descname"><span class="pre">set_LaserOutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.set_LaserOutput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.set_LaserOutput" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p></li>
-<li><p><strong>value</strong> (<em>int/str</em>) – Turn Laser N output ON/OFF
-value = ‘ON’|’OFF’<a href="#id3"><span class="problematic" id="id4">|</span></a>1|0</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.set_Power">
-<span class="sig-name descname"><span class="pre">set_Power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.set_Power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.set_Power" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p></li>
-<li><p><strong>value</strong> (<em>float</em>) – Sets the laser module’s current optical power
-in dBm</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="LU1000.LU1000.set_Whispermode">
-<span class="sig-name descname"><span class="pre">set_Whispermode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000.set_Whispermode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000.set_Whispermode" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>laser</strong> (<em>int</em>) – Laser seleected. 1 or 2</p></li>
-<li><p><strong>state</strong> (<em>str</em>) – [‘ON’,’OFF’]</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="LU1000.Paths">
-<span class="sig-prename descclassname"><span class="pre">LU1000.</span></span><span class="sig-name descname"><span class="pre">Paths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#Paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.Paths" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
 </section>
 <section id="cobrite-tunable-laser-module">
 <h1>CoBrite Tunable Laser module<a class="headerlink" href="#cobrite-tunable-laser-module" title="Link to this heading"></a></h1>
@@ -6449,7 +5936,7 @@ in dBm</p></li>
 <span class="sig-name descname"><span class="pre">ask_ActualPower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoBrite.html#CoBrite.ask_ActualPower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.ask_ActualPower" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p>
+<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
@@ -6508,7 +5995,7 @@ Value format is in THz.</p>
 <span class="sig-name descname"><span class="pre">ask_LaserLim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoBrite.html#CoBrite.ask_LaserLim"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.ask_LaserLim" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p>
+<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
@@ -6528,7 +6015,7 @@ format.</p>
 <span class="sig-name descname"><span class="pre">ask_LaserOutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoBrite.html#CoBrite.ask_LaserOutput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.ask_LaserOutput" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p>
+<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
@@ -6547,7 +6034,7 @@ format.</p>
 <span class="sig-name descname"><span class="pre">ask_Offset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoBrite.html#CoBrite.ask_Offset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.ask_Offset" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p>
+<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
@@ -6557,7 +6044,7 @@ format.</p>
 Value format is in GHz.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>flaot</p>
+<dd class="field-even"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -6567,7 +6054,7 @@ Value format is in GHz.</p>
 <span class="sig-name descname"><span class="pre">ask_Power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoBrite.html#CoBrite.ask_Power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.ask_Power" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p>
+<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
@@ -6587,7 +6074,7 @@ port. Value format is in dBm.</p>
 <span class="sig-name descname"><span class="pre">ask_Wavelength</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoBrite.html#CoBrite.ask_Wavelength"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite.ask_Wavelength" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p>
+<dd class="field-odd"><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – Error message.</p>
@@ -6615,7 +6102,7 @@ Value format is in Nanometer.</p>
 <dd class="field-odd"><p>This function must be set after each set_() function. CoBrite
 writes the set_() to register and returns ;/r/n to the user. The
 ;/r/n command will mess up the next data sent to CoBrite from the user.
-An empty read() is required after each set_() function sendet to the
+An empty read() is required to be sended after each set_() function to the
 laser.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -6630,7 +6117,7 @@ laser.</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</p></li>
+<li><p><strong>chan</strong> (<em>int</em>) – Channel number. Can be 1 or 2. CoBrite have only 2 channels!</p></li>
 <li><p><strong>freq</strong> (<em>float</em>) – Sets frequency in Thz format. For example freq = 192.2345</p></li>
 <li><p><strong>power</strong> (<em>float</em>) – Sets the power to dBm. For example power = 9.8.
 min Power = 8.8
@@ -6826,7 +6313,7 @@ is in Nanometer.</p></li>
 <span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/KA3005.html#KA3005.get_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KA3005.KA3005.get_data" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>OutPut</strong> – Return a dictionary whit the measured voltage and current.</p>
+<dd class="field-odd"><p><strong>OutPut</strong> – Return a dictionary with the measured voltage and current.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>dict</p>
@@ -6849,7 +6336,7 @@ is in Nanometer.</p></li>
 <span class="sig-name descname"><span class="pre">read_Amp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/KA3005.html#KA3005.read_Amp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KA3005.KA3005.read_Amp" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Current Measured</p>
+<dd class="field-odd"><p>Current measured</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE float</p>
@@ -6881,7 +6368,7 @@ is in Nanometer.</p></li>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>voltage</strong> (<em>int/float</em>) – Set the current on the Display</p></li>
+<li><p><strong>amp</strong> (<em>int/float</em>) – Set the current on the Display</p></li>
 <li><p><strong>delay</strong> (<em>0.01s Delay</em>) – </p></li>
 </ul>
 </dd>
@@ -6896,7 +6383,7 @@ is in Nanometer.</p></li>
 <span class="sig-name descname"><span class="pre">set_Ocp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/KA3005.html#KA3005.set_Ocp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KA3005.KA3005.set_Ocp" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>state</strong> (<em>str</em><em> (</em><em>ON/OFF</em><em>)</em>) – Set the state of the over current protection ON and OFF</p>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em><em> (</em><em>ON/OFF</em><em>)</em>) – Set the state of the overcurrent protection ON and OFF</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -6959,7 +6446,7 @@ is in Nanometer.</p></li>
 <span class="sig-name descname"><span class="pre">ask_Amp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/KA3005p.html#KA3005p.ask_Amp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KA3005p.KA3005p.ask_Amp" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>current set.</p>
+<dd class="field-odd"><p>Current set.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE float</p>
@@ -7011,7 +6498,7 @@ is in Nanometer.</p></li>
 <span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/KA3005p.html#KA3005p.get_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KA3005p.KA3005p.get_data" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>OutPut</strong> – Return a dictionary whit the measured voltage and current.</p>
+<dd class="field-odd"><p><strong>OutPut</strong> – Return a dictionary with the measured voltage and current.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>dict</p>
@@ -7034,7 +6521,7 @@ is in Nanometer.</p></li>
 <span class="sig-name descname"><span class="pre">read_Amp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/KA3005p.html#KA3005p.read_Amp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KA3005p.KA3005p.read_Amp" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Current Measured</p>
+<dd class="field-odd"><p>Current measured</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE float</p>
@@ -7047,7 +6534,7 @@ is in Nanometer.</p></li>
 <span class="sig-name descname"><span class="pre">read_Volt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/KA3005p.html#KA3005p.read_Volt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KA3005p.KA3005p.read_Volt" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Voltage Measured</p>
+<dd class="field-odd"><p>Voltage measured</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE float</p>
@@ -7066,7 +6553,7 @@ is in Nanometer.</p></li>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>voltage</strong> (<em>int/float</em>) – Set the current on the Display</p></li>
+<li><p><strong>amp</strong> (<em>int/float</em>) – Set the current on the Display</p></li>
 <li><p><strong>delay</strong> (<em>0.01s Delay</em>) – </p></li>
 </ul>
 </dd>
@@ -7081,7 +6568,7 @@ is in Nanometer.</p></li>
 <span class="sig-name descname"><span class="pre">set_Ocp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/KA3005p.html#KA3005p.set_Ocp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KA3005p.KA3005p.set_Ocp" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>state</strong> (<em>str</em><em> (</em><em>ON/OFF</em><em>)</em>) – Set the state of the over current protection ON and OFF</p>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em><em> (</em><em>ON/OFF</em><em>)</em>) – Set the state of the overcurrent protection ON and OFF</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -7196,7 +6683,7 @@ is in Nanometer.</p></li>
 <span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RD3005.html#RD3005.get_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RD3005.RD3005.get_data" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>OutPut</strong> – Return a dictionary whit the measured voltage and current.</p>
+<dd class="field-odd"><p><strong>OutPut</strong> – Return a dictionary with the measured voltage and current.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>dict</p>
@@ -7251,7 +6738,7 @@ is in Nanometer.</p></li>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>voltage</strong> (<em>int/float</em>) – Set the current on the Display</p></li>
+<li><p><strong>amp</strong> (<em>int/float</em>) – Set the current on the Display</p></li>
 <li><p><strong>delay</strong> (<em>0.01s Delay</em>) – </p></li>
 </ul>
 </dd>
@@ -7266,7 +6753,7 @@ is in Nanometer.</p></li>
 <span class="sig-name descname"><span class="pre">set_Ocp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RD3005.html#RD3005.set_Ocp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RD3005.RD3005.set_Ocp" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>state</strong> (<em>str</em><em> (</em><em>ON/OFF</em><em>)</em>) – Set the state of the over current protection ON and OFF</p>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em><em> (</em><em>ON/OFF</em><em>)</em>) – Set the state of the overcurrent protection ON and OFF</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -7329,7 +6816,7 @@ is in Nanometer.</p></li>
 <span class="sig-name descname"><span class="pre">ask_Amp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GPP4323.html#GPP4323.ask_Amp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GPP4323.GPP4323.ask_Amp" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2,3,4].</p>
+<dd class="field-odd"><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2,3,4].</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>DESCRIPTION.</p>
@@ -7345,10 +6832,10 @@ is in Nanometer.</p></li>
 <span class="sig-name descname"><span class="pre">ask_ChannelLoadMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GPP4323.html#GPP4323.ask_ChannelLoadMode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GPP4323.GPP4323.ask_ChannelLoadMode" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2].</p>
+<dd class="field-odd"><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2].</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Queries CH1 or CH2 work mode. 6 modes below: SERies，PARallel，INDE pendent, CV Load，CC Load，CR Load</p>
+<dd class="field-even"><p>Queries CH1 or CH2 work mode. 6 modes below: SERies/PARallel/INDE pendent, CV Load/CC Load/CR Load</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>TYPE</p>
@@ -7361,10 +6848,10 @@ is in Nanometer.</p></li>
 <span class="sig-name descname"><span class="pre">ask_LoadResistor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GPP4323.html#GPP4323.ask_LoadResistor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GPP4323.GPP4323.ask_LoadResistor" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2].</p>
+<dd class="field-odd"><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2].</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Set Laod Resistance Value for given channel.</p>
+<dd class="field-even"><p>Set load Resistance Value for given channel.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>TYPE</p>
@@ -7377,7 +6864,7 @@ is in Nanometer.</p></li>
 <span class="sig-name descname"><span class="pre">ask_Volt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GPP4323.html#GPP4323.ask_Volt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GPP4323.GPP4323.ask_Volt" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2,3,4].</p>
+<dd class="field-odd"><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2,3,4].</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>DESCRIPTION.</p>
@@ -7406,7 +6893,7 @@ is in Nanometer.</p></li>
 <span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GPP4323.html#GPP4323.get_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GPP4323.GPP4323.get_data" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>OutPut</strong> – Return a dictionary whit the measured voltage and current.</p>
+<dd class="field-odd"><p><strong>OutPut</strong> – Return a dictionary with the measured voltage and current.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>dict</p>
@@ -7443,7 +6930,7 @@ is in Nanometer.</p></li>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2,3,4].</p></li>
+<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2,3,4].</p></li>
 <li><p><strong>amp</strong> (<em>int/float</em>) – Set Current on Channel.</p></li>
 </ul>
 </dd>
@@ -7459,7 +6946,7 @@ is in Nanometer.</p></li>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2].</p></li>
+<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2].</p></li>
 <li><p><strong>mode</strong> (<em>str</em>) – Sets CH1/CH2 as Load CV, CC or CR mode.</p></li>
 <li><p><strong>status</strong> (<em>str</em>) – Possible status [“ON”, “OFF”].</p></li>
 </ul>
@@ -7476,7 +6963,7 @@ is in Nanometer.</p></li>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2].</p></li>
+<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2].</p></li>
 <li><p><strong>status</strong> (<em>str</em>) – Sets CH1/CH2 as Tracking parallel mode.</p></li>
 </ul>
 </dd>
@@ -7492,7 +6979,7 @@ is in Nanometer.</p></li>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2].</p></li>
+<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2].</p></li>
 <li><p><strong>status</strong> (<em>str</em>) – Sets CH1/CH2 as Tracking series mode.</p></li>
 </ul>
 </dd>
@@ -7522,7 +7009,7 @@ GPP-1326 does not have this function. Series-parallel mode is not supported unde
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2].</p></li>
+<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2].</p></li>
 <li><p><strong>value</strong> (<em>float</em>) – Set resistance values from range 1-1000.</p></li>
 </ul>
 </dd>
@@ -7538,7 +7025,7 @@ GPP-1326 does not have this function. Series-parallel mode is not supported unde
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2,3,4].</p></li>
+<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2,3,4].</p></li>
 <li><p><strong>state</strong> (<em>str</em>) – Status of power Supple output. Could be [“ON”, “OFF”]</p></li>
 </ul>
 </dd>
@@ -7554,7 +7041,7 @@ GPP-1326 does not have this function. Series-parallel mode is not supported unde
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2,3,4].</p></li>
+<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2,3,4].</p></li>
 <li><p><strong>voltage</strong> (<em>int/float.</em>) – Set Voltage on Channel.</p></li>
 </ul>
 </dd>

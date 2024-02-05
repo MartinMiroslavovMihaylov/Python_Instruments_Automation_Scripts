@@ -88,6 +88,7 @@
 <span class="k">class</span> <span class="nc">GPP4323</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This class is using python serial, time and io libraries. Please be sure to install pyserial.</span>
 <span class="sd">        Connect to Device and print the Identification Number.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span> <span class="o">=</span>  <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="n">resource_str</span><span class="p">,</span>
@@ -179,7 +180,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        channel : int</span>
-<span class="sd">            Select channel from List of Channal Numbers [1,2,3,4].</span>
+<span class="sd">            Select channel from List of Channel Numbers [1,2,3,4].</span>
 <span class="sd">        voltage : int/float.</span>
 <span class="sd">            Set Voltage on Channel.</span>
 
@@ -207,7 +208,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        channel : int</span>
-<span class="sd">            Select channel from List of Channal Numbers [1,2,3,4].</span>
+<span class="sd">            Select channel from List of Channel Numbers [1,2,3,4].</span>
 <span class="sd">        amp : int/float</span>
 <span class="sd">            Set Current on Channel.</span>
 
@@ -235,7 +236,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        channel : int</span>
-<span class="sd">            Select channel from List of Channal Numbers [1,2].</span>
+<span class="sd">            Select channel from List of Channel Numbers [1,2].</span>
 <span class="sd">        status : str</span>
 <span class="sd">            Sets CH1/CH2 as Tracking series mode.</span>
 
@@ -268,7 +269,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        channel : int</span>
-<span class="sd">            Select channel from List of Channal Numbers [1,2].</span>
+<span class="sd">            Select channel from List of Channel Numbers [1,2].</span>
 <span class="sd">        status : str</span>
 <span class="sd">            Sets CH1/CH2 as Tracking parallel mode.</span>
 
@@ -328,7 +329,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        channel : int</span>
-<span class="sd">            Select channel from List of Channal Numbers [1,2].</span>
+<span class="sd">            Select channel from List of Channel Numbers [1,2].</span>
 <span class="sd">        mode : str</span>
 <span class="sd">            Sets CH1/CH2 as Load CV, CC or CR mode.</span>
 <span class="sd">        status : str</span>
@@ -366,7 +367,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        channel : int</span>
-<span class="sd">            Select channel from List of Channal Numbers [1,2].</span>
+<span class="sd">            Select channel from List of Channel Numbers [1,2].</span>
 <span class="sd">        value : float</span>
 <span class="sd">            Set resistance values from range 1-1000.</span>
 
@@ -395,7 +396,7 @@
 <span class="sd">            Parameters</span>
 <span class="sd">            ----------</span>
 <span class="sd">            channel : int</span>
-<span class="sd">                Select channel from List of Channal Numbers [1,2,3,4].</span>
+<span class="sd">                Select channel from List of Channel Numbers [1,2,3,4].</span>
 <span class="sd">            state : str</span>
 <span class="sd">                Status of power Supple output. Could be [&quot;ON&quot;, &quot;OFF&quot;]</span>
 
@@ -435,7 +436,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        channel : int</span>
-<span class="sd">            Select channel from List of Channal Numbers [1,2,3,4].</span>
+<span class="sd">            Select channel from List of Channel Numbers [1,2,3,4].</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -486,7 +487,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        channel : int</span>
-<span class="sd">            Select channel from List of Channal Numbers [1,2,3,4].</span>
+<span class="sd">            Select channel from List of Channel Numbers [1,2,3,4].</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -499,7 +500,7 @@
         <span class="k">if</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">ChannelLS</span><span class="p">:</span>   
             <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query_values</span><span class="p">(</span><span class="s2">&quot;ISET&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;?&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid channel number or type of measurment! Possible channel numbers are [1,2,3,4]&#39;</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid channel number or type of measurement! Possible channel numbers are [1,2,3,4]&#39;</span><span class="p">)</span></div>
 
         
         
@@ -514,12 +515,12 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        channel : int</span>
-<span class="sd">            Select channel from List of Channal Numbers [1,2].</span>
+<span class="sd">            Select channel from List of Channel Numbers [1,2].</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TYPE</span>
-<span class="sd">            Queries CH1 or CH2 work mode. 6 modes below: SERies，PARallel，INDE pendent, CV Load，CC Load，CR Load</span>
+<span class="sd">            Queries CH1 or CH2 work mode. 6 modes below: SERies/PARallel/INDE pendent, CV Load/CC Load/CR Load</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">ChannelLS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
@@ -542,12 +543,12 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        channel : int</span>
-<span class="sd">            Select channel from List of Channal Numbers [1,2].</span>
+<span class="sd">            Select channel from List of Channel Numbers [1,2].</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TYPE</span>
-<span class="sd">            Set Laod Resistance Value for given channel. </span>
+<span class="sd">            Set load Resistance Value for given channel.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">ChannelLs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>   
@@ -586,7 +587,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        OutPut : dict</span>
-<span class="sd">            Return a dictionary whit the measured voltage and current. </span>
+<span class="sd">            Return a dictionary with the measured voltage and current.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">ChannelLS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
@@ -598,7 +599,7 @@
             <span class="n">OutPut</span><span class="p">[</span><span class="s1">&#39;Voltage/V&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Voltage</span>
             <span class="n">OutPut</span><span class="p">[</span><span class="s1">&#39;Current/A&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Current</span>
             <span class="n">OutPut</span><span class="p">[</span><span class="s1">&#39;Power/W&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Power</span>
-            <span class="k">return</span>  <span class="n">OutPut</span>   
+            <span class="k">return</span> <span class="n">OutPut</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid channel number! Possible channel numbers are [1,2,3,4]&#39;</span><span class="p">)</span></div>
 </div>

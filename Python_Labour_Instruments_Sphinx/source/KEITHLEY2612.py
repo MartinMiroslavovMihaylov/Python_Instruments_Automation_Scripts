@@ -12,6 +12,9 @@ import pyvisa as visa
 
     
 class KEITHLEY2612:
+    '''
+    This function is using pyvisa. Please install PyVisa before you use it.
+    '''
     def __init__(self, resource_str):
         '''
         Connect to Device and print the Identification Number.
@@ -42,7 +45,7 @@ class KEITHLEY2612:
         Parameters
         ----------
         chan : str
-            Select Channel A or B and restore to defaults channel settings.
+            Select Channel A or B and restore to default channel settings.
 
         Raises
         ------
@@ -70,7 +73,17 @@ class KEITHLEY2612:
 # =============================================================================
 # ASK
 # =============================================================================
-    def Identification(self):
+    def getIdn(self):
+        '''
+
+
+        Returns
+        -------
+        TYPE  str
+            Instrument identification
+
+        '''
+
         return str(self.query('*IDN?'))
 
 
@@ -119,7 +132,7 @@ class KEITHLEY2612:
         Returns
         -------
         TYPE  float
-            Return float whit the measured value on the channel
+            Return float with the measured value on the channel
 
         '''
         
@@ -152,7 +165,7 @@ class KEITHLEY2612:
         Returns
         -------
         TYPE : float
-            Return float whit the measured value on the channel
+            Return float with the measured value on the channel
 
         '''
         
@@ -185,7 +198,7 @@ class KEITHLEY2612:
         Returns
         -------
         TYPE : float
-            Return float whit the measured value on the channel
+            Return float with the measured value on the channel
 
         '''
         
@@ -218,7 +231,7 @@ class KEITHLEY2612:
         Returns
         -------
         TYPE : float
-            Return float whit the measured value on the channel
+            Return float with the measured value on the channel
 
         '''
         
@@ -319,7 +332,7 @@ class KEITHLEY2612:
         chan : str
             Select channel A or B
         state : str
-           ON/OFF voltage source autorange
+           ON/OFF voltage source automatic range
 
         Raises
         ------
@@ -353,7 +366,7 @@ class KEITHLEY2612:
         chan : str
             Select channel A or B
         state : str
-           ON/OFF current source autorange
+           ON/OFF current source automatic range
 
         Raises
         ------
@@ -457,7 +470,7 @@ class KEITHLEY2612:
         chan : str
             Select Channel A or B
         value : int/float
-            Sets the voltage limitof channel X to V.
+            Sets the voltage limit of channel X to V.
 
         Raises
         ------
@@ -491,7 +504,7 @@ class KEITHLEY2612:
         chan : str
             Select Channel A or B
         value : int/float
-            Sets the current limitof channel X to V.
+            Sets the current limit of channel X to V.
 
         Raises
         ------
@@ -592,9 +605,9 @@ class KEITHLEY2612:
         ----------
         chan : str
             Select channel A or B
-        double : boolen, optional
+        double : boolean, optional
             Displays source-measure for SMU A and SMU B.
-            double = None per defould.
+            double = None per default.
             if double = True:
                 Display Chan A and B 
             else:
@@ -635,7 +648,7 @@ class KEITHLEY2612:
         Parameters
         ----------
         chan : str
-            Select channl A or B
+            Select channel A or B
         typ : str
             The source function. Set to one of the following values:
             typ = 'volt' for Selects voltage source function
@@ -765,7 +778,7 @@ class KEITHLEY2612:
         Returns
         -------
         OutPut : dict
-            Return a dictionary whit the measured voltage and current.
+            Return a dictionary with the measured voltage and current.
 
         '''
         chan = chan.lower()

@@ -151,6 +151,7 @@
 <dt class="sig sig-object py" id="PM100D.PM100D">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PM100D.</span></span><span class="sig-name descname"><span class="pre">PM100D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This Class is using pyvisa to connect to instruments. Please install PyVisa before using it.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="PM100D.PM100D.Abort">
 <span class="sig-name descname"><span class="pre">Abort</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.Abort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.Abort" title="Link to this definition"></a></dt>
@@ -213,7 +214,7 @@
 <span class="sig-name descname"><span class="pre">ConfigFreq</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ConfigFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ConfigFreq" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Configure for frequency measuremen</p>
+<dd class="field-odd"><p>Configure for frequency measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -239,7 +240,7 @@
 <span class="sig-name descname"><span class="pre">ConfigPowerDensity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ConfigPowerDensity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ConfigPowerDensity" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Configure for power density measuremen</p>
+<dd class="field-odd"><p>Configure for power density measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -294,7 +295,7 @@
 <dd class="field-odd"><p>Performs a power measurement whit hard codded parameter!.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>TYPE Data from the measurment</p>
+<dd class="field-even"><p>TYPE Data from the measurement</p>
 </dd>
 </dl>
 </dd></dl>
@@ -324,8 +325,8 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>Headers</strong> (<em>str</em>) – String with [‘Power’,’Energy’,’Current’,’Voltage’]</p></li>
-<li><p><strong>Data</strong> (<em>lidt</em>) – Data from the instrument.</p></li>
-<li><p><strong>Params</strong> (<em>list</em>) – List with str for different data that are extractet from the instrument.</p></li>
+<li><p><strong>Data</strong> (<em>list</em>) – Data from the instrument.</p></li>
+<li><p><strong>Params</strong> (<em>list</em>) – List with str for different data that are extracted from the instrument.</p></li>
 </ul>
 </p>
 </dd>
@@ -363,7 +364,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">MeasEnergy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.MeasEnergy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.MeasEnergy" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Performs a energy measuremen</p>
+<dd class="field-odd"><p>Performs a energy measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -376,7 +377,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">MeasEnergyDensity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.MeasEnergyDensity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.MeasEnergyDensity" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Performs a energy density measuremen</p>
+<dd class="field-odd"><p>Performs a energy density measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -441,7 +442,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">MeasTemp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.MeasTemp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.MeasTemp" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Performs a sensor temperature measuremen</p>
+<dd class="field-odd"><p>Performs a sensor temperature measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -483,7 +484,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <dd class="field-odd"><p><strong>data</strong> – Performs a power measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>Data from the measurment</p>
+<dd class="field-even"><p>Data from the Measurement</p>
 </dd>
 </dl>
 </dd></dl>
@@ -519,7 +520,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">adjustCurrentRange</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.adjustCurrentRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.adjustCurrentRange" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Adjust the Voltage Measurment.</p>
+<dd class="field-odd"><p>Adjust the Voltage Measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -532,7 +533,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">adjustEnergyMeas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.adjustEnergyMeas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.adjustEnergyMeas" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Adjust the Energy Measurment.</p>
+<dd class="field-odd"><p>Adjust the Energy Measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -545,7 +546,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">adjustPowerMeas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.adjustPowerMeas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.adjustPowerMeas" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Adjust the Power Measurments</p>
+<dd class="field-odd"><p>Adjust the power measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -558,7 +559,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">adjustVoltageRange</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.adjustVoltageRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.adjustVoltageRange" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Adjust the Voltage Measurments.</p>
+<dd class="field-odd"><p>Adjust the Voltage Measurement</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -688,7 +689,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">ask_Pyro</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_Pyro"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_Pyro" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Queries the pyro-detectro response value</p>
+<dd class="field-odd"><p>Queries the pyro-detectr response value</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE str</p>
@@ -727,7 +728,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <span class="sig-name descname"><span class="pre">ask_beeper</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_beeper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_beeper" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Return the state of the the beeper</p>
+<dd class="field-odd"><p>Return the state of the beeper</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>Type print str</p>
@@ -755,7 +756,7 @@ data.</p>
 <span class="sig-name descname"><span class="pre">ask_currentRange</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.ask_currentRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.ask_currentRange" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Queries the current curent range</p>
+<dd class="field-odd"><p>Queries the actual current range</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE str</p>
@@ -814,7 +815,7 @@ Can be  [‘MAX’,’MIN’]</p>
 <span class="sig-name descname"><span class="pre">fetchData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.fetchData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.fetchData" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Read last measurement data. WILL NOT START THE MEASURMENT</p>
+<dd class="field-odd"><p>Read last measurement data. WILL NOT START THE MEASUREMENT</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE float</p>
@@ -950,7 +951,7 @@ that the test passed, other values indicate that the test failed.</p>
 <span class="sig-name descname"><span class="pre">set_Parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/PM100D.html#PM100D.set_Parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D.set_Parameters" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>Type</strong> (<em>str</em>) – This function will set the measurments parameters.
+<dd class="field-odd"><p><strong>Type</strong> (<em>str</em>) – This function will set the measurement parameters.
 Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>

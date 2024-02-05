@@ -154,6 +154,7 @@
 <dt class="sig sig-object py" id="MS4647B.MS4647B">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MS4647B.</span></span><span class="sig-name descname"><span class="pre">MS4647B</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This function is using pyvisa to connect to Instruments. Please install PyVisa before using it.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="MS4647B.MS4647B.Close">
 <span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.Close" title="Link to this definition"></a></dt>
@@ -273,7 +274,7 @@ extension.No query.</p></li>
 <li><p><strong>path</strong> (<em>str</em>) – Where on the PC to save the data</p></li>
 <li><p><strong>name</strong> (<em>str</em>) – Name of the File</p></li>
 <li><p><strong>portNumb</strong> (<em>int/str</em>) – <p>The N(ports number) for the .sNp data output.</p>
-<p>Write a text File whit the transfered Data</p>
+<p>Write a text File with the transferred data</p>
 </p></li>
 </ul>
 </dd>
@@ -293,7 +294,7 @@ extension.No query.</p></li>
 <li><p><strong>path</strong> (<em>str</em>) – Where on the PC to save the data</p></li>
 <li><p><strong>name</strong> (<em>str</em>) – Name of the File</p></li>
 <li><p><strong>portNumb</strong> (<em>int/str</em>) – <p>The N(ports number) for the .sNp data output.</p>
-<p>Write a text File whit the transfered Data</p>
+<p>Write a text File with the transferred data</p>
 </p></li>
 </ul>
 </dd>
@@ -431,7 +432,7 @@ Frequency as:</p>
 <span class="sig-name descname"><span class="pre">ask_DisplayCount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_DisplayCount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_DisplayCount" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Quuery the number of displayed channels.</p>
+<dd class="field-odd"><p>Query the number of displayed channels.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE</p>
@@ -506,7 +507,7 @@ Start Frequency. The query returns the resulting span in Hertz.</p>
 <dd class="field-even"><p><strong>Value</strong> – Outputs the power level of the indicated port on the indicated channel.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>flaot</p>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -748,10 +749,7 @@ GPIB. The file must exist</p>
 <span class="sig-name descname"><span class="pre">ask_TransferDataCSV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS4647B.html#MS4647B.ask_TransferDataCSV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B.ask_TransferDataCSV" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) – File Name</p></li>
-<li><p><strong>portNumb</strong> (<em>int</em>) – the N(ports number) for the .sNp data output.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – File Name</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>TYPE</strong> – The query outputs the disk file data to the
@@ -1140,7 +1138,7 @@ bandwidth for the indicated channel.</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p></li>
-<li><p><strong>value</strong> (<em>int</em>) – Procentge smoothing between 0 to 100</p></li>
+<li><p><strong>value</strong> (<em>int</em>) – Percentage smoothing between 0 to 100</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>

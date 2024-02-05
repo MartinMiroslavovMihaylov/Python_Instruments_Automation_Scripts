@@ -84,8 +84,8 @@
 <a class="viewcode-back" href="../rst/AQ6370D.html#AQ6370D.AQ6370D">[docs]</a>
 <span class="k">class</span> <span class="nc">AQ6370D</span><span class="p">(</span><span class="n">vxi11</span><span class="o">.</span><span class="n">Instrument</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    A class thats uses vxi11 library to interface a Yokogawa AQ6370D.</span>
-<span class="sd">    Need to have python &#39;vxi11&#39;, &#39;pandas&#39; and &#39;numpy&#39; librarys installed!</span>
+<span class="sd">    This class uses vxi11 library to connect to a Yokogawa AQ6370D.</span>
+<span class="sd">    Need to have python &#39;vxi11&#39;, &#39;pandas&#39; and &#39;numpy&#39; libraries installed!</span>
 <span class="sd">    </span>
 <span class="sd">    </span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -168,7 +168,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        str</span>
 <span class="sd">            Queries the automatic setting function of</span>
-<span class="sd">            the sub scale of the level axis.</span>
+<span class="sd">            the subscale of the level axis.</span>
 <span class="sd">            Response 0 = OFF, 1 = ON</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -250,7 +250,7 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        dloat</span>
+<span class="sd">        float</span>
 <span class="sd">            Queries the measurement condition</span>
 <span class="sd">            measurement start wavelength</span>
 
@@ -474,7 +474,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
-<span class="sd">            Queries the measurment resolution</span>
+<span class="sd">            Queries the measurement resolution.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         
@@ -628,7 +628,7 @@
         <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="s1">&#39;Standard&#39;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;Twise as fast as standard&#39;</span></div>
+            <span class="k">return</span> <span class="s1">&#39;Twice as fast as standard&#39;</span></div>
 
     
     
@@ -644,7 +644,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        state : str</span>
-<span class="sd">             Name of the trace that should be extractselected.          </span>
+<span class="sd">             Name of the trace that should be extract/selected.</span>
 <span class="sd">            state = [TRA|TRB|TRC|TRD|TRE|TRF|TRG]</span>
 
 <span class="sd">        Raises</span>
@@ -682,7 +682,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        state : str</span>
-<span class="sd">            Name of the trace that should be extractselected.          </span>
+<span class="sd">            Name of the trace that should be extract/selected.</span>
 <span class="sd">            state = [TRA|TRB|TRC|TRD|TRE|TRF|TRG]</span>
 
 <span class="sd">        Raises</span>
@@ -748,7 +748,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        state : str</span>
-<span class="sd">            Name of the trace that should be extractselected. </span>
+<span class="sd">            Name of the trace that should be extract/selected.</span>
 <span class="sd">            sState = [&#39;TRA&#39;,&#39;TRB&#39;,&#39;TRC&#39;,&#39;TRD&#39;,&#39;TRE&#39;,&#39;TRF&#39;,&#39;TRG&#39;]</span>
 
 <span class="sd">        Raises</span>
@@ -916,7 +916,7 @@
 <span class="sd">                format is reset to the ASCII mode.</span>
 <span class="sd">                • The ASCII format outputs a list of numerics</span>
 <span class="sd">                each of which is delimited by a comma (,).</span>
-<span class="sd">                Example: 12345,12345,....</span>
+<span class="sd">                For example: 12345,12345,....</span>
 <span class="sd">                • By default, the REAL format outputs data in</span>
 <span class="sd">                fixed length blocks of 64 bits, floating-point</span>
 <span class="sd">                binary numerics.</span>
@@ -928,8 +928,8 @@
 <span class="sd">                (ASCII) indicating the number of bytes that</span>
 <span class="sd">                specifies the length after #, length designation</span>
 <span class="sd">                (ASCII), and binary data of a specified length</span>
-<span class="sd">                in this order. Binary data consists of a floatingpoint data string of 8 bytes (64 bits) or 4 bytes</span>
-<span class="sd">                (32 bits). Floating-point data consists of lowerorder bytes to higher-order bytes.</span>
+<span class="sd">                in this order. Binary data consists of a floating point data string of 8 bytes (64 bits) or 4 bytes</span>
+<span class="sd">                (32 bits). Floating-point data consists of lower order bytes to higher-order bytes.</span>
 <span class="sd">                E.g.: #18 [eight &lt;byte data&gt;]</span>
 <span class="sd">                #280[80 &lt;byte data&gt;]</span>
 <span class="sd">                #48008[8008 &lt;byte data&gt;]</span>
@@ -1008,7 +1008,7 @@
 <span class="sd">            Set the center wavelength of the</span>
 <span class="sd">            X-axis of the display scale</span>
 <span class="sd">        unit : str</span>
-<span class="sd">            sUnits = [&#39;M&#39;,&#39;HZ&#39;]</span>
+<span class="sd">            Units = [&#39;M&#39;,&#39;HZ&#39;]</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -1041,8 +1041,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        value : int/float</span>
-<span class="sd">            Set the measurement condition</span>
-<span class="sd">        measurement span.</span>
+<span class="sd">            Set the measurement span.</span>
 <span class="sd">        unit : str</span>
 <span class="sd">            sUnits = [&#39;M&#39;,&#39;HZ&#39;]</span>
 
@@ -1072,7 +1071,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        value : int/float</span>
-<span class="sd">            Set the measurment resolution</span>
+<span class="sd">            Set the measurement resolution.</span>
 <span class="sd">        unit : str</span>
 <span class="sd">            sUnit = [&#39;M&#39;,&#39;HZ&#39;]</span>
 
@@ -1454,7 +1453,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Start Wavelength = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_WavelengthStart</span><span class="p">())</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Stop Wavelength = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_WavelengthStop</span><span class="p">())</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bandwidth Resolution = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_BWResolution</span><span class="p">())</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Center Wavelenght = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_CenterWavelenght</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Center Wavelength = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_CenterWavelenght</span><span class="p">())</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Span = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_Span</span><span class="p">())</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Output data format = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_DataFormat</span><span class="p">())</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Displayed trace = &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_TraceState</span><span class="p">())</span>
@@ -1481,7 +1480,7 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">Header</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Y-Axis units&#39;</span><span class="p">,</span><span class="s1">&#39;X-Axis units&#39;</span><span class="p">,</span><span class="s1">&#39;Start Wavelength&#39;</span><span class="p">,</span><span class="s1">&#39;Stop Wavelength&#39;</span><span class="p">,</span>
-                  <span class="s1">&#39;Bandwidth Resolution&#39;</span><span class="p">,</span><span class="s1">&#39;Center Wavelenght&#39;</span><span class="p">,</span><span class="s1">&#39;Span&#39;</span><span class="p">,</span><span class="s1">&#39;Output data format&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;Bandwidth Resolution&#39;</span><span class="p">,</span><span class="s1">&#39;Center Wavelength&#39;</span><span class="p">,</span><span class="s1">&#39;Span&#39;</span><span class="p">,</span><span class="s1">&#39;Output data format&#39;</span><span class="p">,</span>
                   <span class="s1">&#39;Displayed trace&#39;</span><span class="p">,</span><span class="s1">&#39;Selected Trace&#39;</span><span class="p">,</span><span class="s1">&#39;Averaging Points&#39;</span><span class="p">,</span><span class="s1">&#39;Sample Points&#39;</span><span class="p">,</span>
                   <span class="s1">&#39;Sweep speed&#39;</span><span class="p">,</span><span class="s1">&#39;Sweep Mode&#39;</span><span class="p">]</span>
         <span class="n">Data</span> <span class="o">=</span> <span class="p">[]</span>

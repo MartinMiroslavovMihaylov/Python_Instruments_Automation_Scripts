@@ -85,6 +85,9 @@
 <a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite">[docs]</a>
 <span class="k">class</span> <span class="nc">CoBrite</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This Class is using PyVisa to connect to CoBrite Laser, please install PyVisa and Numpy first!</span>
+<span class="sd">        &#39;&#39;&#39;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">ResourceManager</span><span class="p">()</span><span class="o">.</span><span class="n">open_resource</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">resource_str</span><span class="p">),</span><span class="n">query_delay</span>  <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">))</span>
@@ -112,7 +115,7 @@
 <span class="sd">            This function must be set after each set_() function. CoBrite </span>
 <span class="sd">            writes the set_() to register and returns ;/r/n to the user. The</span>
 <span class="sd">            ;/r/n command will mess up the next data sent to CoBrite from the user.</span>
-<span class="sd">            An empty read() is required after each set_() function sendet to the</span>
+<span class="sd">            An empty read() is required to be sended after each set_() function to the</span>
 <span class="sd">            laser. </span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -199,7 +202,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        chan : int</span>
-<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -241,7 +244,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        chan : int</span>
-<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -250,7 +253,7 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        flaot</span>
+<span class="sd">        float</span>
 <span class="sd">            Queries the frequency offset setting of a tunable laser port. </span>
 <span class="sd">            Value format is in GHz.</span>
 
@@ -280,7 +283,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        chan : int</span>
-<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -328,7 +331,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        chan : int</span>
-<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!</span>
 
 
 <span class="sd">        Raises</span>
@@ -368,7 +371,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        chan : int</span>
-<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -407,7 +410,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        chan : int</span>
-<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -708,7 +711,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        chan : int</span>
-<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.</span>
+<span class="sd">            Channel number. Can be 1 or 2. CoBrite have only 2 channels!</span>
 <span class="sd">        freq : float</span>
 <span class="sd">            Sets frequency in Thz format. For example freq = 192.2345</span>
 <span class="sd">        power : float</span>

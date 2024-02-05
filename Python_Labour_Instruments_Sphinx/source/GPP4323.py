@@ -16,6 +16,7 @@ import time
 class GPP4323:
     def __init__(self, resource_str):
         '''
+        This class is using python serial, time and io libraries. Please be sure to install pyserial.
         Connect to Device and print the Identification Number.
         '''
         self._resource =  serial.Serial(resource_str,
@@ -90,7 +91,7 @@ class GPP4323:
         Parameters
         ----------
         channel : int
-            Select channel from List of Channal Numbers [1,2,3,4].
+            Select channel from List of Channel Numbers [1,2,3,4].
         voltage : int/float.
             Set Voltage on Channel.
 
@@ -115,7 +116,7 @@ class GPP4323:
         Parameters
         ----------
         channel : int
-            Select channel from List of Channal Numbers [1,2,3,4].
+            Select channel from List of Channel Numbers [1,2,3,4].
         amp : int/float
             Set Current on Channel.
 
@@ -140,7 +141,7 @@ class GPP4323:
         Parameters
         ----------
         channel : int
-            Select channel from List of Channal Numbers [1,2].
+            Select channel from List of Channel Numbers [1,2].
         status : str
             Sets CH1/CH2 as Tracking series mode.
 
@@ -170,7 +171,7 @@ class GPP4323:
         Parameters
         ----------
         channel : int
-            Select channel from List of Channal Numbers [1,2].
+            Select channel from List of Channel Numbers [1,2].
         status : str
             Sets CH1/CH2 as Tracking parallel mode.
 
@@ -224,7 +225,7 @@ class GPP4323:
         Parameters
         ----------
         channel : int
-            Select channel from List of Channal Numbers [1,2].
+            Select channel from List of Channel Numbers [1,2].
         mode : str
             Sets CH1/CH2 as Load CV, CC or CR mode.
         status : str
@@ -259,7 +260,7 @@ class GPP4323:
         Parameters
         ----------
         channel : int
-            Select channel from List of Channal Numbers [1,2].
+            Select channel from List of Channel Numbers [1,2].
         value : float
             Set resistance values from range 1-1000.
 
@@ -285,7 +286,7 @@ class GPP4323:
             Parameters
             ----------
             channel : int
-                Select channel from List of Channal Numbers [1,2,3,4].
+                Select channel from List of Channel Numbers [1,2,3,4].
             state : str
                 Status of power Supple output. Could be ["ON", "OFF"]
 
@@ -322,7 +323,7 @@ class GPP4323:
         Parameters
         ----------
         channel : int
-            Select channel from List of Channal Numbers [1,2,3,4].
+            Select channel from List of Channel Numbers [1,2,3,4].
 
         Returns
         -------
@@ -367,7 +368,7 @@ class GPP4323:
         Parameters
         ----------
         channel : int
-            Select channel from List of Channal Numbers [1,2,3,4].
+            Select channel from List of Channel Numbers [1,2,3,4].
 
         Returns
         -------
@@ -380,7 +381,7 @@ class GPP4323:
         if channel in ChannelLS:   
             return float(self.query_values("ISET"+str(channel)+"?").split('\n')[0])
         else:
-            raise ValueError('Invalid channel number or type of measurment! Possible channel numbers are [1,2,3,4]')
+            raise ValueError('Invalid channel number or type of measurement! Possible channel numbers are [1,2,3,4]')
         
         
         
@@ -392,12 +393,12 @@ class GPP4323:
         Parameters
         ----------
         channel : int
-            Select channel from List of Channal Numbers [1,2].
+            Select channel from List of Channel Numbers [1,2].
 
         Returns
         -------
         TYPE
-            Queries CH1 or CH2 work mode. 6 modes below: SERies，PARallel，INDE pendent, CV Load，CC Load，CR Load
+            Queries CH1 or CH2 work mode. 6 modes below: SERies/PARallel/INDE pendent, CV Load/CC Load/CR Load
 
         '''
         ChannelLS = [1,2]
@@ -417,12 +418,12 @@ class GPP4323:
         Parameters
         ----------
         channel : int
-            Select channel from List of Channal Numbers [1,2].
+            Select channel from List of Channel Numbers [1,2].
 
         Returns
         -------
         TYPE
-            Set Laod Resistance Value for given channel. 
+            Set load Resistance Value for given channel.
 
         '''
         ChannelLs = [1,2]   
@@ -458,7 +459,7 @@ class GPP4323:
         Returns
         -------
         OutPut : dict
-            Return a dictionary whit the measured voltage and current. 
+            Return a dictionary with the measured voltage and current.
 
         '''
         ChannelLS = [1,2,3,4]
@@ -470,6 +471,6 @@ class GPP4323:
             OutPut['Voltage/V'] = Voltage
             OutPut['Current/A'] = Current
             OutPut['Power/W'] = Power
-            return  OutPut   
+            return OutPut
         else:
             raise ValueError('Invalid channel number! Possible channel numbers are [1,2,3,4]')

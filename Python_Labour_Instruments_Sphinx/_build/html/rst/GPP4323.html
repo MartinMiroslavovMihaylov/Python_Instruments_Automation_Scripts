@@ -113,7 +113,7 @@
 <span class="sig-name descname"><span class="pre">ask_Amp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/GPP4323.html#GPP4323.ask_Amp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GPP4323.GPP4323.ask_Amp" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2,3,4].</p>
+<dd class="field-odd"><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2,3,4].</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>DESCRIPTION.</p>
@@ -129,10 +129,10 @@
 <span class="sig-name descname"><span class="pre">ask_ChannelLoadMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/GPP4323.html#GPP4323.ask_ChannelLoadMode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GPP4323.GPP4323.ask_ChannelLoadMode" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2].</p>
+<dd class="field-odd"><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2].</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Queries CH1 or CH2 work mode. 6 modes below: SERies，PARallel，INDE pendent, CV Load，CC Load，CR Load</p>
+<dd class="field-even"><p>Queries CH1 or CH2 work mode. 6 modes below: SERies/PARallel/INDE pendent, CV Load/CC Load/CR Load</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>TYPE</p>
@@ -145,10 +145,10 @@
 <span class="sig-name descname"><span class="pre">ask_LoadResistor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/GPP4323.html#GPP4323.ask_LoadResistor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GPP4323.GPP4323.ask_LoadResistor" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2].</p>
+<dd class="field-odd"><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2].</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Set Laod Resistance Value for given channel.</p>
+<dd class="field-even"><p>Set load Resistance Value for given channel.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>TYPE</p>
@@ -161,7 +161,7 @@
 <span class="sig-name descname"><span class="pre">ask_Volt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/GPP4323.html#GPP4323.ask_Volt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GPP4323.GPP4323.ask_Volt" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2,3,4].</p>
+<dd class="field-odd"><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2,3,4].</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>DESCRIPTION.</p>
@@ -190,7 +190,7 @@
 <span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/GPP4323.html#GPP4323.get_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GPP4323.GPP4323.get_data" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>OutPut</strong> – Return a dictionary whit the measured voltage and current.</p>
+<dd class="field-odd"><p><strong>OutPut</strong> – Return a dictionary with the measured voltage and current.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>dict</p>
@@ -227,7 +227,7 @@
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2,3,4].</p></li>
+<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2,3,4].</p></li>
 <li><p><strong>amp</strong> (<em>int/float</em>) – Set Current on Channel.</p></li>
 </ul>
 </dd>
@@ -243,7 +243,7 @@
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2].</p></li>
+<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2].</p></li>
 <li><p><strong>mode</strong> (<em>str</em>) – Sets CH1/CH2 as Load CV, CC or CR mode.</p></li>
 <li><p><strong>status</strong> (<em>str</em>) – Possible status [“ON”, “OFF”].</p></li>
 </ul>
@@ -260,7 +260,7 @@
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2].</p></li>
+<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2].</p></li>
 <li><p><strong>status</strong> (<em>str</em>) – Sets CH1/CH2 as Tracking parallel mode.</p></li>
 </ul>
 </dd>
@@ -276,7 +276,7 @@
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2].</p></li>
+<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2].</p></li>
 <li><p><strong>status</strong> (<em>str</em>) – Sets CH1/CH2 as Tracking series mode.</p></li>
 </ul>
 </dd>
@@ -306,7 +306,7 @@ GPP-1326 does not have this function. Series-parallel mode is not supported unde
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2].</p></li>
+<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2].</p></li>
 <li><p><strong>value</strong> (<em>float</em>) – Set resistance values from range 1-1000.</p></li>
 </ul>
 </dd>
@@ -322,7 +322,7 @@ GPP-1326 does not have this function. Series-parallel mode is not supported unde
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2,3,4].</p></li>
+<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2,3,4].</p></li>
 <li><p><strong>state</strong> (<em>str</em>) – Status of power Supple output. Could be [“ON”, “OFF”]</p></li>
 </ul>
 </dd>
@@ -338,7 +338,7 @@ GPP-1326 does not have this function. Series-parallel mode is not supported unde
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channal Numbers [1,2,3,4].</p></li>
+<li><p><strong>channel</strong> (<em>int</em>) – Select channel from List of Channel Numbers [1,2,3,4].</p></li>
 <li><p><strong>voltage</strong> (<em>int/float.</em>) – Set Voltage on Channel.</p></li>
 </ul>
 </dd>

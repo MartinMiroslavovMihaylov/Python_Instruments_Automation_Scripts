@@ -90,6 +90,9 @@
 <div class="viewcode-block" id="PM100D">
 <a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D">[docs]</a>
 <span class="k">class</span> <span class="nc">PM100D</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    This Class is using pyvisa to connect to instruments. Please install PyVisa before using it.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_str</span><span class="p">):</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">ResourceManager</span><span class="p">()</span><span class="o">.</span><span class="n">open_resource</span><span class="p">(</span><span class="s1">&#39;USB0::0x1313::0x8078::&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">resource_str</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;::INSTR&#39;</span><span class="p">)</span>
@@ -178,7 +181,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TYPE float</span>
-<span class="sd">            Read last measurement data. WILL NOT START THE MEASURMENT</span>
+<span class="sd">            Read last measurement data. WILL NOT START THE MEASUREMENT</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:FETCh?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span></div>
 
@@ -304,7 +307,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        state : str/int</span>
-<span class="sd">            Sets the bandwidth of the photodiode input stage. </span>
+<span class="sd">            Sets the bandwidth of the photodiode input stage.</span>
 <span class="sd">                Can be [&#39;ON&#39;,&#39;OFF&#39;,1,0]</span>
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -338,7 +341,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        Type print str</span>
-<span class="sd">            Return the state of the the beeper</span>
+<span class="sd">            Return the state of the beeper</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;SYSTem:BEEPer:STATe?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
@@ -419,7 +422,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TYPE str</span>
-<span class="sd">            Queries the pyro-detectro response value</span>
+<span class="sd">            Queries the pyro-detectr response value</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         
@@ -455,7 +458,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TYPE str</span>
-<span class="sd">            Queries the current curent range</span>
+<span class="sd">            Queries the actual current range</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;CURRent:DC:UPPer?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
@@ -1081,7 +1084,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        None.</span>
-<span class="sd">            Configure for frequency measuremen</span>
+<span class="sd">            Configure for frequency measurement</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:CONFigure:FREQuency&#39;</span><span class="p">)</span></div>
@@ -1099,7 +1102,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        None.</span>
-<span class="sd">            Configure for power density measuremen</span>
+<span class="sd">            Configure for power density measurement</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:CONFigure:PDENsity&#39;</span><span class="p">)</span></div>
@@ -1227,7 +1230,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        None.</span>
-<span class="sd">            Performs a energy measuremen</span>
+<span class="sd">            Performs a energy measurement</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;MEASure:ENERgy&#39;</span><span class="p">)</span></div>
@@ -1263,7 +1266,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        None.</span>
-<span class="sd">            Performs a energy density measuremen</span>
+<span class="sd">            Performs a energy density measurement</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;MEASure:EDENsity&#39;</span><span class="p">)</span></div>
@@ -1300,7 +1303,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        None.</span>
-<span class="sd">             Performs a sensor temperature measuremen</span>
+<span class="sd">             Performs a sensor temperature measurement</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;MEASure:TEMPerature&#39;</span><span class="p">)</span></div>
@@ -1338,12 +1341,12 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        None.</span>
-<span class="sd">            Adjust the Power Measurments</span>
+<span class="sd">            Adjust the power measurement</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">un</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Set Power unit W/dBm: &#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_PowerUnits</span><span class="p">(</span><span class="n">un</span><span class="p">)</span>
-        <span class="n">dis</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Set Power Measurment Range auto/manual: &#39;</span><span class="p">)</span>
+        <span class="n">dis</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Set Power Measurement Range auto/manual: &#39;</span><span class="p">)</span>
         <span class="n">disList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span><span class="s1">&#39;manual&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">dis</span> <span class="ow">in</span> <span class="n">disList</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">dis</span> <span class="o">==</span> <span class="s1">&#39;auto&#39;</span><span class="p">:</span>
@@ -1353,7 +1356,7 @@
                 <span class="n">val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Sets the upper Power range in W to: &#39;</span><span class="p">))</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">set_PowerRange</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid input! adjustPowerMeas() is stoped!&#39;</span><span class="p">)</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid input! adjustPowerMeas() is stopped!&#39;</span><span class="p">)</span></div>
 
       
             
@@ -1368,7 +1371,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        None.</span>
-<span class="sd">           Adjust the Energy Measurment.</span>
+<span class="sd">           Adjust the Energy Measurement</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Energy is measured in J&#39;</span><span class="p">)</span>
@@ -1390,10 +1393,10 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        None.</span>
-<span class="sd">            Adjust the Voltage Measurments.</span>
+<span class="sd">            Adjust the Voltage Measurement</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">dis</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Set Voltage Measurment Range auto/manual: &#39;</span><span class="p">)</span>
+        <span class="n">dis</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Set Voltage Measurement Range auto/manual: &#39;</span><span class="p">)</span>
         <span class="n">disList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span><span class="s1">&#39;manual&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">dis</span> <span class="ow">in</span> <span class="n">disList</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">dis</span> <span class="o">==</span> <span class="s1">&#39;auto&#39;</span><span class="p">:</span>
@@ -1403,7 +1406,7 @@
                 <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Sets the upper range to: &#39;</span><span class="p">))</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">set_voltageRange</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid input! adjustVoltageRange() is stoped!&#39;</span><span class="p">)</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid input! adjustVoltageRange() is stopped!&#39;</span><span class="p">)</span></div>
 
         
     
@@ -1420,10 +1423,10 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        None.</span>
-<span class="sd">            Adjust the Voltage Measurment.</span>
+<span class="sd">            Adjust the Voltage Measurement</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">dis</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Set Current Measurment Range auto/manual: &#39;</span><span class="p">)</span>
+        <span class="n">dis</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Set Current Measurement Range auto/manual: &#39;</span><span class="p">)</span>
         <span class="n">disList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span><span class="s1">&#39;manual&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">dis</span> <span class="ow">in</span> <span class="n">disList</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">dis</span> <span class="o">==</span> <span class="s1">&#39;auto&#39;</span><span class="p">:</span>
@@ -1433,7 +1436,7 @@
                 <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Sets the upper range to: &#39;</span><span class="p">))</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">set_currentRange</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid input! adjustVoltageRange() is stoped!&#39;</span><span class="p">)</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid input! adjustVoltageRange() is stopped!&#39;</span><span class="p">)</span></div>
 
         
       
@@ -1449,7 +1452,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        Type : str</span>
-<span class="sd">            This function will set the measurments parameters.</span>
+<span class="sd">            This function will set the measurement parameters.</span>
 <span class="sd">            Can be set to Type = [&#39;Power&#39;,&#39;Energy&#39;,&#39;Current&#39;,&#39;Voltage&#39;]</span>
 
 <span class="sd">        Returns</span>
@@ -1473,7 +1476,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">adjustCurrentRange</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid input! Function will be stoped!&#39;</span><span class="p">)</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invalid input! Function will be stopped!&#39;</span><span class="p">)</span></div>
 
             
         
@@ -1503,7 +1506,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Adapter Type: &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_AdapterType</span><span class="p">())</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Max Frequency range: &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_freqRange</span><span class="p">(</span><span class="s1">&#39;MAX&#39;</span><span class="p">))</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Min Frequency range: &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_freqRange</span><span class="p">(</span><span class="s1">&#39;MIN&#39;</span><span class="p">))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Waveelength: &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_Wavelength</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Wavelength: &#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_Wavelength</span><span class="p">())</span>
         
         <span class="n">meas</span> <span class="o">=</span> <span class="n">Type</span>
         <span class="n">measList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Power&#39;</span><span class="p">,</span><span class="s1">&#39;Energy&#39;</span><span class="p">,</span><span class="s1">&#39;Current&#39;</span><span class="p">,</span><span class="s1">&#39;Voltage&#39;</span><span class="p">]</span>
@@ -1545,17 +1548,17 @@
 <span class="sd">        -------</span>
 <span class="sd">        Headers : str</span>
 <span class="sd">            String with [&#39;Power&#39;,&#39;Energy&#39;,&#39;Current&#39;,&#39;Voltage&#39;]</span>
-<span class="sd">        Data : lidt</span>
+<span class="sd">        Data : list</span>
 <span class="sd">            Data from the instrument.</span>
 <span class="sd">        Params : list</span>
-<span class="sd">            List with str for different data that are extractet from the instrument.</span>
+<span class="sd">            List with str for different data that are extracted from the instrument.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        This function will print all the adjusted parameters.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">Headers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Power&#39;</span><span class="p">,</span><span class="s1">&#39;Energy&#39;</span><span class="p">,</span><span class="s1">&#39;Current&#39;</span><span class="p">,</span><span class="s1">&#39;Voltage&#39;</span><span class="p">]</span>
-        <span class="n">Params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Adapter Type&#39;</span><span class="p">,</span><span class="s1">&#39;Max Frequency range&#39;</span><span class="p">,</span><span class="s1">&#39;Min Frequency range&#39;</span><span class="p">,</span><span class="s1">&#39;Waveelength&#39;</span><span class="p">]</span>
+        <span class="n">Params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Adapter Type&#39;</span><span class="p">,</span><span class="s1">&#39;Max Frequency range&#39;</span><span class="p">,</span><span class="s1">&#39;Min Frequency range&#39;</span><span class="p">,</span><span class="s1">&#39;Wavelength&#39;</span><span class="p">]</span>
         <span class="n">Data</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_AdapterType</span><span class="p">(),</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_freqRange</span><span class="p">(</span><span class="s1">&#39;MAX&#39;</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_freqRange</span><span class="p">(</span><span class="s1">&#39;MIN&#39;</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_Wavelength</span><span class="p">()]</span>
     
         <span class="n">meas</span> <span class="o">=</span> <span class="n">Type</span>
@@ -1603,21 +1606,21 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        data : Data from the measurment </span>
+<span class="sd">        data : Data from the Measurement</span>
 <span class="sd">            Performs a power measurement</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Performs a power measurement</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This Function prtforme Power measurments.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This Function performs Power measurements.&#39;</span><span class="p">)</span>
         <span class="c1">#print(&#39;To go on whit the measurments please check again the parameters set!&#39;)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_Parameters</span><span class="p">(</span><span class="s1">&#39;Power&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#####################################&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">DisplayParam</span><span class="p">(</span><span class="s1">&#39;Power&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#####################################&#39;</span><span class="p">)</span>
 
-        <span class="n">com</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Should the measurment proceed yes/no: &#39;</span><span class="p">)</span>
+        <span class="n">com</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Should the measurement proceed yes/no: &#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">com</span> <span class="o">==</span> <span class="s1">&#39;yes&#39;</span><span class="p">:</span>
             
             <span class="bp">self</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>
@@ -1631,7 +1634,7 @@
             
             <span class="k">return</span> <span class="n">data</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Measurment is canceled!&#39;</span><span class="p">)</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Measurement is canceled!&#39;</span><span class="p">)</span></div>
 
 
              
@@ -1644,7 +1647,7 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        TYPE Data from the measurment </span>
+<span class="sd">        TYPE Data from the measurement</span>
 <span class="sd">            Performs a power measurement whit hard codded parameter!.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>

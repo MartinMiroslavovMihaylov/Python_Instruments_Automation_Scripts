@@ -41,21 +41,8 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../rst/MG3694C.html">MG3694C module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rst/AQ6370D.html">AQ6370D module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rst/KA3005.html">KA3005 module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rst/PM100D.html">PM100D module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rst/MS4647B.html">MS4647B module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rst/MS2760A.html">MS2760A module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rst/LU1000.html">LU1000 module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rst/KEITHLEY2612.html">KEITHLEY2612 module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rst/APPH.html">APPH module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rst/CoBrite.html">CoBrite module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rst/GPP4323.html">GPP4323 module</a></li>
-</ul>
-
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
         </div>
       </div>
     </nav>
@@ -211,7 +198,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TYPE float</span>
-<span class="sd">           Sets/gets the voltage at the DUT TUNE püort. Returns the configured value. If the output is</span>
+<span class="sd">           Sets/gets the voltage at the DUT TUNE port. Returns the configured value. If the output is</span>
 <span class="sd">           turned off, it doesn’t necessarily return 0, as an internal voltage may be configured.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -532,7 +519,7 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        TYPE lisz</span>
+<span class="sd">        TYPE list</span>
 <span class="sd">            Returns a list of offset frequency values of the current measurement as block data.</span>
 <span class="sd">            Unit Hz</span>
 
@@ -553,7 +540,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        TYPE list</span>
 <span class="sd">             Returns a list of phase noise spectrum values of the current measurement as block data.</span>
-<span class="sd">             Unit Hz</span>
+<span class="sd">             Units are in Hz.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:CALCulate:FN:TRACe:NOISe?&#39;</span><span class="p">)</span></div>
@@ -571,7 +558,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        TYPE list</span>
 <span class="sd">            Returns a list of offset frequencies of the spurs in the active trace as block data.</span>
-<span class="sd">            Unit Hz</span>
+<span class="sd">            Units are in Hz.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:CALCulate:FN:TRACe:SPURious:FREQuency?&#39;</span><span class="p">)</span></div>
@@ -589,7 +576,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        TYPE list</span>
 <span class="sd">               Returns a list of power values of the spurs in the active trace as block data.</span>
-<span class="sd">               Unit Hz</span>
+<span class="sd">               Units are in Hz</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         
@@ -608,7 +595,7 @@
 <span class="sd">        ----------</span>
 <span class="sd">        value : float</span>
 <span class="sd">            The parameters defines the spot noise offset frequency in [Hz].</span>
-<span class="sd">                Unit Hz</span>
+<span class="sd">                Units are in Hz.</span>
 <span class="sd">                Value - float</span>
 
 <span class="sd">        Returns</span>
@@ -654,7 +641,7 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        chan : ist</span>
+<span class="sd">        chan : list</span>
 <span class="sd">            Can be set to [1,2,3,4]</span>
 
 <span class="sd">        Raises</span>
@@ -746,7 +733,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TYPE str</span>
-<span class="sd">            Query the the phase noise parameter for the measurement.</span>
+<span class="sd">            Query the phase noise parameter for the measurement.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
        
@@ -785,7 +772,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        TYPE str</span>
 <span class="sd">             Query the start tuning voltage for the measurement.</span>
-<span class="sd">             Unit V</span>
+<span class="sd">             Units are in V.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         
@@ -805,7 +792,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        TYPE str</span>
 <span class="sd">            Query the stop tuning voltage for the measurement.</span>
-<span class="sd">            Unit V</span>
+<span class="sd">            Units are in V</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         
@@ -1040,7 +1027,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        None.</span>
-<span class="sd">            Starts the frequency search. See the CALCulate subsystem on how to read out the result.</span>
+<span class="sd">            Starts the frequency search. See function calculate subsystem on how to read out the result.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         
@@ -1085,7 +1072,7 @@
 <span class="sd">                Optionally, a timeout in milliseconds can be specified as a second parameter. </span>
 <span class="sd">                This command will block further SCPI requests until the specified event or the</span>
 <span class="sd">                specified timeout has occurred. If no timeout is specified, the timeout will be </span>
-<span class="sd">                ininite.</span>
+<span class="sd">                initiated.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1106,7 +1093,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        value : float</span>
-<span class="sd">            Sets the voltage at the DUT TUNE püort. Returns the configured value. </span>
+<span class="sd">            Sets the voltage at the DUT TUNE port. Returns the configured value.</span>
 <span class="sd">            If the output is turned off, it doesn’t necessarily return 0, as an internal</span>
 <span class="sd">            voltage may be configured</span>
 <span class="sd">            </span>
@@ -1251,10 +1238,10 @@
 <span class="sd">            Can be [&#39;ALL&#39;,&#39;NEXT&#39;]</span>
 <span class="sd">        value : float</span>
 <span class="sd">            This command requests a preliminary result during the measurement and blocks until </span>
-<span class="sd">            the resultis ready. The first parameter (required) specifies the target iteration </span>
+<span class="sd">            the result is ready. The first parameter (required) specifies the target iteration</span>
 <span class="sd">            to be saved. NEXT specifies the next possible iteration, ALL specifies the last </span>
 <span class="sd">            iteration of the measurement (i.e. waits for the measurement to finish) and an </span>
-<span class="sd">            iteger specifies the specific iteration requested.The second parameter (optional) </span>
+<span class="sd">            integer specifies the specific iteration requested.The second parameter (optional)</span>
 <span class="sd">            defines a timeout in milliseconds. If the command terminates without generating a </span>
 <span class="sd">            preliminary result. It will produce an error. This error can be queried with</span>
 <span class="sd">            SYST:ERR? or SYST:ERR:ALL?.</span>
@@ -1284,7 +1271,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        state : str </span>
-<span class="sd">            Enables/disables the frequency parameter for the measurement.</span>
+<span class="sd">            Enables/Disables the frequency parameter for the measurement.</span>
 <span class="sd">            Can be [&#39;ON&#39;,&#39;OFF&#39;]</span>
 
 <span class="sd">        Raises</span>
@@ -1317,7 +1304,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        state : str</span>
-<span class="sd">            Enables/disables the phase noise parameter for the measurement</span>
+<span class="sd">            Enables/Disables the phase noise parameter for the measurement.</span>
 <span class="sd">            Can be  [&#39;ON&#39;,&#39;OFF&#39;]</span>
 
 <span class="sd">        Raises</span>
@@ -1351,7 +1338,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        state : str</span>
-<span class="sd">            Enables/disables the power parameter for the measurement.</span>
+<span class="sd">            Enables/Disables the power parameter for the measurement.</span>
 <span class="sd">            Can be [&#39;ON&#39;,&#39;OFF&#39;]</span>
 
 <span class="sd">        Raises</span>
@@ -1411,7 +1398,7 @@
 <span class="sd">        ----------</span>
 <span class="sd">        value : float</span>
 <span class="sd">            Sets the stop tuning voltage for the measurement.</span>
-<span class="sd">            Unit V</span>
+<span class="sd">            Units are in V.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1569,8 +1556,8 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        state : str</span>
-<span class="sd">            Enables/disables the phase noise parameter for the measurement.</span>
-<span class="sd">            CAn be set to [&#39;ON&#39;,&#39;OFF&#39;]</span>
+<span class="sd">            Enables/Disables the phase noise parameter for the measurement.</span>
+<span class="sd">            Can be set to [&#39;ON&#39;,&#39;OFF&#39;]</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -1683,7 +1670,7 @@
 <a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.PNMeasExample">[docs]</a>
     <span class="k">def</span> <span class="nf">PNMeasExample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        This is a small example how to make a Phase Noise measurment.</span>
+<span class="sd">        This is a small example how to make a phase noise measurement.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">set_SysMeasMode</span><span class="p">(</span><span class="s1">&#39;PN&#39;</span><span class="p">)</span> <span class="c1"># select phase noise measurement</span>
@@ -1692,7 +1679,7 @@
         <span class="n">err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_SystemError</span><span class="p">()</span>     <span class="c1"># check if measurement was successful</span>
         <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_PNSpot</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="c1">#request spot noise value at 1MHz offset</span>
         <span class="n">ResultDic</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Erro Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">err</span> <span class="c1">#Write Error status if 0 no errors!</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Error Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">err</span> <span class="c1"># Write Error status if 0 no errors!</span>
         <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Spot Phase Noise @ &#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)]</span> <span class="o">=</span> <span class="n">val</span>
         <span class="k">return</span> <span class="n">ResultDic</span></div>
 
@@ -1703,14 +1690,14 @@
 <a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.ANMeasExample">[docs]</a>
     <span class="k">def</span> <span class="nf">ANMeasExample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        This is a small example how to make a Phase Noise measurment.</span>
+<span class="sd">        This is a small example how to make a phase noise measurement.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_SysMeasMode</span><span class="p">(</span><span class="s1">&#39;AN&#39;</span><span class="p">)</span> <span class="c1"># select amplitude noise measurement</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>                <span class="c1"># start measurement</span>
         <span class="n">err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_SystemError</span><span class="p">()</span>     <span class="c1"># check if measurement was successful</span>
         <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_ANSpot</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="c1">#request spot noise value at 1MHz offset</span>
         <span class="n">ResultDic</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Erro Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">err</span> <span class="c1">#Write Error status if 0 no errors!</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Error Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">err</span> <span class="c1">#Write Error status if 0 no errors!</span>
         <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Spot Amplitude Noise @ &#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)]</span> <span class="o">=</span> <span class="n">val</span>
         <span class="k">return</span> <span class="n">ResultDic</span></div>
 
@@ -1722,14 +1709,14 @@
 <a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.FNMeasExample">[docs]</a>
     <span class="k">def</span> <span class="nf">FNMeasExample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        This is a small example how to make a Frequency Noise measurment.</span>
+<span class="sd">        This is a small example how to make a frequency noise measurement.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_SysMeasMode</span><span class="p">(</span><span class="s1">&#39;FN&#39;</span><span class="p">)</span> <span class="c1"># select amplitude noise measurement</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>                <span class="c1"># start measurement</span>
         <span class="n">err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_SystemError</span><span class="p">()</span>     <span class="c1"># check if measurement was successful</span>
         <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_FNSpot</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="c1">#request spot noise value at 1MHz offset</span>
         <span class="n">ResultDic</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Erro Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">err</span> <span class="c1">#Write Error status if 0 no errors!</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Error Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">err</span> <span class="c1">#Write Error status if 0 no errors!</span>
         <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Spot Frequency Noise @ &#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)]</span> <span class="o">=</span> <span class="n">val</span>
         <span class="k">return</span> <span class="n">ResultDic</span></div>
 
@@ -1740,45 +1727,45 @@
 <a class="viewcode-back" href="../rst/APPH.html#APPH.APPH.VCOMeasExample">[docs]</a>
     <span class="k">def</span> <span class="nf">VCOMeasExample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">NoieseOffset1</span><span class="p">,</span><span class="n">NoieseOffset2</span><span class="p">,</span><span class="n">measPoints</span><span class="p">,</span><span class="n">tunRangeMin</span><span class="p">,</span><span class="n">tunRangeMax</span><span class="p">,</span><span class="n">SupplyVoltage</span><span class="p">,</span><span class="n">delay</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        This is a small example how to make a Voltage controlled oscillator Noise measurment.</span>
+<span class="sd">        This is a small example how to make a Voltage controlled oscillator noise measurement.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         
-        <span class="c1">#Config </span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_SysMeasMode</span><span class="p">(</span><span class="s1">&#39;VCO&#39;</span><span class="p">)</span> <span class="c1">#select VCO characterization</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestFreq</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1">#enable frequency parameter</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestISupply</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1">#enable supply current parameter</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOKPuShing</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1">#enable pushing parameter</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOKVCO</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1">#enable Kvco parameter</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestPNoise</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1">#enable spot noise parameter</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestPnoiseOFFSet</span><span class="p">(</span><span class="n">NoieseOffset1</span><span class="p">,</span><span class="n">NoieseOffset2</span><span class="p">)</span> <span class="c1">#set two spot noise offsets: 1.2kHz, 100kHz</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestPower</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1">#enable power parameter</span>
+        <span class="c1"># Config</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_SysMeasMode</span><span class="p">(</span><span class="s1">&#39;VCO&#39;</span><span class="p">)</span> <span class="c1"># Select VCO characterization</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestFreq</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1"># Enable frequency parameter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestISupply</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1"># Enable supply current parameter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOKPuShing</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1"># Enable pushing parameter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOKVCO</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1"># Enable Kvco parameter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestPNoise</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1"># Enable spot noise parameter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestPnoiseOFFSet</span><span class="p">(</span><span class="n">NoieseOffset1</span><span class="p">,</span><span class="n">NoieseOffset2</span><span class="p">)</span> <span class="c1"># Set two spot noise offsets: 1.2kHz, 100kHz</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestPower</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1"># Enable power parameter</span>
         
         
-        <span class="c1">#measurment</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTYPE</span><span class="p">(</span><span class="s1">&#39;VCO&#39;</span><span class="p">)</span> <span class="c1">#set DUT Type (VCO or VCXO)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestPoint</span><span class="p">(</span><span class="n">measPoints</span><span class="p">)</span> <span class="c1">#set 11 measurement points</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestStart</span><span class="p">(</span><span class="n">tunRangeMin</span><span class="p">)</span> <span class="c1">#set tuning range minimum to 0.5V</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestStop</span><span class="p">(</span><span class="n">tunRangeMax</span><span class="p">)</span> <span class="c1">#set tuning range maximum to 10V</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_DUTPortVoltage</span><span class="p">(</span><span class="n">SupplyVoltage</span><span class="p">)</span> <span class="c1">#set supply voltage to 6V</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_DUTPortStatus</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1"># enable supply voltage </span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>                <span class="c1"># start measurement</span>
+        <span class="c1"># Measurement</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTYPE</span><span class="p">(</span><span class="s1">&#39;VCO&#39;</span><span class="p">)</span> <span class="c1"># Set DUT Type (VCO or VCXO)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestPoint</span><span class="p">(</span><span class="n">measPoints</span><span class="p">)</span> <span class="c1"># Set 11 measurement points</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestStart</span><span class="p">(</span><span class="n">tunRangeMin</span><span class="p">)</span> <span class="c1"># Set tuning range minimum to 0.5V</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOTestStop</span><span class="p">(</span><span class="n">tunRangeMax</span><span class="p">)</span> <span class="c1"># Set tuning range maximum to 10V</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_DUTPortVoltage</span><span class="p">(</span><span class="n">SupplyVoltage</span><span class="p">)</span> <span class="c1"># Set supply voltage to 6V</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_DUTPortStatus</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="c1"># Enable supply voltage</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>                <span class="c1"># Start measurement</span>
         
         
-        <span class="c1">#loop</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOWait</span><span class="p">(</span><span class="s1">&#39;ALL&#39;</span><span class="p">,</span><span class="n">delay</span><span class="p">)</span> <span class="c1">#wait for the measurement to finish</span>
-        <span class="n">err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_SystemError</span><span class="p">()</span> <span class="c1">#check if measurement was successful</span>
+        <span class="c1"># Loop</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_VCOWait</span><span class="p">(</span><span class="s1">&#39;ALL&#39;</span><span class="p">,</span><span class="n">delay</span><span class="p">)</span> <span class="c1"># Wait for the measurement to finish</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_SystemError</span><span class="p">()</span> <span class="c1"># Check if measurement was successful</span>
         <span class="n">ResultDic</span> <span class="o">=</span> <span class="p">{}</span>
         
         
-        <span class="c1">#read results</span>
-        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;control voltage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOTraceVoltage</span><span class="p">()</span> <span class="c1">#request control voltage data array</span>
-        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;frequency data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOTraceFreq</span><span class="p">()</span> <span class="c1">#request frequency data array</span>
-        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Kvco data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOKVCO</span><span class="p">()</span> <span class="c1"># request Kvco data array</span>
-        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;pushing data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOKPuShing</span><span class="p">()</span> <span class="c1">#request pushing data array</span>
-        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;supply current data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOTestISupply</span><span class="p">()</span> <span class="c1">#request supply current data array</span>
-        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;power level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOTracePower</span><span class="p">()</span> <span class="c1">#request power level data array</span>
-        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;spot noise data array @offset #1 (1.2kHz)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOTestPnoiseOFFSet</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#request spot noise data array @offset #1 (1.2kHz)</span>
-        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Error Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">err</span> <span class="c1">#Write Error status if 0 no errors!</span></div>
+        <span class="c1"># Read results</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;control voltage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOTraceVoltage</span><span class="p">()</span> <span class="c1"># request control voltage data array</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;frequency data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOTraceFreq</span><span class="p">()</span> <span class="c1"># Request frequency data array</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Kvco data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOKVCO</span><span class="p">()</span> <span class="c1"># Request Kvco data array</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;pushing data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOKPuShing</span><span class="p">()</span> <span class="c1"># Request pushing data array</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;supply current data&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOTestISupply</span><span class="p">()</span> <span class="c1"># Request supply current data array</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;power level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOTracePower</span><span class="p">()</span> <span class="c1"># Request power level data array</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;spot noise data array @offset #1 (1.2kHz)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_VCOTestPnoiseOFFSet</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Request spot noise data array @offset #1 (1.2kHz)</span>
+        <span class="n">ResultDic</span><span class="p">[</span><span class="s1">&#39;Error Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">err</span> <span class="c1"># Write Error status if 0 no errors!</span></div>
 </div>
 
         

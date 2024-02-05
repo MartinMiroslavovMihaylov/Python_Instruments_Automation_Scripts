@@ -237,7 +237,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TYPE float</span>
-<span class="sd">            Voltage Measured</span>
+<span class="sd">            Voltage measured</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">serWriteAndRecieve</span><span class="p">(</span><span class="s2">&quot;VOUT1?&quot;</span><span class="p">))</span></div>
@@ -252,7 +252,7 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        voltage : int/float</span>
+<span class="sd">        amp : int/float</span>
 <span class="sd">            Set the current on the Display</span>
 <span class="sd">            </span>
 <span class="sd">        delay : 0.01s Delay </span>
@@ -276,7 +276,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TYPE float</span>
-<span class="sd">            current set.</span>
+<span class="sd">            Current set.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">serWriteAndRecieve</span><span class="p">(</span><span class="s2">&quot;ISET1?&quot;</span><span class="p">))</span></div>
@@ -291,7 +291,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TYPE float</span>
-<span class="sd">            Current Measured</span>
+<span class="sd">            Current measured</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">serWriteAndRecieve</span><span class="p">(</span><span class="s2">&quot;IOUT1?&quot;</span><span class="p">))</span></div>
@@ -328,7 +328,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        state : str (ON/OFF)</span>
-<span class="sd">            Set the state of the over current protection ON and OFF</span>
+<span class="sd">            Set the state of the overcurrent protection ON and OFF</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -378,7 +378,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        OutPut : dict</span>
-<span class="sd">            Return a dictionary whit the measured voltage and current. </span>
+<span class="sd">            Return a dictionary with the measured voltage and current.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">OutPut</span> <span class="o">=</span> <span class="p">{}</span>
@@ -387,7 +387,7 @@
         <span class="n">OutPut</span><span class="p">[</span><span class="s1">&#39;Voltage/V&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Voltage</span>
         <span class="n">OutPut</span><span class="p">[</span><span class="s1">&#39;Current/A&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Current</span>
         
-        <span class="k">return</span>  <span class="n">OutPut</span>       </div>
+        <span class="k">return</span> <span class="n">OutPut</span></div>
 </div>
 
         

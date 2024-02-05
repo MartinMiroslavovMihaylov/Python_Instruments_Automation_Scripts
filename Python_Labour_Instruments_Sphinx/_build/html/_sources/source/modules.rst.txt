@@ -17,3 +17,4 @@ source
    MS4647B
    PM100D
    RD3005
+   SMA100B

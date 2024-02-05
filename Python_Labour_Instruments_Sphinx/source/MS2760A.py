@@ -10,28 +10,32 @@ import numpy as np
 import pyvisa as visa
 
 
-    
 class MS2760A:
+    '''
+    This function is using pyvisa to connect to Instruments. Please install PyVisa before using it.
+    '''
+
     def __init__(self, resource_str):
 
         # self._resource = visa.ResourceManager().open_resource('TCPIP::' + str(resource_str) + '::9001::SOCKET',read_termination = '\n',query_delay  = 0.5)
-        self._resource = visa.ResourceManager().open_resource(str(resource_str),read_termination = '\n',query_delay  = 0.5)
+        self._resource = visa.ResourceManager().open_resource(
+            str(resource_str), read_termination='\n', query_delay=0.5)
         print(self._resource.query('*IDN?'))
 
-        
     def query(self, message):
         return self._resource.query(message)
-    
+
     def write(self, message):
         return self._resource.write(message)
-    
+
     def Close(self):
         self._resource.close()
-    
+
 
 # =============================================================================
 # Abort
 # =============================================================================
+
     def abort(self):
         '''
         Description: Resets the trigger system. This has the effect of aborting the sweep or any measurement
@@ -44,16 +48,16 @@ class MS2760A:
         sweep will start immediately
         '''
         self.write(':ABORt')
-        
-    
-    
+
+
 # =============================================================================
 # Start Measurment
 # =============================================================================
- 
+
+
     def Init(self):
         '''
-        
+
 
         Returns
         -------
@@ -61,17 +65,18 @@ class MS2760A:
             Initialize meas
 
         '''
-        
+
         self.write(':INITiate:IMMediate')
-    
-    
+
+
 # =============================================================================
 # OPC
 # =============================================================================
-    
+
+
     def OPC(self):
         '''
-        
+
 
         Returns
         -------
@@ -79,18 +84,17 @@ class MS2760A:
             Places a “1” into the output queue when all device
             operations have been completed
         '''
-        
-        
+
         return self.query('*OPC?')
-    
 
 
 # =============================================================================
 # Ask Frequency
 # =============================================================================
+
     def ask_freq_Start(self):
         '''
-        
+
 
         Returns
         -------
@@ -99,16 +103,12 @@ class MS2760A:
             Numeric (Hz)
 
         '''
-        
+
         return self.query(':SENSe:FREQuency:STARt?')
-        
-    
-    
-    
-    
+
     def ask_freq_Stop(self):
         '''
-        
+
 
         Returns
         -------
@@ -117,16 +117,12 @@ class MS2760A:
             Numeric (Hz)
 
         '''
-        
+
         return self.query(':SENSe:FREQuency:STOP?')
 
-    
-    
-    
-    
     def ask_ResBwidth(self):
         '''
-        
+
 
         Returns
         -------
@@ -135,16 +131,12 @@ class MS2760A:
             Query Return: Numeric (Hz)
 
         '''
-        
+
         return float(self.query(':SENSe:BANDwidth:RESolution?'))
-    
-    
-    
-    
-    
+
     def ask_SingleOrContinuesMeas(self):
         '''
-        
+
 
         Returns
         -------
@@ -154,21 +146,17 @@ class MS2760A:
             sweep/measurement mode.
 
         '''
-        
+
         data = self.query(':INITiate:CONTinuous?')
         if data == '1':
             data = 'The instrument is continuously sweeping/measuring mode!'
         else:
             data = 'The instrument is in single sweep/measurement mode!'
         return data
-    
-    
-    
-    
-    
+
     def ask_Configuration(self):
         '''
-        
+
 
         Returns
         -------
@@ -179,16 +167,12 @@ class MS2760A:
             included.
 
         '''
-        
+
         return self.query(':SYSTem:OPTions:CONFig?')
-    
-    
-    
-    
-    
+
     def ask_sweepTime(self):
         '''
-        
+
 
         Returns
         -------
@@ -199,14 +183,10 @@ class MS2760A:
             sweep was reset and the instrument has not yet swept enough to measure a full sweep.
 
         '''
-        
+
         return self.query(':DIAGnostic:SWEep:TIME?')
-    
-    
-    
-    
-    
-    def ask_TraceData(self,traceNumber):
+
+    def ask_TraceData(self, traceNumber):
         '''
         !!!!!DONT USE IT!!!!! 
 
@@ -223,17 +203,13 @@ class MS2760A:
            Trace Data
 
         '''
-        
+
         traceNumber = str(traceNumber)
         return self.query(':TRACe:DATA? ' + traceNumber)
-        
-    
-    
-    
-    
+
     def ask_ResBwidthAuto(self):
         '''
-        
+
 
         Returns
         -------
@@ -242,21 +218,17 @@ class MS2760A:
             Defaoulf: ON
 
         '''
-        
+
         val = self.query(':SENSe:BANDwidth:RESolution:AUTO?')
         if val == '0':
             val = 'OFF'
         else:
             val = 'ON'
         return val
-    
-    
-    
-    
-    
+
     def ask_DataPointCount(self):
         '''
-        
+
         Returns
         -------
         TYPE str
@@ -265,15 +237,12 @@ class MS2760A:
             Query Return: Numeric
 
         '''
-        
+
         return self.query(':DISPlay:POINtcount?')
-    
-    
-    
-    
+
     def ask_MarkerExcursionState(self):
         '''
-        
+
 
         Returns
         -------
@@ -281,20 +250,16 @@ class MS2760A:
             Turn on/off excursion checking for marker max commands
 
         '''
-        
+
         data = self.write(':CALCulate:MARKer:PEAK:EXCursion:STATe?')
         if data == '0':
             return 'OFF'
         else:
             return 'ON'
-        
-        
-        
-        
-    
+
     def ask_MarkerExcursion(self):
         '''
-        
+
 
         Returns
         -------
@@ -304,21 +269,17 @@ class MS2760A:
             marker max commands
 
         '''
-        
+
         return self.query(':CALCulate:MARKer:DATA:ALL?')
-        
-    
-    
-    
-    
-    def ask_CHPowerState(self,state):
+
+    def ask_CHPowerState(self, state):
         '''
-        
+
 
         Parameters
         ----------
         state : str/int
-        
+
             Channel Power State
             Sets the state of the channel power measurement, ON or OFF. When using
             :CONFigure:CHPower,the state is automatically set to ON
@@ -330,19 +291,16 @@ class MS2760A:
             State ON or OFF
 
         '''
-       
+
         data = self.query(':SENSe:CHPower:STATe?')
         if data == '0':
             return 'OFF'
         else:
             return 'ON'
-        
-        
-        
-        
+
     def ask_DataFormat(self):
         '''
-        
+
 
         Returns
         -------
@@ -350,15 +308,12 @@ class MS2760A:
              Query the data format
 
         '''
-        
+
         return self.query(':FORMat:TRACe:DATA?')
-    
-    
-    
-    
+
     def ask_CenterFreq(self):
         '''
-        
+
 
         Returns
         -------
@@ -366,15 +321,12 @@ class MS2760A:
             Query the Central Frequency
             Numeric (Hz)
         '''
-        
-        return float(self.query(':SENSe:FREQuency:CENTer?'))
-    
-    
-    
 
-    def ask_TraceType(self,number):
+        return float(self.query(':SENSe:FREQuency:CENTer?'))
+
+    def ask_TraceType(self, number):
         '''
-        
+
 
         Parameters
         ----------
@@ -392,7 +344,7 @@ class MS2760A:
             will cause the displayed value for a point to be the minimum of the last <integer>
             measured values where <integer> is set by [:SENSe]:AVERage:COUNt. This command
             will be ignored when spectrogram is disabled by DISPlay:VIEW.
-            
+
         Raises
         ------
         ValueError
@@ -404,21 +356,18 @@ class MS2760A:
             Query Return: NORM|MIN|MAX|AVER|RMAX|RMIN|RAV
 
         '''
-        
-        stNumber = [1,2,3,4,5,6]
+
+        stNumber = [1, 2, 3, 4, 5, 6]
         if number in stNumber:
             number = str(number)
             return self.query(':TRACe' + number+':TYPE?')
         else:
-            raise ValueError('Unknown input! See function description for more info.') 
-            
-            
-            
-            
-            
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
     def ask_TraceSelected(self):
         '''
-        
+
 
         Returns
         -------
@@ -432,12 +381,10 @@ class MS2760A:
         traces available to select is model specific
         '''
         return self.query(':TRACe:SELect?')
-    
-    
-    
-    def ask_TraceState(self,number):
+
+    def ask_TraceState(self, number):
         '''
-        
+
 
         Parameters
         ----------
@@ -457,8 +404,8 @@ class MS2760A:
             State ON or OFF
 
         '''
-       
-        stNumber = [1,2,3,4,5,6]
+
+        stNumber = [1, 2, 3, 4, 5, 6]
         if number in stNumber:
             number = str(number)
             state = self.query(':TRACe'+number+':DISPlay:STATe?')
@@ -467,29 +414,23 @@ class MS2760A:
             else:
                 return 'Trace is ON'
         else:
-            raise ValueError('Unknown input! See function description for more info.') 
-            
-        
-        
-        
-        
-        
-    
-    
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+
 # =============================================================================
 # Get Data
 # =============================================================================
-   
 
-        
-    
-    
+
 # =============================================================================
 #  Test param from MatLab Scripts
 # =============================================================================
-    def set_DataPointCount(self,value):
+
+
+    def set_DataPointCount(self, value):
         '''
-        
+
 
         Parameters
         ----------
@@ -498,7 +439,7 @@ class MS2760A:
                 Description: Changes the number of display points the instrument currently measures. Increasing the
                 number of display points can improve the resolution of measurements but will also
                 increase sweep time.
-                
+
                Default Value: 501
                Range: 10 to 10001
 
@@ -512,20 +453,17 @@ class MS2760A:
         None.
 
         '''
-        
-        if float(value) <=10 or float(value)>= 10001:
+
+        if float(value) >= 10 or float(value) <= 10001:
             value = str(value)
             self.write(':DISPlay:POINtcount ' + value)
         else:
-            raise ValueError('Unknown input! See function description for more info.') 
-            
-    
-    
-    
-    
-    def set_freq_Start(self,value,unit):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def set_freq_Start(self, value, unit):
         '''
-        
+
 
         Parameters
         ----------
@@ -533,7 +471,7 @@ class MS2760A:
             Description: Sets the start frequency. Note that in the spectrum analyzer, changing the value of the
             start frequency will change the value of the coupled parameters, Center Frequency and
             Span.
-                
+
         unit : str
             Parameters: <numeric_value> {HZ | KHZ | MHZ | GHZ}
 
@@ -547,20 +485,17 @@ class MS2760A:
         None.
 
         '''
-        
-        stUnit = ['HZ','KHZ','MHZ','GHZ']
+
+        stUnit = ['HZ', 'KHZ', 'MHZ', 'GHZ']
         if unit in stUnit:
             self.write(':SENSe:FREQuency:STARt ' + str(value) + ' ' + unit)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
+            raise ValueError(
+                'Unknown input! See function description for more info.')
 
-    
-    
-    
-    
-    def set_freq_Stop(self,value,unit):
+    def set_freq_Stop(self, value, unit):
         '''
-        
+
 
         Parameters
         ----------
@@ -568,7 +503,7 @@ class MS2760A:
                 Description: Sets the start frequency. Note that in the spectrum analyzer, changing the value of the
                 start frequency will change the value of the coupled parameters, Center Frequency and
                 Span.
-            
+
         unit : str
             Parameters: <numeric_value> {HZ | KHZ | MHZ | GHZ}
 
@@ -582,32 +517,29 @@ class MS2760A:
         None.
 
         '''
-        
-        stUnit = ['HZ','KHZ','MHZ','GHZ']
+
+        stUnit = ['HZ', 'KHZ', 'MHZ', 'GHZ']
         if unit in stUnit:
             self.write(':SENSe:FREQuency:STOP ' + str(value) + ' ' + unit)
         else:
-            raise ValueError('Unknown input! See function description for more info.')   
-            
-    
-    
-    
-    
-    def set_ResBwidth(self,value,unit):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def set_ResBwidth(self, value, unit):
         '''
-        
+
 
         Parameters
         ----------
         value : int/float
             Description: Sets the resolution bandwidth.
             Note that using this command turns the automatic resolution bandwidth setting OFF.
-            In Zero Span, the range will change to allow a mininum of 5 KHz to the maximum of 20
+            In Zero Span, the range will change to allow a minimum of 5 KHz to the maximum of 20
             MHz.
         unit : str
             Parameters: <numeric_value> {HZ | KHZ | MHZ | GHZ}
             Default Unit: Hz
-                
+
 
         Raises
         ------
@@ -619,20 +551,18 @@ class MS2760A:
         None.
 
         '''
-        
-        stUnit = ['HZ','KHZ','MHZ','GHZ']
+
+        stUnit = ['HZ', 'KHZ', 'MHZ', 'GHZ']
         if unit in stUnit:
-            self.write(':SENSe:BANDwidth:RESolution ' + str(value) + ' ' + unit)
+            self.write(':SENSe:BANDwidth:RESolution ' +
+                       str(value) + ' ' + unit)
         else:
-            raise ValueError('Unknown input! See function description for more info.') 
-            
-    
-    
-    
-    
-    def set_ResBwidthAuto(self,state):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def set_ResBwidthAuto(self, state):
         '''
-        
+
 
         Parameters
         ----------
@@ -657,20 +587,17 @@ class MS2760A:
         None.
 
         '''
-        
-        stList = ['ON','OFF',1,0]
+
+        stList = ['ON', 'OFF', 1, 0]
         if state in stList:
             self.write(':SENSe:BANDwidth:RESolution:AUTO ' + str(state))
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-        
-    
-    
-    
-    
-    def set_CenterFreq(self,value,unit):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def set_CenterFreq(self, value, unit):
         '''
-        
+
 
         Parameters
         ----------
@@ -678,7 +605,7 @@ class MS2760A:
             Sets the center frequency. Note that changing the value of the center frequency will
             change the value of the coupled parameters Start Frequency and Stop Frequency. It
             might also change the value of the span.
-            
+
         unit : str
             Unit value. Can be ['HZ','KHZ','MHZ','GHZ']
 
@@ -692,20 +619,18 @@ class MS2760A:
         None.
 
         '''
-        
-        sUnits = ['HZ','KHZ','MHZ','GHZ']
-        
+
+        sUnits = ['HZ', 'KHZ', 'MHZ', 'GHZ']
+
         if unit in sUnits:
-            self.write(':SENSe:FREQuency:CENTer '+str(value) + ' '+ str(unit))
+            self.write(':SENSe:FREQuency:CENTer '+str(value) + ' ' + str(unit))
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-    
-    
-    
-    
-    def set_ContinuousMeas(self,state):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def set_ContinuousMeas(self, state):
         '''
-        
+
 
         Parameters
         ----------
@@ -727,21 +652,18 @@ class MS2760A:
         None.
 
         '''
-        
-        stList = ['ON','OFF',1,0]
+
+        stList = ['ON', 'OFF', 1, 0]
         if state in stList:
             state = str(state)
             self.write(':INITiate:CONTinuous ' + state)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-        
-    
-    
-    
-    
-    def set_DataFormat(self,status):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def set_DataFormat(self, status):
         '''
-        
+
 
         Parameters
         ----------
@@ -758,20 +680,17 @@ class MS2760A:
         None.
 
         '''
-        
-        statusLs = ['ASCii','INTeger','REAL']
-        if status in statusLs:    
+
+        statusLs = ['ASCii', 'INTeger', 'REAL']
+        if status in statusLs:
             self.write(':FORMat:TRACe:DATA ' + str(status))
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-            
+            raise ValueError(
+                'Unknown input! See function description for more info.')
 
-
-
-    
-    def set_Continuous(self,status):
+    def set_Continuous(self, status):
         '''
-        
+
 
         Parameters
         ----------
@@ -782,8 +701,8 @@ class MS2760A:
         ------
         ValueError
             Error message
-            
-            
+
+
         Returns
         -------
         None.
@@ -794,15 +713,12 @@ class MS2760A:
         if status in satusLs:
             self.write('INIT:CONT '+str(status))
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-        
-        
-        
-        
-        
-    def set_MarkerExcursionState(self,state):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def set_MarkerExcursionState(self, state):
         '''
-        
+
 
         Parameters
         ----------
@@ -820,17 +736,15 @@ class MS2760A:
         None.
 
         '''
-        if state in ['ON','OFF',1,0]:
+        if state in ['ON', 'OFF', 1, 0]:
             self.write(':CALCulate:MARKer:PEAK:EXCursion:STATe ' + str(state))
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-            
-            
-            
-            
-    def set_MarkerExcursion(self,value):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def set_MarkerExcursion(self, value):
         '''
-        
+
 
         Parameters
         ----------
@@ -845,14 +759,10 @@ class MS2760A:
 
         '''
         self.write(':CALCulate:MARKer:PEAK:EXCursion ' + str(value)+' DB')
-        
-        
-        
-        
-        
+
     def set_NextPeak(self):
         '''
-        
+
 
         Returns
         -------
@@ -862,11 +772,7 @@ class MS2760A:
 
         '''
         self.write(':CALCulate:MARKer:MAXimum:NEXT')
-        
-        
-        
-        
-        
+
     def set_MaxPeak(self):
         '''
 
@@ -878,14 +784,10 @@ class MS2760A:
 
         '''
         self.write(':CALCulate:MARKer:MAXimum')
-        
-        
-        
-        
-        
+
     def set_MarkerPreset(self):
         '''
-        
+
 
         Returns
         -------
@@ -894,13 +796,10 @@ class MS2760A:
 
         '''
         self.write(':CALCulate:MARKer:APReset')
-        
-        
-        
-        
-    def set_CHPowerState(self,state):
+
+    def set_CHPowerState(self, state):
         '''
-        
+
 
         Parameters
         ----------
@@ -919,33 +818,30 @@ class MS2760A:
         None.
 
         '''
-        
-        stList = ['ON','OFF',1,0]
+
+        stList = ['ON', 'OFF', 1, 0]
         if state in stList:
             state = str(state)
             self.write(':SENSe:CHPower:STATe ' + state)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-        
-        
-        
-        
-        
-    def set_TraceType(self,state,number):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def set_TraceType(self, state, number):
         '''
-        
+
 
         Parameters
         ----------
         state : str
              Sets Trace Type:
                             Normal - NORM
-                            Hold the Minimmum - MIN
+                            Hold the Minimum - MIN
                             Hold the Maximum - MAX
                             Average - AVER
                             Rolling Max Hold - RMAX
                             Rolling Min Hold - RMIN
-                            Rolling Avarage - RAV
+                            Rolling Average - RAV
         number : int
             Trace number:
                         Can be set to [1,2,3,4,5,6]
@@ -960,24 +856,20 @@ class MS2760A:
         None.
 
         '''
-        
+
         stList = ['NORM', 'MIN', 'MAX', 'AVER', 'RMAX', 'RMIN', 'RAV']
-        stNumber = [1,2,3,4,5,6]
+        stNumber = [1, 2, 3, 4, 5, 6]
         if state in stList and number in stNumber:
             state = str(state)
             number = str(number)
             self.write(':TRACe'+number+':TYPE ' + state)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-            
-    
-    
-    
-    
-    
-    def set_TraceSelected(self,number):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def set_TraceSelected(self, number):
         '''
-        
+
 
         Parameters
         ----------
@@ -997,22 +889,19 @@ class MS2760A:
         None.
 
         '''
-        
-        stNumber = [1,2,3,4,5,6]
+
+        stNumber = [1, 2, 3, 4, 5, 6]
 
         if number in stNumber:
             number = str(number)
             self.write(':TRACe:SELect '+number)
         else:
-            raise ValueError('Unknown input! See function description for more info.')
-            
-            
-            
-            
-            
-    def set_TraceState(self,state,number):
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+    def set_TraceState(self, state, number):
         '''
-        
+
 
         Parameters
         ----------
@@ -1034,35 +923,33 @@ class MS2760A:
         None.
 
         '''
-        
-        stNumber = [1,2,3,4,5,6]
-        stList = ['ON','OFF',0,1]
+
+        stNumber = [1, 2, 3, 4, 5, 6]
+        stList = ['ON', 'OFF', 0, 1]
         if number in stNumber and state in stList:
             state = str(state)
             number = str(number)
             self.write(':TRACe'+number+':DISPlay:STATe '+state)
-            
-        else:
-            raise ValueError('Unknown input! See function description for more info.') 
-            
-            
-            
-            
-# =============================================================================
-#   get/Save Data   
-# =============================================================================
 
+        else:
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+
+
+# =============================================================================
+#   get/Save Data
+# =============================================================================
 
 
     def get_Data(self):
         '''
-        
-        This function will stop temporally set Continuous Measurment to OFF, extract 
-        the max.peak value and frequency and restore the Continuous Measurment to ON.
+
+        This function will stop temporally set Continuous Measurement to OFF, extract
+        the max. peak value and frequency and restore the Continuous Measurement to ON.
         Returns
         -------
         OutPut : dict
-            Return a dictionary whit the measured voltage and current.
+            Return a dictionary with the measured voltage and current.
 
         '''
         OutPut = {}
@@ -1076,23 +963,20 @@ class MS2760A:
         OutPut['Power/dBm'] = Power
         OutPut['Frequency/Hz'] = Freq
         return OutPut
-        
-    
-    
-    
-    def ExtractTtraceData(self,value):
+
+    def ExtractTtraceData(self, value):
         '''
-        
+
 
         Parameters
         ----------
         value : int
-        
+
         !!!!!USE IT AT YOUR OWN RISK is not an official function, but a workaround!!!!! 
-        
+
             Trace Number from which the data is taken:
                 Can be set to  [1,2,3,4,5,6].
-            1 - This Function will set the continues measurment to 'OFF'.
+            1 - This Function will set the continues Measurement to 'OFF'.
             2 - Will set the Data Format to ASCii. This is needed since
             :TREACE:DATA? <num> is defect!! 
             3 - Will write TRACE:DATA? <num>. Will return only 3 bits. The rest
@@ -1108,7 +992,7 @@ class MS2760A:
             DESCRIPTION.
 
         '''
-        
+
         self.set_Continuous('OFF')
         self.set_DataFormat('ASCii')
         data = self.write(':TRACe:DATA? '+str(value))
