@@ -20,9 +20,7 @@
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="CoBrite module" href="CoBrite.html" />
-    <link rel="prev" title="KEITHLEY2612 module" href="KEITHLEY2612.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,97 +42,87 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="MG3694C.html">MG3694C module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="AQ6370D.html">AQ6370D module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="KA3005.html">KA3005 module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="PM100D.html">PM100D module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MS4647B.html">MS4647B module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MS2760A.html">MS2760A module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="LU1000.html">LU1000 module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="KEITHLEY2612.html">KEITHLEY2612 module</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">APPH module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#APPH.APPH"><code class="docutils literal notranslate"><span class="pre">APPH</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ANMeasExample"><code class="docutils literal notranslate"><span class="pre">APPH.ANMeasExample()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.Abort"><code class="docutils literal notranslate"><span class="pre">APPH.Abort()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.Close"><code class="docutils literal notranslate"><span class="pre">APPH.Close()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.FNMeasExample"><code class="docutils literal notranslate"><span class="pre">APPH.FNMeasExample()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.Init"><code class="docutils literal notranslate"><span class="pre">APPH.Init()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.PNMeasExample"><code class="docutils literal notranslate"><span class="pre">APPH.PNMeasExample()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.VCOMeasExample"><code class="docutils literal notranslate"><span class="pre">APPH.VCOMeasExample()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_ANSpot"><code class="docutils literal notranslate"><span class="pre">APPH.ask_ANSpot()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_ANTraceFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_ANTraceFreq()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_ANTraceNoise"><code class="docutils literal notranslate"><span class="pre">APPH.ask_ANTraceNoise()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_ANTraceSpurFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_ANTraceSpurFreq()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_ANTraceSpurPower"><code class="docutils literal notranslate"><span class="pre">APPH.ask_ANTraceSpurPower()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_CalcFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_CalcFreq()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_CalcPower"><code class="docutils literal notranslate"><span class="pre">APPH.ask_CalcPower()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_DUTPortStatus"><code class="docutils literal notranslate"><span class="pre">APPH.ask_DUTPortStatus()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_DUTPortVoltage"><code class="docutils literal notranslate"><span class="pre">APPH.ask_DUTPortVoltage()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_FNSpot"><code class="docutils literal notranslate"><span class="pre">APPH.ask_FNSpot()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_FNTraceFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_FNTraceFreq()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_FNTraceNoise"><code class="docutils literal notranslate"><span class="pre">APPH.ask_FNTraceNoise()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_FNTraceSpurFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_FNTraceSpurFreq()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_FNTraceSpurPower"><code class="docutils literal notranslate"><span class="pre">APPH.ask_FNTraceSpurPower()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_PMTraceJitter"><code class="docutils literal notranslate"><span class="pre">APPH.ask_PMTraceJitter()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_PMTraceNoise"><code class="docutils literal notranslate"><span class="pre">APPH.ask_PMTraceNoise()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_PNSpot"><code class="docutils literal notranslate"><span class="pre">APPH.ask_PNSpot()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_PN_IFGain"><code class="docutils literal notranslate"><span class="pre">APPH.ask_PN_IFGain()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_PN_StartFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_PN_StartFreq()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_PN_StopFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_PN_StopFreq()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_SysMeasMode"><code class="docutils literal notranslate"><span class="pre">APPH.ask_SysMeasMode()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_SystemError"><code class="docutils literal notranslate"><span class="pre">APPH.ask_SystemError()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOKPuShing"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOKPuShing()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOKVCO"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOKVCO()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTYPE"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTYPE()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTestISupply"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestISupply()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTestPNoise"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestPNoise()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTestPnoiseOFFSet"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestPnoiseOFFSet()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTestPoint"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestPoint()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTestPower"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestPower()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTestStart"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestStart()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTestStop"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestStop()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTraceFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTraceFreq()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTracePNoise"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTracePNoise()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTracePower"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTracePower()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VCOTraceVoltage"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTraceVoltage()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VSOTestFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VSOTestFreq()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.ask_VSOTestNoise"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VSOTestNoise()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.getIdn"><code class="docutils literal notranslate"><span class="pre">APPH.getIdn()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.query"><code class="docutils literal notranslate"><span class="pre">APPH.query()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_CalcAverage"><code class="docutils literal notranslate"><span class="pre">APPH.set_CalcAverage()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_DUTPortStatus"><code class="docutils literal notranslate"><span class="pre">APPH.set_DUTPortStatus()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_DUTPortVoltage"><code class="docutils literal notranslate"><span class="pre">APPH.set_DUTPortVoltage()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_FreqExecute"><code class="docutils literal notranslate"><span class="pre">APPH.set_FreqExecute()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_Output"><code class="docutils literal notranslate"><span class="pre">APPH.set_Output()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_PNIFGain"><code class="docutils literal notranslate"><span class="pre">APPH.set_PNIFGain()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_PNStartFreq"><code class="docutils literal notranslate"><span class="pre">APPH.set_PNStartFreq()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_PNStopFreq"><code class="docutils literal notranslate"><span class="pre">APPH.set_PNStopFreq()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_PowerExecute"><code class="docutils literal notranslate"><span class="pre">APPH.set_PowerExecute()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_SysMeasMode"><code class="docutils literal notranslate"><span class="pre">APPH.set_SysMeasMode()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOKPuShing"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOKPuShing()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOKVCO"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOKVCO()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTYPE"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTYPE()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTestFreq"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestFreq()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTestISupply"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestISupply()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTestNoise"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestNoise()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTestPNoise"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestPNoise()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTestPnoiseOFFSet"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestPnoiseOFFSet()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTestPoint"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestPoint()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTestPower"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestPower()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTestStart"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestStart()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOTestStop"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestStop()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.set_VCOWait"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOWait()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#APPH.APPH.write"><code class="docutils literal notranslate"><span class="pre">APPH.write()</span></code></a></li>
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">APPH module</a><ul>
+<li><a class="reference internal" href="#APPH.APPH"><code class="docutils literal notranslate"><span class="pre">APPH</span></code></a><ul>
+<li><a class="reference internal" href="#APPH.APPH.ANMeasExample"><code class="docutils literal notranslate"><span class="pre">APPH.ANMeasExample()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.Abort"><code class="docutils literal notranslate"><span class="pre">APPH.Abort()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.Close"><code class="docutils literal notranslate"><span class="pre">APPH.Close()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.FNMeasExample"><code class="docutils literal notranslate"><span class="pre">APPH.FNMeasExample()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.Init"><code class="docutils literal notranslate"><span class="pre">APPH.Init()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.PNMeasExample"><code class="docutils literal notranslate"><span class="pre">APPH.PNMeasExample()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.VCOMeasExample"><code class="docutils literal notranslate"><span class="pre">APPH.VCOMeasExample()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_ANSpot"><code class="docutils literal notranslate"><span class="pre">APPH.ask_ANSpot()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_ANTraceFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_ANTraceFreq()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_ANTraceNoise"><code class="docutils literal notranslate"><span class="pre">APPH.ask_ANTraceNoise()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_ANTraceSpurFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_ANTraceSpurFreq()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_ANTraceSpurPower"><code class="docutils literal notranslate"><span class="pre">APPH.ask_ANTraceSpurPower()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_CalcFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_CalcFreq()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_CalcPower"><code class="docutils literal notranslate"><span class="pre">APPH.ask_CalcPower()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_DUTPortStatus"><code class="docutils literal notranslate"><span class="pre">APPH.ask_DUTPortStatus()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_DUTPortVoltage"><code class="docutils literal notranslate"><span class="pre">APPH.ask_DUTPortVoltage()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_FNSpot"><code class="docutils literal notranslate"><span class="pre">APPH.ask_FNSpot()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_FNTraceFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_FNTraceFreq()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_FNTraceNoise"><code class="docutils literal notranslate"><span class="pre">APPH.ask_FNTraceNoise()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_FNTraceSpurFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_FNTraceSpurFreq()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_FNTraceSpurPower"><code class="docutils literal notranslate"><span class="pre">APPH.ask_FNTraceSpurPower()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_PMTraceJitter"><code class="docutils literal notranslate"><span class="pre">APPH.ask_PMTraceJitter()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_PMTraceNoise"><code class="docutils literal notranslate"><span class="pre">APPH.ask_PMTraceNoise()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_PNSpot"><code class="docutils literal notranslate"><span class="pre">APPH.ask_PNSpot()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_PN_IFGain"><code class="docutils literal notranslate"><span class="pre">APPH.ask_PN_IFGain()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_PN_StartFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_PN_StartFreq()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_PN_StopFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_PN_StopFreq()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_SysMeasMode"><code class="docutils literal notranslate"><span class="pre">APPH.ask_SysMeasMode()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_SystemError"><code class="docutils literal notranslate"><span class="pre">APPH.ask_SystemError()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_VCOKPuShing"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOKPuShing()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_VCOKVCO"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOKVCO()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_VCOTYPE"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTYPE()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_VCOTestISupply"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestISupply()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_VCOTestPNoise"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestPNoise()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_VCOTestPnoiseOFFSet"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestPnoiseOFFSet()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_VCOTestPoint"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestPoint()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_VCOTestPower"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestPower()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_VCOTestStart"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestStart()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_VCOTestStop"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTestStop()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_VCOTraceFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTraceFreq()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_VCOTracePNoise"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTracePNoise()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_VCOTracePower"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTracePower()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_VCOTraceVoltage"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VCOTraceVoltage()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_VSOTestFreq"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VSOTestFreq()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.ask_VSOTestNoise"><code class="docutils literal notranslate"><span class="pre">APPH.ask_VSOTestNoise()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.getIdn"><code class="docutils literal notranslate"><span class="pre">APPH.getIdn()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.query"><code class="docutils literal notranslate"><span class="pre">APPH.query()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_CalcAverage"><code class="docutils literal notranslate"><span class="pre">APPH.set_CalcAverage()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_DUTPortStatus"><code class="docutils literal notranslate"><span class="pre">APPH.set_DUTPortStatus()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_DUTPortVoltage"><code class="docutils literal notranslate"><span class="pre">APPH.set_DUTPortVoltage()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_FreqExecute"><code class="docutils literal notranslate"><span class="pre">APPH.set_FreqExecute()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_Output"><code class="docutils literal notranslate"><span class="pre">APPH.set_Output()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_PNIFGain"><code class="docutils literal notranslate"><span class="pre">APPH.set_PNIFGain()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_PNStartFreq"><code class="docutils literal notranslate"><span class="pre">APPH.set_PNStartFreq()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_PNStopFreq"><code class="docutils literal notranslate"><span class="pre">APPH.set_PNStopFreq()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_PowerExecute"><code class="docutils literal notranslate"><span class="pre">APPH.set_PowerExecute()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_SysMeasMode"><code class="docutils literal notranslate"><span class="pre">APPH.set_SysMeasMode()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_VCOKPuShing"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOKPuShing()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_VCOKVCO"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOKVCO()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_VCOTYPE"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTYPE()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_VCOTestFreq"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestFreq()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_VCOTestISupply"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestISupply()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_VCOTestNoise"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestNoise()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_VCOTestPNoise"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestPNoise()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_VCOTestPnoiseOFFSet"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestPnoiseOFFSet()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_VCOTestPoint"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestPoint()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_VCOTestPower"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestPower()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_VCOTestStart"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestStart()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_VCOTestStop"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOTestStop()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.set_VCOWait"><code class="docutils literal notranslate"><span class="pre">APPH.set_VCOWait()</span></code></a></li>
+<li><a class="reference internal" href="#APPH.APPH.write"><code class="docutils literal notranslate"><span class="pre">APPH.write()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="CoBrite.html">CoBrite module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="GPP4323.html">GPP4323 module</a></li>
 </ul>
-
+</div>
         </div>
       </div>
     </nav>
@@ -170,7 +158,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="APPH.APPH.ANMeasExample">
 <span class="sig-name descname"><span class="pre">ANMeasExample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ANMeasExample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ANMeasExample" title="Link to this definition"></a></dt>
-<dd><p>This is a small example how to make a Phase Noise measurment.</p>
+<dd><p>This is a small example how to make a phase noise measurement.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -194,7 +182,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="APPH.APPH.FNMeasExample">
 <span class="sig-name descname"><span class="pre">FNMeasExample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.FNMeasExample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.FNMeasExample" title="Link to this definition"></a></dt>
-<dd><p>This is a small example how to make a Frequency Noise measurment.</p>
+<dd><p>This is a small example how to make a frequency noise measurement.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -213,13 +201,13 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="APPH.APPH.PNMeasExample">
 <span class="sig-name descname"><span class="pre">PNMeasExample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.PNMeasExample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.PNMeasExample" title="Link to this definition"></a></dt>
-<dd><p>This is a small example how to make a Phase Noise measurment.</p>
+<dd><p>This is a small example how to make a phase noise measurement.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="APPH.APPH.VCOMeasExample">
 <span class="sig-name descname"><span class="pre">VCOMeasExample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">NoieseOffset1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NoieseOffset2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measPoints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tunRangeMin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tunRangeMax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SupplyVoltage</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.VCOMeasExample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.VCOMeasExample" title="Link to this definition"></a></dt>
-<dd><p>This is a small example how to make a Voltage controlled oscillator Noise measurment.</p>
+<dd><p>This is a small example how to make a Voltage controlled oscillator noise measurement.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -346,7 +334,7 @@ Unit dBc</p>
 <span class="sig-name descname"><span class="pre">ask_DUTPortVoltage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_DUTPortVoltage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_DUTPortVoltage" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Sets/gets the voltage at the DUT TUNE püort. Returns the configured value. If the output is
+<dd class="field-odd"><p>Sets/gets the voltage at the DUT TUNE port. Returns the configured value. If the output is
 turned off, it doesn’t necessarily return 0, as an internal voltage may be configured.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -361,7 +349,7 @@ turned off, it doesn’t necessarily return 0, as an internal voltage may be con
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – <dl class="simple">
-<dt>The parameters defines the spot noise offset frequency in [Hz].</dt><dd><p>Unit Hz
+<dt>The parameters defines the spot noise offset frequency in [Hz].</dt><dd><p>Units are in Hz.
 Value - float</p>
 </dd>
 </dl>
@@ -385,7 +373,7 @@ Value - float</p>
 Unit Hz</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>TYPE lisz</p>
+<dd class="field-even"><p>TYPE list</p>
 </dd>
 </dl>
 </dd></dl>
@@ -396,7 +384,7 @@ Unit Hz</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Returns a list of phase noise spectrum values of the current measurement as block data.
-Unit Hz</p>
+Units are in Hz.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE list</p>
@@ -410,7 +398,7 @@ Unit Hz</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Returns a list of offset frequencies of the spurs in the active trace as block data.
-Unit Hz</p>
+Units are in Hz.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE list</p>
@@ -424,7 +412,7 @@ Unit Hz</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Returns a list of power values of the spurs in the active trace as block data.
-Unit Hz</p>
+Units are in Hz</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE list</p>
@@ -664,7 +652,7 @@ text. This query clears the instrument’s error queue.</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Query the start tuning voltage for the measurement.
-Unit V</p>
+Units are in V.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE str</p>
@@ -678,7 +666,7 @@ Unit V</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Query the stop tuning voltage for the measurement.
-Unit V</p>
+Units are in V</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE str</p>
@@ -705,7 +693,7 @@ current measurement as block data2.</p>
 <span class="sig-name descname"><span class="pre">ask_VCOTracePNoise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_VCOTracePNoise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_VCOTracePNoise" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>chan</strong> (<em>ist</em>) – Can be set to [1,2,3,4]</p>
+<dd class="field-odd"><p><strong>chan</strong> (<em>list</em>) – Can be set to [1,2,3,4]</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – Error massage</p>
@@ -767,7 +755,7 @@ current measurement as block data.</p>
 <span class="sig-name descname"><span class="pre">ask_VSOTestNoise</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.ask_VSOTestNoise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.ask_VSOTestNoise" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Query the the phase noise parameter for the measurement.</p>
+<dd class="field-odd"><p>Query the phase noise parameter for the measurement.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE str</p>
@@ -805,7 +793,7 @@ ALL: measurement complete
 Optionally, a timeout in milliseconds can be specified as a second parameter.
 This command will block further SCPI requests until the specified event or the
 specified timeout has occurred. If no timeout is specified, the timeout will be
-ininite.</p>
+initiated.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -834,7 +822,7 @@ ininite.</p>
 <span class="sig-name descname"><span class="pre">set_DUTPortVoltage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_DUTPortVoltage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_DUTPortVoltage" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Sets the voltage at the DUT TUNE püort. Returns the configured value.
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Sets the voltage at the DUT TUNE port. Returns the configured value.
 If the output is turned off, it doesn’t necessarily return 0, as an internal
 voltage may be configured</p>
 </dd>
@@ -849,7 +837,7 @@ voltage may be configured</p>
 <span class="sig-name descname"><span class="pre">set_FreqExecute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_FreqExecute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_FreqExecute" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Starts the frequency search. See the CALCulate subsystem on how to read out the result.</p>
+<dd class="field-odd"><p>Starts the frequency search. See function calculate subsystem on how to read out the result.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -1015,7 +1003,7 @@ Can be [‘ON’,’OFF’]</p>
 <span class="sig-name descname"><span class="pre">set_VCOTestFreq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_VCOTestFreq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_VCOTestFreq" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Enables/disables the frequency parameter for the measurement.
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Enables/Disables the frequency parameter for the measurement.
 Can be [‘ON’,’OFF’]</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -1049,7 +1037,7 @@ Can be [‘ON’,’OFF’]</p>
 <span class="sig-name descname"><span class="pre">set_VCOTestNoise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_VCOTestNoise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_VCOTestNoise" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Enables/disables the phase noise parameter for the measurement
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Enables/Disables the phase noise parameter for the measurement.
 Can be  [‘ON’,’OFF’]</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -1066,8 +1054,8 @@ Can be  [‘ON’,’OFF’]</p>
 <span class="sig-name descname"><span class="pre">set_VCOTestPNoise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_VCOTestPNoise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_VCOTestPNoise" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Enables/disables the phase noise parameter for the measurement.
-CAn be set to [‘ON’,’OFF’]</p>
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Enables/Disables the phase noise parameter for the measurement.
+Can be set to [‘ON’,’OFF’]</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – Error massage</p>
@@ -1122,7 +1110,7 @@ be chosen from 1|2|3|4</p>
 <span class="sig-name descname"><span class="pre">set_VCOTestPower</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/APPH.html#APPH.set_VCOTestPower"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#APPH.APPH.set_VCOTestPower" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Enables/disables the power parameter for the measurement.
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Enables/Disables the power parameter for the measurement.
 Can be [‘ON’,’OFF’]</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -1154,7 +1142,7 @@ Unit V</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Sets the stop tuning voltage for the measurement.
-Unit V</p>
+Units are in V.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
@@ -1170,10 +1158,10 @@ Unit V</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>state</strong> (<em>str</em>) – Can be [‘ALL’,’NEXT’]</p></li>
 <li><p><strong>value</strong> (<em>float</em>) – This command requests a preliminary result during the measurement and blocks until
-the resultis ready. The first parameter (required) specifies the target iteration
+the result is ready. The first parameter (required) specifies the target iteration
 to be saved. NEXT specifies the next possible iteration, ALL specifies the last
 iteration of the measurement (i.e. waits for the measurement to finish) and an
-iteger specifies the specific iteration requested.The second parameter (optional)
+integer specifies the specific iteration requested.The second parameter (optional)
 defines a timeout in milliseconds. If the command terminates without generating a
 preliminary result. It will produce an error. This error can be queried with
 SYST:ERR? or SYST:ERR:ALL?.</p></li>
@@ -1200,10 +1188,7 @@ SYST:ERR? or SYST:ERR:ALL?.</p></li>
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="KEITHLEY2612.html" class="btn btn-neutral float-left" title="KEITHLEY2612 module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="CoBrite.html" class="btn btn-neutral float-right" title="CoBrite module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

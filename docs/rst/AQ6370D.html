@@ -131,8 +131,8 @@
 <dt class="sig sig-object py" id="AQ6370D.AQ6370D">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AQ6370D.</span></span><span class="sig-name descname"><span class="pre">AQ6370D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Instrument</span></code></p>
-<p>A class thats uses vxi11 library to interface a Yokogawa AQ6370D.
-Need to have python ‘vxi11’, ‘pandas’ and ‘numpy’ librarys installed!</p>
+<p>This class uses vxi11 library to connect to a Yokogawa AQ6370D.
+Need to have python ‘vxi11’, ‘pandas’ and ‘numpy’ libraries installed!</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="AQ6370D.AQ6370D.Close">
 <span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.Close" title="Link to this definition"></a></dt>
@@ -176,7 +176,7 @@ each measured point.</p>
 <span class="sig-name descname"><span class="pre">ask_BWResolution</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_BWResolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_BWResolution" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Queries the measurment resolution</p>
+<dd class="field-odd"><p>Queries the measurement resolution.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>float</p>
@@ -235,7 +235,7 @@ REAL,32 = REAL format (32bits)</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Queries the automatic setting function of
-the sub scale of the level axis.
+the subscale of the level axis.
 Response 0 = OFF, 1 = ON</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -389,7 +389,7 @@ measurement span.</p>
 <span class="sig-name descname"><span class="pre">ask_TraceAttribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_TraceAttribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_TraceAttribute" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Name of the trace that should be extractselected.
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Name of the trace that should be extract/selected.
 sState = [‘TRA’,’TRB’,’TRC’,’TRD’,’TRE’,’TRF’,’TRG’]</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -417,7 +417,7 @@ CALC = CALC</p>
 <span class="sig-name descname"><span class="pre">ask_TraceDataX</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_TraceDataX"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_TraceDataX" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Name of the trace that should be extractselected.
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Name of the trace that should be extract/selected.
 state = [TRA|TRB|TRC|TRD|TRE|TRF|TRG]</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -438,7 +438,7 @@ specified trace.</p>
 <span class="sig-name descname"><span class="pre">ask_TraceDataY</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/AQ6370D.html#AQ6370D.ask_TraceDataY"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D.ask_TraceDataY" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Name of the trace that should be extractselected.
+<dd class="field-odd"><p><strong>state</strong> (<em>str</em>) – Name of the trace that should be extract/selected.
 state = [TRA|TRB|TRC|TRD|TRE|TRF|TRG]</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -527,7 +527,7 @@ measurement start wavelength</p>
 measurement start wavelength</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>dloat</p>
+<dd class="field-even"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -592,7 +592,7 @@ each measured point.</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>value</strong> (<em>int/float</em>) – Set the measurment resolution</p></li>
+<li><p><strong>value</strong> (<em>int/float</em>) – Set the measurement resolution.</p></li>
 <li><p><strong>unit</strong> (<em>str</em>) – sUnit = [‘M’,’HZ’]</p></li>
 </ul>
 </dd>
@@ -613,7 +613,7 @@ each measured point.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>value</strong> (<em>int/float</em>) – Set the center wavelength of the
 X-axis of the display scale</p></li>
-<li><p><strong>unit</strong> (<em>str</em>) – sUnits = [‘M’,’HZ’]</p></li>
+<li><p><strong>unit</strong> (<em>str</em>) – Units = [‘M’,’HZ’]</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
@@ -737,8 +737,7 @@ HIGH3 = HIGH3 or HIGH3/CHOP</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>value</strong> (<em>int/float</em>) – Set the measurement condition</p></li>
-<li><p><strong>span.</strong> (<em>measurement</em>) – </p></li>
+<li><p><strong>value</strong> (<em>int/float</em>) – Set the measurement span.</p></li>
 <li><p><strong>unit</strong> (<em>str</em>) – sUnits = [‘M’,’HZ’]</p></li>
 </ul>
 </dd>

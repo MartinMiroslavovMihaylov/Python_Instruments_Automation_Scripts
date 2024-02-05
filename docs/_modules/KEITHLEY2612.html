@@ -84,6 +84,9 @@
 <div class="viewcode-block" id="KEITHLEY2612">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612">[docs]</a>
 <span class="k">class</span> <span class="nc">KEITHLEY2612</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    This function is using pyvisa. Please install PyVisa before you use it.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Connect to Device and print the Identification Number.</span>
@@ -125,7 +128,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        chan : str</span>
-<span class="sd">            Select Channel A or B and restore to defaults channel settings.</span>
+<span class="sd">            Select Channel A or B and restore to default channel settings.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -154,9 +157,19 @@
 <span class="c1"># =============================================================================</span>
 <span class="c1"># ASK</span>
 <span class="c1"># =============================================================================</span>
-<div class="viewcode-block" id="KEITHLEY2612.Identification">
-<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.Identification">[docs]</a>
-    <span class="k">def</span> <span class="nf">Identification</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="KEITHLEY2612.getIdn">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.getIdn">[docs]</a>
+    <span class="k">def</span> <span class="nf">getIdn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE  str</span>
+<span class="sd">            Instrument identification</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">))</span></div>
 
 
@@ -211,7 +224,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TYPE  float</span>
-<span class="sd">            Return float whit the measured value on the channel</span>
+<span class="sd">            Return float with the measured value on the channel</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         
@@ -247,7 +260,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TYPE : float</span>
-<span class="sd">            Return float whit the measured value on the channel</span>
+<span class="sd">            Return float with the measured value on the channel</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         
@@ -283,7 +296,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TYPE : float</span>
-<span class="sd">            Return float whit the measured value on the channel</span>
+<span class="sd">            Return float with the measured value on the channel</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         
@@ -319,7 +332,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TYPE : float</span>
-<span class="sd">            Return float whit the measured value on the channel</span>
+<span class="sd">            Return float with the measured value on the channel</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         
@@ -429,7 +442,7 @@
 <span class="sd">        chan : str</span>
 <span class="sd">            Select channel A or B</span>
 <span class="sd">        state : str</span>
-<span class="sd">           ON/OFF voltage source autorange</span>
+<span class="sd">           ON/OFF voltage source automatic range</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -466,7 +479,7 @@
 <span class="sd">        chan : str</span>
 <span class="sd">            Select channel A or B</span>
 <span class="sd">        state : str</span>
-<span class="sd">           ON/OFF current source autorange</span>
+<span class="sd">           ON/OFF current source automatic range</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -579,7 +592,7 @@
 <span class="sd">        chan : str</span>
 <span class="sd">            Select Channel A or B</span>
 <span class="sd">        value : int/float</span>
-<span class="sd">            Sets the voltage limitof channel X to V.</span>
+<span class="sd">            Sets the voltage limit of channel X to V.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -616,7 +629,7 @@
 <span class="sd">        chan : str</span>
 <span class="sd">            Select Channel A or B</span>
 <span class="sd">        value : int/float</span>
-<span class="sd">            Sets the current limitof channel X to V.</span>
+<span class="sd">            Sets the current limit of channel X to V.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -726,9 +739,9 @@
 <span class="sd">        ----------</span>
 <span class="sd">        chan : str</span>
 <span class="sd">            Select channel A or B</span>
-<span class="sd">        double : boolen, optional</span>
+<span class="sd">        double : boolean, optional</span>
 <span class="sd">            Displays source-measure for SMU A and SMU B.</span>
-<span class="sd">            double = None per defould.</span>
+<span class="sd">            double = None per default.</span>
 <span class="sd">            if double = True:</span>
 <span class="sd">                Display Chan A and B </span>
 <span class="sd">            else:</span>
@@ -772,7 +785,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        chan : str</span>
-<span class="sd">            Select channl A or B</span>
+<span class="sd">            Select channel A or B</span>
 <span class="sd">        typ : str</span>
 <span class="sd">            The source function. Set to one of the following values:</span>
 <span class="sd">            typ = &#39;volt&#39; for Selects voltage source function</span>
@@ -911,7 +924,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        OutPut : dict</span>
-<span class="sd">            Return a dictionary whit the measured voltage and current.</span>
+<span class="sd">            Return a dictionary with the measured voltage and current.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>

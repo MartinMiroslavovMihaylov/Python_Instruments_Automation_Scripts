@@ -104,7 +104,7 @@
 <a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C">[docs]</a>
 <span class="k">class</span> <span class="nc">MG3694C</span><span class="p">(</span><span class="n">vxi11</span><span class="o">.</span><span class="n">Instrument</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    A class thats uses vxi11 library to interface a Anritsu MG3694C.</span>
+<span class="sd">    This class uses vxi11 library to connect to Anritsu MG3694C.</span>
 <span class="sd">    Need to have python &#39;vxi11&#39; library installed!</span>
 <span class="sd">    </span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -758,7 +758,7 @@
 <span class="sd">        state : str/int</span>
 <span class="sd">               Description: ON causes the MG369xC RF output to be turned off (blanked) </span>
 <span class="sd">               during frequency changes in CW or step sweep mode.</span>
-<span class="sd">               OFF leaves RF output turned on (unblanked).</span>
+<span class="sd">               OFF leaves RF output turned on (un blanked).</span>
 <span class="sd">               Parameters: ON | OFF | 1 | 0</span>
 <span class="sd">               Default: ON</span>
 <span class="sd">               </span>
@@ -947,7 +947,7 @@
 <span class="sd">                Description: Selects the modulating waveform (from the internal AM generator) for the internal AM</span>
 <span class="sd">                function, as follows:</span>
 <span class="sd">                SINE = Sine wave</span>
-<span class="sd">                GAUSsian = Guassian noise</span>
+<span class="sd">                GAUSsian = Gaussian noise</span>
 <span class="sd">                RDOWn = Negative ramp</span>
 <span class="sd">                RUP = Positive ramp</span>
 <span class="sd">                SQUare = Square wave</span>
@@ -1145,7 +1145,7 @@
 <span class="sd">                Description: Selects the modulating waveform (from the internal FM generator) for the internal</span>
 <span class="sd">                FM function, as follows:</span>
 <span class="sd">                SINE = Sine wave</span>
-<span class="sd">                GAUSsian = Guassian noise</span>
+<span class="sd">                GAUSsian = Gaussian noise</span>
 <span class="sd">                RDOWn = Negative ramp</span>
 <span class="sd">                RUP =Positive ramp</span>
 <span class="sd">                SQUare = Square wave</span>
@@ -1803,7 +1803,7 @@
 <span class="sd">        This function will print all the adjusted parameters.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">Headers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Params&#39;</span><span class="p">,</span><span class="s1">&#39;Vaue/Type/Info&#39;</span><span class="p">]</span>
-        <span class="n">Params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Adapter Type&#39;</span><span class="p">,</span><span class="s1">&#39;Max Frequency range&#39;</span><span class="p">,</span><span class="s1">&#39;Min Frequency range&#39;</span><span class="p">,</span><span class="s1">&#39;Waveelength&#39;</span><span class="p">]</span>
+        <span class="n">Params</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Adapter Type&#39;</span><span class="p">,</span><span class="s1">&#39;Max Frequency range&#39;</span><span class="p">,</span><span class="s1">&#39;Min Frequency range&#39;</span><span class="p">,</span><span class="s1">&#39;Wavelength&#39;</span><span class="p">]</span>
         <span class="n">Data</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_AdapterType</span><span class="p">(),</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_freqRange</span><span class="p">(</span><span class="s1">&#39;MAX&#39;</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_freqRange</span><span class="p">(</span><span class="s1">&#39;MIN&#39;</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">ask_Wavelength</span><span class="p">()]</span>
     
         <span class="n">meas</span> <span class="o">=</span> <span class="n">Type</span>
@@ -1851,7 +1851,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        OutPut : dict</span>
-<span class="sd">            Return a dictionary whit the measured Power and CW Frequency.</span>
+<span class="sd">            Return a dictionary with the measured Power and CW Frequency.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">OutPut</span> <span class="o">=</span> <span class="p">{}</span>
