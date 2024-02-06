@@ -32,7 +32,7 @@ class SMA100B(vxi11.Instrument):
 
     '''
 
-    def __init__(self, hostname):
+    def __init__(self, hostname="169.254.2.20"):
         '''
         Get name and identification.
         Make a restart of the instrument in the beginning to get the instrument 
