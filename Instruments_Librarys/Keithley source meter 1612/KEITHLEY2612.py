@@ -12,6 +12,9 @@ import pyvisa as visa
 
     
 class KEITHLEY2612:
+    '''
+    This function is using pyvisa. Please install PyVisa before you use it.
+    '''
     def __init__(self, resource_str):
         '''
         Connect to Device and print the Identification Number.
@@ -42,7 +45,7 @@ class KEITHLEY2612:
         Parameters
         ----------
         chan : str
-            Select Channel A or B and restore to defaults channel settings.
+            Select Channel A or B and restore to default channel settings.
 
         Raises
         ------
@@ -72,14 +75,15 @@ class KEITHLEY2612:
 # =============================================================================
     def getIdn(self):
         '''
-        
+
 
         Returns
         -------
-        TYPE  Str
-            Queries the device serial number and name
+        TYPE  str
+            Instrument identification
 
         '''
+
         return str(self.query('*IDN?'))
 
 
@@ -128,7 +132,7 @@ class KEITHLEY2612:
         Returns
         -------
         TYPE  float
-            Return float whit the measured value on the channel
+            Return float with the measured value on the channel
 
         '''
         
@@ -161,7 +165,7 @@ class KEITHLEY2612:
         Returns
         -------
         TYPE : float
-            Return float whit the measured value on the channel
+            Return float with the measured value on the channel
 
         '''
         
@@ -194,7 +198,7 @@ class KEITHLEY2612:
         Returns
         -------
         TYPE : float
-            Return float whit the measured value on the channel
+            Return float with the measured value on the channel
 
         '''
         
@@ -227,7 +231,7 @@ class KEITHLEY2612:
         Returns
         -------
         TYPE : float
-            Return float whit the measured value on the channel
+            Return float with the measured value on the channel
 
         '''
         
@@ -314,6 +318,39 @@ class KEITHLEY2612:
                 self.write('smu'+str(chan)+'.source.output = smu'+str(chan)+'.OUTPUT_'+str(state))
             else:
                 raise ValueError('Unknown input! See function description for more info.')
+    
+    
+    
+    def set_MeasOutput(self,chan,state):
+        
+        '''
+        
+
+        Parameters
+        ----------
+        chan : str
+            Select channel A or B
+        state : str 
+            Set source output (CHAN A) ON and OF
+
+        Raises
+        ------
+        ValueError
+            Error message 
+
+        Returns
+        -------
+        None.
+
+        '''
+        chan = chan.lower()
+        stList = ['ON','OFF']
+        chList = ['a','b']
+        if chan in chList:
+            if state in stList:
+                self.write('smu'+str(chan)+'.source.output = smu'+str(chan)+'.OUTPUT_'+str(state))
+            else:
+                raise ValueError('Unknown input! See function description for more info.')
             
     
     
@@ -328,7 +365,7 @@ class KEITHLEY2612:
         chan : str
             Select channel A or B
         state : str
-           ON/OFF voltage source autorange
+           ON/OFF voltage source automatic range
 
         Raises
         ------
@@ -362,7 +399,7 @@ class KEITHLEY2612:
         chan : str
             Select channel A or B
         state : str
-           ON/OFF current source autorange
+           ON/OFF current source automatic range
 
         Raises
         ------
@@ -466,7 +503,7 @@ class KEITHLEY2612:
         chan : str
             Select Channel A or B
         value : int/float
-            Sets the voltage limitof channel X to V.
+            Sets the voltage limit of channel X to V.
 
         Raises
         ------
@@ -500,7 +537,7 @@ class KEITHLEY2612:
         chan : str
             Select Channel A or B
         value : int/float
-            Sets the current limitof channel X to V.
+            Sets the current limit of channel X to V.
 
         Raises
         ------
@@ -601,9 +638,9 @@ class KEITHLEY2612:
         ----------
         chan : str
             Select channel A or B
-        double : boolen, optional
+        double : boolean, optional
             Displays source-measure for SMU A and SMU B.
-            double = None per defould.
+            double = None per default.
             if double = True:
                 Display Chan A and B 
             else:
@@ -644,7 +681,7 @@ class KEITHLEY2612:
         Parameters
         ----------
         chan : str
-            Select channl A or B
+            Select channel A or B
         typ : str
             The source function. Set to one of the following values:
             typ = 'volt' for Selects voltage source function
@@ -691,7 +728,7 @@ class KEITHLEY2612:
             Selects the displayed measurement function: 
             Amperes, volts, ohms, or watts.
             SMU A and SMU B can be set for different measurement functions!
-
+      
         Raises
         ------
         ValueError
@@ -716,6 +753,49 @@ class KEITHLEY2612:
                 self.write('display.smu'+str(chan)+'.measure.func = display.MEASURE_OHMS')
             elif typ == 'watt':
                 self.write('display.smu'+str(chan)+'.measure.func = display.MEASURE_WATTS')
+            else:
+                raise ValueError('Unknown input! See function description for more info.')
+        else:
+                raise ValueError('Unknown input! See function description for more info.')
+                
+        
+
+        
+    def set_MeasurementVoltageRange(self,chan,typ, value):
+        '''
+        
+
+        Parameters
+        ----------
+        chan : str
+            Select channel A or B
+        typ : str
+            Selects the displayed measurement function: 
+            Amperes or volts.
+            SMU A and SMU B can be set for different measurement functions!
+        value : int/float
+            Select channel A or B value to be set
+
+        Raises
+        ------
+        ValueError
+            Error message 
+
+        Returns
+        -------
+        None.
+
+        '''
+        
+        chan = chan.lower()
+        typ = typ.lower()
+        tList = ['volt','amp']
+        chList = ['a','b']
+        if chan in chList and typ in tList:
+            if typ == 'volt':
+                self.write('smu'+str(chan)+'.measure.rangev = ' + str(float(value)))
+            elif typ == 'amp':
+                self.write('smu'+str(chan)+'.measure.rangei = ' + str(float(value)))
             else:
                 raise ValueError('Unknown input! See function description for more info.')
         else:
@@ -774,7 +854,7 @@ class KEITHLEY2612:
         Returns
         -------
         OutPut : dict
-            Return a dictionary whit the measured voltage and current.
+            Return a dictionary with the measured voltage and current.
 
         '''
         chan = chan.lower()
