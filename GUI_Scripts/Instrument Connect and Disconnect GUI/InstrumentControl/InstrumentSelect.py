@@ -59,7 +59,7 @@ def SourceMeter():
         while KM == 0:
             try:
                 KA = KEITHLEY2612(str(data))
-                KM = KA.Identification().split('\n')[0]
+                KM = KA.getIdn().split('\n')[0]
                 if KM == 'Keithley Instruments Inc., Model 2612, 1152698, 1.4.2':
                    KM = 1
                    dataInst = str(data)
@@ -181,7 +181,7 @@ def PowerSupply():
 
 def PowerMeter():
     from InstrumentControl.PM100D import PM100D
-    Serien_Nummer = ['P0024970','P0033858', 'P0037385']
+    Serien_Nummer = ['P0024970','P0033858', 'P0037385', 'P0037393']
     for _ in Serien_Nummer:
         try:
             PM100D(_)
