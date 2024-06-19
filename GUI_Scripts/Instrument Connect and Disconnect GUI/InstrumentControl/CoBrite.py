@@ -13,6 +13,9 @@ import pyvisa as visa
     
 class CoBrite:
     def __init__(self, resource_str):
+        '''
+        This Class is using PyVisa to connect to CoBrite Laser, please install PyVisa and Numpy first!
+        '''
 
         self._resource = visa.ResourceManager().open_resource(str(resource_str),query_delay  = 0.5)
         print(self._resource.query('*IDN?'))
@@ -32,14 +35,15 @@ class CoBrite:
             This function must be set after each set_() function. CoBrite 
             writes the set_() to register and returns ;/r/n to the user. The
             ;/r/n command will mess up the next data sent to CoBrite from the user.
-            An empty read() is required after each set_() function sendet to the
+            An empty read() is required to be sended after each set_() function to the
             laser. 
 
         '''
         return self._resource.read_raw()
     
     def Close(self):
-        self._resource.close()
+        self._resource.close
+        print('Instrument CoBrite is closed!')
         
         
 # =============================================================================
@@ -107,7 +111,7 @@ class CoBrite:
         Parameters
         ----------
         chan : int
-            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.
+            Channel number. Can be 1 or 2. CoBrite have only 2 channels!
 
         Raises
         ------
@@ -146,7 +150,7 @@ class CoBrite:
         Parameters
         ----------
         chan : int
-            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.
+            Channel number. Can be 1 or 2. CoBrite have only 2 channels!
 
         Raises
         ------
@@ -155,7 +159,7 @@ class CoBrite:
 
         Returns
         -------
-        flaot
+        float
             Queries the frequency offset setting of a tunable laser port. 
             Value format is in GHz.
 
@@ -182,7 +186,7 @@ class CoBrite:
         Parameters
         ----------
         chan : int
-            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.
+            Channel number. Can be 1 or 2. CoBrite have only 2 channels!
 
         Raises
         ------
@@ -227,7 +231,7 @@ class CoBrite:
         Parameters
         ----------
         chan : int
-            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.
+            Channel number. Can be 1 or 2. CoBrite have only 2 channels!
 
 
         Raises
@@ -264,7 +268,7 @@ class CoBrite:
         Parameters
         ----------
         chan : int
-            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.
+            Channel number. Can be 1 or 2. CoBrite have only 2 channels!
 
         Raises
         ------
@@ -300,7 +304,7 @@ class CoBrite:
         Parameters
         ----------
         chan : int
-            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.
+            Channel number. Can be 1 or 2. CoBrite have only 2 channels!
 
         Raises
         ------
@@ -580,7 +584,7 @@ class CoBrite:
         Parameters
         ----------
         chan : int
-            Channel number. Can be 1 or 2. CoBrite have only 2 channels!.
+            Channel number. Can be 1 or 2. CoBrite have only 2 channels!
         freq : float
             Sets frequency in Thz format. For example freq = 192.2345
         power : float

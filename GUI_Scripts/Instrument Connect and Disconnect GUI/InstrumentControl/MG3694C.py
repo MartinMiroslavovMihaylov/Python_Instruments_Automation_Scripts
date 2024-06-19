@@ -32,7 +32,7 @@ Befor using the MG3694C you need to:
 
 class MG3694C(vxi11.Instrument):
     '''
-    A class thats uses vxi11 library to interface a Anritsu MG3694C.
+    This class uses vxi11 library to connect to Anritsu MG3694C.
     Need to have python 'vxi11' library installed!
     
     '''
@@ -43,12 +43,37 @@ class MG3694C(vxi11.Instrument):
         Make a restart of the instrument in the beginning to get the instrument 
         to default settings.
         '''
+        self.hostname = hostname
         super().__init__(hostname)
         print(self.ask('*IDN?'))
         self.write('*RST')
         
+    def reconnect(self,attempts_number=3):
+        for attempts_num in range(attempts_number):
+            try:
+                super().__init__(self.hostname)
+                break
+            except:
+                print("Exeption occured {0} times".format(attempts_num))
+
+
+    def write(self, message, encoding = 'utf-8'):
+        # super().write(message,encoding)
+        for attempts_num in range(3):
+            try:
+                super().write(message,encoding)
+                break
+            except:
+                self.reconnect()   
+
     def query(self, message):
-        return self.ask(message)
+        for attempts_num in range(3):
+            try:
+                return self.ask(message)
+                break
+            except:
+                self.reconnect()
+        
     
     def Close(self):
         return self.close()
@@ -588,7 +613,7 @@ class MG3694C(vxi11.Instrument):
         state : str/int
                Description: ON causes the MG369xC RF output to be turned off (blanked) 
                during frequency changes in CW or step sweep mode.
-               OFF leaves RF output turned on (unblanked).
+               OFF leaves RF output turned on (un blanked).
                Parameters: ON | OFF | 1 | 0
                Default: ON
                
@@ -762,7 +787,7 @@ class MG3694C(vxi11.Instrument):
                 Description: Selects the modulating waveform (from the internal AM generator) for the internal AM
                 function, as follows:
                 SINE = Sine wave
-                GAUSsian = Guassian noise
+                GAUSsian = Gaussian noise
                 RDOWn = Negative ramp
                 RUP = Positive ramp
                 SQUare = Square wave
@@ -890,7 +915,7 @@ class MG3694C(vxi11.Instrument):
         '''
         
         if state in ['LINear','LOGarithmic']:
-            self.wrtie(':SOURce:AM:TYPE ' + state)
+            self.write(':SOURce:AM:TYPE ' + state)
         else:
             raise ValueError('Unknown input! See function description for more info.')
         
@@ -945,7 +970,7 @@ class MG3694C(vxi11.Instrument):
                 Description: Selects the modulating waveform (from the internal FM generator) for the internal
                 FM function, as follows:
                 SINE = Sine wave
-                GAUSsian = Guassian noise
+                GAUSsian = Gaussian noise
                 RDOWn = Negative ramp
                 RUP =Positive ramp
                 SQUare = Square wave
@@ -1555,7 +1580,7 @@ class MG3694C(vxi11.Instrument):
         This function will print all the adjusted parameters.
         '''
         Headers = ['Params','Vaue/Type/Info']
-        Params = ['Adapter Type','Max Frequency range','Min Frequency range','Waveelength']
+        Params = ['Adapter Type','Max Frequency range','Min Frequency range','Wavelength']
         Data = [self.ask_AdapterType(),self.ask_freqRange('MAX'),self.ask_freqRange('MIN'),self.ask_Wavelength()]
     
         meas = Type
@@ -1600,7 +1625,7 @@ class MG3694C(vxi11.Instrument):
         Returns
         -------
         OutPut : dict
-            Return a dictionary whit the measured Power and CW Frequency.
+            Return a dictionary with the measured Power and CW Frequency.
 
         '''
         OutPut = {}

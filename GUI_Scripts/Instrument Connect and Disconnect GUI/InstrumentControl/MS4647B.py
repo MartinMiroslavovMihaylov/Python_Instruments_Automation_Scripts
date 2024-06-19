@@ -13,6 +13,9 @@ import pyvisa as visa
 
     
 class MS4647B:
+    '''
+    This function is using pyvisa to connect to Instruments. Please install PyVisa before using it.
+    '''
     def __init__(self, resource_str):
         '''
         Connect to Device and print the Identification Number.
@@ -535,8 +538,6 @@ class MS4647B:
         ----------
         name : str
             File Name
-        portNumb : int
-            the N(ports number) for the .sNp data output.
 
         Returns
         -------
@@ -594,7 +595,7 @@ class MS4647B:
 
         Returns
         -------
-        Value: flaot
+        Value: float
              Outputs the power level of the indicated port on the indicated channel.
 
         '''
@@ -657,7 +658,7 @@ class MS4647B:
         Returns
         -------
         TYPE
-            Quuery the number of displayed channels.
+            Query the number of displayed channels.
 
         '''
         return float(self.query(':DISP:COUN?').split('\n')[0])
@@ -1409,7 +1410,7 @@ class MS4647B:
         ChanNumber : int
             Channel Number 1,2,3...
         value : int
-            Procentge smoothing between 0 to 100
+            Percentage smoothing between 0 to 100
         Raises
         ------
         ValueError
@@ -1760,7 +1761,7 @@ class MS4647B:
         portNumb : int/str
             The N(ports number) for the .sNp data output.
             
-            Write a text File whit the transfered Data
+            Write a text File with the transferred data
 
         Returns
         -------
@@ -1793,7 +1794,7 @@ class MS4647B:
         portNumb : int/str
             The N(ports number) for the .sNp data output.
             
-            Write a text File whit the transfered Data
+            Write a text File with the transferred data
 
         Returns
         -------

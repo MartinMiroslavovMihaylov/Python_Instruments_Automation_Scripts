@@ -12,8 +12,8 @@ import vxi11
 
 class AQ6370D(vxi11.Instrument):
     '''
-    A class thats uses vxi11 library to interface a Yokogawa AQ6370D.
-    Need to have python 'vxi11', 'pandas' and 'numpy' librarys installed!
+    This class uses vxi11 library to connect to a Yokogawa AQ6370D.
+    Need to have python 'vxi11', 'pandas' and 'numpy' libraries installed!
     
     
     '''
@@ -82,7 +82,7 @@ class AQ6370D(vxi11.Instrument):
         -------
         str
             Queries the automatic setting function of
-            the sub scale of the level axis.
+            the subscale of the level axis.
             Response 0 = OFF, 1 = ON
 
         '''
@@ -155,7 +155,7 @@ class AQ6370D(vxi11.Instrument):
 
         Returns
         -------
-        dloat
+        float
             Queries the measurement condition
             measurement start wavelength
 
@@ -352,7 +352,7 @@ class AQ6370D(vxi11.Instrument):
         Returns
         -------
         float
-            Queries the measurment resolution
+            Queries the measurement resolution.
 
         '''
         
@@ -488,7 +488,7 @@ class AQ6370D(vxi11.Instrument):
         if data == '0':
             return 'Standard'
         else:
-            return 'Twise as fast as standard'
+            return 'Twice as fast as standard'
     
     
     
@@ -501,7 +501,7 @@ class AQ6370D(vxi11.Instrument):
         Parameters
         ----------
         state : str
-             Name of the trace that should be extractselected.          
+             Name of the trace that should be extract/selected.
             state = [TRA|TRB|TRC|TRD|TRE|TRF|TRG]
 
         Raises
@@ -536,7 +536,7 @@ class AQ6370D(vxi11.Instrument):
         Parameters
         ----------
         state : str
-            Name of the trace that should be extractselected.          
+            Name of the trace that should be extract/selected.
             state = [TRA|TRB|TRC|TRD|TRE|TRF|TRG]
 
         Raises
@@ -596,7 +596,7 @@ class AQ6370D(vxi11.Instrument):
         Parameters
         ----------
         state : str
-            Name of the trace that should be extractselected. 
+            Name of the trace that should be extract/selected.
             sState = ['TRA','TRB','TRC','TRD','TRE','TRF','TRG']
 
         Raises
@@ -752,7 +752,7 @@ class AQ6370D(vxi11.Instrument):
                 format is reset to the ASCII mode.
                 • The ASCII format outputs a list of numerics
                 each of which is delimited by a comma (,).
-                Example: 12345,12345,....
+                For example: 12345,12345,....
                 • By default, the REAL format outputs data in
                 fixed length blocks of 64 bits, floating-point
                 binary numerics.
@@ -764,8 +764,8 @@ class AQ6370D(vxi11.Instrument):
                 (ASCII) indicating the number of bytes that
                 specifies the length after #, length designation
                 (ASCII), and binary data of a specified length
-                in this order. Binary data consists of a floatingpoint data string of 8 bytes (64 bits) or 4 bytes
-                (32 bits). Floating-point data consists of lowerorder bytes to higher-order bytes.
+                in this order. Binary data consists of a floating point data string of 8 bytes (64 bits) or 4 bytes
+                (32 bits). Floating-point data consists of lower order bytes to higher-order bytes.
                 E.g.: #18 [eight <byte data>]
                 #280[80 <byte data>]
                 #48008[8008 <byte data>]
@@ -838,7 +838,7 @@ class AQ6370D(vxi11.Instrument):
             Set the center wavelength of the
             X-axis of the display scale
         unit : str
-            sUnits = ['M','HZ']
+            Units = ['M','HZ']
 
         Raises
         ------
@@ -868,8 +868,7 @@ class AQ6370D(vxi11.Instrument):
         Parameters
         ----------
         value : int/float
-            Set the measurement condition
-        measurement span.
+            Set the measurement span.
         unit : str
             sUnits = ['M','HZ']
 
@@ -896,7 +895,7 @@ class AQ6370D(vxi11.Instrument):
         Parameters
         ----------
         value : int/float
-            Set the measurment resolution
+            Set the measurement resolution.
         unit : str
             sUnit = ['M','HZ']
 
@@ -1245,7 +1244,7 @@ class AQ6370D(vxi11.Instrument):
         print('Start Wavelength = ',self.ask_WavelengthStart())
         print('Stop Wavelength = ',self.ask_WavelengthStop())
         print('Bandwidth Resolution = ',self.ask_BWResolution())
-        print('Center Wavelenght = ',self.ask_CenterWavelenght())
+        print('Center Wavelength = ',self.ask_CenterWavelenght())
         print('Span = ',self.ask_Span())
         print('Output data format = ',self.ask_DataFormat())
         print('Displayed trace = ',self.ask_TraceState())
@@ -1269,7 +1268,7 @@ class AQ6370D(vxi11.Instrument):
 
         '''
         Header = ['Y-Axis units','X-Axis units','Start Wavelength','Stop Wavelength',
-                  'Bandwidth Resolution','Center Wavelenght','Span','Output data format',
+                  'Bandwidth Resolution','Center Wavelength','Span','Output data format',
                   'Displayed trace','Selected Trace','Averaging Points','Sample Points',
                   'Sweep speed','Sweep Mode']
         Data = []

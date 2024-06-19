@@ -103,7 +103,7 @@ class APPH:
         Returns
         -------
         TYPE float
-           Sets/gets the voltage at the DUT TUNE püort. Returns the configured value. If the output is
+           Sets/gets the voltage at the DUT TUNE port. Returns the configured value. If the output is
            turned off, it doesn’t necessarily return 0, as an internal voltage may be configured.
 
         '''
@@ -379,7 +379,7 @@ class APPH:
 
         Returns
         -------
-        TYPE lisz
+        TYPE list
             Returns a list of offset frequency values of the current measurement as block data.
             Unit Hz
 
@@ -397,7 +397,7 @@ class APPH:
         -------
         TYPE list
              Returns a list of phase noise spectrum values of the current measurement as block data.
-             Unit Hz
+             Units are in Hz.
         '''
         
         return self.query(':CALCulate:FN:TRACe:NOISe?')
@@ -412,7 +412,7 @@ class APPH:
         -------
         TYPE list
             Returns a list of offset frequencies of the spurs in the active trace as block data.
-            Unit Hz
+            Units are in Hz.
         '''
         
         return self.query(':CALCulate:FN:TRACe:SPURious:FREQuency?')
@@ -427,7 +427,7 @@ class APPH:
         -------
         TYPE list
                Returns a list of power values of the spurs in the active trace as block data.
-               Unit Hz
+               Units are in Hz
 
         '''
         
@@ -443,7 +443,7 @@ class APPH:
         ----------
         value : float
             The parameters defines the spot noise offset frequency in [Hz].
-                Unit Hz
+                Units are in Hz.
                 Value - float
 
         Returns
@@ -483,7 +483,7 @@ class APPH:
 
         Parameters
         ----------
-        chan : ist
+        chan : list
             Can be set to [1,2,3,4]
 
         Raises
@@ -563,7 +563,7 @@ class APPH:
         Returns
         -------
         TYPE str
-            Query the the phase noise parameter for the measurement.
+            Query the phase noise parameter for the measurement.
 
         '''
        
@@ -596,7 +596,7 @@ class APPH:
         -------
         TYPE str
              Query the start tuning voltage for the measurement.
-             Unit V
+             Units are in V.
 
         '''
         
@@ -613,7 +613,7 @@ class APPH:
         -------
         TYPE str
             Query the stop tuning voltage for the measurement.
-            Unit V
+            Units are in V
 
         '''
         
@@ -818,7 +818,7 @@ class APPH:
         Returns
         -------
         None.
-            Starts the frequency search. See the CALCulate subsystem on how to read out the result.
+            Starts the frequency search. See function calculate subsystem on how to read out the result.
 
         '''
         
@@ -857,7 +857,7 @@ class APPH:
                 Optionally, a timeout in milliseconds can be specified as a second parameter. 
                 This command will block further SCPI requests until the specified event or the
                 specified timeout has occurred. If no timeout is specified, the timeout will be 
-                ininite.
+                initiated.
 
         Returns
         -------
@@ -875,7 +875,7 @@ class APPH:
         Parameters
         ----------
         value : float
-            Sets the voltage at the DUT TUNE püort. Returns the configured value. 
+            Sets the voltage at the DUT TUNE port. Returns the configured value.
             If the output is turned off, it doesn’t necessarily return 0, as an internal
             voltage may be configured
             
@@ -1005,10 +1005,10 @@ class APPH:
             Can be ['ALL','NEXT']
         value : float
             This command requests a preliminary result during the measurement and blocks until 
-            the resultis ready. The first parameter (required) specifies the target iteration 
+            the result is ready. The first parameter (required) specifies the target iteration
             to be saved. NEXT specifies the next possible iteration, ALL specifies the last 
             iteration of the measurement (i.e. waits for the measurement to finish) and an 
-            iteger specifies the specific iteration requested.The second parameter (optional) 
+            integer specifies the specific iteration requested.The second parameter (optional)
             defines a timeout in milliseconds. If the command terminates without generating a 
             preliminary result. It will produce an error. This error can be queried with
             SYST:ERR? or SYST:ERR:ALL?.
@@ -1035,7 +1035,7 @@ class APPH:
         Parameters
         ----------
         state : str 
-            Enables/disables the frequency parameter for the measurement.
+            Enables/Disables the frequency parameter for the measurement.
             Can be ['ON','OFF']
 
         Raises
@@ -1065,7 +1065,7 @@ class APPH:
         Parameters
         ----------
         state : str
-            Enables/disables the phase noise parameter for the measurement
+            Enables/Disables the phase noise parameter for the measurement.
             Can be  ['ON','OFF']
 
         Raises
@@ -1096,7 +1096,7 @@ class APPH:
         Parameters
         ----------
         state : str
-            Enables/disables the power parameter for the measurement.
+            Enables/Disables the power parameter for the measurement.
             Can be ['ON','OFF']
 
         Raises
@@ -1150,7 +1150,7 @@ class APPH:
         ----------
         value : float
             Sets the stop tuning voltage for the measurement.
-            Unit V
+            Units are in V.
 
         Returns
         -------
@@ -1293,8 +1293,8 @@ class APPH:
         Parameters
         ----------
         state : str
-            Enables/disables the phase noise parameter for the measurement.
-            CAn be set to ['ON','OFF']
+            Enables/Disables the phase noise parameter for the measurement.
+            Can be set to ['ON','OFF']
 
         Raises
         ------
@@ -1395,7 +1395,7 @@ class APPH:
     
     def PNMeasExample(self,value):
         '''
-        This is a small example how to make a Phase Noise measurment.
+        This is a small example how to make a phase noise measurement.
         '''
         
         self.set_SysMeasMode('PN') # select phase noise measurement
@@ -1404,7 +1404,7 @@ class APPH:
         err = self.ask_SystemError()     # check if measurement was successful
         val = self.ask_PNSpot(value) #request spot noise value at 1MHz offset
         ResultDic = {}
-        ResultDic['Erro Value'] = err #Write Error status if 0 no errors!
+        ResultDic['Error Value'] = err # Write Error status if 0 no errors!
         ResultDic['Spot Phase Noise @ ' +str(value)] = val
         return ResultDic
     
@@ -1412,14 +1412,14 @@ class APPH:
     
     def ANMeasExample(self,value):
         '''
-        This is a small example how to make a Phase Noise measurment.
+        This is a small example how to make a phase noise measurement.
         '''
         self.set_SysMeasMode('AN') # select amplitude noise measurement
         self.Init()                # start measurement
         err = self.ask_SystemError()     # check if measurement was successful
         val = self.ask_ANSpot(value) #request spot noise value at 1MHz offset
         ResultDic = {}
-        ResultDic['Erro Value'] = err #Write Error status if 0 no errors!
+        ResultDic['Error Value'] = err #Write Error status if 0 no errors!
         ResultDic['Spot Amplitude Noise @ ' +str(value)] = val
         return ResultDic
 
@@ -1428,14 +1428,14 @@ class APPH:
 
     def FNMeasExample(self,value):
         '''
-        This is a small example how to make a Frequency Noise measurment.
+        This is a small example how to make a frequency noise measurement.
         '''
         self.set_SysMeasMode('FN') # select amplitude noise measurement
         self.Init()                # start measurement
         err = self.ask_SystemError()     # check if measurement was successful
         val = self.ask_FNSpot(value) #request spot noise value at 1MHz offset
         ResultDic = {}
-        ResultDic['Erro Value'] = err #Write Error status if 0 no errors!
+        ResultDic['Error Value'] = err #Write Error status if 0 no errors!
         ResultDic['Spot Frequency Noise @ ' +str(value)] = val
         return ResultDic
     
@@ -1443,45 +1443,45 @@ class APPH:
     
     def VCOMeasExample(self,NoieseOffset1,NoieseOffset2,measPoints,tunRangeMin,tunRangeMax,SupplyVoltage,delay):
         '''
-        This is a small example how to make a Voltage controlled oscillator Noise measurment.
+        This is a small example how to make a Voltage controlled oscillator noise measurement.
         '''
         
-        #Config 
-        self.set_SysMeasMode('VCO') #select VCO characterization
-        self.set_VCOTestFreq('ON') #enable frequency parameter
-        self.set_VCOTestISupply('ON') #enable supply current parameter
-        self.set_VCOKPuShing('ON') #enable pushing parameter
-        self.set_VCOKVCO('ON') #enable Kvco parameter
-        self.set_VCOTestPNoise('ON') #enable spot noise parameter
-        self.set_VCOTestPnoiseOFFSet(NoieseOffset1,NoieseOffset2) #set two spot noise offsets: 1.2kHz, 100kHz
-        self.set_VCOTestPower('ON') #enable power parameter
+        # Config
+        self.set_SysMeasMode('VCO') # Select VCO characterization
+        self.set_VCOTestFreq('ON') # Enable frequency parameter
+        self.set_VCOTestISupply('ON') # Enable supply current parameter
+        self.set_VCOKPuShing('ON') # Enable pushing parameter
+        self.set_VCOKVCO('ON') # Enable Kvco parameter
+        self.set_VCOTestPNoise('ON') # Enable spot noise parameter
+        self.set_VCOTestPnoiseOFFSet(NoieseOffset1,NoieseOffset2) # Set two spot noise offsets: 1.2kHz, 100kHz
+        self.set_VCOTestPower('ON') # Enable power parameter
         
         
-        #measurment
-        self.set_VCOTYPE('VCO') #set DUT Type (VCO or VCXO)
-        self.set_VCOTestPoint(measPoints) #set 11 measurement points
-        self.set_VCOTestStart(tunRangeMin) #set tuning range minimum to 0.5V
-        self.set_VCOTestStop(tunRangeMax) #set tuning range maximum to 10V
-        self.set_DUTPortVoltage(SupplyVoltage) #set supply voltage to 6V
-        self.set_DUTPortStatus('ON') # enable supply voltage 
-        self.Init()                # start measurement
+        # Measurement
+        self.set_VCOTYPE('VCO') # Set DUT Type (VCO or VCXO)
+        self.set_VCOTestPoint(measPoints) # Set 11 measurement points
+        self.set_VCOTestStart(tunRangeMin) # Set tuning range minimum to 0.5V
+        self.set_VCOTestStop(tunRangeMax) # Set tuning range maximum to 10V
+        self.set_DUTPortVoltage(SupplyVoltage) # Set supply voltage to 6V
+        self.set_DUTPortStatus('ON') # Enable supply voltage
+        self.Init()                # Start measurement
         
         
-        #loop
-        self.set_VCOWait('ALL',delay) #wait for the measurement to finish
-        err = self.ask_SystemError() #check if measurement was successful
+        # Loop
+        self.set_VCOWait('ALL',delay) # Wait for the measurement to finish
+        err = self.ask_SystemError() # Check if measurement was successful
         ResultDic = {}
         
         
-        #read results
-        ResultDic['control voltage'] = self.ask_VCOTraceVoltage() #request control voltage data array
-        ResultDic['frequency data'] = self.ask_VCOTraceFreq() #request frequency data array
-        ResultDic['Kvco data'] = self.ask_VCOKVCO() # request Kvco data array
-        ResultDic['pushing data'] = self.ask_VCOKPuShing() #request pushing data array
-        ResultDic['supply current data'] = self.ask_VCOTestISupply() #request supply current data array
-        ResultDic['power level'] = self.ask_VCOTracePower() #request power level data array
-        ResultDic['spot noise data array @offset #1 (1.2kHz)'] = self.ask_VCOTestPnoiseOFFSet(1) #request spot noise data array @offset #1 (1.2kHz)
-        ResultDic['Error Value'] = err #Write Error status if 0 no errors!
+        # Read results
+        ResultDic['control voltage'] = self.ask_VCOTraceVoltage() # request control voltage data array
+        ResultDic['frequency data'] = self.ask_VCOTraceFreq() # Request frequency data array
+        ResultDic['Kvco data'] = self.ask_VCOKVCO() # Request Kvco data array
+        ResultDic['pushing data'] = self.ask_VCOKPuShing() # Request pushing data array
+        ResultDic['supply current data'] = self.ask_VCOTestISupply() # Request supply current data array
+        ResultDic['power level'] = self.ask_VCOTracePower() # Request power level data array
+        ResultDic['spot noise data array @offset #1 (1.2kHz)'] = self.ask_VCOTestPnoiseOFFSet(1) # Request spot noise data array @offset #1 (1.2kHz)
+        ResultDic['Error Value'] = err # Write Error status if 0 no errors!
         
         
         
