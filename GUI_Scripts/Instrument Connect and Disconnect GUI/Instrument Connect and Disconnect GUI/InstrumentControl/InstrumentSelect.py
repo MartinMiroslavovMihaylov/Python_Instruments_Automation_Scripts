@@ -38,6 +38,7 @@ def CoBrite():
                 CO = CoBrite(str(data))
                 CP = CO.Identification().split(';')[0]
                 if CP == 'COBRITE CBDX-SC-SC-NN-NN-FA, SN 22060011, F/W Ver 1.2.1(160), HW Ver 1.20':
+                   CO.Close()
                    CP = 1
                    dataInst = str(data)
                 else:
@@ -61,6 +62,7 @@ def SourceMeter():
                 KA = KEITHLEY2612(str(data))
                 KM = KA.getIdn().split('\n')[0]
                 if KM == 'Keithley Instruments Inc., Model 2612, 1152698, 1.4.2':
+                   KA.Close()
                    KM = 1
                    dataInst = str(data)
                 else:
@@ -121,12 +123,13 @@ def PowerSupply():
     CheckInstrName = None
     CheckInstrName = PS.getIdn().split("\n")[0]
     PS.Close()
+    return  RD3005(data)
     
     
-    if CheckInstrName in SerialNum:
-        return RD3005(Port_)
-    else:
-        raise ValueError("Instrument is not Valid Power Supply!")
+    # if CheckInstrName in SerialNum:
+    #     return RD3005(Port_)
+    # else:
+    #     raise ValueError("Instrument is not Valid Power Supply!")
  
     # if CheckInstrName in SerialNum:
     #     if data == SerialNum[0]:
@@ -233,46 +236,46 @@ def SigGen():
 
 def VNA():
     from InstrumentControl.MS4647B import MS4647B
-    # import vxi11
-    # rm = vxi11.list_devices()
-    rm = visa.ResourceManager('@py')
-    list_rm = rm.list_resources()
+    import vxi11
+    rm = vxi11.list_devices()
+    # rm = visa.ResourceManager('@py')
+    # list_rm = rm.list_resources()
         
     IP = '169.254.100.85'
     Str_IP = None
     Set = 0
 
-    for _ in range(len(list_rm)):
-        test_ip = list_rm[_].split('::')[1]
-        if test_ip == IP:
-            while Set == 0:
-                try:
-                    Str_IP = list_rm[_].split('::')[0] + '::' +list_rm[_].split('::')[1]
-                    VNA = MS4647B(Str_IP)
-                    data = VNA.getIdn()
-                    if data == 'ANRITSU,MS4647B,1416530,V2023.9.1':
-                        Set = 1
-                        VNA.RTL()
-                        VNA.Close()
-                        break
-                    else:
-                        print('Connecting')
-                except (visa.VisaIOError): 
-                    print('Serial Number dont match!')
-            
-        else:
-            print('No matching Device detected !!')
+    # for _ in range(len(list_rm)):
+    #     test_ip = list_rm[_].split('::')[1]
+    #     if test_ip == IP:
+    #         while Set == 0:
+    #             try:
+    #                 Str_IP = list_rm[_].split('::')[0] + '::' +list_rm[_].split('::')[1]
+    #                 VNA = MS4647B(Str_IP)
+    #                 data = VNA.getIdn()
+    #                 if data == 'ANRITSU,MS4647B,1416530,V2023.9.1':
+    #                     Set = 1
+    #                     VNA.RTL()
+    #                     VNA.Close()
+    #                     break
+    #                 else:
+    #                     print('Connecting')
+    #             except (visa.VisaIOError): 
+    #                 print('Serial Number dont match!')
+    #         
+    #     else:
+    #         print('No matching Device detected !!')
 
-    # for _ in rm:
-    #     try:
-    #          VNA = MS4647B('TCPIP::'+str(_))
-    #          InstrVNA = _
-    #          VNA.RTL()
-    #          VNA.Close()
-    #     except (visa.VisaIOError): 
-    #         print('Serial Number dont match!')
-    return MS4647B(Str_IP) 
-    #return MS4647B('TCPIP0::169.254.100.85')
+    for _ in rm:
+        try:
+             VNA = MS4647B('TCPIP::'+str(_))
+             InstrVNA = _
+             VNA.RTL()
+             VNA.Close()
+        except (visa.VisaIOError): 
+            print('Serial Number dont match!')
+    # return MS4647B(Str_IP) 
+    return MS4647B('TCPIP0::169.254.100.85')
     #return MS4647B('TCPIP0::131.234.87.205')
 
            
@@ -313,7 +316,7 @@ def PowerSupply_GPP4323():
     from InstrumentControl.GPP4323 import GPP4323
     import serial.tools.list_ports
     
-    SerialNum = ['GW INSTEK,GPP-4323,SN:GEW840790,V1.17', 'GW Instek,GPP-4323,SN:GEW866095,V1.19', 'GW Instek,GPP-4323,SN:GEW866085,V1.19', 'GW Instek,GPP-4323,SN:GEW866095,V1.02']
+    SerialNum = ['GW INSTEK,GPP-4323,SN:GEW840790,V1.17', 'GW Instek,GPP-4323,SN:GEW866095,V1.19', 'GW Instek,GPP-4323,SN:GEW866085,V1.19', 'GW Instek,GPP-4323,SN:GEW866095,V1.02', 'GW Instek,GPP-4323,SN:GEW866095,V1.02', "GW Instek,GPP-4323,SN:GEW864544,V1.19", "GW Instek,GPP-4323,SN:GEW866072,V1.19", "GW Instek,GPP-4323,SN:GEW866082,V1.19"]
     ports = serial.tools.list_ports.comports()
     COM_List = []
     Port_ = None
@@ -376,7 +379,7 @@ def InstInit(Num):
         return SpecAnalyser()
     elif Num ==  " Anritsu Signal Generator MG3694C ":
         return SigGen()
-    elif Num == " Anritsu Vectro Analyzer MS4647B ":
+    elif Num == " Anritsu Vectro Analyzer MS4647B  ":
         return VNA()
     elif Num ==  " Power Meter ThorLabs PM100D ":
         return PowerMeter()
