@@ -42,11 +42,7 @@ class CoBrite:
         return self._resource.read_raw()
     
     def Close(self):
-<<<<<<< HEAD
         self._resource.close()
-=======
-        self._resource.close
->>>>>>> 14df7964bb536af4c98ab5016f26d2773e6bdadd
         print('Instrument CoBrite is closed!')
         
         
