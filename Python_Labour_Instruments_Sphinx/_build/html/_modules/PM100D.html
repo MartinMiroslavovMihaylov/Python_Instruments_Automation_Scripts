@@ -1668,6 +1668,38 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">MeasPower</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetchData</span><span class="p">()</span>   </div>
 
+        
+        
+        
+<div class="viewcode-block" id="PM100D.DefaultPowerMeas_W">
+<a class="viewcode-back" href="../rst/PM100D.html#PM100D.PM100D.DefaultPowerMeas_W">[docs]</a>
+    <span class="k">def</span> <span class="nf">DefaultPowerMeas_W</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">WaveLength</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE Data from the measurement</span>
+<span class="sd">            Performs a power measurement whit hard codded parameter!.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_PowerUnits</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_WaveLength</span><span class="p">(</span><span class="n">WaveLength</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_AutoPowerRange</span><span class="p">(</span><span class="s1">&#39;ON&#39;</span><span class="p">)</span>
+        
+        <span class="c1">#print(&#39;#####################################&#39;)</span>
+        <span class="c1">#self.DisplayParam(&#39;Power&#39;)</span>
+        <span class="c1">#print(&#39;#####################################&#39;)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Init</span><span class="p">()</span>
+        <span class="n">complite</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">complite</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+            <span class="n">complite</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OPC</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ConfigPower</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MeasPower</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetchData</span><span class="p">()</span></div>
+
 
 
 

@@ -115,15 +115,46 @@
 <span class="sd">        Make a restart of the instrument in the beginning to get the instrument </span>
 <span class="sd">        to default settings.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hostname</span> <span class="o">=</span> <span class="n">hostname</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">hostname</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;*RST&#39;</span><span class="p">)</span>
         
+<div class="viewcode-block" id="MG3694C.reconnect">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.reconnect">[docs]</a>
+    <span class="k">def</span> <span class="nf">reconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">attempts_number</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">attempts_num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">attempts_number</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hostname</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exeption occured </span><span class="si">{0}</span><span class="s2"> times&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attempts_num</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="MG3694C.write">
+<a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.write">[docs]</a>
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">):</span>
+        <span class="c1"># super().write(message,encoding)</span>
+        <span class="k">for</span> <span class="n">attempts_num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">,</span><span class="n">encoding</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">reconnect</span><span class="p">()</span>   </div>
+
+
 <div class="viewcode-block" id="MG3694C.query">
 <a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.query">[docs]</a>
     <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+        <span class="k">for</span> <span class="n">attempts_num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">reconnect</span><span class="p">()</span></div>
 
+        
     
 <div class="viewcode-block" id="MG3694C.Close">
 <a class="viewcode-back" href="../rst/MG3694C.html#MG3694C.MG3694C.Close">[docs]</a>
@@ -1084,7 +1115,7 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;LINear&#39;</span><span class="p">,</span><span class="s1">&#39;LOGarithmic&#39;</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">wrtie</span><span class="p">(</span><span class="s1">&#39;:SOURce:AM:TYPE &#39;</span> <span class="o">+</span> <span class="n">state</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:AM:TYPE &#39;</span> <span class="o">+</span> <span class="n">state</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
 

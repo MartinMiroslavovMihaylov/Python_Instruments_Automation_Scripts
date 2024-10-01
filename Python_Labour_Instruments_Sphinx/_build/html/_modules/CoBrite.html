@@ -89,7 +89,7 @@
 <span class="sd">        This Class is using PyVisa to connect to CoBrite Laser, please install PyVisa and Numpy first!</span>
 <span class="sd">        &#39;&#39;&#39;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">ResourceManager</span><span class="p">()</span><span class="o">.</span><span class="n">open_resource</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">resource_str</span><span class="p">),</span><span class="n">query_delay</span>  <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">ResourceManager</span><span class="p">()</span><span class="o">.</span><span class="n">open_resource</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">resource_str</span><span class="p">),</span> <span class="n">query_delay</span>  <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">))</span>
 
         
@@ -125,7 +125,8 @@
 <div class="viewcode-block" id="CoBrite.Close">
 <a class="viewcode-back" href="../rst/CoBrite.html#CoBrite.CoBrite.Close">[docs]</a>
     <span class="k">def</span> <span class="nf">Close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Instrument CoBrite is closed!&#39;</span><span class="p">)</span></div>
 
         
         

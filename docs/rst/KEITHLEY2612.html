@@ -64,6 +64,8 @@
 <li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_CurrentLimit"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_CurrentLimit()</span></code></a></li>
 <li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_CurrentRange"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_CurrentRange()</span></code></a></li>
 <li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_DisplayMeasurementFunction"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_DisplayMeasurementFunction()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_MeasOutput"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_MeasOutput()</span></code></a></li>
+<li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_MeasurementVoltageRange"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_MeasurementVoltageRange()</span></code></a></li>
 <li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_OutputSourceFunction"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_OutputSourceFunction()</span></code></a></li>
 <li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_PulseMeasured"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_PulseMeasured()</span></code></a></li>
 <li><a class="reference internal" href="#KEITHLEY2612.KEITHLEY2612.set_SourceOutput"><code class="docutils literal notranslate"><span class="pre">KEITHLEY2612.set_SourceOutput()</span></code></a></li>
@@ -418,6 +420,47 @@ if double = True:</p>
 <li><p><strong>typ</strong> (<em>str</em>) – Selects the displayed measurement function:
 Amperes, volts, ohms, or watts.
 SMU A and SMU B can be set for different measurement functions!</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.set_MeasOutput">
+<span class="sig-name descname"><span class="pre">set_MeasOutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.set_MeasOutput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.set_MeasOutput" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p></li>
+<li><p><strong>state</strong> (<em>str</em>) – Set source output (CHAN A) ON and OF</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612.set_MeasurementVoltageRange">
+<span class="sig-name descname"><span class="pre">set_MeasurementVoltageRange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">typ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/KEITHLEY2612.html#KEITHLEY2612.set_MeasurementVoltageRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612.set_MeasurementVoltageRange" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p></li>
+<li><p><strong>typ</strong> (<em>str</em>) – Selects the displayed measurement function:
+Amperes or volts.
+SMU A and SMU B can be set for different measurement functions!</p></li>
+<li><p><strong>value</strong> (<em>int/float</em>) – Select channel A or B value to be set</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>

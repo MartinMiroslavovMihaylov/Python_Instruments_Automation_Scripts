@@ -14,7 +14,7 @@ customtkinter.set_default_color_theme("green")  # Themes: "blue" (standard), "gr
 
 
 
-ListInstruments = ["Anrtisu Spectrum Analyzer MS2760A", "Anritsu Signal Generator MG3694C", "Anritsu Vectro Analyzer MS4647B", "Power Meter ThorLabs PM100D", "Novoptel Laser LU1000", "Yokogawa Optical Spectrum Analyzer AQ6370D", "KEITHLEY Source Meter 2612", "Power Supply KA3005", "CoBrite Tunable Laser", "AnaPico AG,APPH20G", "4-Channels Power Suppy GPP4323" ]
+ListInstruments = ["Anrtisu Spectrum Analyzer MS2760A", "Anritsu Signal Generator MG3694C", "Anritsu Vectro Analyzer MS4647B", "Power Meter ThorLabs PM100D", "Novoptel Laser LU1000", "Yokogawa Optical Spectrum Analyzer AQ6370D", "KEITHLEY Source Meter 2612", "Power Supply KA3005", "CoBrite Tunable Laser", "AnaPico AG,APPH20G", "4-Channels Power Suppy GPP4323", "Rohde and Schwarz SMA100B" ]
 
 
 
@@ -271,6 +271,12 @@ class App(customtkinter.CTk):
                 print('Yokogawa Optical Spectrum Analyzer AQ6370D is connected as OSA')
                 Ist_List.append(OSA)
                 # return OSA
+            elif base_element == " Rohde and Schwarz SMA100B  ":
+                print(base_element)
+                SMA = InstInit(base_element)
+                self.Instrument.append(SMA)
+                print('Rohde&Schwarz Signal Generator SMA100 is connected as SMA')
+                Ist_List.append(SMA)
             elif base_element == " KEITHLEY Source Meter 2612  ":
                 print(base_element)
                 KA = InstInit(base_element)

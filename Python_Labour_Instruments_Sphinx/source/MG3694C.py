@@ -43,12 +43,37 @@ class MG3694C(vxi11.Instrument):
         Make a restart of the instrument in the beginning to get the instrument 
         to default settings.
         '''
+        self.hostname = hostname
         super().__init__(hostname)
         print(self.ask('*IDN?'))
         self.write('*RST')
         
+    def reconnect(self,attempts_number=3):
+        for attempts_num in range(attempts_number):
+            try:
+                super().__init__(self.hostname)
+                break
+            except:
+                print("Exeption occured {0} times".format(attempts_num))
+
+
+    def write(self, message, encoding = 'utf-8'):
+        # super().write(message,encoding)
+        for attempts_num in range(3):
+            try:
+                super().write(message,encoding)
+                break
+            except:
+                self.reconnect()   
+
     def query(self, message):
-        return self.ask(message)
+        for attempts_num in range(3):
+            try:
+                return self.ask(message)
+                break
+            except:
+                self.reconnect()
+        
     
     def Close(self):
         return self.close()
@@ -890,7 +915,7 @@ class MG3694C(vxi11.Instrument):
         '''
         
         if state in ['LINear','LOGarithmic']:
-            self.wrtie(':SOURce:AM:TYPE ' + state)
+            self.write(':SOURce:AM:TYPE ' + state)
         else:
             raise ValueError('Unknown input! See function description for more info.')
         

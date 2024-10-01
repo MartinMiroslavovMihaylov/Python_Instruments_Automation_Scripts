@@ -10,20 +10,6 @@ import numpy as np
 import vxi11
 
 
-print(
-    '''
-
-#####################################################################################
-
-Befor using the SMA100B you need to:
-    1) Install python-vxi11. E.g. pip install python-vxi11
-    2) Check the IP Adress of the SMA100B. Setup-> Remote Access -> Network
-    
-#####################################################################################
-
-'''
-)
-
 
 class SMA100B(vxi11.Instrument):
     '''
@@ -46,16 +32,45 @@ class SMA100B(vxi11.Instrument):
         return self.ask(message)
 
     def Close(self):
+        print("Instrument Rohde&Schwarz SMA100B is closed!")
         return self.close()
 
     def reset(self):
         return self.write('*RST')
 # =============================================================================
-# Abort Command
+# Get Identication Command
+# =============================================================================
+    def getIdn(self):
+        '''
+        
+
+        Returns
+        -------
+        TYPE
+            DESCRIPTION.
+
+        '''
+        return self.query('*IDN?')
+    
+# =============================================================================
+# Ask Commands
 # =============================================================================
 
+    def ask_OutputImpedance(self):
+        """
+        
+
+        Returns
+        -------
+        TYPE
+            Queries the impedance of the RF outputs.
+
+        """
+        return float(self.query(":OUTPut1:IMP?"))
+
+
 # =============================================================================
-# OUTPut subsystem
+# Set Commands
 # =============================================================================
 
     def set_rf_output_all(self, value):
@@ -71,12 +86,17 @@ class SMA100B(vxi11.Instrument):
         ValueError
             Valid values are: \'ON\', \'OFF\', 1, 0
         """
-        if value == 1 or value == 'ON':
+        
+        OnsStates = ["On", "ON", "on", "oN", "1"]
+        OffsStates = ["Off", "oFf", "ofF", "OFF", "off", "0"]
+        if value in OnsStates:
             self.write(':OUTPut:ALL:STATe 1')
-        elif value == 0 or value == 'OFF':
+        elif value in OffsStates:
             self.write(':OUTPut:ALL:STATe 0')
         else:
             raise ValueError('Not a valid input. Valid: \'ON\', \'OFF\', 1, 0')
+            
+            
 
     def set_rf_output(self, value):
         """Activates the Signal Genrator RF Output
@@ -91,13 +111,92 @@ class SMA100B(vxi11.Instrument):
         ValueError
             Valid values are: \'ON\', \'OFF\', 1, 0
         """
-        if value == 1 or value == 'ON':
+        OnsStates = ["On", "ON", "on", "oN", "1"]
+        OffsStates = ["Off", "oFf", "ofF", "OFF", "off", "0"]
+        if value in OnsStates:
             self.write(':OUTPut' + ' 1')
-        elif value == 0 or value == 'OFF':
+        elif value in  OffsStates:
             self.write(':OUTPut' + ' 0')
         else:
             raise ValueError('Not a valid input. Valid: \'ON\', \'OFF\', 1, 0')
 
+
+    def set_DCOffset(self, value):
+        """
+        
+
+        Parameters
+        ----------
+        value : int/float
+            Sets the value of the DC offset.
+            Range: -5 to 5
+            Increment: 0.001
+
+        Returns
+        -------
+        None.
+
+        """
+        if value >= -5 and value <= 5:
+            self.write(":CSYNthesis:OFFSet "+ str(value))
+        else:
+            raise ValueError("Allowed Offsets are numbers between -5 and 5!")
+
+
+    def set_CMOS_Voltage(self, value):
+        """
+        
+
+        Parameters
+        ----------
+        value : int/float
+            Sets the voltage for the CMOS signal.
+            Range: 0.8 to 2.7
+            Increment: 0.001
+
+        Raises
+        ------
+        ValueError
+            Wrong range Error.
+
+        Returns
+        -------
+        None.
+
+        """
+        if value >= 0.8 and value <= 2.7:
+            self.write(":CSYNthesis:VOLTage "+str(value))
+        else:
+            raise ValueError("Wrong Value. Allowed values are between o.8 and 2.7!")
+            
+    def set_ClockSigPhase(self, value):
+        """
+        
+
+        Parameters
+        ----------
+        value : int/float
+            Shifts the phase of the generated clock signal.
+            Range: -36000 to 36000
+            Increment: 0.1
+
+
+        Raises
+        ------
+        ValueError
+            Wrong Value Error.
+
+        Returns
+        -------
+        None.
+
+        """
+        if value >= -36000 and value <= 36000:
+            self.write(":CSYNthesis:PHASe "+ str(value))
+        else:
+            raise ValueError("Wrong value range! Allowed values between -36000 and 36000!")
+        
+        
 # =============================================================================
 # SOURce:FREQuency subsystem
 # =============================================================================
@@ -128,7 +227,13 @@ class SMA100B(vxi11.Instrument):
                 The instrument processes frequency and level settings in
                 defined sweep steps.
         '''
-        self.write(':FREQuency:MODE ' + MODE)
+        
+        sStates = ["CW", "cw", "Cw", "cW", "FIXed", "SWEep", "LIST", "CIMBined"]
+        if MODE in sStates:
+            self.write(':FREQuency:MODE ' + MODE)
+        else:
+            raise ValueError("Not a valid input. Valid: CW | FIXed | SWEep | LIST | COMBined !")
+            
 
     def set_freq_CW(self, value, unit):
         '''
@@ -145,7 +250,7 @@ class SMA100B(vxi11.Instrument):
         None.
 
         '''
-
+        # TODO Check The Code
         minFreq = 10
         maxFreq = 67
         stUnit = ['MHz', 'GHz']
@@ -167,6 +272,27 @@ class SMA100B(vxi11.Instrument):
                 'Unknown input! See function description for more info.')
 
 
+# =============================================================================
+# Activate Commands
+# =============================================================================
+
+    def act_DCOffset(self, state):
+        '''
+        
+
+        Returns
+        -------
+        Activates a DC offset.
+
+        '''
+        sState = ["On", "oN", "on", "ON", "1", "Off", "OFF", "off", "0"]
+        if state in sState:
+            self.write(":CSYNthesis:OFFSet:STATe "+ state)
+        else:
+            raise ValueError("Wrong command! You can give 'ON', 'OFF', '0', '1'!")
+        
+    
+    
 # =============================================================================
 # SOURce:POWer subsystem
 # =============================================================================
