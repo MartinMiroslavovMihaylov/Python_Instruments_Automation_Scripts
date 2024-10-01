@@ -56,6 +56,7 @@
 <li><a class="reference internal" href="#MS2760A.MS2760A.ask_Configuration"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_Configuration()</span></code></a></li>
 <li><a class="reference internal" href="#MS2760A.MS2760A.ask_DataFormat"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_DataFormat()</span></code></a></li>
 <li><a class="reference internal" href="#MS2760A.MS2760A.ask_DataPointCount"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_DataPointCount()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.ask_FreqSpan"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_FreqSpan()</span></code></a></li>
 <li><a class="reference internal" href="#MS2760A.MS2760A.ask_MarkerExcursion"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_MarkerExcursion()</span></code></a></li>
 <li><a class="reference internal" href="#MS2760A.MS2760A.ask_MarkerExcursionState"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_MarkerExcursionState()</span></code></a></li>
 <li><a class="reference internal" href="#MS2760A.MS2760A.ask_ResBwidth"><code class="docutils literal notranslate"><span class="pre">MS2760A.ask_ResBwidth()</span></code></a></li>
@@ -76,6 +77,7 @@
 <li><a class="reference internal" href="#MS2760A.MS2760A.set_ContinuousMeas"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_ContinuousMeas()</span></code></a></li>
 <li><a class="reference internal" href="#MS2760A.MS2760A.set_DataFormat"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_DataFormat()</span></code></a></li>
 <li><a class="reference internal" href="#MS2760A.MS2760A.set_DataPointCount"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_DataPointCount()</span></code></a></li>
+<li><a class="reference internal" href="#MS2760A.MS2760A.set_FreqSpan"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_FreqSpan()</span></code></a></li>
 <li><a class="reference internal" href="#MS2760A.MS2760A.set_MarkerExcursion"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_MarkerExcursion()</span></code></a></li>
 <li><a class="reference internal" href="#MS2760A.MS2760A.set_MarkerExcursionState"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_MarkerExcursionState()</span></code></a></li>
 <li><a class="reference internal" href="#MS2760A.MS2760A.set_MarkerPreset"><code class="docutils literal notranslate"><span class="pre">MS2760A.set_MarkerPreset()</span></code></a></li>
@@ -292,6 +294,20 @@ Query Return: Numeric</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>TYPE str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.ask_FreqSpan">
+<span class="sig-name descname"><span class="pre">ask_FreqSpan</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.ask_FreqSpan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.ask_FreqSpan" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Query the Frequency Span
+Numeric (Hz)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -619,6 +635,28 @@ increase sweep time.</p>
 <p>Default Value: 501
 Range: 10 to 10001</p>
 </p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MS2760A.MS2760A.set_FreqSpan">
+<span class="sig-name descname"><span class="pre">set_FreqSpan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MS2760A.html#MS2760A.set_FreqSpan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A.set_FreqSpan" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>float</em>) – Sets the frequency span. Setting the value of &lt;freq&gt; to 0 Hz is the equivalent of setting
+the span mode to zero span. Note that changing the value of the frequency span will
+change the value of the coupled parameters Start Frequency and Stop Frequency and
+might change the Center Frequency.</p></li>
+<li><p><strong>unit</strong> (<em>str</em>) – Unit value. Can be [‘HZ’,’KHZ’,’MHZ’,’GHZ’]</p></li>
+</ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – Error message</p>

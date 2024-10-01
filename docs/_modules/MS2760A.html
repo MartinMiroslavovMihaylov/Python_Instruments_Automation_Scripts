@@ -89,9 +89,8 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_str</span><span class="p">):</span>
 
-        <span class="c1"># self._resource = visa.ResourceManager().open_resource(&#39;TCPIP::&#39; + str(resource_str) + &#39;::9001::SOCKET&#39;,read_termination = &#39;\n&#39;,query_delay  = 0.5)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">ResourceManager</span><span class="p">()</span><span class="o">.</span><span class="n">open_resource</span><span class="p">(</span>
-            <span class="nb">str</span><span class="p">(</span><span class="n">resource_str</span><span class="p">),</span> <span class="n">read_termination</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">query_delay</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">ResourceManager</span><span class="p">()</span><span class="o">.</span><span class="n">open_resource</span><span class="p">(</span><span class="s1">&#39;TCPIP0::&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">resource_str</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;::59001::SOCKET&#39;</span><span class="p">,</span><span class="n">read_termination</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">query_delay</span>  <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="c1"># self._resource = visa.ResourceManager().open_resource(str(resource_str), read_termination=&#39;\n&#39;, query_delay=0.5)</span>
         <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">))</span>
 
 <div class="viewcode-block" id="MS2760A.query">
@@ -455,6 +454,22 @@
 
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:FREQuency:CENTer?&#39;</span><span class="p">))</span></div>
 
+    
+<div class="viewcode-block" id="MS2760A.ask_FreqSpan">
+<a class="viewcode-back" href="../rst/MS2760A.html#MS2760A.MS2760A.ask_FreqSpan">[docs]</a>
+    <span class="k">def</span> <span class="nf">ask_FreqSpan</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE float</span>
+<span class="sd">            Query the Frequency Span</span>
+<span class="sd">            Numeric (Hz)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;:SENSe:FREQuency:SPAN?&#39;</span><span class="p">))</span></div>
+
+    
 
 <div class="viewcode-block" id="MS2760A.ask_TraceType">
 <a class="viewcode-back" href="../rst/MS2760A.html#MS2760A.MS2760A.ask_TraceType">[docs]</a>
@@ -782,6 +797,44 @@
 
         <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">sUnits</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe:FREQuency:CENTer &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+            
+<div class="viewcode-block" id="MS2760A.set_FreqSpan">
+<a class="viewcode-back" href="../rst/MS2760A.html#MS2760A.MS2760A.set_FreqSpan">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_FreqSpan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float </span>
+<span class="sd">            Sets the frequency span. Setting the value of &lt;freq&gt; to 0 Hz is the equivalent of setting</span>
+<span class="sd">            the span mode to zero span. Note that changing the value of the frequency span will</span>
+<span class="sd">            change the value of the coupled parameters Start Frequency and Stop Frequency and</span>
+<span class="sd">            might change the Center Frequency.</span>
+
+<span class="sd">        unit : str</span>
+<span class="sd">            Unit value. Can be [&#39;HZ&#39;,&#39;KHZ&#39;,&#39;MHZ&#39;,&#39;GHZ&#39;]</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Error message</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        None.</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        
+        <span class="n">sUnits</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;HZ&#39;</span><span class="p">,</span> <span class="s1">&#39;KHZ&#39;</span><span class="p">,</span> <span class="s1">&#39;MHZ&#39;</span><span class="p">,</span> <span class="s1">&#39;GHZ&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">sUnits</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SENSe:FREQuency:SPAN &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>

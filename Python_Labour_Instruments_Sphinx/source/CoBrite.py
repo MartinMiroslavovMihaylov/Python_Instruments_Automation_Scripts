@@ -17,7 +17,7 @@ class CoBrite:
         This Class is using PyVisa to connect to CoBrite Laser, please install PyVisa and Numpy first!
         '''
 
-        self._resource = visa.ResourceManager().open_resource(str(resource_str),query_delay  = 0.5)
+        self._resource = visa.ResourceManager().open_resource(str(resource_str), query_delay  = 0.5)
         print(self._resource.query('*IDN?'))
 
         
@@ -43,6 +43,7 @@ class CoBrite:
     
     def Close(self):
         self._resource.close()
+        print('Instrument CoBrite is closed!')
         
         
 # =============================================================================

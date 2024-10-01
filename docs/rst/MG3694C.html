@@ -79,6 +79,7 @@
 <li><a class="reference internal" href="#MG3694C.MG3694C.ask_pm_state"><code class="docutils literal notranslate"><span class="pre">MG3694C.ask_pm_state()</span></code></a></li>
 <li><a class="reference internal" href="#MG3694C.MG3694C.get_Data"><code class="docutils literal notranslate"><span class="pre">MG3694C.get_Data()</span></code></a></li>
 <li><a class="reference internal" href="#MG3694C.MG3694C.query"><code class="docutils literal notranslate"><span class="pre">MG3694C.query()</span></code></a></li>
+<li><a class="reference internal" href="#MG3694C.MG3694C.reconnect"><code class="docutils literal notranslate"><span class="pre">MG3694C.reconnect()</span></code></a></li>
 <li><a class="reference internal" href="#MG3694C.MG3694C.set_OutputPowerLevel"><code class="docutils literal notranslate"><span class="pre">MG3694C.set_OutputPowerLevel()</span></code></a></li>
 <li><a class="reference internal" href="#MG3694C.MG3694C.set_am_internalFreq"><code class="docutils literal notranslate"><span class="pre">MG3694C.set_am_internalFreq()</span></code></a></li>
 <li><a class="reference internal" href="#MG3694C.MG3694C.set_am_internalWave"><code class="docutils literal notranslate"><span class="pre">MG3694C.set_am_internalWave()</span></code></a></li>
@@ -106,6 +107,7 @@
 <li><a class="reference internal" href="#MG3694C.MG3694C.set_pm_internalFreq"><code class="docutils literal notranslate"><span class="pre">MG3694C.set_pm_internalFreq()</span></code></a></li>
 <li><a class="reference internal" href="#MG3694C.MG3694C.set_pm_internalWave"><code class="docutils literal notranslate"><span class="pre">MG3694C.set_pm_internalWave()</span></code></a></li>
 <li><a class="reference internal" href="#MG3694C.MG3694C.set_pm_state"><code class="docutils literal notranslate"><span class="pre">MG3694C.set_pm_state()</span></code></a></li>
+<li><a class="reference internal" href="#MG3694C.MG3694C.write"><code class="docutils literal notranslate"><span class="pre">MG3694C.write()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -555,6 +557,11 @@ function.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="MG3694C.MG3694C.query">
 <span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MG3694C.html#MG3694C.query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MG3694C.MG3694C.query" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MG3694C.MG3694C.reconnect">
+<span class="sig-name descname"><span class="pre">reconnect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attempts_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MG3694C.html#MG3694C.reconnect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MG3694C.MG3694C.reconnect" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -1144,6 +1151,12 @@ Default: OFF</p>
 <dd class="field-odd"><p>None.</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MG3694C.MG3694C.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/MG3694C.html#MG3694C.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MG3694C.MG3694C.write" title="Link to this definition"></a></dt>
+<dd><p>Write string to instrument</p>
 </dd></dl>
 
 </dd></dl>

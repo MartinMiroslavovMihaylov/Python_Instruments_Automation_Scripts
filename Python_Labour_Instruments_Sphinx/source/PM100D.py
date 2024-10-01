@@ -1398,6 +1398,35 @@ class PM100D:
         self.ConfigPower()
         self.MeasPower()
         return self.fetchData()   
+        
+        
+        
+    def DefaultPowerMeas_W(self, WaveLength):
+        '''
+        
+
+        Returns
+        -------
+        TYPE Data from the measurement
+            Performs a power measurement whit hard codded parameter!.
+
+        '''
+        
+        self.set_PowerUnits('W')
+        self.set_WaveLength(WaveLength)
+        self.set_AutoPowerRange('ON')
+        
+        #print('#####################################')
+        #self.DisplayParam('Power')
+        #print('#####################################')
+        self.Init()
+        complite = 0
+        while complite == '1':
+            complite = self.OPC()
+            self.timeout = 0.1
+        self.ConfigPower()
+        self.MeasPower()
+        return self.fetchData()
 
 
 
