@@ -47,7 +47,11 @@
 <li><a class="reference internal" href="#">Welcome to Instruments Automatisation Libraries’s documentation!</a></li>
 <li><a class="reference internal" href="#python-libraries">Python Libraries</a></li>
 <li><a class="reference internal" href="#programms-needed-when-using-the-novoptel-laser">Programms needed when using the Novoptel Laser</a></li>
-<li><a class="reference internal" href="#how-to-use">How to use</a><ul>
+<li><a class="reference internal" href="#how-to-use-the-gui">How to use the GUI</a><ul>
+<li><a class="reference internal" href="#python-code-example-to-how-to-set-frequency-on-r-s-sma100b">Python code example to how to set frequency on R&amp;S SMA100B</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#how-to-use-the-code-without-the-gui">How to use the code without the GUI</a><ul>
 <li><a class="reference internal" href="#python-code-example-to-how-to-connect-to-thorlabs-power-meter-pm100d">Python code example to how to connect to ThorLabs Power Meter PM100D</a></li>
 </ul>
 </li>
@@ -737,8 +741,58 @@ of the operating system whether the Octave path is set correctly…
 Windows Path - ‘C:Program FilesGNU OctaveOctave-6.1.0mingw64bin’
 For more information see: Python script by https://www.novoptel.de/Home/Downloads_en.php</p>
 </section>
-<section id="how-to-use">
-<h1>How to use<a class="headerlink" href="#how-to-use" title="Link to this heading"></a></h1>
+<section id="how-to-use-the-gui">
+<h1>How to use the GUI<a class="headerlink" href="#how-to-use-the-gui" title="Link to this heading"></a></h1>
+<p>In folder “GUI_Scripts/Instrument Connect and Disconnect GUI” you will find an customtkinter GUI write
+by me to help you faster connect and disconnect to different devices. You can copy the hole “Instrument Connect and Disconnect GUI”
+folder to your prefered location. Inside you will see an main.py. You can open the main.py in your Python IDE. To use the GUI
+you will be needing two more extra library.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">customtkinter</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">pillow</span>
+</pre></div>
+</div>
+<p>After installing it you can run the main.py. An GUI window will open with list of instruments. Choose your instrument
+and press select. You can choose more the one instrument! Afterwords press the green button Connect. This will automatically
+search your ports for the devices you selected. Please be shure to connect the devices to your PC/Laptop befor you connect otherwise you will
+be not able to find any devices! After some time you will see an green text in the box bewol your selected devices with “Instruments are Connected !”.
+When you get this massage you can now close the GUI with Close and all the devices will be saved in your dictionary “dictTest” see main.py.
+You now can use the dictionary to call an device function for example</p>
+<section id="python-code-example-to-how-to-set-frequency-on-r-s-sma100b">
+<h2>Python code example to how to set frequency on R&amp;S SMA100B<a class="headerlink" href="#python-code-example-to-how-to-set-frequency-on-r-s-sma100b" title="Link to this heading"></a></h2>
+<p>Here’s a simple Python code example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">App_Constructor</span> <span class="kn">import</span> <span class="n">App</span><span class="p">,</span> <span class="n">DisconnectApp</span>
+
+<span class="c1">#######################################################</span>
+<span class="c1"># How to use the GUI Automation Controll</span>
+<span class="c1"># Call the GUI App and select your instruments</span>
+<span class="c1"># The selected instruments will be connected and you will see an</span>
+<span class="c1"># green Massage in the GUI Massage Box.</span>
+<span class="c1"># After you see the massage you can Close the app with the Close button</span>
+<span class="c1">#######################################################</span>
+
+<span class="c1"># Call GUI App</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">App</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+
+<span class="c1"># The devices will be given back in a dictionary</span>
+<span class="n">dictTest</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># Create empty dictionary to store the devices</span>
+<span class="n">dictTest</span> <span class="o">=</span>  <span class="n">app</span><span class="o">.</span><span class="n">ExtractData</span><span class="p">()</span> <span class="c1"># Call the app ExtractData Function to give you the Connected Devices back</span>
+
+<span class="n">dictTest</span><span class="p">[</span><span class="s1">&#39; Rohde and Schwarz SMA100B &#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_freq_CW</span><span class="p">(</span><span class="n">FreqVec</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s2">&quot;GHz&quot;</span><span class="p">)</span>
+<span class="n">dictTest</span><span class="p">[</span><span class="s1">&#39; Rohde and Schwarz SMA100B &#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="how-to-use-the-code-without-the-gui">
+<h1>How to use the code without the GUI<a class="headerlink" href="#how-to-use-the-code-without-the-gui" title="Link to this heading"></a></h1>
+<p>If you wann use the codes without the GUI, you can do it too. You can copy the library of the instrument
+you wanna use from “GUI_Scripts/Instrument Connect and Disconnect GUI/InstrumentControl”. To connect
+to your instrument you will still need the python librarys given in the section “Python Libraries”!
+Then you need to know what kind of connection your instrument have to your PC/Laptop Ethernet, USB-C,
+USB-A, RS323 etc. After you find out you can connect to your instrument and use all the function from
+the choosen instrument library. See the code bewol for a short example on how to connect use some function
+and then close the connection to your instrument.</p>
 <section id="python-code-example-to-how-to-connect-to-thorlabs-power-meter-pm100d">
 <h2>Python code example to how to connect to ThorLabs Power Meter PM100D<a class="headerlink" href="#python-code-example-to-how-to-connect-to-thorlabs-power-meter-pm100d" title="Link to this heading"></a></h2>
 <p>Here’s a simple Python code example how to connect and disconnect from an instrument:</p>
