@@ -202,15 +202,16 @@ def LU1000():
 
 def SpecAnalyser():
     from InstrumentControl.MS2760A import MS2760A
-    Source = '127.0.0.1'
-    Ports = visa.ResourceManager().list_resources(query='TCP?*')
-    for i in range(len(Ports)):
-        if Ports[i].split("::")[1] == Source:
-            _ = Ports[i]
-        else:
-            pass
-    # return MS2760A('127.0.0.1')
-    return MS2760A(_)
+    # Source = '127.0.0.1'
+    # Ports = visa.ResourceManager().list_resources(query='TCP?*')
+    # for i in range(len(Ports)):
+    #     if Ports[i].split("::")[1] == Source:
+    #         _ = Ports[i]
+    #     else:
+    #         pass
+    # return MS2760A(_)
+    return MS2760A('127.0.0.1')
+    
 
 
 def SigGen():
@@ -232,6 +233,20 @@ def SigGen():
         print('Instrument Connected as SG')
     else:
         pass
+
+def RnS_SMA100B():
+    from InstrumentControl.SMA100B import SMA100B
+    import vxi11
+    rm = vxi11.list_devices()
+
+    for _ in rm:
+        try:
+             SMA = SMA100B(str(_))
+             InstrSMA = _
+             SMA.Close()
+        except (visa.VisaIOError): 
+            print('Serial Number dont match!')
+    return SMA100B(InstrSMA)
 
 
 def VNA():
@@ -375,7 +390,7 @@ def PowerSupply_GPP4323():
 
 
 def InstInit(Num):
-    if Num == " Anrtisu Spectrum Analyzer MS2760A ":
+    if Num == " Anrtisu Spectrum Analyzer MS2760A  ":
         return SpecAnalyser()
     elif Num ==  " Anritsu Signal Generator MG3694C ":
         return SigGen()
@@ -397,6 +412,8 @@ def InstInit(Num):
         return APPH()
     elif Num == " 4-Channels Power Suppy GPP4323 ":
         return PowerSupply_GPP4323()
+    elif Num == " Rohde and Schwarz SMA100B  ":
+        return RnS_SMA100B()
     else:
         raise ValueError('Invalid Instrument Selected')
     

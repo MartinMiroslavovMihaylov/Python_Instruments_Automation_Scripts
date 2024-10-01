@@ -17,9 +17,8 @@ class MS2760A:
 
     def __init__(self, resource_str):
 
-        # self._resource = visa.ResourceManager().open_resource('TCPIP::' + str(resource_str) + '::9001::SOCKET',read_termination = '\n',query_delay  = 0.5)
-        self._resource = visa.ResourceManager().open_resource(
-            str(resource_str), read_termination='\n', query_delay=0.5)
+        self._resource = visa.ResourceManager().open_resource('TCPIP0::' + str(resource_str) + '::59001::SOCKET',read_termination = '\n',query_delay  = 0.5)
+        # self._resource = visa.ResourceManager().open_resource(str(resource_str), read_termination='\n', query_delay=0.5)
         print(self._resource.query('*IDN?'))
 
     def query(self, message):
@@ -323,6 +322,19 @@ class MS2760A:
         '''
 
         return float(self.query(':SENSe:FREQuency:CENTer?'))
+    
+    def ask_FreqSpan(self):
+        '''
+
+
+        Returns
+        -------
+        TYPE float
+            Query the Frequency Span
+            Numeric (Hz)
+        '''
+        return float(self.query(':SENSe:FREQuency:SPAN?'))
+    
 
     def ask_TraceType(self, number):
         '''
@@ -624,6 +636,41 @@ class MS2760A:
 
         if unit in sUnits:
             self.write(':SENSe:FREQuency:CENTer '+str(value) + ' ' + str(unit))
+        else:
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+            
+    def set_FreqSpan(self, value, unit):
+        '''
+
+
+        Parameters
+        ----------
+        value : float 
+            Sets the frequency span. Setting the value of <freq> to 0 Hz is the equivalent of setting
+            the span mode to zero span. Note that changing the value of the frequency span will
+            change the value of the coupled parameters Start Frequency and Stop Frequency and
+            might change the Center Frequency.
+
+        unit : str
+            Unit value. Can be ['HZ','KHZ','MHZ','GHZ']
+
+        Raises
+        ------
+        ValueError
+            Error message
+
+        Returns
+        -------
+        None.
+
+        '''
+        
+        
+        sUnits = ['HZ', 'KHZ', 'MHZ', 'GHZ']
+
+        if unit in sUnits:
+            self.write(':SENSe:FREQuency:SPAN '+str(value) + ' ' + str(unit))
         else:
             raise ValueError(
                 'Unknown input! See function description for more info.')
