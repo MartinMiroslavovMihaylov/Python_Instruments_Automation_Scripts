@@ -4,7 +4,7 @@ Folder containing the Python Instruments Scripts with setup.py file for easy ins
 
 # Python Documentation Link
 
-https://martinmiroslavovmihaylov.github.io/Python_Documents/
+https://martinmiroslavovmihaylov.github.io/Python_Instruments_Automation_Scripts/
 
 # Python LaTeX Documentation
 
