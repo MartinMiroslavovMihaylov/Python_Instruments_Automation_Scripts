@@ -407,19 +407,18 @@ class DisconnectApp(customtkinter.CTk):
 
     def disconnect_device(self, device_name):
         if device_name == ' Anritsu Vectro Analyzer MS4647B ':
-            """Disconnect VNA."""
+            """Disconnect a specific device."""
             self.DissDict[device_name].RTL()
             self.DissDict[device_name].Close()  # Disconnect the device
             self.buttons[device_name].configure(state="disabled")
             self.textbox.insert("0.0", f"{device_name} is Disconnected\n")
             self.textbox.see('0.0')
         else:
-            """Disconnect a the rest of the devices."""
+            """Disconnect a specific device."""
             self.DissDict[device_name].Close()  # Disconnect the device
             self.buttons[device_name].configure(state="disabled")
             self.textbox.insert("0.0", f"{device_name} is Disconnected\n")
             self.textbox.see('0.0')
-   
 
     def quit_window(self):
         """Quit the application."""
