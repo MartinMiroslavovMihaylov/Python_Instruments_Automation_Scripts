@@ -997,7 +997,8 @@ class MS2760A:
         self.set_DataFormat('ASCii')
         data = self.write(':TRACe:DATA? '+str(value))
         data = self.ask_DataFormat()
-        new_str = data[6:-5]
+        num_header = int(data[1])+2  # get the header size
+        new_str = data[num_header:-5]  # truncate the header block and end block
         data_arr = new_str.split(',')
         Output = [float(item) for item in data_arr]
         Output = np.array(Output)
