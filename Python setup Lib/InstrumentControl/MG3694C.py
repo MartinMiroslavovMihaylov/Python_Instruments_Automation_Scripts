@@ -15,7 +15,14 @@ print(
 '''
 
 #####################################################################################
-
+Currently the Anritsu MG3694C Signal Generator is in dynamic DHCP mode!!!
+    1) Make sure Instrument and PC are connected vie ethernet  cable.
+    2) Hold Windows + R keys and type cmd
+    3) type: arp -a
+    4) Find the IP-Adress corresponding to the MAC:Adress printed on the device
+    5) For SCT-LAB it is: 00-50-c2-38-3f-eb
+    6) Use this IP-Adress to connect
+    
 Befor using the MG3694C you need to:
     1) Make sure Instrument and PC are connected vie ethernet  cable.
     2) Hold Windows + R keys and type ncpa.cpl
