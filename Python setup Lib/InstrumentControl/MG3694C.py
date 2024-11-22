@@ -1183,17 +1183,17 @@ class MG3694C(vxi11.Instrument):
         '''
         
         
-        minFreq = 10
-        maxFreq = 40 
+        minFreq = 10e6 # 10 MHz
+        maxFreq = 40e9 # 40 GHz
         stUnit = ['MHz','GHz']
 
         if unit == 'MHz':
-            if value <= 40*1e9 and value >= 10:
+            if value*1e6 <= maxFreq and value*1e6 >= minFreq:
                 self.write(':SOURce:FREQuency:CW ' + str(value) + ' ' + unit)
             else:
-                raise ValueError('Warning !! Minimum Frequency = 10 MHz and Maximum Frequency = 40*1e9 MHz')
+                raise ValueError('Warning !! Minimum Frequency = 10 MHz and Maximum Frequency = 40 GHz')
         elif unit == 'GHz':
-            if value <= 40 and value >= 0.01:
+            if value*1e9 <= maxFreq and value*1e9 >= minFreq:
                 self.write(':SOURce:FREQuency:CW ' + str(value) + ' ' + unit)
             else:
                 raise ValueError('Warning !! Minimum Frequency = 0.01 GHz and Maximum Frequency = 40 GHz')
