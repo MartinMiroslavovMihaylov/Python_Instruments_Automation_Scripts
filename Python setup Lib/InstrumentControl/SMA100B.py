@@ -98,6 +98,9 @@ class SMA100B(vxi11.Instrument):
         else:
             raise ValueError('Not a valid input. Valid: \'ON\', \'OFF\', 1, 0')
 
+    def set_output(self, value):
+        self.set_rf_output(value)
+
 # =============================================================================
 # SOURce:FREQuency subsystem
 # =============================================================================
@@ -155,7 +158,7 @@ class SMA100B(vxi11.Instrument):
                 self.write(':SOURce:FREQuency:CW ' + str(value) + ' ' + unit)
             else:
                 raise ValueError(
-                    'Warning !! Minimum Frequency = 10 MHz and Maximum Frequency = 67*1e9 MHz')
+                    'Warning !! Minimum Frequency = 10 MHz and Maximum Frequency = 67 GHz')
         elif unit == 'GHz':
             if value <= maxFreq and value >= 0.01:
                 self.write(':SOURce:FREQuency:CW ' + str(value) + ' ' + unit)
