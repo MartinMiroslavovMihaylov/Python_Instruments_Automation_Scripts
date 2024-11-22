@@ -182,4 +182,12 @@ class SMA100B(vxi11.Instrument):
         value : float
             Output Power in dBm
         """        ''''''
-        self.write('SOURce:POWer:LEVel:IMMediate:AMPlitude ' + str(value))
+        minVal = -20.0
+        maxVal = 30.0
+        if value > maxVal or value < minVal:
+            raise ValueError('Unknown input! See function description for more info.')
+        else:
+            self.write('SOURce:POWer:LEVel:IMMediate:AMPlitude ' + str(value))
+
+    def set_OutputPowerLevel(self,value):
+        self.set_rf_power(value)
