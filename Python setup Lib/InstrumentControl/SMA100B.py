@@ -149,7 +149,7 @@ class SMA100B(vxi11.Instrument):
 
         '''
 
-        minFreq = 8e6 # 8 kHz
+        minFreq = 8e3 # 8 kHz
         maxFreq = 72e9  # 67 GHz calibrated, 72 GHz max
         stUnit = ['MHz', 'GHz']
 
