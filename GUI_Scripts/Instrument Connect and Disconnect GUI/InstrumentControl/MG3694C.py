@@ -15,7 +15,14 @@ print(
 '''
 
 #####################################################################################
-
+Currently the Anritsu MG3694C Signal Generator is in dynamic DHCP mode!!!
+    1) Make sure Instrument and PC are connected vie ethernet  cable.
+    2) Hold Windows + R keys and type cmd
+    3) type: arp -a
+    4) Find the IP-Adress corresponding to the MAC:Adress printed on the device
+    5) For SCT-LAB it is: 00-50-c2-38-3f-eb
+    6) Use this IP-Adress to connect
+    
 Befor using the MG3694C you need to:
     1) Make sure Instrument and PC are connected vie ethernet  cable.
     2) Hold Windows + R keys and type ncpa.cpl
@@ -1183,17 +1190,17 @@ class MG3694C(vxi11.Instrument):
         '''
         
         
-        minFreq = 10
-        maxFreq = 40 
+        minFreq = 10e6 # 10 MHz
+        maxFreq = 40e9 # 40 GHz
         stUnit = ['MHz','GHz']
 
         if unit == 'MHz':
-            if value <= 40*1e9 and value >= 10:
+            if value*1e6 <= maxFreq and value*1e6 >= minFreq:
                 self.write(':SOURce:FREQuency:CW ' + str(value) + ' ' + unit)
             else:
-                raise ValueError('Warning !! Minimum Frequency = 10 MHz and Maximum Frequency = 40*1e9 MHz')
+                raise ValueError('Warning !! Minimum Frequency = 10 MHz and Maximum Frequency = 40 GHz')
         elif unit == 'GHz':
-            if value <= 40 and value >= 0.01:
+            if value*1e9 <= maxFreq and value*1e9 >= minFreq:
                 self.write(':SOURce:FREQuency:CW ' + str(value) + ' ' + unit)
             else:
                 raise ValueError('Warning !! Minimum Frequency = 0.01 GHz and Maximum Frequency = 40 GHz')
