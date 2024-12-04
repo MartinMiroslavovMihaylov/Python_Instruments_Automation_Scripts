@@ -98,6 +98,9 @@ class SMA100B(vxi11.Instrument):
         else:
             raise ValueError('Not a valid input. Valid: \'ON\', \'OFF\', 1, 0')
 
+    def set_output(self, value):
+        self.set_rf_output(value)
+
 # =============================================================================
 # SOURce:FREQuency subsystem
 # =============================================================================
@@ -146,22 +149,22 @@ class SMA100B(vxi11.Instrument):
 
         '''
 
-        minFreq = 10
-        maxFreq = 67
+        minFreq = 8e3 # 8 kHz
+        maxFreq = 72e9  # 67 GHz calibrated, 72 GHz max
         stUnit = ['MHz', 'GHz']
 
         if unit == 'MHz':
-            if value <= maxFreq*1e9 and value >= 10:
+            if value*1e6 <= maxFreq and value*1e6 >= minFreq:
                 self.write(':SOURce:FREQuency:CW ' + str(value) + ' ' + unit)
             else:
                 raise ValueError(
-                    'Warning !! Minimum Frequency = 10 MHz and Maximum Frequency = 67*1e9 MHz')
+                    'Warning !! Minimum Frequency = 8 kHz and Maximum Frequency = 67 GHz')
         elif unit == 'GHz':
-            if value <= maxFreq and value >= 0.01:
+            if value*1e9 <= maxFreq and value*1e9 >= minFreq:
                 self.write(':SOURce:FREQuency:CW ' + str(value) + ' ' + unit)
             else:
                 raise ValueError(
-                    'Warning !! Minimum Frequency = 0.01 GHz and Maximum Frequency = 67 GHz')
+                    'Warning !! Minimum Frequency = 8 kHz and Maximum Frequency = 67 GHz')
         else:
             raise ValueError(
                 'Unknown input! See function description for more info.')
@@ -179,4 +182,12 @@ class SMA100B(vxi11.Instrument):
         value : float
             Output Power in dBm
         """        ''''''
-        self.write('SOURce:POWer:LEVel:IMMediate:AMPlitude ' + str(value))
+        minVal = -20.0
+        maxVal = 30.0
+        if value > maxVal or value < minVal:
+            raise ValueError('Unknown input! See function description for more info.')
+        else:
+            self.write('SOURce:POWer:LEVel:IMMediate:AMPlitude ' + str(value))
+
+    def set_OutputPowerLevel(self,value):
+        self.set_rf_power(value)
