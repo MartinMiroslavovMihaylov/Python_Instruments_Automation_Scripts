@@ -6,7 +6,7 @@ from CTkListbox import *
 import os
 from PIL import Image,ImageTk
 import sys
-from InstrumentControl.InstrumentSelect import InstInit
+from Instruments_Libraries.InstrumentSelect import InstInit
 
 
 customtkinter.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark", "Light"
