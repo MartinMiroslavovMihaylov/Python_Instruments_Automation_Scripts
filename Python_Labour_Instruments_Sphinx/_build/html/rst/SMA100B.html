@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rohde and Schwarz Signal Generator SMA100B module &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Instruments Automatisation Libraries
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Rohde and Schwarz Signal Generator SMA100B module</a><ul>
+<li><a class="reference internal" href="#SMA100B.SMA100B"><code class="docutils literal notranslate"><span class="pre">SMA100B</span></code></a><ul>
+<li><a class="reference internal" href="#SMA100B.SMA100B.Close"><code class="docutils literal notranslate"><span class="pre">SMA100B.Close()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.act_DCOffset"><code class="docutils literal notranslate"><span class="pre">SMA100B.act_DCOffset()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.ask_OutputImpedance"><code class="docutils literal notranslate"><span class="pre">SMA100B.ask_OutputImpedance()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.getIdn"><code class="docutils literal notranslate"><span class="pre">SMA100B.getIdn()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.query"><code class="docutils literal notranslate"><span class="pre">SMA100B.query()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.reset"><code class="docutils literal notranslate"><span class="pre">SMA100B.reset()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.set_CMOS_Voltage"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_CMOS_Voltage()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.set_ClockSigPhase"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_ClockSigPhase()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.set_DCOffset"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_DCOffset()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.set_freq_CW"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_freq_CW()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.set_frequency_mode"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_frequency_mode()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.set_rf_output"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_rf_output()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.set_rf_output_all"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_rf_output_all()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.set_rf_power"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_rf_power()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Instruments Automatisation Libraries</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Rohde and Schwarz Signal Generator SMA100B module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/rst/SMA100B.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rohde-and-schwarz-signal-generator-sma100b-module">
+<h1>Rohde and Schwarz Signal Generator SMA100B module<a class="headerlink" href="#rohde-and-schwarz-signal-generator-sma100b-module" title="Link to this heading"></a></h1>
+<p id="module-SMA100B">”
+Created on Fir Feb 02 13:00:00 2024</p>
+<p>&#64;author: mweizel</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="SMA100B.SMA100B">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SMA100B.</span></span><span class="sig-name descname"><span class="pre">SMA100B</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Instrument</span></code></p>
+<p>A class thats uses vxi11 library to interface a SMA100B
+Need to have python ‘vxi11’ library installed!</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.Close">
+<span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.Close" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.act_DCOffset">
+<span class="sig-name descname"><span class="pre">act_DCOffset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B.act_DCOffset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.act_DCOffset" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Activates a DC offset.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.ask_OutputImpedance">
+<span class="sig-name descname"><span class="pre">ask_OutputImpedance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B.ask_OutputImpedance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.ask_OutputImpedance" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Queries the impedance of the RF outputs.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.getIdn">
+<span class="sig-name descname"><span class="pre">getIdn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B.getIdn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.getIdn" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DESCRIPTION.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>TYPE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.query">
+<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B.query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.query" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.reset" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.set_CMOS_Voltage">
+<span class="sig-name descname"><span class="pre">set_CMOS_Voltage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B.set_CMOS_Voltage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.set_CMOS_Voltage" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int/float</em>) – Sets the voltage for the CMOS signal.
+Range: 0.8 to 2.7
+Increment: 0.001</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Wrong range Error.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.set_ClockSigPhase">
+<span class="sig-name descname"><span class="pre">set_ClockSigPhase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B.set_ClockSigPhase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.set_ClockSigPhase" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int/float</em>) – Shifts the phase of the generated clock signal.
+Range: -36000 to 36000
+Increment: 0.1</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Wrong Value Error.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.set_DCOffset">
+<span class="sig-name descname"><span class="pre">set_DCOffset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B.set_DCOffset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.set_DCOffset" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>int/float</em>) – Sets the value of the DC offset.
+Range: -5 to 5
+Increment: 0.001</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.set_freq_CW">
+<span class="sig-name descname"><span class="pre">set_freq_CW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B.set_freq_CW"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.set_freq_CW" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>int/float</em>) – Parameter Frequency</p></li>
+<li><p><strong>unit</strong> (<em>str</em>) – Frequency Unit: ‘GHz’ or ‘MHz’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.set_frequency_mode">
+<span class="sig-name descname"><span class="pre">set_frequency_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MODE</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B.set_frequency_mode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.set_frequency_mode" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>MODE</strong> (<em>str</em>) – <p>&lt;Mode&gt; CW | FIXed | SWEep | LIST | COMBined</p>
+<dl class="simple">
+<dt>CW|FIXed</dt><dd><p>Sets the fixed frequency mode. CW and FIXed are synonyms.
+The instrument operates at a defined frequency.</p>
+</dd>
+<dt>SWEep</dt><dd><p>Sets sweep mode.
+The instrument processes frequency (and level) settings in
+defined sweep steps.</p>
+</dd>
+<dt>LIST</dt><dd><p>Sets list mode.
+The instrument processes frequency and level settings by
+means of values loaded from a list.</p>
+</dd>
+<dt>COMBined</dt><dd><p>Sets the combined RF frequency / level sweep mode.
+The instrument processes frequency and level settings in
+defined sweep steps.</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.set_rf_output">
+<span class="sig-name descname"><span class="pre">set_rf_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B.set_rf_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.set_rf_output" title="Link to this definition"></a></dt>
+<dd><p>Activates the Signal Genrator RF Output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>str/int</em>) – ‘ON’ 1 or ‘OFF’ 0</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Valid values are: ‘ON’, ‘OFF’, 1, 0</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.set_rf_output_all">
+<span class="sig-name descname"><span class="pre">set_rf_output_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B.set_rf_output_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.set_rf_output_all" title="Link to this definition"></a></dt>
+<dd><p>Activates all Signal Genrator RF Outputs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>str/int</em>) – ‘ON’ 1 or ‘OFF’ 0</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Valid values are: ‘ON’, ‘OFF’, 1, 0</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.set_rf_power">
+<span class="sig-name descname"><span class="pre">set_rf_power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B.set_rf_power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.set_rf_power" title="Link to this definition"></a></dt>
+<dd><p>Sets the Signal Generator Output Power in dBm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Output Power in dBm</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Martin.Mihaylov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
