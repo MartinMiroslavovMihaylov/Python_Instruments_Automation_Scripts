@@ -29,51 +29,51 @@ to be finished.
 # Instruments
 
 Anrtisu Spectrum Analyzer MS2760A
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/main/Pictures/SA_Back.jpg?raw=true)
+	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/SA_Back.jpg?raw=true)
 
 
 Anritsu Signal Generator MG3694C
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/main/Pictures/SG_Front.jpg?raw=true)
+	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/SG_Front.jpg?raw=true)
 
 
 Rohde & Schwarz Signal Generator SMA100B
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/main/Pictures/SMA100B_Front.jpg?raw=true)
+	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/SMA100B_Front.jpg?raw=true)
 
 
 Anritsu Vectro Analyzer MS4647B
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/main/Pictures/VNA_Front.jpg?raw=true)
+	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/VNA_Front.jpg?raw=true)
 
 
 Yokogawa Optical Spectrum Analyzer AQ6370D
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/main/Pictures/OSA_Front.jpg?raw=true)
+	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/OSA_Front.jpg?raw=true)
 
 
 CoBrite Tunable Laser
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/main/Pictures/CoBri_Front.jpg?raw=true)
+	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/CoBri_Front.jpg?raw=true)
 	
 	
 Novoptel Laser LU1000
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/main/Pictures/LU_Front.jpg?raw=true)
+	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/LU_Front.jpg?raw=true)
 	
 
 KEITHLEY Source Meter 2612
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/main/Pictures/KA_Front.jpg?raw=true)
+	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/KA_Front.jpg?raw=true)
 
 
 Power Meter ThorLabs PM100D
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/main/Pictures/PM_Front.jpg?raw=true)
+	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/PM_Front.jpg?raw=true)
 
 
 Power Suppy GPP4323 4-Channels 
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/main/Pictures/GPP_Front.jpg?raw=true)
+	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/GPP_Front.jpg?raw=true)
 
 
 Power Supply RD3005, KA3005 and KA3005p
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/main/Pictures/KP_Front.jpg?raw=true)
+	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/KP_Front.jpg?raw=true)
 
 
 AnaPico AG APPH20G 
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/main/Pictures/APP_Front.jpg?raw=true)
+	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/APP_Front.jpg?raw=true)
 
 
 
