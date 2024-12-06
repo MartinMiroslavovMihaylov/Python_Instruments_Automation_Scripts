@@ -1,4 +1,9 @@
-# Python setup.py Lib  
+# Old Git files branch 
 
-Old git files form laboratory PCs and old Laptop
+Here are some old files from the olf Git structure
+
+
+# Python Documentation Link
+
+https://martinmiroslavovmihaylov.github.io/Python_Instruments_Automation_Scripts/
 
