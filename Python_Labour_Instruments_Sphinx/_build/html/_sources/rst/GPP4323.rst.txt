@@ -1,7 +1,0 @@
-4 Channels Power Suppy GPP4323 module
-==============
-
-.. automodule:: GPP4323
-   :members:
-   :undoc-members:
-   :show-inheritance:

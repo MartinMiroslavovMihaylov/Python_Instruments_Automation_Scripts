@@ -1,7 +1,0 @@
-Power Supply RD3005 module
-=============
-
-.. automodule:: RD3005
-   :members:
-   :undoc-members:
-   :show-inheritance:
