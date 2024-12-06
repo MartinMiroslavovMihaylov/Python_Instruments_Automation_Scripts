@@ -1,7 +1,0 @@
-Yokogawa Optical Spectrum Analyzer AQ6370D module
-==============
-
-.. automodule:: AQ6370D
-   :members:
-   :undoc-members:
-   :show-inheritance:
