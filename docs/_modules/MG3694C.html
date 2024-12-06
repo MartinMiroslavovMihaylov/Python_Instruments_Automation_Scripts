@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
@@ -5,18 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MG3694C &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -85,7 +83,14 @@
 <span class="sd">&#39;&#39;&#39;</span>
 
 <span class="sd">#####################################################################################</span>
-
+<span class="sd">Currently the Anritsu MG3694C Signal Generator is in dynamic DHCP mode!!!</span>
+<span class="sd">    1) Make sure Instrument and PC are connected vie ethernet  cable.</span>
+<span class="sd">    2) Hold Windows + R keys and type cmd</span>
+<span class="sd">    3) type: arp -a</span>
+<span class="sd">    4) Find the IP-Adress corresponding to the MAC:Adress printed on the device</span>
+<span class="sd">    5) For SCT-LAB it is: 00-50-c2-38-3f-eb</span>
+<span class="sd">    6) Use this IP-Adress to connect</span>
+<span class="sd">    </span>
 <span class="sd">Befor using the MG3694C you need to:</span>
 <span class="sd">    1) Make sure Instrument and PC are connected vie ethernet  cable.</span>
 <span class="sd">    2) Hold Windows + R keys and type ncpa.cpl</span>
@@ -1404,17 +1409,17 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         
         
-        <span class="n">minFreq</span> <span class="o">=</span> <span class="mi">10</span>
-        <span class="n">maxFreq</span> <span class="o">=</span> <span class="mi">40</span> 
+        <span class="n">minFreq</span> <span class="o">=</span> <span class="mf">10e6</span> <span class="c1"># 10 MHz</span>
+        <span class="n">maxFreq</span> <span class="o">=</span> <span class="mf">40e9</span> <span class="c1"># 40 GHz</span>
         <span class="n">stUnit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MHz&#39;</span><span class="p">,</span><span class="s1">&#39;GHz&#39;</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="s1">&#39;MHz&#39;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">40</span><span class="o">*</span><span class="mf">1e9</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span><span class="o">*</span><span class="mf">1e6</span> <span class="o">&lt;=</span> <span class="n">maxFreq</span> <span class="ow">and</span> <span class="n">value</span><span class="o">*</span><span class="mf">1e6</span> <span class="o">&gt;=</span> <span class="n">minFreq</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:FREQuency:CW &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">unit</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Warning !! Minimum Frequency = 10 MHz and Maximum Frequency = 40*1e9 MHz&#39;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Warning !! Minimum Frequency = 10 MHz and Maximum Frequency = 40 GHz&#39;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">unit</span> <span class="o">==</span> <span class="s1">&#39;GHz&#39;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">40</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mf">0.01</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span><span class="o">*</span><span class="mf">1e9</span> <span class="o">&lt;=</span> <span class="n">maxFreq</span> <span class="ow">and</span> <span class="n">value</span><span class="o">*</span><span class="mf">1e9</span> <span class="o">&gt;=</span> <span class="n">minFreq</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:SOURce:FREQuency:CW &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">unit</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Warning !! Minimum Frequency = 0.01 GHz and Maximum Frequency = 40 GHz&#39;</span><span class="p">)</span>
