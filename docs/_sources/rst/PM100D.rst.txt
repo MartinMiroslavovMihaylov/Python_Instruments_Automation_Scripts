@@ -1,0 +1,7 @@
+Power Meter ThorLabs PM100D module
+=============
+
+.. automodule:: PM100D
+   :members:
+   :undoc-members:
+   :show-inheritance:
