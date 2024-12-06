@@ -1,6 +1,16 @@
 # Python setup.py Lib  
 
-The GUIs for the device control scripts are maintained here.
+Folder containing the Python Instruments Scripts with setup.py file for easy instal
+
+# Python Documentation Link
+
+https://martinmiroslavovmihaylov.github.io/Python_Instruments_Automation_Scripts/
+
+# Python LaTeX Documentation
+
+Documentation/Automate measurements with Python
+
+
 
 # Python GUI 
 
@@ -15,7 +25,6 @@ The Live Update extention for the GUI is still in development and since is not a
 to be finished. 
 
 
-<<<<<<< HEAD
 
 # Instruments
 
@@ -68,5 +77,3 @@ AnaPico AG APPH20G
 
 
 
-=======
->>>>>>> 10c6d51174e7b015d3f48a1d8adb616e5d9aa593
