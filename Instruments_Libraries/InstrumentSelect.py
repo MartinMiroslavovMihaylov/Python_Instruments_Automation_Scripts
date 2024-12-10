@@ -365,7 +365,12 @@ def PowerSupply_GPP4323():
     GPP.Close()
     return GPP4323(Port_)
           
-    
+          
+    def UXR():
+        # TODO: Write an auto connect script 
+        # Fest IP
+        # "TCPIP0::KEYSIGH-Q75EBO9.local::hislip0::INSTR"
+    # return UXR()
 # =============================================================================
 #     Old GPP Function
 # =============================================================================
@@ -414,6 +419,8 @@ def InstInit(Num):
         return PowerSupply_GPP4323()
     elif Num == " Rohde and Schwarz SMA100B  ":
         return RnS_SMA100B()
+    elif Num == " Keysight UXR0702A "
+        return UXR()
     else:
         raise ValueError('Invalid Instrument Selected')
     
