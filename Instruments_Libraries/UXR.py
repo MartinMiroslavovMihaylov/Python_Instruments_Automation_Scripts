@@ -88,6 +88,19 @@ class UXR:
     # =============================================================================
     # : (Root Level) Commands
     # =============================================================================
+    def aquisition_done(self) -> int:
+        """The :ADER? query reads the Acquisition Done Event Register and returns 1 or 0.
+        After the Acquisition Done Event Register is read, the register is cleared. The
+        returned value 1 indicates an acquisition completed event has occurred and 0
+        indicates an acquisition completed event has not occurred.
+
+        Returns
+        -------
+        int
+            {1 | 0}
+        """
+        return int(self.query(":ADER?"))
+    
     def aquisition_state(self) -> str:
         """The :ASTate? query returns the acquisition state.
 
@@ -491,13 +504,17 @@ class UXR:
 
         # Query the waveform data
         if self._waveform_format == "WORD":
-            return self.query_binary_values(
+            try:
+                return self.query_binary_values(
                 message,
                 datatype=datatype,
                 container=container,
                 data_points=data_points,
                 **kwargs,
             )
+            except Exception as e:
+                print("Error:", e)
+            
         else:
             raise NotImplementedError(
                 f"Unsupported waveform format: {self._waveform_format}. "
