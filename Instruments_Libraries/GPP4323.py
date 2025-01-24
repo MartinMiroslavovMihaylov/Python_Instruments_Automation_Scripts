@@ -11,8 +11,16 @@ import io
 import serial
 import time
 
+print(
+'''
+#####################################################################################
+    To use the DC-Power Supply GW-Instek GPP4323 you need to install the USB Driver 
+    from https://www.gwinstek.com/en-global/download/ - GPP USB Driver 
+    Python Library needed: pip install pyserial
+#####################################################################################
+'''
+)
 
-    
 class GPP4323:
     def __init__(self, resource_str):
         '''
