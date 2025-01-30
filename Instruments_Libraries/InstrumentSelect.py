@@ -401,19 +401,19 @@ def InstInit(Num):
         return SigGen()
     elif Num == " Anritsu Vectro Analyzer MS4647B  ":
         return VNA()
-    elif Num ==  " Power Meter ThorLabs PM100D ":
+    elif Num ==  " Power Meter ThorLabs PM100D  ":
         return PowerMeter()
-    elif Num == " Novoptel Laser LU1000 ":
+    elif Num == " Novoptel Laser LU1000  ":
         return LU1000()
-    elif Num == " Yokogawa Optical Spectrum Analyzer AQ6370D ":
+    elif Num == "Yokogawa Optical Spectrum Analyzer AQ6370D  ":
         return OSA()
-    elif Num == " KEITHLEY Source Meter 2612 ":
+    elif Num == " KEITHLEY Source Meter 2612  ":
         return SourceMeter()
     elif Num == " Power Supply KA3005 ":
         return PowerSupply()
-    elif Num == " CoBrite Tunable Laser ":
+    elif Num == " CoBrite Tunable Laser  ":
         return CoBrite()
-    elif Num == " AnaPico AG,APPH20G ":
+    elif Num == " AnaPico AG,APPH20G  ":
         return APPH()
     elif Num == " 4-Channels Power Suppy GPP4323 ":
         return PowerSupply_GPP4323()
