@@ -416,7 +416,7 @@ def InstInit(Num):
         return CoBrite()
     elif Num == " AnaPico AG,APPH20G  ":
         return APPH()
-    elif Num == " 4-Channels Power Suppy GPP4323  ":
+    elif Num == " 4-Channels Power Suppy GPP4323 ":
         return PowerSupply_GPP4323()
     elif Num == " Rohde and Schwarz SMA100B  ":
         return RnS_SMA100B()
