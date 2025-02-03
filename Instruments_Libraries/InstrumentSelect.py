@@ -12,7 +12,7 @@ import pyvisa as visa
 
 
 def OSA():
-    from InstrumentControl.AQ6370D import AQ6370D
+    from Instruments_Libraries.AQ6370D import AQ6370D
     # import vxi11
     # rm = vxi11.list_devices()
     # for _ in rm:
@@ -28,7 +28,7 @@ def OSA():
 
 
 def CoBrite():
-    from InstrumentControl.CoBrite import CoBrite
+    from Instruments_Libraries.CoBrite import CoBrite
     rm = visa.ResourceManager()
     CP = 0
     dataInst = []
@@ -52,7 +52,7 @@ def CoBrite():
 
 
 def SourceMeter():
-    from InstrumentControl.KEITHLEY2612 import KEITHLEY2612
+    from Instruments_Libraries.KEITHLEY2612 import KEITHLEY2612
     rm = visa.ResourceManager()
     KM = 0
     dataInst = []
@@ -78,9 +78,9 @@ def SourceMeter():
 
 
 def PowerSupply():
-    from InstrumentControl.RD3005 import RD3005
-    from InstrumentControl.KA3005 import KA3005
-    from InstrumentControl.KA3005p import KA3005p
+    from Instruments_Libraries.RD3005 import RD3005
+    from Instruments_Libraries.KA3005 import KA3005
+    from Instruments_Libraries.KA3005p import KA3005p
     
     SerialNum = ['KORAD KA3005P V5.8 SN:03379314' , 'KORAD KA3005P V5.8 SN:03379289' , 'RND 320-KA3005P V2.0']      
     #Prnt all instruments connected to the COM-Ports.
@@ -148,9 +148,9 @@ def PowerSupply():
 # =============================================================================
         
 # def PowerSupply():
-#     from InstrumentControl.RD3005 import RD3005
-#     from InstrumentControl.KA3005 import KA3005
-#     from InstrumentControl.KA3005p import KA3005p
+#     from Instruments_Libraries.RD3005 import RD3005
+#     from Instruments_Libraries.KA3005 import KA3005
+#     from Instruments_Libraries.KA3005p import KA3005p
     
 #     SerialNum = ['KORAD KA3005P V5.8 SN:03379314' , 'KORAD KA3005P V5.8 SN:03379289' , 'RND 320-KA3005P V2.0', 'GW INSTEK,GPP-4323,SN:GEW840790,V1.17']      
 #     #Prnt all instruments connected to the COM-Ports.
@@ -183,7 +183,7 @@ def PowerSupply():
 
 
 def PowerMeter():
-    from InstrumentControl.PM100D import PM100D
+    from Instruments_Libraries.PM100D import PM100D
     Serien_Nummer = ['P0024970','P0033858', 'P0037385', 'P0037393']
     for _ in Serien_Nummer:
         try:
@@ -196,12 +196,12 @@ def PowerMeter():
 
 
 def LU1000():
-    from InstrumentControl.LU1000 import LU1000
+    from Instruments_Libraries.LU1000 import LU1000
     return LU1000()
 
 
 def SpecAnalyser():
-    from InstrumentControl.MS2760A import MS2760A
+    from Instruments_Libraries.MS2760A import MS2760A
     # Source = '127.0.0.1'
     # Ports = visa.ResourceManager().list_resources(query='TCP?*')
     # for i in range(len(Ports)):
@@ -215,7 +215,7 @@ def SpecAnalyser():
 
 
 def SigGen():
-    from InstrumentControl.MG3694C import MG3694C
+    from Instruments_Libraries.MG3694C import MG3694C
     print('''
           ########### Set the correct network settings ###########
           
@@ -235,7 +235,7 @@ def SigGen():
         pass
 
 def RnS_SMA100B():
-    from InstrumentControl.SMA100B import SMA100B
+    from Instruments_Libraries.SMA100B import SMA100B
     import vxi11
     rm = vxi11.list_devices()
 
@@ -250,7 +250,7 @@ def RnS_SMA100B():
 
 
 def VNA():
-    from InstrumentControl.MS4647B import MS4647B
+    from Instruments_Libraries.MS4647B import MS4647B
     import vxi11
     rm = vxi11.list_devices()
     # rm = visa.ResourceManager('@py')
@@ -295,7 +295,7 @@ def VNA():
 
            
 def APPH():
-    from InstrumentControl.APPH import APPH
+    from Instruments_Libraries.APPH import APPH
     # import vxi11
     # rm = vxi11.list_devices()
     import pyvisa as visa
@@ -328,7 +328,7 @@ def APPH():
     
     
 def PowerSupply_GPP4323():
-    from InstrumentControl.GPP4323 import GPP4323
+    from Instruments_Libraries.GPP4323 import GPP4323
     import serial.tools.list_ports
     
     SerialNum = ['GW INSTEK,GPP-4323,SN:GEW840790,V1.17', 'GW Instek,GPP-4323,SN:GEW866095,V1.19', 'GW Instek,GPP-4323,SN:GEW866085,V1.19', 'GW Instek,GPP-4323,SN:GEW866095,V1.02', 'GW Instek,GPP-4323,SN:GEW866095,V1.02', "GW Instek,GPP-4323,SN:GEW864544,V1.19", "GW Instek,GPP-4323,SN:GEW866072,V1.19", "GW Instek,GPP-4323,SN:GEW866082,V1.19"]
@@ -367,6 +367,7 @@ def PowerSupply_GPP4323():
           
           
     def UXR():
+        return print("Under Constructuon")
         # TODO: Write an auto connect script 
         # Fest IP
         # "TCPIP0::KEYSIGH-Q75EBO9.local::hislip0::INSTR"
@@ -375,7 +376,7 @@ def PowerSupply_GPP4323():
 #     Old GPP Function
 # =============================================================================
 # def PowerSupply_GPP4323():
-#     from InstrumentControl.GPP4323 import GPP4323
+#     from Instruments_Libraries.GPP4323 import GPP4323
 #     import serial.tools.list_ports
 #     ports = serial.tools.list_ports.comports()
 #     for port, desc, hwid in sorted(ports):
@@ -397,7 +398,7 @@ def PowerSupply_GPP4323():
 def InstInit(Num):
     if Num == " Anrtisu Spectrum Analyzer MS2760A  ":
         return SpecAnalyser()
-    elif Num ==  " Anritsu Signal Generator MG3694C ":
+    elif Num ==  " Anritsu Signal Generator MG3694C  ":
         return SigGen()
     elif Num == " Anritsu Vectro Analyzer MS4647B  ":
         return VNA()
@@ -405,21 +406,21 @@ def InstInit(Num):
         return PowerMeter()
     elif Num == " Novoptel Laser LU1000  ":
         return LU1000()
-    elif Num == "Yokogawa Optical Spectrum Analyzer AQ6370D  ":
+    elif Num == " Yokogawa Optical Spectrum Analyzer AQ6370D  ":
         return OSA()
     elif Num == " KEITHLEY Source Meter 2612  ":
         return SourceMeter()
-    elif Num == " Power Supply KA3005 ":
+    elif Num == " Power Supply KA3005  ":
         return PowerSupply()
     elif Num == " CoBrite Tunable Laser  ":
         return CoBrite()
     elif Num == " AnaPico AG,APPH20G  ":
         return APPH()
-    elif Num == " 4-Channels Power Suppy GPP4323 ":
+    elif Num == " 4-Channels Power Suppy GPP4323  ":
         return PowerSupply_GPP4323()
     elif Num == " Rohde and Schwarz SMA100B  ":
         return RnS_SMA100B()
-    elif Num == " Keysight UXR0702A "
+    elif Num == " Keysight UXR0702A  ":
         return UXR()
     else:
         raise ValueError('Invalid Instrument Selected')
