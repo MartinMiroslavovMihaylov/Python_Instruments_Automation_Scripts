@@ -426,7 +426,7 @@ def InstInit(Num):
         return PowerSupply_GPP4323()
     elif Num == " Rohde and Schwarz SMA100B  ":
         return RnS_SMA100B()
-    elif Num == " Keysight UXR0702A ":
+    elif Num == " Keysight UXR0702A  ":
         return UXR_1002A()
     else:
         raise ValueError('Invalid Instrument Selected')
