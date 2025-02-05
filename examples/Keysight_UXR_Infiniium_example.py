@@ -7,7 +7,19 @@ import pandas as pd
 import numpy as np
 import sys
 
-sys.path.append("../Instruments_Libraries/")
+# Add this to your settings.json in VSCode. Replace "YOUR_OWN_PATH_to" with your own path 
+# e.g. with "./" or "C:/Users/username/"
+# "python.analysis.extraPaths": [
+#         "YOUR_OWN_PATH_to/Python_Instruments_Automation_Scripts/Instruments_Libraries"
+#     ],
+#     "python.autoComplete.extraPaths": [
+#         "YOUR_OWN_PATH_to/Python_Instruments_Automation_Scripts/Instruments_Libraries"
+#     ],
+#     "terminal.integrated.env.linux": {
+#         "PYTHONPATH": "YOUR_OWN_PATH_to/Python_Instruments_Automation_Scripts/Instruments_Libraries;${env:PYTHONPATH}"
+#     }
+
+sys.path.append("../Instruments_Libraries/") #make visible
 from UXR import UXR
 
 # %%===========================================================================
