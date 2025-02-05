@@ -51,12 +51,12 @@ class GPP4323:
         self.timeout_STR
 
 
-
     def query_IND(self, message):
         self._resource.write((message + self.eol_char).encode('utf-8'))
         data = self.sio.read()
         return data
     
+
     def query_values(self, message):
         self._resource.write((message + self.eol_char).encode('utf-8'))
         self.timeout_STR
@@ -64,16 +64,15 @@ class GPP4323:
         return data
 
     
-    
     def Close(self):
         print('Instrument GPP4323 is closed!')
         return self._resource.close()
     
+
+    def reset(self):
+        self.write("*RST")
     
-    
-    
-    
-    
+
     def getIdn(self):
         '''
         
@@ -85,7 +84,6 @@ class GPP4323:
 
         '''
         return self.query_IND("*IDN?")
-    
     
     
 # =============================================================================
