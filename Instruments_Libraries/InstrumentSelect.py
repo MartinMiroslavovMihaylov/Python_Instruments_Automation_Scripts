@@ -366,12 +366,18 @@ def PowerSupply_GPP4323():
     return GPP4323(Port_)
           
           
-    def UXR():
-        return print("Under Constructuon")
-        # TODO: Write an auto connect script 
-        # Fest IP
-        # "TCPIP0::KEYSIGH-Q75EBO9.local::hislip0::INSTR"
-    # return UXR()
+def UXR_1002A():
+    from Instruments_Libraries.UXR import UXR
+    try:
+        my_UXR = UXR("TCPIP0::KEYSIGH-Q75EBO9.local::hislip0::INSTR")
+        # Inital Settings UXR
+        my_UXR.system_header("off")  # Defalt is off and should stay off!!!
+        my_UXR.waveform_byteorder("LSBFirst")
+        my_UXR.waveform_format("WORD")  # Data Aquisition is only implemented for WORD yet.
+        my_UXR.waveform_streaming("off")
+    except visa.VisaIOError as e: 
+        print('Caught VisaIOError: ', e)
+    return my_UXR
 # =============================================================================
 #     Old GPP Function
 # =============================================================================
@@ -420,8 +426,8 @@ def InstInit(Num):
         return PowerSupply_GPP4323()
     elif Num == " Rohde and Schwarz SMA100B  ":
         return RnS_SMA100B()
-    elif Num == " Keysight UXR0702A  ":
-        return UXR()
+    elif Num == " Keysight UXR0702A ":
+        return UXR_1002A()
     else:
         raise ValueError('Invalid Instrument Selected')
     
