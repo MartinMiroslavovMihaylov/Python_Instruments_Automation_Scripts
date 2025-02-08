@@ -4,6 +4,7 @@
 from time import sleep
 import sys, ftd2xx as ftd
 from ctypes import *
+import re
 
 
 class NovoptelUSB():
@@ -13,25 +14,44 @@ class NovoptelUSB():
     baudrate = 230400
     DEVNO = -1
     
-    def __init__(self):
+    def __init__(self, instrument_str = None):
         
         self.isConnected = False
         self.d=0
-    
-        # list all connected ftdi devices
-        dlist=ftd.listDevices(2)
-        if len(dlist) > 0:
-            counter=0
-            for dev in dlist[:]:
-                print("    " + str(counter) + ": " + dev.decode('UTF-8'))
-                counter = counter + 1
-            print("    Select Instrument (-1 to Quit):")
-            self.DEVNO = int(input())
-            if self.DEVNO>=0:
-                self.connect()
-        else:
-             print("    No Instrument found")
-        return
+
+        if isinstance(instrument_str, str): #Code from mweizel
+            pattern = rf'^{instrument_str}.*' 
+            # list all connected ftdi devices
+            dlist=ftd.listDevices(2)
+            if len(dlist) > 0:
+                for idx, dev in enumerate(dlist[:]):
+                    if re.match(pattern, dev.decode('UTF-8')): #if instrument_str is found
+                        self.DEVNO = idx
+                if self.DEVNO>=0:
+                    try:
+                        print(f"Try connecting to {dlist[self.DEVNO].decode('UTF-8')}")
+                        self.connect()
+                    except:
+                        self.DEVNO = -1
+                        print("Not Connected.")
+            else:
+                print("    No Instrument found")
+            return
+        else: #Code form Novoptel
+            # list all connected ftdi devices
+            dlist=ftd.listDevices(2)
+            if len(dlist) > 0:
+                counter=0
+                for dev in dlist[:]:
+                    print("    " + str(counter) + ": " + dev.decode('UTF-8'))
+                    counter = counter + 1
+                print("    Select Instrument (-1 to Quit):")
+                self.DEVNO = int(input())
+                if self.DEVNO>=0:
+                    self.connect()
+            else:
+                print("    No Instrument found")
+            return
         
         
         
@@ -75,7 +95,7 @@ class NovoptelUSB():
         while bytesavailable<5 and tries<1000:
             bytesavailable=self.d.getQueueStatus()
             tries += 1
-            #sleep(0.001)
+            sleep(0.001)
         
         # get RX
         res=self.d.read(bytesavailable)
