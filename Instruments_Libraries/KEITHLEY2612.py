@@ -20,7 +20,7 @@ class KEITHLEY2612:
         Connect to Device and print the Identification Number.
         '''
         self._resource = visa.ResourceManager().open_resource(resource_str)
-        print(self._resource.query('*IDN?'))
+        print(self._resource.query('*IDN?').strip())
 
         # Internal Variables
         self._chList = ['a', 'b']
@@ -84,12 +84,12 @@ class KEITHLEY2612:
 
         '''
 
-        return str(self.query('*IDN?'))
+        return str(self.query('*IDN?')).strip()
 
 
 
-    def ask_LimitReached(self,chan):
-        '''
+    def ask_LimitReached(self,chan: str) -> bool:
+        '''This attribute contains the state of source compliance.
         
 
         Parameters
@@ -107,15 +107,15 @@ class KEITHLEY2612:
         
         chan = chan.lower()
         if chan in self._chList:
-            v = self.write('smua.source.compliance')
-            return print(v)
+            v = self.query('print(smu'+str(chan)+'.source.compliance)').strip().lower()
+            return True if v == 'true' else False
     
     
     
     
     
-    def ask_Current(self,chan):
-        '''
+    def ask_Current(self,chan: str) -> float:
+        '''This function performs one current measurements and returns the value.
         
 
         Parameters
@@ -131,7 +131,7 @@ class KEITHLEY2612:
         Returns
         -------
         TYPE  float
-            Return float with the measured value on the channel
+            Return float with the measured current value on the channel.
 
         '''
         
@@ -145,8 +145,8 @@ class KEITHLEY2612:
     
     
     
-    def ask_Voltage(self,chan):
-        '''
+    def ask_Voltage(self,chan: str) -> float:
+        '''This function performs one voltage measurements and returns the value.
         
 
         Parameters
@@ -163,7 +163,7 @@ class KEITHLEY2612:
         Returns
         -------
         TYPE : float
-            Return float with the measured value on the channel
+            Return float with the measured voltage value on the channel.
 
         '''
         
@@ -177,8 +177,8 @@ class KEITHLEY2612:
     
     
     
-    def ask_Power(self,chan):
-        '''
+    def ask_Power(self,chan: str) -> float:
+        '''This function performs one power measurements and returns the value.
         
 
         Parameters
@@ -195,7 +195,7 @@ class KEITHLEY2612:
         Returns
         -------
         TYPE : float
-            Return float with the measured value on the channel
+            Return float with the measured power value on the channel.
 
         '''
         
@@ -209,8 +209,8 @@ class KEITHLEY2612:
     
     
     
-    def ask_Resistance(self,chan):
-        '''
+    def ask_Resistance(self,chan: str) -> float:
+        '''This function performs one resistance measurements and returns the value.
         
 
         Parameters
@@ -227,7 +227,7 @@ class KEITHLEY2612:
         Returns
         -------
         TYPE : float
-            Return float with the measured value on the channel
+            Return float with the measured resistance value on the channel.
 
         '''
         
@@ -242,7 +242,7 @@ class KEITHLEY2612:
     
     
     def ask_readBuffer(self,chan,start,stop):
-        '''
+        '''TODO: This function should be checked. Also is doesn't return anything at the moment.
         
 
         Parameters
@@ -491,15 +491,17 @@ class KEITHLEY2612:
     
     
     def set_VoltageLimit(self, chan: str, value: int|float) -> None:
-        '''
+        '''Sets voltage source compliance. Use to limit the voltage output 
+        when in the current source mode. This attribute should be set in the 
+        test sequence before turning the source on.
         
-
         Parameters
         ----------
         chan : str
             Select Channel A or B
         value : int/float
-            Sets the voltage limit of channel X to V.
+            Sets the voltage limit of channel X to V. Using a limit value of 0 
+            will result in a "Parameter Too Small" error message (error 1102) 
 
         Raises
         ------
@@ -513,7 +515,7 @@ class KEITHLEY2612:
         '''
         
         chan = chan.lower()
-        if chan in self._chList:
+        if chan in self._chList and 20e-3 < value < 200:
             value = '{:.0e}'.format(value)
             self.write('smu'+str(chan)+'.source.limitv = ' + str(value))
         else:
@@ -524,7 +526,9 @@ class KEITHLEY2612:
     
     
     def set_CurrentLimit(self, chan: str, value: int|float) -> None:
-        '''
+        '''Sets current source compliance. Use to limit the current output 
+        when in the voltage source mode. This attribute should be set in the 
+        test sequence before turning the source on.
         
 
         Parameters
@@ -532,7 +536,8 @@ class KEITHLEY2612:
         chan : str
             Select Channel A or B
         value : int/float
-            Sets the current limit of channel X to V.
+            Sets the current limit of channel X to A. Using a limit value of 0 
+            will result in a "Parameter Too Small" error message (error 1102) 
 
         Raises
         ------
@@ -546,7 +551,7 @@ class KEITHLEY2612:
         '''
         
         chan = chan.lower()
-        if chan in self._chList:
+        if chan in self._chList and 10e-9 < value < 3:
             value = '{:.0e}'.format(value)
             self.write('smu'+str(chan)+'.source.limiti = ' + str(value))
         else:
@@ -557,7 +562,7 @@ class KEITHLEY2612:
     
     
     def set_Voltage(self, chan: str, value: int|float) -> None:
-        '''
+        '''This attribute sets the source level voltage.
         
 
         Parameters
@@ -590,7 +595,7 @@ class KEITHLEY2612:
     
     
     def set_Current(self, chan: str, value: int|float) -> None:
-        '''
+        '''This attribute sets the source level current.
         
 
         Parameters
@@ -632,7 +637,7 @@ class KEITHLEY2612:
             Select channel A or B
         double : boolean, optional
             Displays source-measure for SMU A and SMU B.
-            double = None per default.
+            double = True per default.
             if double = True:
                 Display Chan A and B 
             else:
@@ -664,7 +669,7 @@ class KEITHLEY2612:
     
     
     def set_OutputSourceFunction(self, chan: str, type: str) -> None:
-        '''
+        '''This attribute sets the source function (V source or I source).
         
 
         Parameters
@@ -673,8 +678,8 @@ class KEITHLEY2612:
             Select channel A or B
         type : str
             The source function. Set to one of the following values:
-            type = 'volt' for Selects voltage source function
-            type = 'amp' for Selects voltage source function
+            type = 'volt' Selects voltage source function
+            type = 'amp'  Selects current source function
 
         Raises
         ------
@@ -703,7 +708,7 @@ class KEITHLEY2612:
     
     
     def set_DisplayMeasurementFunction(self, chan: str, type: str) -> None:
-        '''
+        '''This attribute specifies the type of measurement being displayed.
         
 
         Parameters
@@ -745,7 +750,7 @@ class KEITHLEY2612:
 
         
     def set_MeasurementVoltageRange(self, chan: str, type: str, value: int|float) -> None:
-        '''
+        '''This attribute contains the positive full-scale value of the measure range for voltage or current.
         
 
         Parameters
@@ -753,11 +758,11 @@ class KEITHLEY2612:
         chan : str
             Select channel A or B
         type : str
-            Selects the displayed measurement function: 
+            Selects the measurement function: 
             'volt' or 'amp'.
             SMU A and SMU B can be set for different measurement functions!
         value : int/float
-            Select channel A or B value to be set
+            Set to the maximum expected voltage or current to be measured.
 
         Raises
         ------
