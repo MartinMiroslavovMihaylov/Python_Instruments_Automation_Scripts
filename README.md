@@ -1,6 +1,7 @@
 # Old Git files branch 
 
-Here are some old files from the olf Git structure
+In this Branch, the old Depricated Scripts will be saved. Also in Debugg_Scripts they are some fast test scripts for some of the devices 
+used for debugging or testing new functions. 
 
 
 # Python Documentation Link
