@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
@@ -6,18 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Welcome to Instruments Automatisation Libraries’s documentation! &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=f2a433a1"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -434,16 +432,64 @@
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#lu1000-module">LU1000 Module</a><ul>
-<li><a class="reference internal" href="#lu1000-classes">LU1000 Classes</a><ul>
-<li><a class="reference internal" href="#lu1000-base">LU1000_Base</a></li>
-<li><a class="reference internal" href="#lu1000-cband">LU1000_Cband</a></li>
-<li><a class="reference internal" href="#lu1000-oband">LU1000_Oband</a></li>
+<li><a class="reference internal" href="#module-LU1000">Novoptel LU1000 Module</a><ul>
+<li><a class="reference internal" href="#LU1000.LU1000_Base"><code class="docutils literal notranslate"><span class="pre">LU1000_Base</span></code></a><ul>
+<li><a class="reference internal" href="#LU1000.LU1000_Base.Close"><code class="docutils literal notranslate"><span class="pre">LU1000_Base.Close()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Base.get_controller_temp"><code class="docutils literal notranslate"><span class="pre">LU1000_Base.get_controller_temp()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Base.get_firmware"><code class="docutils literal notranslate"><span class="pre">LU1000_Base.get_firmware()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Base.get_laser_output"><code class="docutils literal notranslate"><span class="pre">LU1000_Base.get_laser_output()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Base.get_module_type"><code class="docutils literal notranslate"><span class="pre">LU1000_Base.get_module_type()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Base.get_serial_number"><code class="docutils literal notranslate"><span class="pre">LU1000_Base.get_serial_number()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Base.set_laser_output"><code class="docutils literal notranslate"><span class="pre">LU1000_Base.set_laser_output()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband</span></code></a><ul>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.get_channel"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.get_channel()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.get_data"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.get_data()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.get_frequency"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.get_frequency()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.get_grid_spacing"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.get_grid_spacing()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.get_max_freq"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.get_max_freq()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.get_max_optical_power"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.get_max_optical_power()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.get_measured_power"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.get_measured_power()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.get_min_freq"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.get_min_freq()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.get_min_grid_freq"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.get_min_grid_freq()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.get_min_optical_power"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.get_min_optical_power()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.get_target_power"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.get_target_power()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.get_temperature"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.get_temperature()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.get_whispermode"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.get_whispermode()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.set_channel"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.set_channel()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.set_fine_tune"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.set_fine_tune()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.set_frequency"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.set_frequency()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.set_grid_spacing"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.set_grid_spacing()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.set_target_power"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.set_target_power()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Cband.set_whispermode"><code class="docutils literal notranslate"><span class="pre">LU1000_Cband.set_whispermode()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#LU1000.LU1000_Oband"><code class="docutils literal notranslate"><span class="pre">LU1000_Oband</span></code></a><ul>
+<li><a class="reference internal" href="#LU1000.LU1000_Oband.get_measured_current_1"><code class="docutils literal notranslate"><span class="pre">LU1000_Oband.get_measured_current_1()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Oband.get_measured_current_2"><code class="docutils literal notranslate"><span class="pre">LU1000_Oband.get_measured_current_2()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Oband.get_measured_power_dBm"><code class="docutils literal notranslate"><span class="pre">LU1000_Oband.get_measured_power_dBm()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Oband.get_measured_power_mW"><code class="docutils literal notranslate"><span class="pre">LU1000_Oband.get_measured_power_mW()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Oband.get_target_current"><code class="docutils literal notranslate"><span class="pre">LU1000_Oband.get_target_current()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Oband.get_temperature"><code class="docutils literal notranslate"><span class="pre">LU1000_Oband.get_temperature()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Oband.set_target_current"><code class="docutils literal notranslate"><span class="pre">LU1000_Oband.set_target_current()</span></code></a></li>
+<li><a class="reference internal" href="#LU1000.LU1000_Oband.set_temperature"><code class="docutils literal notranslate"><span class="pre">LU1000_Oband.set_temperature()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#novoptelusb-module">NovoptelUSB module</a></li>
+<li><a class="reference internal" href="#module-NovoptelUSB">NovoptelUSB module</a><ul>
+<li><a class="reference internal" href="#NovoptelUSB.NovoptelUSB"><code class="docutils literal notranslate"><span class="pre">NovoptelUSB</span></code></a><ul>
+<li><a class="reference internal" href="#NovoptelUSB.NovoptelUSB.DEVNO"><code class="docutils literal notranslate"><span class="pre">NovoptelUSB.DEVNO</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelUSB.NovoptelUSB.baudrate"><code class="docutils literal notranslate"><span class="pre">NovoptelUSB.baudrate</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelUSB.NovoptelUSB.close"><code class="docutils literal notranslate"><span class="pre">NovoptelUSB.close()</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelUSB.NovoptelUSB.connect"><code class="docutils literal notranslate"><span class="pre">NovoptelUSB.connect()</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelUSB.NovoptelUSB.read"><code class="docutils literal notranslate"><span class="pre">NovoptelUSB.read()</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelUSB.NovoptelUSB.write"><code class="docutils literal notranslate"><span class="pre">NovoptelUSB.write()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-NovoptelTCP">NovoptelTCP module</a><ul>
 <li><a class="reference internal" href="#NovoptelTCP.NovoptelTCP"><code class="docutils literal notranslate"><span class="pre">NovoptelTCP</span></code></a><ul>
 <li><a class="reference internal" href="#NovoptelTCP.NovoptelTCP.close"><code class="docutils literal notranslate"><span class="pre">NovoptelTCP.close()</span></code></a></li>
@@ -775,7 +821,7 @@ and then close the connection to your instrument.</p>
 <p>&#64;author: Martin.Mihaylov</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="MS2760A.MS2760A">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MS2760A.</span></span><span class="sig-name descname"><span class="pre">MS2760A</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MS2760A.html#MS2760A"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MS2760A.</span></span><span class="sig-name descname"><span class="pre">MS2760A</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MS2760A.html#MS2760A"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS2760A.MS2760A" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This function is using pyvisa to connect to Instruments. Please install PyVisa before using it.</p>
 <dl class="py method">
@@ -789,7 +835,7 @@ and then close the connection to your instrument.</p>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>value</strong> (<em>int</em>) – </p></li>
+<li><p><strong>value</strong> (<em>int</em>)</p></li>
 <li><p><strong>function</strong> (<em>!!!!!USE IT AT YOUR OWN RISK is not an official</em>) – <dl class="simple">
 <dt>Trace Number from which the data is taken:</dt><dd><p>Can be set to  [1,2,3,4,5,6].</p>
 </dd>
@@ -1571,7 +1617,7 @@ Span.</p></li>
 <p>&#64;author: Martin.Mihylov</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="MG3694C.MG3694C">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MG3694C.</span></span><span class="sig-name descname"><span class="pre">MG3694C</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MG3694C.html#MG3694C"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MG3694C.MG3694C" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MG3694C.</span></span><span class="sig-name descname"><span class="pre">MG3694C</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MG3694C.html#MG3694C"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MG3694C.MG3694C" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Instrument</span></code></p>
 <p>This class uses vxi11 library to connect to Anritsu MG3694C.
 Need to have python ‘vxi11’ library installed!</p>
@@ -2026,7 +2072,7 @@ Default: 1 kHz</p>
 </dl>
 <p>Raises</p>
 </p></li>
-<li><p><strong>------</strong> – </p></li>
+<li><p><strong>------</strong></p></li>
 <li><p><strong>ValueError</strong> – Error message</p></li>
 </ul>
 </dd>
@@ -2596,7 +2642,7 @@ Created on Fir Feb 02 13:00:00 2024</p>
 <p>&#64;author: mweizel</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="SMA100B.SMA100B">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SMA100B.</span></span><span class="sig-name descname"><span class="pre">SMA100B</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SMA100B.html#SMA100B"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SMA100B.</span></span><span class="sig-name descname"><span class="pre">SMA100B</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/SMA100B.html#SMA100B"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Instrument</span></code></p>
 <p>A class thats uses vxi11 library to interface a SMA100B
 Need to have python ‘vxi11’ library installed!</p>
@@ -2819,7 +2865,7 @@ defined sweep steps.</p>
 <p>&#64;author: Martin.Mihaylov</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="MS4647B.MS4647B">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MS4647B.</span></span><span class="sig-name descname"><span class="pre">MS4647B</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MS4647B.html#MS4647B"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MS4647B.</span></span><span class="sig-name descname"><span class="pre">MS4647B</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MS4647B.html#MS4647B"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MS4647B.MS4647B" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This function is using pyvisa to connect to Instruments. Please install PyVisa before using it.</p>
 <dl class="py method">
@@ -3455,7 +3501,7 @@ GPIB. The file must exist</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>ChanNumber</strong> (<em>int</em>) – Channel Number 1,2,3…</p></li>
-<li><p><strong>value1</strong> (<em>int</em>) – </p></li>
+<li><p><strong>value1</strong> (<em>int</em>)</p></li>
 <li><p><strong>value2</strong> (<em>int</em>) – <p>The command assigns the data port pair to use when creating an sNp
 data file on the indicated channel. The use of Port 3 and/or Port 4
 requires a 4-port VNA instrument</p>
@@ -4014,7 +4060,7 @@ control the VectorStar ME7838x  Broadband/Millimeter-Wave 3738A Test Set.</p>
 <p>&#64;author: Martin.Mihaylov</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="AQ6370D.AQ6370D">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AQ6370D.</span></span><span class="sig-name descname"><span class="pre">AQ6370D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AQ6370D.html#AQ6370D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">AQ6370D.</span></span><span class="sig-name descname"><span class="pre">AQ6370D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/AQ6370D.html#AQ6370D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#AQ6370D.AQ6370D" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Instrument</span></code></p>
 <p>This class uses vxi11 library to connect to a Yokogawa AQ6370D.
 Need to have python ‘vxi11’, ‘pandas’ and ‘numpy’ libraries installed!</p>
@@ -4763,7 +4809,7 @@ measurement stop wavelength</p>
 <p>&#64;author: MartinMihaylov</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="PM100D.PM100D">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PM100D.</span></span><span class="sig-name descname"><span class="pre">PM100D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM100D.html#PM100D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">PM100D.</span></span><span class="sig-name descname"><span class="pre">PM100D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/PM100D.html#PM100D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#PM100D.PM100D" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This Class is using pyvisa to connect to instruments. Please install PyVisa before using it.</p>
 <dl class="py method">
@@ -5694,7 +5740,7 @@ Can be set to Type = [‘Power’,’Energy’,’Current’,’Voltage’]</p>
 <p>&#64;author: Martin.Mihaylov</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="KEITHLEY2612.KEITHLEY2612">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">KEITHLEY2612.</span></span><span class="sig-name descname"><span class="pre">KEITHLEY2612</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/KEITHLEY2612.html#KEITHLEY2612"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">KEITHLEY2612.</span></span><span class="sig-name descname"><span class="pre">KEITHLEY2612</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/KEITHLEY2612.html#KEITHLEY2612"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KEITHLEY2612.KEITHLEY2612" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This function is using pyvisa. Please install PyVisa before you use it.</p>
 <dl class="py method">
@@ -6106,7 +6152,7 @@ type = ‘amp’  Selects current source function</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>chan</strong> (<em>str</em>) – Select channel A or B</p></li>
-<li><p><strong>value</strong> (<em>int/float</em><em> or </em><em>list with curly braces for example {1</em><em>,</em><em>2</em><em>,</em><em>3</em><em>...</em><em>.}.</em>) – </p></li>
+<li><p><strong>value</strong> (<em>int/float</em><em> or </em><em>list with curly braces for example {1</em><em>,</em><em>2</em><em>,</em><em>3</em><em>...</em><em>.}.</em>)</p></li>
 <li><p><strong>ton</strong> (<em>int/float</em>) – X ms pulse on</p></li>
 <li><p><strong>toff</strong> (<em>int/float</em>) – X ms pulse off</p></li>
 </ul>
@@ -6237,29 +6283,667 @@ will result in a “Parameter Too Small” error message (error 1102)</p></li>
 </dd></dl>
 
 </section>
-<section id="lu1000-module">
-<h1>LU1000 Module<a class="headerlink" href="#lu1000-module" title="Link to this heading"></a></h1>
-<section id="lu1000-classes">
-<h2>LU1000 Classes<a class="headerlink" href="#lu1000-classes" title="Link to this heading"></a></h2>
-<section id="lu1000-base">
-<h3>LU1000_Base<a class="headerlink" href="#lu1000-base" title="Link to this heading"></a></h3>
+<section id="module-LU1000">
+<span id="novoptel-lu1000-module"></span><h1>Novoptel LU1000 Module<a class="headerlink" href="#module-LU1000" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="LU1000.LU1000_Base">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LU1000.</span></span><span class="sig-name descname"><span class="pre">LU1000_Base</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'USB'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5025</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000_Base"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Base" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Base.Close">
+<span class="sig-name descname"><span class="pre">Close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000_Base.Close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Base.Close" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Base.get_controller_temp">
+<span class="sig-name descname"><span class="pre">get_controller_temp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Base.get_controller_temp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Base.get_controller_temp" title="Link to this definition"></a></dt>
+<dd><p>Controller module temperature in Celsius</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>res</strong> – Controller module temperature in Celsius</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Base.get_firmware">
+<span class="sig-name descname"><span class="pre">get_firmware</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000_Base.get_firmware"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Base.get_firmware" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Base.get_laser_output">
+<span class="sig-name descname"><span class="pre">get_laser_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Base.get_laser_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Base.get_laser_output" title="Link to this definition"></a></dt>
+<dd><p>Returns the Laser output state. Enabled = 1 , Disabled = 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Laser enabled = 1 or laser disabled = 0</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Base.get_module_type">
+<span class="sig-name descname"><span class="pre">get_module_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Base.get_module_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Base.get_module_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Base.get_serial_number">
+<span class="sig-name descname"><span class="pre">get_serial_number</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000_Base.get_serial_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Base.get_serial_number" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Base.set_laser_output">
+<span class="sig-name descname"><span class="pre">set_laser_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Base.set_laser_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Base.set_laser_output" title="Link to this definition"></a></dt>
+<dd><p>Turn Laser N output ON/OFF</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>laser</strong> (<em>int</em>) – Laser output selected -  1 or 2</p></li>
+<li><p><strong>value</strong> (<em>int/str</em>) – value = ‘ON’|’OFF’<a href="#id3"><span class="problematic" id="id4">|</span></a>1|0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LU1000.</span></span><span class="sig-name descname"><span class="pre">LU1000_Cband</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'USB'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="rst/LU1000.html#LU1000.LU1000_Base" title="LU1000.LU1000_Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">LU1000_Base</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.get_channel">
+<span class="sig-name descname"><span class="pre">get_channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.get_channel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.get_channel" title="Link to this definition"></a></dt>
+<dd><p>Returns the Laser module’s current channel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – Laser module’s current channel number</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.get_data">
+<span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.get_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.get_data" title="Link to this definition"></a></dt>
+<dd><p>Return a dictionary with the measured power and set frequency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – DESCRIPTION.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>OutPut</strong> – Return a dictionary with the measured power and set frequency.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.get_frequency">
+<span class="sig-name descname"><span class="pre">get_frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.get_frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.get_frequency" title="Link to this definition"></a></dt>
+<dd><p>Calculate and return Frequency on the selected channel</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Freq</strong> – Calculate and return Frequency on the selected channel</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.get_grid_spacing">
+<span class="sig-name descname"><span class="pre">get_grid_spacing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.get_grid_spacing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.get_grid_spacing" title="Link to this definition"></a></dt>
+<dd><p>Grid spacing in GHz*10</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Grid spacing in GHz*10</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.get_max_freq">
+<span class="sig-name descname"><span class="pre">get_max_freq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.get_max_freq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.get_max_freq" title="Link to this definition"></a></dt>
+<dd><p>Lasers’s maximum possible Frequency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>max possible frequency</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.get_max_optical_power">
+<span class="sig-name descname"><span class="pre">get_max_optical_power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.get_max_optical_power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.get_max_optical_power" title="Link to this definition"></a></dt>
+<dd><p>Get maximum possible optical power setting</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser out selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – Get maximum possible optical power setting</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.get_measured_power">
+<span class="sig-name descname"><span class="pre">get_measured_power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.get_measured_power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.get_measured_power" title="Link to this definition"></a></dt>
+<dd><p>Returns the current optical power encoded as dBm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – Returns the current optical power encoded as dBm</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.get_min_freq">
+<span class="sig-name descname"><span class="pre">get_min_freq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.get_min_freq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.get_min_freq" title="Link to this definition"></a></dt>
+<dd><p>Laser’s minimum possible frequency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser out selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>min possible frequency.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.get_min_grid_freq">
+<span class="sig-name descname"><span class="pre">get_min_grid_freq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.get_min_grid_freq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.get_min_grid_freq" title="Link to this definition"></a></dt>
+<dd><p>Laser’s minimum supported grid spacing, GHz*10</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Laser’s minimum supported grid spacing, GHz*10</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.get_min_optical_power">
+<span class="sig-name descname"><span class="pre">get_min_optical_power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.get_min_optical_power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.get_min_optical_power" title="Link to this definition"></a></dt>
+<dd><p>Get minimum possible optical power setting</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser out selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – Get minimum possible optical power setting</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.get_target_power">
+<span class="sig-name descname"><span class="pre">get_target_power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.get_target_power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.get_target_power" title="Link to this definition"></a></dt>
+<dd><p>Returns the laser module’s current Optical Power in dBm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Returns the laser module’s current optical power in dBm</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.get_temperature">
+<span class="sig-name descname"><span class="pre">get_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.get_temperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.get_temperature" title="Link to this definition"></a></dt>
+<dd><p>Returns the current temperature encoded as °C.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser out selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – Returns the current temperature encoded as °C.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.get_whispermode">
+<span class="sig-name descname"><span class="pre">get_whispermode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.get_whispermode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.get_whispermode" title="Link to this definition"></a></dt>
+<dd><p>Whispermode Status, ON = 2, OFF = 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>res</strong> – Whispermode Status. ON = 2, OFF = 0</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.set_channel">
+<span class="sig-name descname"><span class="pre">set_channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.set_channel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.set_channel" title="Link to this definition"></a></dt>
+<dd><p>Sets the laser module’s current channel</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p></li>
+<li><p><strong>value</strong> (<em>int</em>) – Sets the laser module’s current channel
+value = select channel value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.set_fine_tune">
+<span class="sig-name descname"><span class="pre">set_fine_tune</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.set_fine_tune"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.set_fine_tune" title="Link to this definition"></a></dt>
+<dd><p>Fine-tuning set the frequency in MHz steps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p></li>
+<li><p><strong>value</strong> (<em>int</em>) – Fine-tuning set the frequency in MHz steps</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.set_frequency">
+<span class="sig-name descname"><span class="pre">set_frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.set_frequency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.set_frequency" title="Link to this definition"></a></dt>
+<dd><p>Set Laser Frequency value in  value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – Set Laser Frequency in THz
+e.g value = 192.876</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.set_grid_spacing">
+<span class="sig-name descname"><span class="pre">set_grid_spacing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.set_grid_spacing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.set_grid_spacing" title="Link to this definition"></a></dt>
+<dd><p>Set Grid spacing in GHz*10.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p></li>
+<li><p><strong>value</strong> (<em>int</em>) – Set Grid spacing. Smallest possible value = 1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.set_target_power">
+<span class="sig-name descname"><span class="pre">set_target_power</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_warning</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.set_target_power"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.set_target_power" title="Link to this definition"></a></dt>
+<dd><p>Sets the laser module’s optical power in dBm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – optical power in dBm</p></li>
+<li><p><strong>ignore_warning</strong> (<em>bool</em>) – When True, no warning for power &gt; 10dBm is displayed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Cband.set_whispermode">
+<span class="sig-name descname"><span class="pre">set_whispermode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">30</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Cband.set_whispermode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Cband.set_whispermode" title="Link to this definition"></a></dt>
+<dd><p>Activates/Deactivates Whispermode</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p></li>
+<li><p><strong>state</strong> (<em>str</em><em> | </em><em>int</em>) – [‘ON’,’OFF’, 1, 0]</p></li>
+<li><p><strong>timeout</strong> (<em>int</em>) – Timeout in seconds</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LU1000.LU1000_Oband">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LU1000.</span></span><span class="sig-name descname"><span class="pre">LU1000_Oband</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'192.168.1.100'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/LU1000.html#LU1000_Oband"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Oband" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="rst/LU1000.html#LU1000.LU1000_Base" title="LU1000.LU1000_Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">LU1000_Base</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Oband.get_measured_current_1">
+<span class="sig-name descname"><span class="pre">get_measured_current_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Oband.get_measured_current_1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Oband.get_measured_current_1" title="Link to this definition"></a></dt>
+<dd><p>Experimental!
+Retruns the laser module’s measured current in mA</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Measured current in mA</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Oband.get_measured_current_2">
+<span class="sig-name descname"><span class="pre">get_measured_current_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Oband.get_measured_current_2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Oband.get_measured_current_2" title="Link to this definition"></a></dt>
+<dd><p>Experimental!
+Retruns the laser module’s measured current in mA</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Measured current in mA</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Oband.get_measured_power_dBm">
+<span class="sig-name descname"><span class="pre">get_measured_power_dBm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Oband.get_measured_power_dBm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Oband.get_measured_power_dBm" title="Link to this definition"></a></dt>
+<dd><p>Retruns the laser module’s measured power in dBm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Measured power in dBm or ‘nan’ if laser is off</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Oband.get_measured_power_mW">
+<span class="sig-name descname"><span class="pre">get_measured_power_mW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Oband.get_measured_power_mW"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Oband.get_measured_power_mW" title="Link to this definition"></a></dt>
+<dd><p>Retruns the laser module’s measured power in mW</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Measured power in mW or 10 if laser is off</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Oband.get_target_current">
+<span class="sig-name descname"><span class="pre">get_target_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Oband.get_target_current"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Oband.get_target_current" title="Link to this definition"></a></dt>
+<dd><p>Retruns the laser module’s current in mA</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Current in mA.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Oband.get_temperature">
+<span class="sig-name descname"><span class="pre">get_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Oband.get_temperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Oband.get_temperature" title="Link to this definition"></a></dt>
+<dd><p>Returns the laser module temperature in °C.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Temperature in °C</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Oband.set_target_current">
+<span class="sig-name descname"><span class="pre">set_target_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_warning</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Oband.set_target_current"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Oband.set_target_current" title="Link to this definition"></a></dt>
+<dd><p>Sets the laser module’s current in mA</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p></li>
+<li><p><strong>value</strong> (<em>float</em>) – 0mA &lt;= value &lt;= 100mA</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LU1000.LU1000_Oband.set_temperature">
+<span class="sig-name descname"><span class="pre">set_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">laser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/LU1000.html#LU1000_Oband.set_temperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LU1000.LU1000_Oband.set_temperature" title="Link to this definition"></a></dt>
+<dd><p>Sets the laser module’s temperature in °C.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>laser</strong> (<em>int</em>) – Laser output selected - 1 or 2</p></li>
+<li><p><strong>temperature</strong> (<em>float</em>) – 9°C &lt;= temperature &lt;= 45°C</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Error message</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="lu1000-cband">
-<h3>LU1000_Cband<a class="headerlink" href="#lu1000-cband" title="Link to this heading"></a></h3>
-</section>
-<section id="lu1000-oband">
-<h3>LU1000_Oband<a class="headerlink" href="#lu1000-oband" title="Link to this heading"></a></h3>
-</section>
-</section>
-</section>
-<section id="novoptelusb-module">
-<h1>NovoptelUSB module<a class="headerlink" href="#novoptelusb-module" title="Link to this heading"></a></h1>
+<section id="module-NovoptelUSB">
+<span id="novoptelusb-module"></span><h1>NovoptelUSB module<a class="headerlink" href="#module-NovoptelUSB" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="NovoptelUSB.NovoptelUSB">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">NovoptelUSB.</span></span><span class="sig-name descname"><span class="pre">NovoptelUSB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instrument_str</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NovoptelUSB.html#NovoptelUSB"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelUSB.NovoptelUSB" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="NovoptelUSB.NovoptelUSB.DEVNO">
+<span class="sig-name descname"><span class="pre">DEVNO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-1</span></em><a class="headerlink" href="#NovoptelUSB.NovoptelUSB.DEVNO" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="NovoptelUSB.NovoptelUSB.baudrate">
+<span class="sig-name descname"><span class="pre">baudrate</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">230400</span></em><a class="headerlink" href="#NovoptelUSB.NovoptelUSB.baudrate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="NovoptelUSB.NovoptelUSB.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/NovoptelUSB.html#NovoptelUSB.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelUSB.NovoptelUSB.close" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="NovoptelUSB.NovoptelUSB.connect">
+<span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/NovoptelUSB.html#NovoptelUSB.connect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelUSB.NovoptelUSB.connect" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="NovoptelUSB.NovoptelUSB.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NovoptelUSB.html#NovoptelUSB.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelUSB.NovoptelUSB.read" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="NovoptelUSB.NovoptelUSB.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NovoptelUSB.html#NovoptelUSB.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelUSB.NovoptelUSB.write" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="module-NovoptelTCP">
 <span id="novopteltcp-module"></span><h1>NovoptelTCP module<a class="headerlink" href="#module-NovoptelTCP" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="NovoptelTCP.NovoptelTCP">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">NovoptelTCP.</span></span><span class="sig-name descname"><span class="pre">NovoptelTCP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'127.0.0.1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5025</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NovoptelTCP.html#NovoptelTCP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelTCP.NovoptelTCP" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">NovoptelTCP.</span></span><span class="sig-name descname"><span class="pre">NovoptelTCP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'127.0.0.1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5025</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NovoptelTCP.html#NovoptelTCP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelTCP.NovoptelTCP" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="NovoptelTCP.NovoptelTCP.close">
@@ -6345,7 +7029,7 @@ will result in a “Parameter Too Small” error message (error 1102)</p></li>
 <p>&#64;author: Martin.Mihaylov</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="CoBrite.CoBrite">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CoBrite.</span></span><span class="sig-name descname"><span class="pre">CoBrite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoBrite.html#CoBrite"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">CoBrite.</span></span><span class="sig-name descname"><span class="pre">CoBrite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/CoBrite.html#CoBrite"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#CoBrite.CoBrite" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="CoBrite.CoBrite.Close">
@@ -6683,7 +7367,7 @@ is in Nanometer.</p></li>
 <p>&#64;author: Martin.Mihaylov</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="KA3005.KA3005">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">KA3005.</span></span><span class="sig-name descname"><span class="pre">KA3005</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">psu_com</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/KA3005.html#KA3005"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KA3005.KA3005" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">KA3005.</span></span><span class="sig-name descname"><span class="pre">KA3005</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">psu_com</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/KA3005.html#KA3005"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KA3005.KA3005" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="KA3005.KA3005.Close">
@@ -6803,7 +7487,7 @@ is in Nanometer.</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>amp</strong> (<em>int/float</em>) – Set the current on the Display</p></li>
-<li><p><strong>delay</strong> (<em>0.01s Delay</em>) – </p></li>
+<li><p><strong>delay</strong> (<em>0.01s Delay</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -6845,7 +7529,7 @@ is in Nanometer.</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>voltage</strong> (<em>int/float</em>) – Set the voltage on the Display</p></li>
-<li><p><strong>delay</strong> (<em>0.01s Delay</em>) – </p></li>
+<li><p><strong>delay</strong> (<em>0.01s Delay</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -6868,7 +7552,7 @@ is in Nanometer.</p></li>
 <p>&#64;author: Martin.Mihaylov</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="KA3005p.KA3005p">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">KA3005p.</span></span><span class="sig-name descname"><span class="pre">KA3005p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">psu_com</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/KA3005p.html#KA3005p"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KA3005p.KA3005p" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">KA3005p.</span></span><span class="sig-name descname"><span class="pre">KA3005p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">psu_com</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/KA3005p.html#KA3005p"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#KA3005p.KA3005p" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="KA3005p.KA3005p.Close">
@@ -6988,7 +7672,7 @@ is in Nanometer.</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>amp</strong> (<em>int/float</em>) – Set the current on the Display</p></li>
-<li><p><strong>delay</strong> (<em>0.01s Delay</em>) – </p></li>
+<li><p><strong>delay</strong> (<em>0.01s Delay</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -7030,7 +7714,7 @@ is in Nanometer.</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>voltage</strong> (<em>int/float</em>) – Set the voltage on the Display</p></li>
-<li><p><strong>delay</strong> (<em>0.01s Delay</em>) – </p></li>
+<li><p><strong>delay</strong> (<em>0.01s Delay</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -7053,7 +7737,7 @@ is in Nanometer.</p></li>
 <p>&#64;author: Martin.Mihaylov</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="RD3005.RD3005">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">RD3005.</span></span><span class="sig-name descname"><span class="pre">RD3005</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">psu_com</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RD3005.html#RD3005"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RD3005.RD3005" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">RD3005.</span></span><span class="sig-name descname"><span class="pre">RD3005</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">psu_com</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RD3005.html#RD3005"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#RD3005.RD3005" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="RD3005.RD3005.Close">
@@ -7173,7 +7857,7 @@ is in Nanometer.</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>amp</strong> (<em>int/float</em>) – Set the current on the Display</p></li>
-<li><p><strong>delay</strong> (<em>0.01s Delay</em>) – </p></li>
+<li><p><strong>delay</strong> (<em>0.01s Delay</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -7215,7 +7899,7 @@ is in Nanometer.</p></li>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>voltage</strong> (<em>int/float</em>) – Set the voltage on the Display</p></li>
-<li><p><strong>delay</strong> (<em>0.01s Delay</em>) – </p></li>
+<li><p><strong>delay</strong> (<em>0.01s Delay</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -7238,7 +7922,7 @@ is in Nanometer.</p></li>
 <p>&#64;author: Martin.Mihaylov</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="GPP4323.GPP4323">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GPP4323.</span></span><span class="sig-name descname"><span class="pre">GPP4323</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GPP4323.html#GPP4323"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GPP4323.GPP4323" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">GPP4323.</span></span><span class="sig-name descname"><span class="pre">GPP4323</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/GPP4323.html#GPP4323"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GPP4323.GPP4323" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="GPP4323.GPP4323.Close">
@@ -7507,7 +8191,7 @@ GPP-1326 does not have this function. Series-parallel mode is not supported unde
 <p>&#64;author: Maxim Weizel</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="UXR.UXR">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">UXR.</span></span><span class="sig-name descname"><span class="pre">UXR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'TCPIP0::KEYSIGH-Q75EBO9.local::hislip0::INSTR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/UXR.html#UXR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#UXR.UXR" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">UXR.</span></span><span class="sig-name descname"><span class="pre">UXR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resource_str</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'TCPIP0::KEYSIGH-Q75EBO9.local::hislip0::INSTR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_channel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/UXR.html#UXR"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#UXR.UXR" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class is using pyvisa to connect to Instruments. Please install PyVisa before using it.</p>
 <dl class="py method">
@@ -7518,7 +8202,7 @@ GPP-1326 does not have this function. Series-parallel mode is not supported unde
 <dl class="py method">
 <dt class="sig sig-object py" id="UXR.UXR.IDN">
 <span class="sig-name descname"><span class="pre">IDN</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/UXR.html#UXR.IDN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#UXR.UXR.IDN" title="Link to this definition"></a></dt>
-<dd><p>The <a href="#id3"><span class="problematic" id="id4">*</span></a>IDN? query returns the company name, oscilloscope model number, serial
+<dd><p>The <a href="#id5"><span class="problematic" id="id6">*</span></a>IDN? query returns the company name, oscilloscope model number, serial
 number, and software version by returning this string:
 Keysight Technologies,&lt;Model #&gt;,&lt;USXXXXXXXX&gt;,&lt;Rev #&gt;[,&lt;Options&gt;]</p>
 <blockquote>
@@ -7686,7 +8370,7 @@ by default None</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="UXR.UXR.clear_status">
 <span class="sig-name descname"><span class="pre">clear_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/UXR.html#UXR.clear_status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#UXR.UXR.clear_status" title="Link to this definition"></a></dt>
-<dd><p>The <a href="#id5"><span class="problematic" id="id6">*</span></a>CLS command clears all status and error registers.</p>
+<dd><p>The <a href="#id7"><span class="problematic" id="id8">*</span></a>CLS command clears all status and error registers.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -7721,7 +8405,7 @@ To Do: input can be: [CHANnel&lt;N&gt; | DIFF&lt;D&gt; | COMMonmode&lt;C&gt;]</p
 <dl class="py method">
 <dt class="sig sig-object py" id="UXR.UXR.reset">
 <span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/UXR.html#UXR.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#UXR.UXR.reset" title="Link to this definition"></a></dt>
-<dd><p>The <a href="#id7"><span class="problematic" id="id8">*</span></a>RST command performs a default setup which is the same as pressing the
+<dd><p>The <a href="#id9"><span class="problematic" id="id10">*</span></a>RST command performs a default setup which is the same as pressing the
 oscilloscope front panel [Default Setup] key.</p>
 </dd></dl>
 

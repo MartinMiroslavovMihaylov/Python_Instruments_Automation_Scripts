@@ -174,8 +174,8 @@
 <span class="sd">            Valid values are: \&#39;ON\&#39;, \&#39;OFF\&#39;, 1, 0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
-        <span class="n">OnsStates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;On&quot;</span><span class="p">,</span> <span class="s2">&quot;ON&quot;</span><span class="p">,</span> <span class="s2">&quot;on&quot;</span><span class="p">,</span> <span class="s2">&quot;oN&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">]</span>
-        <span class="n">OffsStates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Off&quot;</span><span class="p">,</span> <span class="s2">&quot;oFf&quot;</span><span class="p">,</span> <span class="s2">&quot;ofF&quot;</span><span class="p">,</span> <span class="s2">&quot;OFF&quot;</span><span class="p">,</span> <span class="s2">&quot;off&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">]</span>
+        <span class="n">OnsStates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;On&quot;</span><span class="p">,</span> <span class="s2">&quot;ON&quot;</span><span class="p">,</span> <span class="s2">&quot;on&quot;</span><span class="p">,</span> <span class="s2">&quot;oN&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">OffsStates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Off&quot;</span><span class="p">,</span> <span class="s2">&quot;oFf&quot;</span><span class="p">,</span> <span class="s2">&quot;ofF&quot;</span><span class="p">,</span> <span class="s2">&quot;OFF&quot;</span><span class="p">,</span> <span class="s2">&quot;off&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">OnsStates</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:OUTPut:ALL:STATe 1&#39;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">OffsStates</span><span class="p">:</span>
@@ -201,8 +201,8 @@
 <span class="sd">        ValueError</span>
 <span class="sd">            Valid values are: \&#39;ON\&#39;, \&#39;OFF\&#39;, 1, 0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">OnsStates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;On&quot;</span><span class="p">,</span> <span class="s2">&quot;ON&quot;</span><span class="p">,</span> <span class="s2">&quot;on&quot;</span><span class="p">,</span> <span class="s2">&quot;oN&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">]</span>
-        <span class="n">OffsStates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Off&quot;</span><span class="p">,</span> <span class="s2">&quot;oFf&quot;</span><span class="p">,</span> <span class="s2">&quot;ofF&quot;</span><span class="p">,</span> <span class="s2">&quot;OFF&quot;</span><span class="p">,</span> <span class="s2">&quot;off&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">]</span>
+        <span class="n">OnsStates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;On&quot;</span><span class="p">,</span> <span class="s2">&quot;ON&quot;</span><span class="p">,</span> <span class="s2">&quot;on&quot;</span><span class="p">,</span> <span class="s2">&quot;oN&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">OffsStates</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Off&quot;</span><span class="p">,</span> <span class="s2">&quot;oFf&quot;</span><span class="p">,</span> <span class="s2">&quot;ofF&quot;</span><span class="p">,</span> <span class="s2">&quot;OFF&quot;</span><span class="p">,</span> <span class="s2">&quot;off&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">OnsStates</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;:OUTPut&#39;</span> <span class="o">+</span> <span class="s1">&#39; 1&#39;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">value</span> <span class="ow">in</span>  <span class="n">OffsStates</span><span class="p">:</span>
@@ -210,6 +210,24 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Not a valid input. Valid: </span><span class="se">\&#39;</span><span class="s1">ON</span><span class="se">\&#39;</span><span class="s1">, </span><span class="se">\&#39;</span><span class="s1">OFF</span><span class="se">\&#39;</span><span class="s1">, 1, 0&#39;</span><span class="p">)</span></div>
 
+
+
+<div class="viewcode-block" id="SMA100B.set_output">
+<a class="viewcode-back" href="../rst/SMA100B.html#SMA100B.SMA100B.set_output">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Activates the Signal Genrator RF Output</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : str/int</span>
+<span class="sd">            &#39;ON&#39; 1 or &#39;OFF&#39; 0</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Valid values are: \&#39;ON\&#39;, \&#39;OFF\&#39;, 1, 0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_rf_output</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="SMA100B.set_DCOffset">
@@ -428,6 +446,13 @@
 <div class="viewcode-block" id="SMA100B.set_OutputPowerLevel">
 <a class="viewcode-back" href="../rst/SMA100B.html#SMA100B.SMA100B.set_OutputPowerLevel">[docs]</a>
     <span class="k">def</span> <span class="nf">set_OutputPowerLevel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the Signal Generator Output Power in dBm</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : float</span>
+<span class="sd">            Output Power in dBm</span>
+<span class="sd">        &quot;&quot;&quot;</span>        <span class="s1">&#39;&#39;&#39;&#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_rf_power</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
 </div>
 

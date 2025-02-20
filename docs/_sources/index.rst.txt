@@ -16,12 +16,15 @@ Instruments:
 	- Power Meter ThorLabs PM100D
 	- KEITHLEY Source Meter 2612
 	- Novoptel Laser LU1000
+		- NovoptelTCP
+		- NovoptelUSB
 	- CoBrite Tunable Laser
 	- Power Supply RD3005
 	- Power Supply KA3005
 	- Power Supply KA3005p
 	- 4 Channels Power Suppy GPP4323
 	- AnaPico AG APPH20G
+	- Keysight Realtime Oscilloscope UXR0702A
 	
 	
 	
@@ -34,7 +37,6 @@ This Python Librarys can be used with Python Version 3.10.0 or newr.
 For the Moment you will need the following python Libraries. ::
 
 	pip install ftd2xx
-	pip install oct2py
 	pip install pyserial
 	pip install serial-tool
 	pip install python-vxi11
@@ -49,12 +51,10 @@ For the Moment you will need the following python Libraries. ::
 Programms needed when using the Novoptel Laser
 ===================================================================
 
-To use the Novoptel Laser LU1000, the user must install octave. At the 
-moment what the Novoptel documentation mentions, is that Octave version 
-6.1.0 is required. Furthermore, the user must check in the path variables 
-of the operating system whether the Octave path is set correctly...
-Windows Path - 'C:\Program Files\GNU Octave\Octave-6.1.0\mingw64\bin'
-For more information see: Python script by https://www.novoptel.de/Home/Downloads_en.php 
+To use the LU1000 Laser you need to install the FTDI D2XX Driver e.g.
+from https://www.novoptel.de/Home/Downloads_de.php - USB Driver for USB2.0
+or https://ftdichip.com/drivers/d2xx-drivers/ - 2.12.36.4 (accessed on 08.02.2025)
+Python Library needed: pip install ftd2xx 
 
 
 How to use the GUI 
@@ -129,50 +129,26 @@ Here's a simple Python code example how to connect and disconnect from an instru
    PM.Close()
 
 Instruments
-===================================================================
+============
 
 .. include:: rst/MS2760A.rst
-   
-
 .. include:: rst/MG3694C.rst
-
-
 .. include:: rst/SMA100B.rst
-
-
 .. include:: rst/MS4647B.rst
-
-
 .. include:: rst/AQ6370D.rst
-
-
 .. include:: rst/PM100D.rst
-
-
 .. include:: rst/KEITHLEY2612.rst
-
-
 .. include:: rst/LU1000.rst
-
-
+.. include:: rst/NovoptelUSB.rst
+.. include:: rst/NovoptelTCP.rst
 .. include:: rst/CoBrite.rst
-
-
 .. include:: rst/KA3005.rst
-
-
 .. include:: rst/KA3005p.rst
-
-
 .. include:: rst/RD3005.rst
-
-
 .. include:: rst/GPP4323.rst
-
-
 .. include:: rst/APPH20G.rst
+.. include:: rst/UXR.rst
 
-		
 
 Indices and tables
 ==================

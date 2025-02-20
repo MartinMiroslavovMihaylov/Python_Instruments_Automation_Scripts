@@ -56,6 +56,7 @@
 <li><a class="reference internal" href="#SMA100B.SMA100B.set_OutputPowerLevel"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_OutputPowerLevel()</span></code></a></li>
 <li><a class="reference internal" href="#SMA100B.SMA100B.set_freq_CW"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_freq_CW()</span></code></a></li>
 <li><a class="reference internal" href="#SMA100B.SMA100B.set_frequency_mode"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_frequency_mode()</span></code></a></li>
+<li><a class="reference internal" href="#SMA100B.SMA100B.set_output"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_output()</span></code></a></li>
 <li><a class="reference internal" href="#SMA100B.SMA100B.set_rf_output"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_rf_output()</span></code></a></li>
 <li><a class="reference internal" href="#SMA100B.SMA100B.set_rf_output_all"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_rf_output_all()</span></code></a></li>
 <li><a class="reference internal" href="#SMA100B.SMA100B.set_rf_power"><code class="docutils literal notranslate"><span class="pre">SMA100B.set_rf_power()</span></code></a></li>
@@ -96,7 +97,7 @@ Created on Fir Feb 02 13:00:00 2024</p>
 <p>&#64;author: mweizel</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="SMA100B.SMA100B">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SMA100B.</span></span><span class="sig-name descname"><span class="pre">SMA100B</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SMA100B.</span></span><span class="sig-name descname"><span class="pre">SMA100B</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Instrument</span></code></p>
 <p>A class thats uses vxi11 library to interface a SMA100B
 Need to have python ‘vxi11’ library installed!</p>
@@ -205,7 +206,13 @@ Increment: 0.001</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="SMA100B.SMA100B.set_OutputPowerLevel">
 <span class="sig-name descname"><span class="pre">set_OutputPowerLevel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B.set_OutputPowerLevel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.set_OutputPowerLevel" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Sets the Signal Generator Output Power in dBm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>float</em>) – Output Power in dBm</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="SMA100B.SMA100B.set_freq_CW">
@@ -247,6 +254,20 @@ defined sweep steps.</p>
 </dd>
 </dl>
 </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SMA100B.SMA100B.set_output">
+<span class="sig-name descname"><span class="pre">set_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SMA100B.html#SMA100B.set_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SMA100B.SMA100B.set_output" title="Link to this definition"></a></dt>
+<dd><p>Activates the Signal Genrator RF Output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>str/int</em>) – ‘ON’ 1 or ‘OFF’ 0</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Valid values are: ‘ON’, ‘OFF’, 1, 0</p>
 </dd>
 </dl>
 </dd></dl>
