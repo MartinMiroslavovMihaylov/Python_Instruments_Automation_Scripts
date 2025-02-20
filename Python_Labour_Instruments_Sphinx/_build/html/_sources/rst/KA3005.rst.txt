@@ -1,7 +1,0 @@
-Power Supply KA3005 module
-=============
-
-.. automodule:: KA3005
-   :members:
-   :undoc-members:
-   :show-inheritance:

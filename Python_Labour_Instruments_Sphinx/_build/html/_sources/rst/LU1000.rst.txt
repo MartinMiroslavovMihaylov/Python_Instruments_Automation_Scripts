@@ -1,7 +1,0 @@
-Novoptel Laser LU1000 module
-=============
-
-.. automodule:: LU1000
-   :members:
-   :undoc-members:
-   :show-inheritance:

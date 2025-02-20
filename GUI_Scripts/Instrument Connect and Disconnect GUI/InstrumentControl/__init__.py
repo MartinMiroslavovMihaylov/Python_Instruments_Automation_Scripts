@@ -1,2 +1,0 @@
-from InstrumentControl.InstrumentControl import InfoClass
-from InstrumentControl.InstrumentControl import Instruments
