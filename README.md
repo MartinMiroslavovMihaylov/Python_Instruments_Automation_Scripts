@@ -10,3 +10,11 @@ https://martinmiroslavovmihaylov.github.io/Python_Instruments_Automation_Scripts
 # Python LaTeX Documentation
 
 Documentation/Automate measurements with Python
+
+
+# Usefull Python Sphinx Commands 
+Sphinx Commands:
+
+	make clean
+	sphinx-apidoc -o rst source
+	make html

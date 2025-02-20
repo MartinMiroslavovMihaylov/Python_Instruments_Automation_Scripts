@@ -87,8 +87,8 @@ class SMA100B(vxi11.Instrument):
             Valid values are: \'ON\', \'OFF\', 1, 0
         """
         
-        OnsStates = ["On", "ON", "on", "oN", "1"]
-        OffsStates = ["Off", "oFf", "ofF", "OFF", "off", "0"]
+        OnsStates = ["On", "ON", "on", "oN", "1", 1]
+        OffsStates = ["Off", "oFf", "ofF", "OFF", "off", "0", 0]
         if value in OnsStates:
             self.write(':OUTPut:ALL:STATe 1')
         elif value in OffsStates:
@@ -111,8 +111,8 @@ class SMA100B(vxi11.Instrument):
         ValueError
             Valid values are: \'ON\', \'OFF\', 1, 0
         """
-        OnsStates = ["On", "ON", "on", "oN", "1"]
-        OffsStates = ["Off", "oFf", "ofF", "OFF", "off", "0"]
+        OnsStates = ["On", "ON", "on", "oN", "1", 1]
+        OffsStates = ["Off", "oFf", "ofF", "OFF", "off", "0", 0]
         if value in OnsStates:
             self.write(':OUTPut' + ' 1')
         elif value in  OffsStates:
@@ -120,6 +120,21 @@ class SMA100B(vxi11.Instrument):
         else:
             raise ValueError('Not a valid input. Valid: \'ON\', \'OFF\', 1, 0')
 
+
+    def set_output(self,value):
+        """Activates the Signal Genrator RF Output
+
+        Parameters
+        ----------
+        value : str/int
+            'ON' 1 or 'OFF' 0
+
+        Raises
+        ------
+        ValueError
+            Valid values are: \'ON\', \'OFF\', 1, 0
+        """
+        self.set_rf_output(value)
 
     def set_DCOffset(self, value):
         """
@@ -314,4 +329,11 @@ class SMA100B(vxi11.Instrument):
   
     
     def set_OutputPowerLevel(self,value):
+        """Sets the Signal Generator Output Power in dBm
+
+        Parameters
+        ----------
+        value : float
+            Output Power in dBm
+        """        ''''''
         self.set_rf_power(value)

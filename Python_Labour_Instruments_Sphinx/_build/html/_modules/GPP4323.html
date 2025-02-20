@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
@@ -7,14 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GPP4323 &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
   
-      <script src="../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f2a433a1"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -79,8 +81,16 @@
 <span class="kn">import</span> <span class="nn">serial</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
+<span class="nb">print</span><span class="p">(</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">#####################################################################################</span>
+<span class="sd">    To use the DC-Power Supply GW-Instek GPP4323 you need to install the USB Driver </span>
+<span class="sd">    from https://www.gwinstek.com/en-global/download/ - GPP USB Driver </span>
+<span class="sd">    Python Library needed: pip install pyserial</span>
+<span class="sd">#####################################################################################</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="p">)</span>
 
-    
 <div class="viewcode-block" id="GPP4323">
 <a class="viewcode-back" href="../rst/GPP4323.html#GPP4323.GPP4323">[docs]</a>
 <span class="k">class</span> <span class="nc">GPP4323</span><span class="p">:</span>
@@ -116,7 +126,6 @@
 
 
 
-
 <div class="viewcode-block" id="GPP4323.query_IND">
 <a class="viewcode-back" href="../rst/GPP4323.html#GPP4323.GPP4323.query_IND">[docs]</a>
     <span class="k">def</span> <span class="nf">query_IND</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
@@ -125,6 +134,7 @@
         <span class="k">return</span> <span class="n">data</span></div>
 
     
+
 <div class="viewcode-block" id="GPP4323.query_values">
 <a class="viewcode-back" href="../rst/GPP4323.html#GPP4323.GPP4323.query_values">[docs]</a>
     <span class="k">def</span> <span class="nf">query_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
@@ -135,7 +145,6 @@
 
 
     
-    
 <div class="viewcode-block" id="GPP4323.Close">
 <a class="viewcode-back" href="../rst/GPP4323.html#GPP4323.GPP4323.Close">[docs]</a>
     <span class="k">def</span> <span class="nf">Close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -143,11 +152,14 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
     
+
+<div class="viewcode-block" id="GPP4323.reset">
+<a class="viewcode-back" href="../rst/GPP4323.html#GPP4323.GPP4323.reset">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;*RST&quot;</span><span class="p">)</span></div>
+
     
-    
-    
-    
-    
+
 <div class="viewcode-block" id="GPP4323.getIdn">
 <a class="viewcode-back" href="../rst/GPP4323.html#GPP4323.GPP4323.getIdn">[docs]</a>
     <span class="k">def</span> <span class="nf">getIdn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -162,7 +174,6 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query_IND</span><span class="p">(</span><span class="s2">&quot;*IDN?&quot;</span><span class="p">)</span></div>
 
-    
     
     
 <span class="c1"># =============================================================================</span>

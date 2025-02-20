@@ -2,9 +2,10 @@ source
 ======
 
 .. toctree::
-   :maxdepth: 13
+   :maxdepth: 26
+   :caption: Contents:
 
-   APPH20G
+   APPH
    AQ6370D
    CoBrite
    GPP4323
@@ -12,8 +13,12 @@ source
    KA3005p
    KEITHLEY2612
    LU1000
+   NovoptelTCP
+   NovoptelUSB
    MG3694C
    MS2760A
    MS4647B
    PM100D
    RD3005
+   SMA100B
+   UXR

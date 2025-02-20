@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NovoptelTCP module &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Instruments Automatisation Libraries
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">NovoptelTCP module</a><ul>
+<li><a class="reference internal" href="#NovoptelTCP.NovoptelTCP"><code class="docutils literal notranslate"><span class="pre">NovoptelTCP</span></code></a><ul>
+<li><a class="reference internal" href="#NovoptelTCP.NovoptelTCP.close"><code class="docutils literal notranslate"><span class="pre">NovoptelTCP.close()</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelTCP.NovoptelTCP.connect"><code class="docutils literal notranslate"><span class="pre">NovoptelTCP.connect()</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelTCP.NovoptelTCP.debug"><code class="docutils literal notranslate"><span class="pre">NovoptelTCP.debug</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelTCP.NovoptelTCP.ip"><code class="docutils literal notranslate"><span class="pre">NovoptelTCP.ip</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelTCP.NovoptelTCP.port"><code class="docutils literal notranslate"><span class="pre">NovoptelTCP.port</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelTCP.NovoptelTCP.read"><code class="docutils literal notranslate"><span class="pre">NovoptelTCP.read()</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelTCP.NovoptelTCP.readsdram_getpackets"><code class="docutils literal notranslate"><span class="pre">NovoptelTCP.readsdram_getpackets()</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelTCP.NovoptelTCP.readsdram_getpackets_raw"><code class="docutils literal notranslate"><span class="pre">NovoptelTCP.readsdram_getpackets_raw()</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelTCP.NovoptelTCP.readsdram_raw"><code class="docutils literal notranslate"><span class="pre">NovoptelTCP.readsdram_raw()</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelTCP.NovoptelTCP.readsdram_sendrequest"><code class="docutils literal notranslate"><span class="pre">NovoptelTCP.readsdram_sendrequest()</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelTCP.NovoptelTCP.reconnect"><code class="docutils literal notranslate"><span class="pre">NovoptelTCP.reconnect()</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelTCP.NovoptelTCP.s"><code class="docutils literal notranslate"><span class="pre">NovoptelTCP.s</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelTCP.NovoptelTCP.socket_read"><code class="docutils literal notranslate"><span class="pre">NovoptelTCP.socket_read()</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelTCP.NovoptelTCP.socket_write"><code class="docutils literal notranslate"><span class="pre">NovoptelTCP.socket_write()</span></code></a></li>
+<li><a class="reference internal" href="#NovoptelTCP.NovoptelTCP.write"><code class="docutils literal notranslate"><span class="pre">NovoptelTCP.write()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Instruments Automatisation Libraries</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">NovoptelTCP module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/rst/NovoptelTCP.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-NovoptelTCP">
+<span id="novopteltcp-module"></span><h1>NovoptelTCP module<a class="headerlink" href="#module-NovoptelTCP" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="NovoptelTCP.NovoptelTCP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">NovoptelTCP.</span></span><span class="sig-name descname"><span class="pre">NovoptelTCP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'127.0.0.1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5025</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NovoptelTCP.html#NovoptelTCP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelTCP.NovoptelTCP" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="NovoptelTCP.NovoptelTCP.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NovoptelTCP.html#NovoptelTCP.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelTCP.NovoptelTCP.close" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="NovoptelTCP.NovoptelTCP.connect">
+<span class="sig-name descname"><span class="pre">connect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NovoptelTCP.html#NovoptelTCP.connect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelTCP.NovoptelTCP.connect" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="NovoptelTCP.NovoptelTCP.debug">
+<span class="sig-name descname"><span class="pre">debug</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#NovoptelTCP.NovoptelTCP.debug" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="NovoptelTCP.NovoptelTCP.ip">
+<span class="sig-name descname"><span class="pre">ip</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'127.0.0.1'</span></em><a class="headerlink" href="#NovoptelTCP.NovoptelTCP.ip" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="NovoptelTCP.NovoptelTCP.port">
+<span class="sig-name descname"><span class="pre">port</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5025</span></em><a class="headerlink" href="#NovoptelTCP.NovoptelTCP.port" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="NovoptelTCP.NovoptelTCP.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NovoptelTCP.html#NovoptelTCP.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelTCP.NovoptelTCP.read" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="NovoptelTCP.NovoptelTCP.readsdram_getpackets">
+<span class="sig-name descname"><span class="pre">readsdram_getpackets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">startaddrseq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">packetsinthissequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cycles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NovoptelTCP.html#NovoptelTCP.readsdram_getpackets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelTCP.NovoptelTCP.readsdram_getpackets" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="NovoptelTCP.NovoptelTCP.readsdram_getpackets_raw">
+<span class="sig-name descname"><span class="pre">readsdram_getpackets_raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">startaddrseq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">packetsinthissequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cycles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NovoptelTCP.html#NovoptelTCP.readsdram_getpackets_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelTCP.NovoptelTCP.readsdram_getpackets_raw" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="NovoptelTCP.NovoptelTCP.readsdram_raw">
+<span class="sig-name descname"><span class="pre">readsdram_raw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">startaddr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numaddr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NovoptelTCP.html#NovoptelTCP.readsdram_raw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelTCP.NovoptelTCP.readsdram_raw" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="NovoptelTCP.NovoptelTCP.readsdram_sendrequest">
+<span class="sig-name descname"><span class="pre">readsdram_sendrequest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">startaddrseq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">packetsinthissequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cycles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NovoptelTCP.html#NovoptelTCP.readsdram_sendrequest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelTCP.NovoptelTCP.readsdram_sendrequest" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="NovoptelTCP.NovoptelTCP.reconnect">
+<span class="sig-name descname"><span class="pre">reconnect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NovoptelTCP.html#NovoptelTCP.reconnect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelTCP.NovoptelTCP.reconnect" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="NovoptelTCP.NovoptelTCP.s">
+<span class="sig-name descname"><span class="pre">s</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#NovoptelTCP.NovoptelTCP.s" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="NovoptelTCP.NovoptelTCP.socket_read">
+<span class="sig-name descname"><span class="pre">socket_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NovoptelTCP.html#NovoptelTCP.socket_read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelTCP.NovoptelTCP.socket_read" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="NovoptelTCP.NovoptelTCP.socket_write">
+<span class="sig-name descname"><span class="pre">socket_write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NovoptelTCP.html#NovoptelTCP.socket_write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelTCP.NovoptelTCP.socket_write" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="NovoptelTCP.NovoptelTCP.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">addr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/NovoptelTCP.html#NovoptelTCP.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#NovoptelTCP.NovoptelTCP.write" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Martin.Mihaylov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

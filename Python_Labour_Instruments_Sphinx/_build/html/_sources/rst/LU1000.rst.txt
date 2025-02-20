@@ -1,7 +1,35 @@
-Novoptel Laser LU1000 module
+LU1000 Module
 =============
 
 .. automodule:: LU1000
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+LU1000 Classes
+--------------
+
+LU1000_Base
+~~~~~~~~~~~
+
+.. autoclass:: LU1000_Base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   
+
+LU1000_Cband
+~~~~~~~~~~~~
+
+.. autoclass:: LU1000_Cband
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+LU1000_Oband
+~~~~~~~~~~~~
+
+.. autoclass:: LU1000_Oband
    :members:
    :undoc-members:
    :show-inheritance:

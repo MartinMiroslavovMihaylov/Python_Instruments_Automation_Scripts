@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
@@ -7,14 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KEITHLEY2612 &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
   
-      <script src="../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f2a433a1"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -90,9 +92,10 @@
 <span class="sd">        Connect to Device and print the Identification Number.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_resource</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">ResourceManager</span><span class="p">()</span><span class="o">.</span><span class="n">open_resource</span><span class="p">(</span><span class="n">resource_str</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">))</span>
-        
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_resource</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
 
+        <span class="c1"># Internal Variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]</span>
 
 <div class="viewcode-block" id="KEITHLEY2612.query">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.query">[docs]</a>
@@ -114,7 +117,7 @@
 
     
 <span class="c1"># =============================================================================</span>
-<span class="c1"># Reset to Defoult</span>
+<span class="c1"># Reset to Default</span>
 <span class="c1"># =============================================================================</span>
     
 <div class="viewcode-block" id="KEITHLEY2612.Reset">
@@ -140,8 +143,7 @@
 <span class="sd">        &#39;&#39;&#39;</span>
        
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.reset()&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
@@ -168,15 +170,15 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
 
-        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;*IDN?&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></div>
 
 
 
 
 <div class="viewcode-block" id="KEITHLEY2612.ask_LimitReached">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.ask_LimitReached">[docs]</a>
-    <span class="k">def</span> <span class="nf">ask_LimitReached</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">ask_LimitReached</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This attribute contains the state of source compliance.</span>
 <span class="sd">        </span>
 
 <span class="sd">        Parameters</span>
@@ -193,10 +195,9 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
-            <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smua.source.compliance&#39;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;print(smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.compliance)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="s1">&#39;true&#39;</span> <span class="k">else</span> <span class="kc">False</span></div>
 
     
     
@@ -205,8 +206,8 @@
     
 <div class="viewcode-block" id="KEITHLEY2612.ask_Current">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.ask_Current">[docs]</a>
-    <span class="k">def</span> <span class="nf">ask_Current</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">ask_Current</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This function performs one current measurements and returns the value.</span>
 <span class="sd">        </span>
 
 <span class="sd">        Parameters</span>
@@ -222,13 +223,12 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TYPE  float</span>
-<span class="sd">            Return float with the measured value on the channel</span>
+<span class="sd">            Return float with the measured current value on the channel.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;print(smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.i())&#39;</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
@@ -240,8 +240,8 @@
     
 <div class="viewcode-block" id="KEITHLEY2612.ask_Voltage">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.ask_Voltage">[docs]</a>
-    <span class="k">def</span> <span class="nf">ask_Voltage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">ask_Voltage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This function performs one voltage measurements and returns the value.</span>
 <span class="sd">        </span>
 
 <span class="sd">        Parameters</span>
@@ -258,13 +258,12 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TYPE : float</span>
-<span class="sd">            Return float with the measured value on the channel</span>
+<span class="sd">            Return float with the measured voltage value on the channel.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;print(smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.v())&#39;</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
@@ -276,8 +275,8 @@
     
 <div class="viewcode-block" id="KEITHLEY2612.ask_Power">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.ask_Power">[docs]</a>
-    <span class="k">def</span> <span class="nf">ask_Power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">ask_Power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This function performs one power measurements and returns the value.</span>
 <span class="sd">        </span>
 
 <span class="sd">        Parameters</span>
@@ -294,13 +293,12 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TYPE : float</span>
-<span class="sd">            Return float with the measured value on the channel</span>
+<span class="sd">            Return float with the measured power value on the channel.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;print(smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.p())&#39;</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
@@ -312,8 +310,8 @@
     
 <div class="viewcode-block" id="KEITHLEY2612.ask_Resistance">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.ask_Resistance">[docs]</a>
-    <span class="k">def</span> <span class="nf">ask_Resistance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">ask_Resistance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This function performs one resistance measurements and returns the value.</span>
 <span class="sd">        </span>
 
 <span class="sd">        Parameters</span>
@@ -330,13 +328,12 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TYPE : float</span>
-<span class="sd">            Return float with the measured value on the channel</span>
+<span class="sd">            Return float with the measured resistance value on the channel.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;print(smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.r())&#39;</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
@@ -349,7 +346,7 @@
 <div class="viewcode-block" id="KEITHLEY2612.ask_readBuffer">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.ask_readBuffer">[docs]</a>
     <span class="k">def</span> <span class="nf">ask_readBuffer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">start</span><span class="p">,</span><span class="n">stop</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;TODO: This function should be checked. Also is doesn&#39;t return anything at the moment.</span>
 <span class="sd">        </span>
 
 <span class="sd">        Parameters</span>
@@ -376,8 +373,7 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;printbuffer(&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">start</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;,smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;)&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
@@ -393,17 +389,15 @@
 
 <div class="viewcode-block" id="KEITHLEY2612.set_SourceOutput">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_SourceOutput">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_SourceOutput</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
-<span class="w">        </span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        </span>
+    <span class="k">def</span> <span class="nf">set_SourceOutput</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="o">|</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This attribute sets source output state (on or off)</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        chan : str</span>
 <span class="sd">            Select channel A or B</span>
 <span class="sd">        state : str </span>
-<span class="sd">            Set source output (CHAN A) ON and OF</span>
+<span class="sd">            Set source output (CHAN A/B) ON or OFF</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -415,31 +409,33 @@
 <span class="sd">        None.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Normalize channel and state inputs</span>
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">stList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">]</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stList</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.output = smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.OUTPUT_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+        <span class="n">state_mapping</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;on&#39;</span><span class="p">:</span> <span class="s1">&#39;ON&#39;</span><span class="p">,</span> <span class="s1">&#39;off&#39;</span><span class="p">:</span> <span class="s1">&#39;OFF&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;ON&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;OFF&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;HIGH_Z&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;ON&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;OFF&#39;</span> <span class="p">}</span>
+        <span class="n">state_normalized</span> <span class="o">=</span> <span class="n">state_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">state</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">else</span> <span class="n">state</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+        <span class="c1"># Validate inputs</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span> <span class="ow">and</span> <span class="n">state_normalized</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.output = smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.OUTPUT_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state_normalized</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
 
     
     
     
+
+
 <div class="viewcode-block" id="KEITHLEY2612.set_MeasOutput">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_MeasOutput">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_MeasOutput</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
-<span class="w">        </span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        </span>
+    <span class="k">def</span> <span class="nf">set_MeasOutput</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="o">|</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>   
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This attribute sets source output state (on or off)</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        chan : str</span>
 <span class="sd">            Select channel A or B</span>
 <span class="sd">        state : str </span>
-<span class="sd">            Set source output (CHAN A) ON and OF</span>
+<span class="sd">            Set source output (CHAN A/B) ON or OFF</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -451,14 +447,17 @@
 <span class="sd">        None.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Normalize channel and state inputs</span>
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">stList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">]</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stList</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.output = smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.OUTPUT_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+        <span class="n">state_mapping</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;on&#39;</span><span class="p">:</span> <span class="s1">&#39;ON&#39;</span><span class="p">,</span> <span class="s1">&#39;off&#39;</span><span class="p">:</span> <span class="s1">&#39;OFF&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;ON&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;OFF&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;HIGH_Z&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;ON&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;OFF&#39;</span> <span class="p">}</span>
+        <span class="n">state_normalized</span> <span class="o">=</span> <span class="n">state_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">state</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">else</span> <span class="n">state</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+        <span class="c1"># Validate inputs</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span> <span class="ow">and</span> <span class="n">state_normalized</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.output = smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.OUTPUT_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">state_normalized</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid channel or state! Channel must be &quot;A&quot; or &quot;B&quot;. </span><span class="se">\</span>
+<span class="s1">                             State must be &quot;ON&quot;, &quot;OFF&quot;, 1, or 0.&#39;</span><span class="p">)</span></div>
 
             
     
@@ -467,9 +466,8 @@
     
 <div class="viewcode-block" id="KEITHLEY2612.set_AutoVoltageRange">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_AutoVoltageRange">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_AutoVoltageRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        </span>
+    <span class="k">def</span> <span class="nf">set_AutoVoltageRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="o">|</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This attribute contains the state of the source autorange control (on/off).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -488,14 +486,16 @@
 <span class="sd">        None.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Normalize channel and state inputs</span>
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">stList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">]</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stList</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.autorangev = smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.AUTORANGE_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+        <span class="n">state_mapping</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;on&#39;</span><span class="p">:</span> <span class="s1">&#39;ON&#39;</span><span class="p">,</span> <span class="s1">&#39;off&#39;</span><span class="p">:</span> <span class="s1">&#39;OFF&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;ON&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;OFF&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;ON&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;OFF&#39;</span> <span class="p">}</span>
+        <span class="n">state_normalized</span> <span class="o">=</span> <span class="n">state_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">state</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">else</span> <span class="n">state</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+        <span class="c1"># Validate inputs</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span> <span class="ow">and</span> <span class="n">state_normalized</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.autorangev = smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.AUTORANGE_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state_normalized</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
 
                 
     
@@ -504,9 +504,8 @@
     
 <div class="viewcode-block" id="KEITHLEY2612.set_AutoCurrentRange">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_AutoCurrentRange">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_AutoCurrentRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">state</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        </span>
+    <span class="k">def</span> <span class="nf">set_AutoCurrentRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="o">|</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This attribute contains the state of the source autorange control (on/off).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -525,15 +524,16 @@
 <span class="sd">        None.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-        
+        <span class="c1"># Normalize channel and state inputs</span>
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">stList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ON&#39;</span><span class="p">,</span><span class="s1">&#39;OFF&#39;</span><span class="p">]</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">stList</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.autorangei = smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.AUTORANGE_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+        <span class="n">state_mapping</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;on&#39;</span><span class="p">:</span> <span class="s1">&#39;ON&#39;</span><span class="p">,</span> <span class="s1">&#39;off&#39;</span><span class="p">:</span> <span class="s1">&#39;OFF&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;ON&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;OFF&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;ON&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;OFF&#39;</span> <span class="p">}</span>
+        <span class="n">state_normalized</span> <span class="o">=</span> <span class="n">state_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">state</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">else</span> <span class="n">state</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+        <span class="c1"># Validate inputs</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span> <span class="ow">and</span> <span class="n">state_normalized</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.autorangei = smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.AUTORANGE_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">state_normalized</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
 
     
     
@@ -542,9 +542,9 @@
     
 <div class="viewcode-block" id="KEITHLEY2612.set_VoltageRange">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_VoltageRange">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_VoltageRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        </span>
+    <span class="k">def</span> <span class="nf">set_VoltageRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="o">|</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This attribute contains the positive full-scale value </span>
+<span class="sd">            of the measure range for voltage </span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -565,8 +565,7 @@
 <span class="sd">        &#39;&#39;&#39;</span>
   
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span><span class="p">:</span>
             <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.0e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.measure.rangev = &#39;</span> <span class="o">+</span> <span class="n">value</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -579,9 +578,9 @@
     
 <div class="viewcode-block" id="KEITHLEY2612.set_CurrentRange">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_CurrentRange">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_CurrentRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        </span>
+    <span class="k">def</span> <span class="nf">set_CurrentRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="o">|</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This attribute contains the positive full-scale value </span>
+<span class="sd">            of the measure range for current        </span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -602,8 +601,7 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span><span class="p">:</span>
             <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.0e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.rangei = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
             
@@ -617,16 +615,18 @@
     
 <div class="viewcode-block" id="KEITHLEY2612.set_VoltageLimit">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_VoltageLimit">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_VoltageLimit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">set_VoltageLimit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="o">|</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Sets voltage source compliance. Use to limit the voltage output </span>
+<span class="sd">        when in the current source mode. This attribute should be set in the </span>
+<span class="sd">        test sequence before turning the source on.</span>
 <span class="sd">        </span>
-
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        chan : str</span>
 <span class="sd">            Select Channel A or B</span>
 <span class="sd">        value : int/float</span>
-<span class="sd">            Sets the voltage limit of channel X to V.</span>
+<span class="sd">            Sets the voltage limit of channel X to V. Using a limit value of 0 </span>
+<span class="sd">            will result in a &quot;Parameter Too Small&quot; error message (error 1102) </span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -640,8 +640,7 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span> <span class="ow">and</span> <span class="mf">20e-3</span> <span class="o">&lt;</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">:</span>
             <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.0e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.limitv = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
@@ -654,8 +653,10 @@
     
 <div class="viewcode-block" id="KEITHLEY2612.set_CurrentLimit">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_CurrentLimit">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_CurrentLimit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">set_CurrentLimit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="o">|</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Sets current source compliance. Use to limit the current output </span>
+<span class="sd">        when in the voltage source mode. This attribute should be set in the </span>
+<span class="sd">        test sequence before turning the source on.</span>
 <span class="sd">        </span>
 
 <span class="sd">        Parameters</span>
@@ -663,7 +664,8 @@
 <span class="sd">        chan : str</span>
 <span class="sd">            Select Channel A or B</span>
 <span class="sd">        value : int/float</span>
-<span class="sd">            Sets the current limit of channel X to V.</span>
+<span class="sd">            Sets the current limit of channel X to A. Using a limit value of 0 </span>
+<span class="sd">            will result in a &quot;Parameter Too Small&quot; error message (error 1102) </span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -677,8 +679,7 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span> <span class="ow">and</span> <span class="mf">10e-9</span> <span class="o">&lt;</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
             <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.0e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.limiti = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
@@ -691,8 +692,8 @@
     
 <div class="viewcode-block" id="KEITHLEY2612.set_Voltage">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_Voltage">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_Voltage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">set_Voltage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="o">|</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This attribute sets the source level voltage.</span>
 <span class="sd">        </span>
 
 <span class="sd">        Parameters</span>
@@ -714,8 +715,7 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span><span class="p">:</span>
             <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.4e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.levelv = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
@@ -728,8 +728,8 @@
     
 <div class="viewcode-block" id="KEITHLEY2612.set_Current">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_Current">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_Current</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">set_Current</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="o">|</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This attribute sets the source level current.</span>
 <span class="sd">        </span>
 
 <span class="sd">        Parameters</span>
@@ -751,8 +751,7 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span><span class="p">:</span>
             <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.4e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.leveli = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
@@ -765,7 +764,7 @@
     
 <div class="viewcode-block" id="KEITHLEY2612.set_ChannelDisplay">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_ChannelDisplay">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_ChannelDisplay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">double</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_ChannelDisplay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">double</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        </span>
 
@@ -775,7 +774,7 @@
 <span class="sd">            Select channel A or B</span>
 <span class="sd">        double : boolean, optional</span>
 <span class="sd">            Displays source-measure for SMU A and SMU B.</span>
-<span class="sd">            double = None per default.</span>
+<span class="sd">            double = True per default.</span>
 <span class="sd">            if double = True:</span>
 <span class="sd">                Display Chan A and B </span>
 <span class="sd">            else:</span>
@@ -793,17 +792,14 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">double</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+        
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">double</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;display.screen = display.SMU&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="o">.</span><span class="n">upper</span><span class="p">()))</span>  
+            <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;display.screen = display.SMUA_SMUB&#39;</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;display.screen = display.SMU&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="o">.</span><span class="n">upper</span><span class="p">()))</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
 
                    
     
@@ -812,18 +808,18 @@
     
 <div class="viewcode-block" id="KEITHLEY2612.set_OutputSourceFunction">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_OutputSourceFunction">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_OutputSourceFunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">typ</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">set_OutputSourceFunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This attribute sets the source function (V source or I source).</span>
 <span class="sd">        </span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        chan : str</span>
 <span class="sd">            Select channel A or B</span>
-<span class="sd">        typ : str</span>
+<span class="sd">        type : str</span>
 <span class="sd">            The source function. Set to one of the following values:</span>
-<span class="sd">            typ = &#39;volt&#39; for Selects voltage source function</span>
-<span class="sd">            typ = &#39;amp&#39; for Selects voltage source function</span>
+<span class="sd">            type = &#39;volt&#39; Selects voltage source function</span>
+<span class="sd">            type = &#39;amp&#39;  Selects current source function</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -837,18 +833,15 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">typ</span> <span class="o">=</span> <span class="n">typ</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="nb">type</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="n">tList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;volt&#39;</span><span class="p">,</span><span class="s1">&#39;amp&#39;</span><span class="p">]</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span> <span class="ow">and</span> <span class="n">typ</span> <span class="ow">in</span> <span class="n">tList</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="s1">&#39;volt&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span> <span class="ow">and</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">tList</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;volt&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.func = smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.OUTPUT_DCVOLTS&#39;</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="s1">&#39;amp&#39;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;amp&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.func = smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.OUTPUT_DCAMPS&#39;</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
 
               
     
@@ -857,17 +850,17 @@
     
 <div class="viewcode-block" id="KEITHLEY2612.set_DisplayMeasurementFunction">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_DisplayMeasurementFunction">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_DisplayMeasurementFunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">typ</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">set_DisplayMeasurementFunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This attribute specifies the type of measurement being displayed.</span>
 <span class="sd">        </span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        chan : str</span>
 <span class="sd">            Select channel A or B</span>
-<span class="sd">        typ : str</span>
+<span class="sd">        type : str</span>
 <span class="sd">            Selects the displayed measurement function: </span>
-<span class="sd">            Amperes, volts, ohms, or watts.</span>
+<span class="sd">            volt, amp, ohm, or watt.</span>
 <span class="sd">            SMU A and SMU B can be set for different measurement functions!</span>
 <span class="sd">      </span>
 <span class="sd">        Raises</span>
@@ -882,22 +875,19 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">typ</span> <span class="o">=</span> <span class="n">typ</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="nb">type</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="n">tList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;volt&#39;</span><span class="p">,</span><span class="s1">&#39;amp&#39;</span><span class="p">,</span><span class="s1">&#39;ohm&#39;</span><span class="p">,</span><span class="s1">&#39;watt&#39;</span><span class="p">]</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span> <span class="ow">and</span> <span class="n">typ</span> <span class="ow">in</span> <span class="n">tList</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="s1">&#39;volt&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span> <span class="ow">and</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">tList</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;volt&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;display.smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.func = display.MEASURE_DCVOLTS&#39;</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="s1">&#39;amp&#39;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;amp&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;display.smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.func = display.MEASURE_DCAMPS&#39;</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="s1">&#39;ohm&#39;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;ohm&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;display.smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.func = display.MEASURE_OHMS&#39;</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="s1">&#39;watt&#39;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;watt&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;display.smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.func = display.MEASURE_WATTS&#39;</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
 
                 
         
@@ -905,20 +895,20 @@
         
 <div class="viewcode-block" id="KEITHLEY2612.set_MeasurementVoltageRange">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_MeasurementVoltageRange">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_MeasurementVoltageRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">typ</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">set_MeasurementVoltageRange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="o">|</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;This attribute contains the positive full-scale value of the measure range for voltage or current.</span>
 <span class="sd">        </span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        chan : str</span>
 <span class="sd">            Select channel A or B</span>
-<span class="sd">        typ : str</span>
-<span class="sd">            Selects the displayed measurement function: </span>
-<span class="sd">            Amperes or volts.</span>
+<span class="sd">        type : str</span>
+<span class="sd">            Selects the measurement function: </span>
+<span class="sd">            &#39;volt&#39; or &#39;amp&#39;.</span>
 <span class="sd">            SMU A and SMU B can be set for different measurement functions!</span>
 <span class="sd">        value : int/float</span>
-<span class="sd">            Select channel A or B value to be set</span>
+<span class="sd">            Set to the maximum expected voltage or current to be measured.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
@@ -932,13 +922,13 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">typ</span> <span class="o">=</span> <span class="n">typ</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="nb">type</span> <span class="o">=</span> <span class="nb">type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.0e}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="n">tList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;volt&#39;</span><span class="p">,</span><span class="s1">&#39;amp&#39;</span><span class="p">]</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span> <span class="ow">and</span> <span class="n">typ</span> <span class="ow">in</span> <span class="n">tList</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="s1">&#39;volt&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span> <span class="ow">and</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">tList</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;volt&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.rangev = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
-            <span class="k">elif</span> <span class="n">typ</span> <span class="o">==</span> <span class="s1">&#39;amp&#39;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;amp&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.measure.rangei = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span>
@@ -952,7 +942,7 @@
     
 <div class="viewcode-block" id="KEITHLEY2612.set_PulseMeasured">
 <a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_PulseMeasured">[docs]</a>
-    <span class="k">def</span> <span class="nf">set_PulseMeasured</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">ton</span><span class="p">,</span><span class="n">toff</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_PulseMeasured</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">chan</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span><span class="n">value</span><span class="p">:</span><span class="nb">int</span><span class="o">|</span><span class="nb">float</span><span class="p">,</span><span class="n">ton</span><span class="p">:</span><span class="nb">int</span><span class="o">|</span><span class="nb">float</span><span class="p">,</span><span class="n">toff</span><span class="p">:</span><span class="nb">int</span><span class="o">|</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 
 <span class="sd">        Parameters</span>
@@ -977,16 +967,52 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;ConfigPulseIMeasureV(smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ton</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;,&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">toff</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;)&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
 
-                   
-    
-    
-    
+
+
+
+
+
+<div class="viewcode-block" id="KEITHLEY2612.set_offmode">
+<a class="viewcode-back" href="../rst/KEITHLEY2612.html#KEITHLEY2612.KEITHLEY2612.set_offmode">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_offmode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This attribute sets the source output-off mode</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        chan : str</span>
+<span class="sd">            Channel A or B</span>
+<span class="sd">        type : int | str</span>
+<span class="sd">            0 or NORMAL: Configures the source function according to</span>
+<span class="sd">                smuX.source.offfunc attribute</span>
+<span class="sd">            1 or ZERO: Configures source to output 0 V </span>
+<span class="sd">            2 or HIGH_Z: Opens the output relay when the output is turned off</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            Channel not in Channel list or Type not in Type list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Normalize channel and state inputs</span>
+        <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">type_mapping</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;NORMAL&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;ZERO&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;HIGH_Z&#39;</span><span class="p">,</span> <span class="s1">&#39;normal&#39;</span><span class="p">:</span> <span class="s1">&#39;NORMAL&#39;</span><span class="p">,</span> <span class="s1">&#39;zero&#39;</span><span class="p">:</span> <span class="s1">&#39;ZERO&#39;</span> <span class="p">}</span>
+        <span class="n">type_normalized</span> <span class="o">=</span> <span class="n">type_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">type</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">else</span> <span class="nb">type</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+        <span class="c1"># Validate inputs      </span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span> <span class="ow">and</span> <span class="n">type_normalized</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>         
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.source.offmode = smu&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.OUTPUT_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">type_normalized</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown input! See function description for more info.&#39;</span><span class="p">)</span></div>
+
+
+
+
+
+
 <span class="c1"># =============================================================================</span>
 <span class="c1"># Get/Save Data</span>
 <span class="c1"># =============================================================================</span>
@@ -1008,9 +1034,8 @@
 
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">chan</span> <span class="o">=</span> <span class="n">chan</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="n">chList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
         <span class="n">OutPut</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="n">chList</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">chan</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_chList</span><span class="p">:</span>
             <span class="n">Current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_Current</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span>
             <span class="n">Voltage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_Voltage</span><span class="p">(</span><span class="n">chan</span><span class="p">)</span>
         <span class="n">OutPut</span><span class="p">[</span><span class="s1">&#39;Voltage/V&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Voltage</span>

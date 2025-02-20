@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UXR &mdash; Instruments Automatisation Libraries 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f2a433a1"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Instruments Automatisation Libraries
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Instruments Automatisation Libraries</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">UXR</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for UXR</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Mon Dec  1 20:17:32 2024</span>
+
+<span class="sd">@author: Maxim Weizel</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pyvisa</span> <span class="k">as</span> <span class="nn">visa</span>
+
+
+<div class="viewcode-block" id="UXR">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR">[docs]</a>
+<span class="k">class</span> <span class="nc">UXR</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class is using pyvisa to connect to Instruments. Please install PyVisa before using it.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">resource_str</span><span class="o">=</span><span class="s2">&quot;TCPIP0::KEYSIGH-Q75EBO9.local::hislip0::INSTR&quot;</span><span class="p">,</span>
+        <span class="n">num_channel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instrument</span> <span class="o">=</span> <span class="n">visa</span><span class="o">.</span><span class="n">ResourceManager</span><span class="p">()</span><span class="o">.</span><span class="n">open_resource</span><span class="p">(</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">resource_str</span><span class="p">),</span> <span class="n">read_termination</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">query_delay</span><span class="o">=</span><span class="mf">0.5</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;*IDN?&quot;</span><span class="p">))</span>
+
+        <span class="c1"># Internal Variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_types_channel</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_channel</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_waveform_format</span> <span class="o">=</span> <span class="s2">&quot;ASC&quot;</span>
+
+<div class="viewcode-block" id="UXR.query">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.query">[docs]</a>
+    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UXR.query_binary_values">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.query_binary_values">[docs]</a>
+    <span class="k">def</span> <span class="nf">query_binary_values</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="n">container</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">data_points</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">query_binary_values</span><span class="p">(</span>
+            <span class="n">message</span><span class="p">,</span>
+            <span class="n">datatype</span><span class="o">=</span><span class="n">datatype</span><span class="p">,</span>
+            <span class="n">container</span><span class="o">=</span><span class="n">container</span><span class="p">,</span>
+            <span class="n">data_points</span><span class="o">=</span><span class="n">data_points</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UXR.write">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.write">[docs]</a>
+    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UXR.Close">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.Close">[docs]</a>
+    <span class="k">def</span> <span class="nf">Close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+    <span class="c1"># =============================================================================</span>
+    <span class="c1"># * (Common) Commands</span>
+    <span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="UXR.clear_status">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.clear_status">[docs]</a>
+    <span class="k">def</span> <span class="nf">clear_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The *CLS command clears all status and error registers.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;*CLS&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UXR.IDN">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.IDN">[docs]</a>
+    <span class="k">def</span> <span class="nf">IDN</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The *IDN? query returns the company name, oscilloscope model number, serial</span>
+<span class="sd">        number, and software version by returning this string:</span>
+<span class="sd">        Keysight Technologies,&lt;Model #&gt;,&lt;USXXXXXXXX&gt;,&lt;Rev #&gt;[,&lt;Options&gt;]</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            str</span>
+<span class="sd">                Keysight Technologies,DSO9404A,USXXXXXXXX,XX.XX.XXXX</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;*IDN?&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UXR.OPC">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.OPC">[docs]</a>
+    <span class="k">def</span> <span class="nf">OPC</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Places a “1” into the output queue when all device</span>
+<span class="sd">        operations have been completed</span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        TYPE str</span>
+<span class="sd">            1 or 0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;*OPC?&quot;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="UXR.reset">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.reset">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The *RST command performs a default setup which is the same as pressing the</span>
+<span class="sd">        oscilloscope front panel [Default Setup] key.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;*RST&quot;</span><span class="p">)</span></div>
+
+
+    <span class="c1"># =============================================================================</span>
+    <span class="c1"># : (Root Level) Commands</span>
+    <span class="c1"># =============================================================================</span>
+<div class="viewcode-block" id="UXR.aquisition_done">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.aquisition_done">[docs]</a>
+    <span class="k">def</span> <span class="nf">aquisition_done</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :ADER? query reads the Acquisition Done Event Register and returns 1 or 0.</span>
+<span class="sd">        After the Acquisition Done Event Register is read, the register is cleared. The</span>
+<span class="sd">        returned value 1 indicates an acquisition completed event has occurred and 0</span>
+<span class="sd">        indicates an acquisition completed event has not occurred.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        int</span>
+<span class="sd">            {1 | 0}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;:ADER?&quot;</span><span class="p">))</span></div>
+
+    
+<div class="viewcode-block" id="UXR.aquisition_state">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.aquisition_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">aquisition_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :ASTate? query returns the acquisition state.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            {ARM | TRIG | ATRIG | ADONE}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;:ASTate?&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UXR.autoscale">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.autoscale">[docs]</a>
+    <span class="k">def</span> <span class="nf">autoscale</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :AUToscale command causes the oscilloscope to evaluate all input waveforms</span>
+<span class="sd">        and find the optimum conditions for displaying the waveform.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;:AUToscale&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UXR.autoscale_channels">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.autoscale_channels">[docs]</a>
+    <span class="k">def</span> <span class="nf">autoscale_channels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :AUToscale:CHANnels command selects whether to apply autoscale to all of</span>
+<span class="sd">        the input channels or just the input channels that are currently displayed.</span>
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            value : str, optional</span>
+<span class="sd">                {ALL | DISPlayed}, if None then query</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            str</span>
+<span class="sd">                {ALL | DISP}</span>
+
+<span class="sd">            Raises</span>
+<span class="sd">            ------</span>
+<span class="sd">            ValueError</span>
+<span class="sd">                Expected one of: {ALL | DISP | DISPlayed }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;DISPLAYED&quot;</span><span class="p">,</span> <span class="s2">&quot;DISP&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_types</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid Argument. Expected one of: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">_types</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;:AUToscale:CHANnels </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># Query</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;:AUToscale:CHANnels?&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UXR.digitize">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.digitize">[docs]</a>
+    <span class="k">def</span> <span class="nf">digitize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_num</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This command initializes the selected channels or functions, then acquires</span>
+<span class="sd">        them according to the current oscilloscope settings. When all waveforms are</span>
+<span class="sd">        completely acquired, the oscilloscope is stopped.</span>
+<span class="sd">        To Do: input can be: [CHANnel&lt;N&gt; | DIFF&lt;D&gt; | COMMonmode&lt;C&gt;]</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            channel_num : int</span>
+<span class="sd">                Number of the Channel</span>
+
+<span class="sd">            Raises</span>
+<span class="sd">            ------</span>
+<span class="sd">            channel_numError</span>
+<span class="sd">                Expected one of: channel number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">channel_num</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">channel_num</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_types_channel</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Invalid Argument. Expected one of: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_types_channel</span>
+                <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;:DIGitize CHANnel</span><span class="si">{</span><span class="n">channel_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;:DIGitize&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UXR.run_state">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.run_state">[docs]</a>
+    <span class="k">def</span> <span class="nf">run_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :RSTate? query returns the run state:</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            {RUN | STOP | SING}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;:RSTate?&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UXR.run">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.run">[docs]</a>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the scope in run mode.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;:RUN&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UXR.single">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.single">[docs]</a>
+    <span class="k">def</span> <span class="nf">single</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Take a single acquisition</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;:SING&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UXR.status">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.status">[docs]</a>
+    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :STATus? query shows whether the specified channel, function, wmemory,</span>
+<span class="sd">        histogram, measurement trend, measurement spectrum, or equalized waveform is</span>
+<span class="sd">        on or off.</span>
+<span class="sd">        To Do: Each type has a different range of values that is excepted. No Checking</span>
+<span class="sd">        is implemented.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            key : str, optional</span>
+<span class="sd">                if None return status of Channel1</span>
+<span class="sd">            value : int, optional</span>
+<span class="sd">                For Channel [1,2], for Function &lt;=16</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            int</span>
+<span class="sd">                A return value of 1 means on and a return value of 0 means off</span>
+
+<span class="sd">            Raises</span>
+<span class="sd">            ------</span>
+<span class="sd">            ValueError</span>
+<span class="sd">                Expected one of: CHANNEL, FUNCTION, HIST, ... etc.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_types_key</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;CHAN&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;CHANNEL&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;DIFF&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;COMM&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;COMMONMODE&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FUNC&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FUNCTION&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;HIST&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;HISTOGRAM&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;WMEM&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;WMEMORY&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;CLOC&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;CLOCK&quot;</span> <span class="s2">&quot;MTR&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;MTREND&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;MSP&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;MSPECTRUM&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;EQU&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;EQUALIZED&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;XT&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_types_key</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid Argument. Expected one of: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">_types_key</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">16</span><span class="p">:</span>  <span class="c1"># For CHAN &lt;=2, for FUNC &lt;=16, ... etc.</span>
+                <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;:STATus? </span><span class="si">{</span><span class="n">key</span><span class="si">}{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;:STATus? CHANnel1&quot;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="UXR.stop">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.stop">[docs]</a>
+    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the scope in stop mode.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;:STOP&quot;</span><span class="p">)</span></div>
+
+
+    <span class="c1"># =============================================================================</span>
+    <span class="c1"># :CHANnel&lt;N&gt; Commands</span>
+    <span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="UXR.channel_display">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.channel_display">[docs]</a>
+    <span class="k">def</span> <span class="nf">channel_display</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">write</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :CHANnel&lt;N&gt;:DISPlay command turns the display of the specified channel on</span>
+<span class="sd">        or off.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            channel : int</span>
+<span class="sd">                An integer, analog input channel 1 or 2</span>
+<span class="sd">            write : bool, optional</span>
+<span class="sd">                write the channel display state, else query</span>
+<span class="sd">            value : int, str, optional</span>
+<span class="sd">                ON, 1, OFF, 0</span>
+
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            int</span>
+<span class="sd">                The :CHANnel&lt;N&gt;:DISPlay? query returns the current display condition for the</span>
+<span class="sd">                specified channel</span>
+
+<span class="sd">            Raises</span>
+<span class="sd">            ------</span>
+<span class="sd">            ValueError</span>
+<span class="sd">                For Channel expected one of: num_channels</span>
+<span class="sd">            ValueError</span>
+<span class="sd">                For values expected one of: ON, 1, OFF, 0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_type_value</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ON&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;OFF&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_types_channel</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid Argument. Expected one of: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_types_channel</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">write</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_type_value</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid Argument. Expected one of: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">_type_value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;:CHANnel</span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">:DISPlay </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># query</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;:CHANnel</span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">:DISPlay?&quot;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="UXR.channel_range">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.channel_range">[docs]</a>
+    <span class="k">def</span> <span class="nf">channel_range</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">write</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">range_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :CHANnel&lt;N&gt;:RANGe command defines the full-scale vertical axis of the</span>
+<span class="sd">        selected channel. The values represent the full-scale deflection</span>
+<span class="sd">        factor of the vertical axis in volts. These values change as the probe attenuation</span>
+<span class="sd">        factor is changed.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            channel : int</span>
+<span class="sd">                An integer, analog input channel 1 or 2</span>
+<span class="sd">            write : bool, optional</span>
+<span class="sd">                write else query, by default False</span>
+<span class="sd">            range_value : float, optional</span>
+<span class="sd">                A real number for the full-scale voltage of the specified channel number,</span>
+<span class="sd">                by default None</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            float</span>
+<span class="sd">                full-scale vertical axis of the selected channel</span>
+
+<span class="sd">            Raises</span>
+<span class="sd">            ------</span>
+<span class="sd">            ValueError</span>
+<span class="sd">                For Channel expected one of: num_channels</span>
+<span class="sd">            ValueError</span>
+<span class="sd">                For range_value expected to be &lt; 2V</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_types_channel</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid Argument. Expected one of: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_types_channel</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">write</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">range_value</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">:</span>  <span class="c1"># 2V Full Scale Range</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;:CHANnel</span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">:RANGe </span><span class="si">{</span><span class="n">range_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid Argument. Expected to be &lt;= 4V&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># query</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;:CHANnel</span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">:RANGe?&quot;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="UXR.channel_scale">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.channel_scale">[docs]</a>
+    <span class="k">def</span> <span class="nf">channel_scale</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">write</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">scale_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :CHANnel&lt;N&gt;:SCALe command sets the vertical scale, or units per division, of</span>
+<span class="sd">        the selected channel. This command is the same as the front-panel channel scale.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            channel : int</span>
+<span class="sd">                An integer, analog input channel 1 or 2</span>
+<span class="sd">            write : bool, optional</span>
+<span class="sd">                write else query, by default False</span>
+<span class="sd">            scale_value : float, optional</span>
+<span class="sd">                A real number for the vertical scale of the channel in units per division,</span>
+<span class="sd">                by default None</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            float</span>
+<span class="sd">                A real number for the vertical scale of the channel in units per division</span>
+
+<span class="sd">            Raises</span>
+<span class="sd">            ------</span>
+<span class="sd">            ValueError</span>
+<span class="sd">                For Channel expected one of: num_channels</span>
+<span class="sd">            ValueError</span>
+<span class="sd">                For range_value expected to be &lt; 500mV/div</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">channel</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_types_channel</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Invalid Argument. Expected one of: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_types_channel</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">write</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">scale_value</span> <span class="o">&lt;=</span> <span class="mf">0.5</span><span class="p">:</span>  <span class="c1"># 500mV/div Scale</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;:CHANnel</span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">:SCALe </span><span class="si">{</span><span class="n">scale_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid Argument. Expected to be &lt;= 500mV/div&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># query</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;:CHANnel</span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">:SCALe?&quot;</span><span class="p">))</span></div>
+
+
+    <span class="c1"># =============================================================================</span>
+    <span class="c1"># :SYSTem Commands</span>
+    <span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="UXR.system_header">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.system_header">[docs]</a>
+    <span class="k">def</span> <span class="nf">system_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;!!!! SHOULD BE OFF !!!!</span>
+<span class="sd">        The :SYSTem:HEADer command specifies whether the instrument will output a</span>
+<span class="sd">        header for query responses. When :SYSTem:HEADer is set to ON, the query</span>
+<span class="sd">        responses include the command header.</span>
+
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            value : int | str | None, optional</span>
+<span class="sd">                {{ON | 1} | {OFF | 0}}, by default None</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            int</span>
+<span class="sd">                {1 | 0}</span>
+
+<span class="sd">            Raises</span>
+<span class="sd">            ------</span>
+<span class="sd">            ValueError</span>
+<span class="sd">                Expected one of: {{ON | 1} | {OFF | 0}}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_type_value</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ON&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;OFF&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_type_value</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid Argument. Expected one of: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">_type_value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;:SYSTem:HEADer </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># query</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;:SYSTem:HEADer?&quot;</span><span class="p">))</span></div>
+
+
+    <span class="c1"># =============================================================================</span>
+    <span class="c1"># :WAVeform Commands</span>
+    <span class="c1"># =============================================================================</span>
+
+<div class="viewcode-block" id="UXR.waveform_byteorder">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.waveform_byteorder">[docs]</a>
+    <span class="k">def</span> <span class="nf">waveform_byteorder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :WAVeform:BYTeorder command selects the order in which bytes are</span>
+<span class="sd">        transferred from (or to) the oscilloscope using WORD and LONG formats</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            value : str, optional</span>
+<span class="sd">                byteorder {MSBF, LSBF}, by default None</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            str</span>
+<span class="sd">                byteorder {MSBF, LSBF}</span>
+
+<span class="sd">            Raises</span>
+<span class="sd">            ------</span>
+<span class="sd">            ValueError</span>
+<span class="sd">                Expected one of: MSBFIRST, LSBFIRST</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MSBF&quot;</span><span class="p">,</span> <span class="s2">&quot;MSBFIRST&quot;</span><span class="p">,</span> <span class="s2">&quot;LSBF&quot;</span><span class="p">,</span> <span class="s2">&quot;LSBFIRST&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_types</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid Argument. Expected one of: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">_types</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;:WAVeform:BYTeorder </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># Query</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;:WAVeform:BYTeorder?&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UXR.waveform_data">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.waveform_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">waveform_data</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">start</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">datatype</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;h&quot;</span><span class="p">,</span>
+        <span class="n">container</span><span class="p">:</span> <span class="nb">type</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+        <span class="n">data_points</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The :WAVeform:DATA? query outputs waveform data to the computer over the</span>
+<span class="sd">        remote interface. The data is copied from a waveform memory, function, or</span>
+<span class="sd">        channel previously specified with the :WAVeform:SOURce command.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        start : int, optional</span>
+<span class="sd">            Starting point in the source memory for the first waveform point to transfer, by default None.</span>
+<span class="sd">        size : int, optional</span>
+<span class="sd">            Number of points in the source memory to transfer. If larger than available data,</span>
+<span class="sd">            size is adjusted to the maximum available, by default None.</span>
+<span class="sd">        datatype : str, optional</span>
+<span class="sd">            Data type for binary values as defined in Python struct, by default &quot;h&quot; (short).</span>
+<span class="sd">        container : type, optional</span>
+<span class="sd">            Type of container to hold the data, by default np.array.</span>
+<span class="sd">        data_points : int, optional</span>
+<span class="sd">            Expected number of data points, by default 0.</span>
+<span class="sd">        kwargs : dict, optional</span>
+<span class="sd">            Additional arguments passed to the query_binary_values method.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        np.ndarray</span>
+<span class="sd">            Acquired data.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If `start` or `size` are invalid (non-integers or negative).</span>
+<span class="sd">        NotImplementedError</span>
+<span class="sd">            If the waveform format is not &quot;WORD&quot;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Validate start and size</span>
+        <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`start` must be a non-negative integer.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">size</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`size` must be a non-negative integer.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Construct the SCPI message</span>
+        <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;:WAVeform:DATA? </span><span class="si">{</span><span class="n">start</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">elif</span> <span class="n">start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;:WAVeform:DATA? </span><span class="si">{</span><span class="n">start</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;:WAVeform:DATA?&quot;</span>
+
+        <span class="c1"># Query the waveform data</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_waveform_format</span> <span class="o">==</span> <span class="s2">&quot;WORD&quot;</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query_binary_values</span><span class="p">(</span>
+                <span class="n">message</span><span class="p">,</span>
+                <span class="n">datatype</span><span class="o">=</span><span class="n">datatype</span><span class="p">,</span>
+                <span class="n">container</span><span class="o">=</span><span class="n">container</span><span class="p">,</span>
+                <span class="n">data_points</span><span class="o">=</span><span class="n">data_points</span><span class="p">,</span>
+                <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+            
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Unsupported waveform format: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_waveform_format</span><span class="si">}</span><span class="s2">. &quot;</span>
+                <span class="s2">&quot;Only &#39;WORD&#39; format is currently supported.&quot;</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UXR.waveform_format">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.waveform_format">[docs]</a>
+    <span class="k">def</span> <span class="nf">waveform_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :WAVeform:FORMat command sets the data transmission mode for waveform</span>
+<span class="sd">        data output. This command controls how the data is formatted when it is sent from</span>
+<span class="sd">        the oscilloscope, and pertains to all waveforms.</span>
+<span class="sd">        To Do: Only WORD is tested. There is a FLOAT type?</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            value : str, optional</span>
+<span class="sd">                One of {ASCii | BINary | BYTE | WORD }, by default None</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            str</span>
+<span class="sd">                {ASC | BIN | BYTE | WORD }</span>
+
+<span class="sd">            Raises</span>
+<span class="sd">            ------</span>
+<span class="sd">            ValueError</span>
+<span class="sd">                Expected one of: {ASCii | BINary | BYTE | WORD}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ASC&quot;</span><span class="p">,</span> <span class="s2">&quot;ASCII&quot;</span><span class="p">,</span> <span class="s2">&quot;BIN&quot;</span><span class="p">,</span> <span class="s2">&quot;BINARY&quot;</span><span class="p">,</span> <span class="s2">&quot;BYTE&quot;</span><span class="p">,</span> <span class="s2">&quot;WORD&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_types</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid Argument. Expected one of: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">_types</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;:WAVeform:FORMat </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_waveform_format</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># Query</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_waveform_format</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;:WAVeform:FORMat?&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_waveform_format</span></div>
+
+
+<div class="viewcode-block" id="UXR.waveform_points">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.waveform_points">[docs]</a>
+    <span class="k">def</span> <span class="nf">waveform_points</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :WAVeform:POINts? query returns the points value in the current waveform</span>
+<span class="sd">        preamble.</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            int</span>
+<span class="sd">                Number of points in the current waveform</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;:WAVeform:POINts?&quot;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="UXR.waveform_source">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.waveform_source">[docs]</a>
+    <span class="k">def</span> <span class="nf">waveform_source</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :WAVeform:SOURce command selects a channel, function, waveform</span>
+<span class="sd">        memory, or histogram as the waveform source</span>
+<span class="sd">        To Do: No checkes implemented</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            key : str | None, optional</span>
+<span class="sd">                One of: {CHANnel&lt;N&gt; | DIFF&lt;D&gt; | COMMonmode&lt;C&gt; | FUNCtion&lt;F&gt; | HISTogram |</span>
+<span class="sd">                WMEMory&lt;R&gt; | CLOCk | MTRend | MSPectrum | EQUalized | XT&lt;X&gt; | PNOise |</span>
+<span class="sd">                INPut | CORRected | ERRor | LFPR | NREDuced}, by default None</span>
+<span class="sd">            value : int | None, optional</span>
+<span class="sd">                Number e.g. 1 for Channel1, by default None</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            str</span>
+<span class="sd">                The :WAVeform:SOURce? query returns the currently selected waveform source.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;:WAVeform:SOURce </span><span class="si">{</span><span class="n">key</span><span class="si">}{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;:WAVeform:SOURce?&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UXR.waveform_streaming">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.waveform_streaming">[docs]</a>
+    <span class="k">def</span> <span class="nf">waveform_streaming</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;When enabled, :WAVeform:STReaming allows more than 999,999,999 bytes of</span>
+<span class="sd">        data to be transferred from the Infiniium oscilloscope to a PC when using the</span>
+<span class="sd">        :WAVeform:DATA? query.</span>
+
+<span class="sd">            Parameters</span>
+<span class="sd">            ----------</span>
+<span class="sd">            value : int | str | None, optional</span>
+<span class="sd">                {{ON | 1} | {OFF | 0}}, by default None</span>
+
+<span class="sd">            Returns</span>
+<span class="sd">            -------</span>
+<span class="sd">            int</span>
+<span class="sd">                {1 | 0}</span>
+
+<span class="sd">            Raises</span>
+<span class="sd">            ------</span>
+<span class="sd">            ValueError</span>
+<span class="sd">                Expected one of: {{ON | 1} | {OFF | 0}}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_type_value</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ON&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;OFF&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_type_value</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid Argument. Expected one of: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">_type_value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;:WAVeform:STReaming </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># query</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;:WAVeform:STReaming?&quot;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="UXR.waveform_x_increment">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.waveform_x_increment">[docs]</a>
+    <span class="k">def</span> <span class="nf">waveform_x_increment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :WAVeform:XINCrement? query returns the duration between consecutive</span>
+<span class="sd">        data points for the currently specified waveform source.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            A real number representing the duration between data points on the X axis.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;:WAVeform:XINCrement?&quot;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="UXR.waveform_x_origin">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.waveform_x_origin">[docs]</a>
+    <span class="k">def</span> <span class="nf">waveform_x_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :WAVeform:XORigin? query returns the X-axis value of the first data point in</span>
+<span class="sd">        the data record.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            A real number representing the X-axis value of the first data point in the data</span>
+<span class="sd">            record.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;:WAVeform:XORigin?&quot;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="UXR.waveform_y_increment">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.waveform_y_increment">[docs]</a>
+    <span class="k">def</span> <span class="nf">waveform_y_increment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :WAVeform:YINCrement? query returns the y-increment voltage value for the</span>
+<span class="sd">        currently specified source.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            A real number in exponential format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;:WAVeform:YINCrement?&quot;</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="UXR.waveform_y_origin">
+<a class="viewcode-back" href="../rst/UXR.html#UXR.UXR.waveform_y_origin">[docs]</a>
+    <span class="k">def</span> <span class="nf">waveform_y_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :WAVeform:YORigin? query returns the y-origin voltage value for the currently</span>
+<span class="sd">        specified source. The voltage value returned is the voltage value represented by</span>
+<span class="sd">        the waveform data digital code 00000.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            A real number in exponential format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;:WAVeform:YORigin?&quot;</span><span class="p">))</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Martin.Mihaylov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
