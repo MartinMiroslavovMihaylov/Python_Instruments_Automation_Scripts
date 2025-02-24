@@ -1,8 +1,9 @@
 # version: 1.0.0 2024/11/28 #Downloaded from https://www.novoptel.de/Home/Downloads_de.php
 # version: 1.1.0 2025/02/07 modified by Maxim.Weizel for LU1000 CBand+OBand (partially tested)
 
-from NovoptelUSB import NovoptelUSB
-from NovoptelTCP import NovoptelTCP
+
+from Instruments_Libraries.NovoptelUSB import NovoptelUSB
+from Instruments_Libraries.NovoptelTCP import NovoptelTCP
 from time import time, sleep
 
 print(
@@ -20,7 +21,7 @@ print(
     # LU1000 Laser Base Class #
 ##################################
 class LU1000_Base:
-    def __init__(self, target='192.168.1.100', port=5025):
+    def __init__(self, target='USB', port=5025):
         if target == 'USB':
             self.n = NovoptelUSB('LU1000')
             if self.n.DEVNO < 0:
@@ -29,7 +30,7 @@ class LU1000_Base:
             self.n = NovoptelTCP(target, port=port)
         self._available_lasers = [1, 2]
 
-    def close(self):
+    def Close(self):
         self.n.close()
         self.n = None
 
