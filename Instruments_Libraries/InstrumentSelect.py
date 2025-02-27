@@ -330,40 +330,47 @@ def APPH():
 def PowerSupply_GPP4323():
     from Instruments_Libraries.GPP4323 import GPP4323
     import serial.tools.list_ports
+    import re
+
+    # Regular expression to match the GPP4323 instrument ID
+    serial_regex = r'^GW INSTEK,GPP-4323.*'
     
-    SerialNum = ['GW INSTEK,GPP-4323,SN:GEW840790,V1.17', 'GW Instek,GPP-4323,SN:GEW866095,V1.19', 'GW Instek,GPP-4323,SN:GEW866085,V1.19', 'GW Instek,GPP-4323,SN:GEW866095,V1.02', 'GW Instek,GPP-4323,SN:GEW866095,V1.02', "GW Instek,GPP-4323,SN:GEW864544,V1.19", "GW Instek,GPP-4323,SN:GEW866072,V1.19", "GW Instek,GPP-4323,SN:GEW866082,V1.19"]
-    ports = serial.tools.list_ports.comports()
-    COM_List = []
-    Port_ = None
-    for port, desc, hwid in sorted(ports):
-            # print("{}: {} [{}]".format(port, desc, hwid))
-            COM_List.append(port)
-
-
-    PowerInstr = 0
-    for data in list(COM_List):
-        while PowerInstr == 0:
-            try:
-                GPP = GPP4323(data)
-                PowerInstr = GPP.getIdn().split("\n")[0]
-                if PowerInstr in SerialNum:
-                    PowerInstr = 1
-                    Port_ = data
-                    break
-                else:
-                    PowerInstr = 0
-                    print("Scanning COM Ports for Instrument !")
-            except serial.SerialException as e:
-                #There is no new data from serial port
-                print("Scanning COM Ports for Instrument !")
-            except TypeError as e:
-                #Disconnect of USB->UART occured
-                GPP = GPP4323()
-            else:
+    # Get all COM ports
+    ports = list(serial.tools.list_ports.comports())
+    
+    # Filter out Bluetooth devices based on description (ignore case)
+    filtered_ports = [
+        port for port in ports 
+        if "bluetooth" not in port.description.lower()
+    ]
+    
+    # Sort ports so that those with "gpp" in their description are prioritized
+    filtered_ports.sort(key=lambda port: (0 if "gpp" in port.description.lower() else 1, port.device))
+    print(filtered_ports)
+    selected_port = None
+    
+    # Iterate over filtered and sorted COM ports
+    for port in filtered_ports:
+        try:
+            GPP = GPP4323(port.device)
+            idn = GPP.getIdn()
+            if re.match(serial_regex, idn.upper()):
+                selected_port = port.device
                 break
-            break    
-    GPP.Close()
-    return GPP4323(Port_)
+        except Exception as e:
+            # Log the error or print a message, then continue with next port
+            print(f"Error connecting to {port.device}: {e}")
+        finally:
+            try:
+                GPP.Close()
+            except Exception:
+                pass
+    
+    if selected_port is None:
+        raise Exception("No suitable power supply found.")
+    
+    # Return a new instance connected to the selected port
+    return GPP4323(selected_port)
           
           
 def UXR_1002A():

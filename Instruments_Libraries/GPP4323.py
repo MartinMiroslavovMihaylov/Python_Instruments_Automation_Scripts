@@ -35,31 +35,28 @@ class GPP4323:
                         parity = serial.PARITY_NONE,
                         xonxoff = False)
         
-        self.eol_char = '\r\n'
+        self.eol_char = '\n'
+        self.timeout = 0.2
         self.sio = io.TextIOWrapper(io.BufferedReader(self._resource),newline= self.eol_char)
-        self._resource.write(('*IDN?' + self.eol_char).encode('utf-8'))
-        self.timeout_STR = time.sleep(0.2)
-        self.timeout_STR
-        self.timeout_STR = time.sleep(0.2)
-        print(self.sio.read())
+        print(self.getIdn())
         
 
    
     
     def write(self, message):
         self._resource.write((message + self.eol_char).encode('utf-8'))
-        self.timeout_STR
-
-
-    def query_IND(self, message):
-        self._resource.write((message + self.eol_char).encode('utf-8'))
-        data = self.sio.read()
-        return data
     
 
     def query_values(self, message):
         self._resource.write((message + self.eol_char).encode('utf-8'))
-        self.timeout_STR
+        time.sleep(self.timeout)
+        data = self._resource.read_until().decode('utf-8').strip()
+        return data
+    
+    
+    def query_values_io(self, message):
+        self._resource.write((message + self.eol_char).encode('utf-8'))
+        time.sleep(self.timeout)
         data = self.sio.read()
         return data
 
@@ -83,7 +80,7 @@ class GPP4323:
             Instrument identification 
 
         '''
-        return self.query_IND("*IDN?")
+        return self.query_values("*IDN?")
     
     
 # =============================================================================
@@ -340,7 +337,7 @@ class GPP4323:
         
         ChannelLS = [1,2,3,4]
         if channel in ChannelLS:   
-            return float(self.query_values("VSET"+str(channel)+"?").split('\n')[0])
+            return float(self.query_values("VSET"+str(channel)+"?"))
         else:
             raise ValueError('Invalid channel number! Possible channel numbers are [1,2,3,4]')
         
@@ -360,7 +357,7 @@ class GPP4323:
         TypeLS = ['Voltage', 'Current', 'Power']
         ChannelLS = [1,2,3,4]
         if channel in ChannelLS and Type in TypeLS:
-            return float(self.query_values(":MEASure"+str(channel)+":"+str(Type)+"?").split('\n')[0])
+            return float(self.query_values(":MEASure"+str(channel)+":"+str(Type)+"?"))
         else:
             raise ValueError('Invalid channel number or type of measurment! Possible channel numbers are [1,2,3,4]. Possible tapes are ["Voltage", "Current", "Power"]')
         
@@ -385,7 +382,7 @@ class GPP4323:
        
         ChannelLS = [1,2,3,4]
         if channel in ChannelLS:   
-            return float(self.query_values("ISET"+str(channel)+"?").split('\n')[0])
+            return float(self.query_values("ISET"+str(channel)+"?"))
         else:
             raise ValueError('Invalid channel number or type of measurement! Possible channel numbers are [1,2,3,4]')
         
@@ -410,7 +407,7 @@ class GPP4323:
         ChannelLS = [1,2]
         
         if channel in ChannelLS:
-           return self.query_values(":MODE"+str(channel)+"?").split('\n')[0]
+           return self.query_values(":MODE"+str(channel)+"?")
         else:
             raise ValueError('Invalid channel number! Possible channel numbers are [1,2,3,4]')
         
@@ -434,7 +431,7 @@ class GPP4323:
         '''
         ChannelLs = [1,2]   
         if channel in ChannelLs:
-            return float(self.query_values(":LOAD"+str(channel) + ":RESistor?").split('\n')[0])
+            return float(self.query_values(":LOAD"+str(channel) + ":RESistor?"))
         else: 
             raise ValueError('Invalid channel number! Possible channel numbers are [1,2,3,4]')
                         
@@ -451,7 +448,7 @@ class GPP4323:
 
     #     '''
         
-    #     return float(self.query_values("STATUS?").split('\n')[0])
+    #     return float(self.query_values("STATUS?"))
     
 
 # =============================================================================

@@ -4,6 +4,7 @@
 from Instruments_Libraries.NovoptelUSB import NovoptelUSB
 from Instruments_Libraries.NovoptelTCP import NovoptelTCP
 from time import time, sleep
+import logging
 
 print(
 '''
@@ -28,6 +29,7 @@ class LU1000_Base:
         else:
             self.n = NovoptelTCP(target, port=port)
         self._available_lasers = [1, 2]
+        self._num_of_attempts = 5 # try to write 5 times
 
     def Close(self):
         self.n.close()
@@ -155,25 +157,35 @@ class LU1000_Cband(LU1000_Base):
     def __init__(self, target='192.168.1.100'):
         super().__init__(target)
         # implement LU1000_Cband specific initializations here
+        self._default_max_freq = 196.25 # THz
+        self._default_min_freq = 191.5 # THz
+        self._default_grid_spacing = 500 # value after restart
+        self._default_max_channel_number = 96 # value after restart
+
         self._max_freq = {
-            1: self.get_max_freq(1),
-            2: self.get_max_freq(2)
+            1: self._default_max_freq,
+            2: self._default_max_freq
         }
 
         self._min_freq = {
-            1: self.get_min_freq(1),
-            2: self.get_min_freq(2)
+            1: self._default_min_freq,
+            2: self._default_min_freq
         }
 
         self._grid_spacing = {
-            1: self.get_grid_spacing(1),
-            2: self.get_grid_spacing(2)
+            1: self._default_grid_spacing,
+            2: self._default_grid_spacing
         }
 
         self._max_channel_number = {
-            1: self._update_max_channel_number(1),
-            2: self._update_max_channel_number(2)
+            1: self._default_max_channel_number,
+            2: self._default_max_channel_number 
         }
+
+        self._update_min_and_max_frequency(1)
+        self._update_min_and_max_frequency(2)
+        self._update_max_channel_number(1)
+        self._update_max_channel_number(2)
         
 # =============================================================================
 # C-Band Laser - General instrument data
@@ -183,8 +195,20 @@ class LU1000_Cband(LU1000_Base):
 
 # =============================================================================
 # C-Band Laser - GET functions
-# =============================================================================        
-    def _update_max_channel_number(self, laser: int) -> int:
+# =============================================================================
+    def _update_min_and_max_frequency(self, laser: int):
+        '''_internal function: Update min and max Laser frequency
+
+        Parameters
+        ----------
+        laser : int
+            Laser output selected - 1 or 2
+        '''
+        self._min_freq[laser] = self.get_min_freq(laser)
+        self._max_freq[laser] = self.get_max_freq(laser)
+
+
+    def _update_max_channel_number(self, laser: int) -> None:
         '''_internal function: Update max channel number
         
         Parameters
@@ -204,11 +228,9 @@ class LU1000_Cband(LU1000_Base):
         '''
 
         self._validate_laser(laser)
-        max_f = self._max_freq[laser]
-        min_f = self._min_freq[laser]
-        sleep(0.1)
-        grid_spacing = self.get_grid_spacing(laser)
-        return int( (max_f-min_f)/(grid_spacing/1e4) + 1)
+        self._max_channel_number[laser] = int( 
+            (self._max_freq[laser]-self._min_freq[laser])/(self._grid_spacing[laser]/1e4) + 1
+            )
 
     def get_channel(self, laser: int) -> int:
         '''Returns the Laser module's current channel.
@@ -662,11 +684,16 @@ class LU1000_Cband(LU1000_Base):
         '''
 
         self._validate_laser(laser)
-        THz = self._get_min_freq_THz(laser)
-        GHz = self._get_min_freq_GHz(laser)
-        Freq = THz + GHz*1e-4
-        return Freq
-
+        for attempts in range(self._num_of_attempts):
+            THz = self._get_min_freq_THz(laser)
+            GHz = self._get_min_freq_GHz(laser)
+            Freq = THz + GHz*1e-4
+            if self._default_min_freq <= Freq <= self._default_max_freq:
+                return Freq
+        else:
+            logging.warning(f'''Min frequency is not in range: {self._default_min_freq} THz - {self._default_max_freq} THz.
+                            Setting to default value: {self._default_min_freq} THz''')
+            return self._default_min_freq
 
     def get_max_freq(self, laser: int) -> float:
         '''Lasers's maximum possible Frequency.
@@ -689,10 +716,16 @@ class LU1000_Cband(LU1000_Base):
         '''
 
         self._validate_laser(laser)
-        THz = self._get_max_freq_THz(laser)
-        GHz = self._get_max_freq_GHz(laser)
-        Freq = THz + GHz*1e-4
-        return float(Freq)
+        for attempts in range(self._num_of_attempts):
+            THz = self._get_max_freq_THz(laser)
+            GHz = self._get_max_freq_GHz(laser)
+            Freq = THz + GHz*1e-4
+            if self._default_min_freq <= Freq <= self._default_max_freq:
+                return Freq
+        else:
+            logging.warning(f'''Max frequency is not in range: {self._default_min_freq} THz - {self._default_max_freq} THz.
+                            Setting to default value: {self._default_max_freq} THz''')
+            return self._default_max_freq
 
 
     def get_frequency(self, laser: int) -> float:
@@ -812,17 +845,20 @@ class LU1000_Cband(LU1000_Base):
         
         addr = self._calc_address(laser, 52)
         if value >= 1:
-            for ii in range(5): # try 5 times
+            for attempt in range(self._num_of_attempts): # try 5 times
                 self._write(addr, int(value))
-                self._max_channel_number[laser] = self._update_max_channel_number(laser)
-                sleep(0.1)
-                if self.get_grid_spacing(laser) == value:
+                tmp_grid_spacing = self.get_grid_spacing(laser)
+                if tmp_grid_spacing == value:
+                    self._grid_spacing[laser] = tmp_grid_spacing
+                    self._update_max_channel_number(laser)
                     break
+                else:
+                    logging.warning(f'Failed to set grid spacing: {tmp_grid_spacing} GHz*10. Trying again.')
             else:
                 raise ValueError('Failed to set grid spacing.')
         else:
             raise ValueError(
-                'Unknown input! See function description for more info.')
+                f'Value: {value} out of range!')
 
     def _set_first_chann_freq_THz(self, laser: int, value: int|float) -> None:
         '''_internal function: Channel's frequency, THz
@@ -936,7 +972,12 @@ class LU1000_Cband(LU1000_Base):
 # SET Wrapper Functions implemented by SCT-Group
 # =============================================================================
     def set_frequency(self, laser: int, value: float) -> None:
-        '''Set Laser Frequency value in  value
+        '''Experimental!!! This is not the correct way to set the frequency!
+        To use this function you need to set_grid_spacing = 1 before!
+        The correct way would be to change the channel number!
+        A warpper function: set_channel_frequency() can do this automatically for you.
+        
+        This function sets the Laser Frequency in THz.
 
 
         Parameters
@@ -961,6 +1002,50 @@ class LU1000_Cband(LU1000_Base):
         self._set_first_chann_freq_GHz(laser, GHz)
 
 
+    def set_channel_frequency(self, laser: int, frequency: float) -> None:
+        '''Sets the laser frequency by writing to the channel register.
+        
+        This method:
+        1. Writes GRID=1 to the GRID register.
+        2. Calculates the channel number from the frequency.
+        3. Writes the channel number to the channel register.
+        
+        Parameters
+        ----------
+        laser : int
+            The laser number (1 or 2).
+        frequency : float
+            The desired frequency in THz.
+            
+        Returns
+        -------
+        bool
+            True if the operation succeeded; False otherwise.
+        '''
+
+        # Validate laser number
+        self._validate_laser(laser)
+
+        # Check frequency range
+        if  frequency < self._min_freq[laser] or frequency > self._max_freq[laser]:
+            raise ValueError(f"Frequency must be between {self._min_freq[laser]} THz and {self._max_freq[laser]} THz")
+
+        # Set GRID to 1.
+        GRID = 1
+        if self._grid_spacing[laser] != GRID:
+            self.set_grid_spacing(laser, GRID)
+
+        # Calculate Channel Number
+        GRID_part = round(frequency * 1e4) / 1e4
+        Channel = int((GRID_part - 191.5) / 1e-4 + 1)
+
+        # Set the Channel. Try _num_of_attempts times
+        for attempt in range(self._num_of_attempts):
+            self.set_channel(laser, Channel)
+            if self.get_channel(laser) == Channel:
+                break
+        else:
+            raise ValueError("Failed to set channel.")
 
 
 # =============================================================================
@@ -1118,50 +1203,7 @@ class LU1000_Oband(LU1000_Base):
 
         # Scale the value to mW.
         return raw_value / 1000.0
-    
-    def get_measured_current_1(self, laser: int) -> float:
-        '''Experimental! 
-        Retruns the laser module's measured current in mA
 
-        Parameters
-        ----------
-        laser : int
-            Laser output selected - 1 or 2
-
-        Raises
-        ------
-        ValueError
-            Error message
-
-        Returns
-        -------
-        Measured current in mA
-
-        '''
-        addr = self._calc_address(laser, 28)
-        return self._read(addr) *6.35647/1000
-    
-    def get_measured_current_2(self, laser: int) -> float:
-        '''Experimental! 
-        Retruns the laser module's measured current in mA
-
-        Parameters
-        ----------
-        laser : int
-            Laser output selected - 1 or 2
-
-        Raises
-        ------
-        ValueError
-            Error message
-
-        Returns
-        -------
-        Measured current in mA
-
-        '''
-        addr = self._calc_address(laser, 26)
-        return (self._read(addr) + 4957)/589.9
     
 # =============================================================================
 # Set
@@ -1224,4 +1266,50 @@ class LU1000_Oband(LU1000_Base):
         else:
             raise ValueError(
                 'Unknown input! See function description for more info.')
-          
+
+# =============================================================================
+# Experimental Functions - Implemented by SCT-Group
+# =============================================================================
+    def get_measured_current_1(self, laser: int) -> float:
+        '''Experimental! 
+        Retruns the laser module's measured current in mA
+
+        Parameters
+        ----------
+        laser : int
+            Laser output selected - 1 or 2
+
+        Raises
+        ------
+        ValueError
+            Error message
+
+        Returns
+        -------
+        Measured current in mA
+
+        '''
+        addr = self._calc_address(laser, 28)
+        return self._read(addr) *6.35647/1000
+    
+    def get_measured_current_2(self, laser: int) -> float:
+        '''Experimental! 
+        Retruns the laser module's measured current in mA
+
+        Parameters
+        ----------
+        laser : int
+            Laser output selected - 1 or 2
+
+        Raises
+        ------
+        ValueError
+            Error message
+
+        Returns
+        -------
+        Measured current in mA
+
+        '''
+        addr = self._calc_address(laser, 26)
+        return (self._read(addr) + 4957)/589.9
