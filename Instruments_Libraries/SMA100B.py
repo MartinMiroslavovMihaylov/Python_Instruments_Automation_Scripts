@@ -26,7 +26,6 @@ class SMA100B(vxi11.Instrument):
         '''
         super().__init__(hostname)
         print(self.ask('*IDN?'))
-        self.write('*RST')
 
     def query(self, message):
         return self.ask(message)
