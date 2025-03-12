@@ -1,12 +1,11 @@
 # version: 1.0.0 2024/11/28 #Downloaded from https://www.novoptel.de/Home/Downloads_de.php
 # version: 1.1.0 2025/02/07 modified by Maxim.Weizel for LU1000 CBand+OBand (partially tested)
 
-from Instruments_Libraries.NovoptelUSB import NovoptelUSB
-from Instruments_Libraries.NovoptelTCP import NovoptelTCP
-from time import time, sleep
-import logging
-
-print(
+try:
+    from Instruments_Libraries.NovoptelUSB import NovoptelUSB
+    from Instruments_Libraries.NovoptelTCP import NovoptelTCP
+except ImportError:
+    raise ImportError(
 '''
 #####################################################################################
     To use the LU1000 Laser you need to install the FTDI D2XX Driver e.g.
@@ -15,7 +14,13 @@ print(
     Python Library needed: pip install ftd2xx 
 #####################################################################################
 '''
-)
+    )
+
+import numpy as np
+from time import time, sleep
+import logging
+
+
 
 ##################################
     # LU1000 Laser Base Class #
@@ -154,7 +159,7 @@ class LU1000_Base:
     # C-Band Tuable Laser Class #
 ##################################
 class LU1000_Cband(LU1000_Base):    
-    def __init__(self, target='192.168.1.100'):
+    def __init__(self, target='USB'):
         super().__init__(target)
         # implement LU1000_Cband specific initializations here
         self._default_max_freq = 196.25 # THz
@@ -1088,7 +1093,7 @@ class LU1000_Cband(LU1000_Base):
 ##################################
 class LU1000_Oband(LU1000_Base):
     
-    def __init__(self, target='192.168.1.100'):
+    def __init__(self, target='USB'):
         super().__init__(target)
         # Implement O-Band Laser specific initializations here        
         

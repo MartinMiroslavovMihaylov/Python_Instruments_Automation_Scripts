@@ -52,7 +52,7 @@ class MS2760A:
 # =============================================================================
 # General functions
 # =============================================================================
-    def Idn(sef) -> str:
+    def Idn(self) -> str:
         '''
         Identify the Insturment.
 
@@ -61,7 +61,7 @@ class MS2760A:
         TYPE str
             A string with the Instrument name.
         '''
-        return sef.query('*IDN?')
+        return self.query('*IDN?')
     
     def reset(self) -> None:
         '''
@@ -538,6 +538,17 @@ class MS2760A:
         else:
             raise ValueError(
                 'Trace Number must be between 1 and 6')
+        
+    def ask_CaptureTime(self) -> float:
+        '''
+        Query the capture time in ms.
+
+        Returns
+        -------
+        float
+            Capture Timte in ms. Range 0 ms to 10000 ms.
+        '''
+        return self.query_ascii_values(f':CAPTure:TIMe?')[0]
 
 # =============================================================================
 #  Write Functions
@@ -1155,7 +1166,31 @@ class MS2760A:
         else:
             raise ValueError(
                 'Unknown input! See function description for more info.')
+    
+    def set_CaptureTime(self, captureTime:float = 0, unit:str = 'ms') -> None:
+        '''
+        Determines how much time to spend taking samples for each portion of the spectrum.
 
+        Parameters
+        ----------
+        captureTime : float, optional
+            default: 0 ms, Range: 0 ms to 10000 ms
+        unit : str, optional
+            default: 'ms'
+
+        Raises
+        ------
+        ValueError
+            Error message
+        '''
+        unit_List = ['PS', 'NS', 'US', 'MS', 'S', 'MIN', 'HR']
+        unit = unit.upper() if isinstance(unit, str) else unit
+        if unit in unit_List:
+            self.write(f':CAPTure:TIMe {captureTime} {unit}')
+        else:
+            raise ValueError(
+                'Unknown input! See function description for more info.')
+        
 # =============================================================================
 #   get/Save Data
 # =============================================================================
