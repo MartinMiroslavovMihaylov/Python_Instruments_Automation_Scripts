@@ -23,11 +23,17 @@ class UXR:
         self.instrument = visa.ResourceManager().open_resource(
             str(resource_str), read_termination="\n", query_delay=0.5
         )
-        print(self.instrument.query("*IDN?"))
+        print(self.IDN())
 
         # Internal Variables
         self._types_channel = list(range(1, num_channel + 1))
         self._waveform_format = "ASC"
+
+        # Default Settings
+        self.system_header("off")  # Default is off and should stay off!!!
+        self.waveform_byteorder("LSBFirst")
+        self.waveform_format("WORD")  # Data Aquisition is only implemented for WORD yet.
+        self.waveform_streaming("off")
 
     def query(self, message):
         return self.instrument.query(message)
@@ -296,6 +302,49 @@ class UXR:
             self.write(f":CHANnel{channel}:DISPlay {value}")
         else:  # query
             return int(self.query(f":CHANnel{channel}:DISPlay?"))
+        
+    def function_display(
+        self, function_num: int, write: bool = False, value: int | str | None = None
+    ) -> int:
+        """The :FUNCtion<N>:DISPlay command turns the display of the specified function_num on
+        or off.
+
+            Parameters
+            ----------
+            function_num : int
+                Function Number
+            write : bool, optional
+                write the channel display state, else query
+            value : int, str, optional
+                ON, 1, OFF, 0
+
+
+            Returns
+            -------
+            int
+                The :FUNCtion<N>:DISPlay? query returns the current display condition for the
+                specified function_num
+
+            Raises
+            ------
+            ValueError
+                For function_num expected one of: 1-16
+            ValueError
+                For values expected one of: ON, 1, OFF, 0
+        """
+        _type_value = ["ON", 1, "OFF", 0]
+        if int(function_num) < 1 or int(function_num) > 16:
+            raise ValueError(
+                "Invalid Argument. Expected one of: 1-16"
+            )
+        if write:
+            if isinstance(value, str):
+                value = value.upper()
+            if value not in _type_value:
+                raise ValueError("Invalid Argument. Expected one of: %s" % _type_value)
+            self.write(f":FUNCtion{function_num}:DISPlay {value}")
+        else:  # query
+            return int(self.query(f":FUNCtion{function_num}:DISPlay?"))
 
     def channel_range(
         self, channel: int, write: bool = False, range_value: float | None = None
@@ -419,14 +468,14 @@ class UXR:
     # :WAVeform Commands
     # =============================================================================
 
-    def waveform_byteorder(self, value: str | None = None) -> str:
+    def waveform_byteorder(self, value: str = 'LSBFIRST') -> str:
         """The :WAVeform:BYTeorder command selects the order in which bytes are
         transferred from (or to) the oscilloscope using WORD and LONG formats
 
             Parameters
             ----------
             value : str, optional
-                byteorder {MSBF, LSBF}, by default None
+                byteorder {MSBF, LSBF}, by default LSBFIRST
 
             Returns
             -------
