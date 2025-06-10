@@ -33,55 +33,22 @@ The Live Update extension for the GUI is still in development and since is not a
 to be finished. 
 
 
-
 # Instruments
 
-Anritsu Spectrum Analyzer MS2760A
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/SA_Back.jpg?raw=true)
-
-
-Anritsu Signal Generator MG3694C
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/SG_Front.jpg?raw=true)
-
-
-Rohde & Schwarz Signal Generator SMA100B
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/SMA100B_Front.jpg?raw=true)
-
-
-Anritsu Vector Analyzer MS4647B
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/VNA_Front.jpg?raw=true)
-
-
-Yokogawa Optical Spectrum Analyzer AQ6370D
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/OSA_Front.jpg?raw=true)
-
-
-CoBrite Tunable Laser
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/CoBri_Front.jpg?raw=true)
-	
-	
-Novoptel Laser LU1000
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/LU_Front.jpg?raw=true)
-	
-
-KEITHLEY Source Meter 2612
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/KA_Front.jpg?raw=true)
-
-
-Power Meter ThorLabs PM100D
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/PM_Front.jpg?raw=true)
-
-
-Power Supply GPP4323 4-Channels 
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/GPP_Front.jpg?raw=true)
-
-
-Power Supply RD3005, KA3005 and KA3005p
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/KP_Front.jpg?raw=true)
-
-
-AnaPico AG APPH20G 
-	- ![alt text](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/APP_Front.jpg?raw=true)
+| Instrument | Picture |
+| :--------: | :-----: |
+| **Anritsu Spectrum Analyzer MS2760A** | ![MS2760A](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/SA_Back.jpg?raw=true) |
+| **Anritsu Signal Generator MG3694C**   | ![MG3694C](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/SG_Front.jpg?raw=true) |
+| **Rohde & Schwarz Signal Generator SMA100B** | ![SMA100B](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/SMA100B_Front.jpg?raw=true) |
+| **Anritsu Vector Analyzer MS4647B**    | ![MS4647B](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/VNA_Front.jpg?raw=true) |
+| **Yokogawa Optical Spectrum Analyzer AQ6370D** | ![AQ6370D](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/OSA_Front.jpg?raw=true) |
+| **CoBrite Tunable Laser**              | ![CoBrite](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/CoBri_Front.jpg?raw=true) |
+| **Novoptel Laser LU1000**              | ![LU1000](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/LU_Front.jpg?raw=true) |
+| **KEITHLEY Source Meter 2612**         | ![2612](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/KA_Front.jpg?raw=true) |
+| **Power Meter ThorLabs PM100D**        | ![PM100D](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/PM_Front.jpg?raw=true) |
+| **Power Supply GPP4323 (4-Channel)**   | ![GPP4323](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/GPP_Front.jpg?raw=true) |
+| **Power Supply RD3005 / KA3005 / KA3005P** | ![RD3005](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/KP_Front.jpg?raw=true) |
+| **AnaPico AG APPH20G**                 | ![APPH20G](https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts/blob/docu/Pictures/APP_Front.jpg?raw=true) |
 
 
 
