@@ -1,19 +1,23 @@
-# Install as User
+# Documentation
 
-	pip install --no-cache-dir --force-reinstall git+https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts.git
+https://martinmiroslavovmihaylov.github.io/Python_Instruments_Automation_Scripts/
 
-pip options: '--no-cache-dir --force-reinstall' to pull a fresh copy. Version numbers of this project might not always be incremented for minor changes.
 
-# Install as Developer
+# Install
+
+	pip install git+https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts.git
+
+### Update as User
+Version numbers of this project might not always be incremented for minor changes. To be sure first uninstall:
+
+	pip uninstall Instruments_Libraries
+	pip install --no-cache-dir git+https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts.git
+
+### Install as Developer
 	git clone https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts.git
 	cd Python_Instruments_Automation_Scripts
 	pip install -e .
 Option '-e' for editable
-
-# Python Documentation Link
-
-https://martinmiroslavovmihaylov.github.io/Python_Instruments_Automation_Scripts/
-
 
 # Python GUI 
 
