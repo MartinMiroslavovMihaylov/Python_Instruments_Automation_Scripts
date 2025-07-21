@@ -516,7 +516,7 @@ class KEITHLEY2612:
         
         chan = chan.lower()
         if chan in self._chList and 20e-3 < value < 200:
-            value = '{:.0e}'.format(value)
+            value = '{:.4e}'.format(value)
             self.write('smu'+str(chan)+'.source.limitv = ' + str(value))
         else:
             raise ValueError('Unknown input! See function description for more info.')
@@ -552,7 +552,7 @@ class KEITHLEY2612:
         
         chan = chan.lower()
         if chan in self._chList and 10e-9 < value < 3:
-            value = '{:.0e}'.format(value)
+            value = '{:.4e}'.format(value)
             self.write('smu'+str(chan)+'.source.limiti = ' + str(value))
         else:
             raise ValueError('Unknown input! See function description for more info.')
