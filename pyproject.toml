@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Instruments_Libraries"
-version = "2025.06.21"
+version = "2025.07.21"
 authors = [
   { name = "Martin Mihaylov", email = "martinmi@hni.uni-paderborn.de" },
   { name = "Maxim Weizel", email = "mweizel@hni.uni-paderborn.de" },
