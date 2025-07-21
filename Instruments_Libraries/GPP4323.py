@@ -38,6 +38,9 @@ class GPP4323:
         self.eol_char = '\n'
         self.timeout = 0.2
         self.sio = io.TextIOWrapper(io.BufferedReader(self._resource),newline= self.eol_char)
+        self._ChannelLS = [1,2,3,4]
+        self._mainChannelLS = [1,2]
+        self._StateLS_mapping = { 'on': 'ON', 'off': 'OFF', 1: 'ON', 0: 'OFF', '1': 'ON', '0': 'OFF' }
         print(self.getIdn())
         
 
@@ -87,7 +90,7 @@ class GPP4323:
 # Set Values and Modes
 # =============================================================================
     
-    def set_Volt(self, channel, voltage):
+    def set_Volt(self, channel: int, voltage: int|float) -> None:
         '''
         
 
@@ -103,16 +106,18 @@ class GPP4323:
         None.
 
         '''
-        ChannelLS = [1,2,3,4]
-        if channel in ChannelLS: 
+        
+        if channel in self._ChannelLS: 
             self.write("VSET"+str(channel)+":{:1.2f}".format(voltage))
         else:
-            raise ValueError("Invalid channel number give! Channel Number can be [1,2,3,4].")
+            raise ValueError("Invalid channel number give! Channel Number can be [1,2,3,4].")   
+    def set_Voltage(self, channel: int, voltage: int | float) -> None:
+        '''Alias for set_Volt().'''
+        self.set_Volt(channel, voltage)
         
         
         
-        
-    def set_Amp(self, channel, amp):
+    def set_Amp(self, channel: int, amp: int|float) -> None:
         '''
         
 
@@ -128,16 +133,20 @@ class GPP4323:
         None.
 
         '''
-        ChannelLS = [1,2,3,4]
-        if channel in ChannelLS: 
+        if channel in self._ChannelLS: 
             self.write("ISET"+str(channel)+":{:1.4f}".format(amp))
         else:
             raise ValueError("Invalid channel number give! Channel number can be [1,2,3,4].")
+    def set_Current(self, channel: int, amp: int | float) -> None:
+        '''Alias for set_Amp().'''
+        self.set_Amp(channel, amp)
+    def set_CurrentLimit(self, channel: int, amp: int | float) -> None:
+        '''Alias for set_Amp().'''
+        self.set_Amp(channel, amp) 
         
         
         
-        
-    def set_ChannelToSerial(self, channel, status):
+    def set_ChannelToSerial(self, channel: int, status: str|int) -> None:
         '''
         
 
@@ -153,12 +162,10 @@ class GPP4323:
         None.
 
         '''
-        ChannelLS = [1,2]
-        if channel in ChannelLS:
-            if status == 'ON':
-                self.write(":OUTPut:SERies ON")
-            elif status == 'OFF':   
-                self.write(":OUTPut:SERies OFF")
+        if channel in self._mainChannelLS:
+            state_normalized = self._StateLS_mapping.get(status.lower() if isinstance(status, str) else int(status))
+            if state_normalized is not None:
+                self.write(f":OUTPut:SERies {state_normalized}")
             else:
                 raise ValueError("Invalid channel Status. Valid arguments are 'ON' or 'OFF'! ")
         else:
@@ -167,7 +174,7 @@ class GPP4323:
         
         
         
-    def set_ChannelToParallel(self, channel, status):
+    def set_ChannelToParallel(self, channel: int, status: str|int) -> None:
         '''
         
 
@@ -183,12 +190,10 @@ class GPP4323:
         None.
 
         '''
-        ChannelLS = [1,2]
-        if channel in ChannelLS:
-            if status == 'ON':
-                self.write(":OUTPut:PARallel ON")
-            elif status == 'OFF':   
-                self.write(":OUTPut:PARallel OFF")
+        if channel in self._mainChannelLS:
+            state_normalized = self._StateLS_mapping.get(status.lower() if isinstance(status, str) else int(status))
+            if state_normalized is not None:
+                self.write(f":OUTPut:PARallel {state_normalized}")
             else:
                 raise ValueError("Invalid channel status. Possible arguments are 'ON' or 'OFF'! ")
         else:
@@ -197,7 +202,7 @@ class GPP4323:
         
         
          
-    def set_ChannelTracking(self, mode):
+    def set_ChannelTracking(self, mode: int) -> None:
         '''
         
 
@@ -221,7 +226,7 @@ class GPP4323:
         
         
         
-    def set_ChannelLoadMode(self, channel, mode, status):
+    def set_ChannelLoadMode(self, channel: int, mode: str, status: str|int) -> None:
         '''
         
 
@@ -239,15 +244,12 @@ class GPP4323:
         None.
 
         '''
-        ChannelLS  =[1,2]
         modeLS = ['CC', 'CV', 'CR']
+        state_normalized = self._StateLS_mapping.get(status.lower() if isinstance(status, str) else int(status))
         
-        
-        if channel in ChannelLS and mode in modeLS:
-            if status == 'ON':
-                self.write(":LOAD"+str(channel)+":"+str(mode)+' ON')
-            elif status == 'OFF':
-                self.write(":LOAD"+str(channel)+":"+str(mode)+' OFF')
+        if channel in self._mainChannelLS and mode in modeLS:
+            if state_normalized is not None:
+                self.write(":LOAD"+str(channel)+":"+str(mode)+' '+str(state_normalized))
             else:
                 raise ValueError("Invalid channel Status. Valid arguments are 'ON' or 'OFF'! ")
         else:
@@ -256,7 +258,7 @@ class GPP4323:
         
         
         
-    def set_LoadResistor(self, channel, value):
+    def set_LoadResistor(self, channel: int, value: float) -> None:
         '''
         
 
@@ -272,8 +274,8 @@ class GPP4323:
         None.
 
         '''
-        ChannelLS = [1,2]
-        if channel in ChannelLS:
+
+        if channel in self._mainChannelLS:
             self.write(":LOAD"+str(channel) + ":RESistor " +str(value))
             # self.write("LOAD2: RESistor 100")
         else:
@@ -282,34 +284,31 @@ class GPP4323:
         
         
         
-    def set_Out(self, channel, state):
-            '''
-            
+    def set_Out(self, channel: int, status: str|int) -> None:
+        '''Enable/Disable Output
+        
 
-            Parameters
-            ----------
-            channel : int
-                Select channel from List of Channel Numbers [1,2,3,4].
-            state : str
-                Status of power Supple output. Could be ["ON", "OFF"]
+        Parameters
+        ----------
+        channel : int
+            Select channel from List of Channel Numbers [1,2,3,4].
+        status : str
+            Status of power Supple output. Could be ["ON", "OFF"]
 
-            Returns
-            -------
-            None.
+        Returns
+        -------
+        None.
 
-            '''
-            
-            ChannelLS = [1,2,3,4]
-            StateLS = ['ON', 'OFF']
-            if channel in ChannelLS and state in StateLS:
-                if(state == 'ON'):
-                    self.write(":OUTPut"+str(channel) + ':STATe '+ str(state))
-                elif(state == 'OFF'):
-                    self.write(":OUTPut"+str(channel) + ':STATe '+ str(state))
-                else:
-                    raise ValueError("Invalid channel Status. Valid arguments are 'ON' or 'OFF'! ")
+        '''
+        
+        state_normalized = self._StateLS_mapping.get(status.lower() if isinstance(status, str) else int(status))
+        if channel in self._ChannelLS:
+            if state_normalized is not None:
+                self.write(":OUTPut"+str(channel) + ':STATe '+ str(state_normalized))
             else:
-                raise ValueError("Invalid channel number give! Channel Number can be [1,2,3,4].")
+                raise ValueError("Invalid channel Status. Valid arguments are 'ON' or 'OFF'! ")
+        else:
+            raise ValueError("Invalid channel number give! Channel Number can be [1,2,3,4].")
         
         
         
@@ -319,8 +318,8 @@ class GPP4323:
 # =============================================================================
 
 
-    def ask_Volt(self,channel):
-        '''
+    def ask_VoltageSetting(self, channel: int) -> float:
+        ''' Returns the voltage setting, NOT the measured voltage!!!
         
 
         Parameters
@@ -330,42 +329,20 @@ class GPP4323:
 
         Returns
         -------
-        TYPE
-            DESCRIPTION.
+        float
+            Voltage Setting.
 
         '''
         
-        ChannelLS = [1,2,3,4]
-        if channel in ChannelLS:   
+        if channel in self._ChannelLS:   
             return float(self.query_values("VSET"+str(channel)+"?"))
         else:
             raise ValueError('Invalid channel number! Possible channel numbers are [1,2,3,4]')
         
         
         
-        
-    def read_Measurment(self, channel, Type):
-        '''
-        
-
-        Returns
-        -------
-        TYPE float
-            Voltage Measured
-
-        '''
-        TypeLS = ['Voltage', 'Current', 'Power']
-        ChannelLS = [1,2,3,4]
-        if channel in ChannelLS and Type in TypeLS:
-            return float(self.query_values(":MEASure"+str(channel)+":"+str(Type)+"?"))
-        else:
-            raise ValueError('Invalid channel number or type of measurment! Possible channel numbers are [1,2,3,4]. Possible tapes are ["Voltage", "Current", "Power"]')
-        
-        
-        
-        
-    def ask_Amp(self,channel):
-        '''
+    def ask_CurrentSetting(self, channel: int) -> float:
+        '''Returns the current setting, NOT the measured current!!!
         
 
         Parameters
@@ -375,22 +352,110 @@ class GPP4323:
 
         Returns
         -------
-        TYPE
-            DESCRIPTION.
+        float
+            Current Setting.
 
         '''
-       
-        ChannelLS = [1,2,3,4]
-        if channel in ChannelLS:   
+    
+        if channel in self._ChannelLS:   
             return float(self.query_values("ISET"+str(channel)+"?"))
         else:
             raise ValueError('Invalid channel number or type of measurement! Possible channel numbers are [1,2,3,4]')
+       
+
+
+       
+    def read_Measurement(self, channel: int, type: str) -> float:
+        '''Performs a measurement and returns the measured value.
+
+
+        Parameters
+        ----------
+        channel : int
+            Select channel from List of Channel Numbers [1,2,3,4].
+        Type : str
+            Select measurement type: 
+            'volt', 'amp' or 'watt'.
         
-        
-        
-        
-    def ask_ChannelLoadMode(self, channel):
+        Returns
+        -------
+        float
+            Return float with the measured value on the channel.
+
         '''
+
+        type_mapping = {'voltage': 'Voltage', 'volt': 'Voltage',
+                'current': 'Current', 'amp': 'Current',
+                'power': 'Power', 'watt': 'Power'
+            }
+        type = type_mapping.get(type.lower() if isinstance(type, str) else type)
+        
+        if channel in self._ChannelLS and type is not None:
+            return float(self.query_values(":MEASure"+str(channel)+":"+str(type)+"?"))
+        else:
+            raise ValueError('Invalid channel number or type of measurment! Possible channel numbers are [1,2,3,4]. Possible tapes are ["Voltage", "Current", "Power"]')
+             
+
+
+    def ask_Current(self, channel: int) -> float:
+        ''' Performs one current measurements and returns the value.
+        
+
+        Parameters
+        ----------
+        channel : int    
+            Select channel from List of Channel Numbers [1,2,3,4].
+
+        Returns
+        -------
+        float
+            Measured Current.
+
+        '''
+        return self.read_Measurement(channel, 'amp')
+
+
+
+    def ask_Voltage(self, channel: int) -> float:
+        ''' Performs one voltage measurements and returns the value.
+        
+
+        Parameters
+        ----------
+        channel : int    
+            Select channel from List of Channel Numbers [1,2,3,4].
+
+        Returns
+        -------
+        float
+            Measured Voltage.
+
+        '''
+        return self.read_Measurement(channel, 'volt')
+
+
+
+    def ask_Power(self, channel: int) -> float:
+        ''' Performs one power measurements and returns the value.
+        
+
+        Parameters
+        ----------
+        channel : int    
+            Select channel from List of Channel Numbers [1,2,3,4].
+
+        Returns
+        -------
+        float
+            Measured Power.
+
+        '''
+        return self.read_Measurement(channel, 'watt')    
+        
+        
+    def ask_ChannelLoadMode(self, channel: int) -> str:
+        ''' Queries CH1 or CH2 work mode. 
+        6 modes: SERies/PARallel/INDE pendent, CV Load/CC Load/CR Load
         
 
         Parameters
@@ -400,13 +465,12 @@ class GPP4323:
 
         Returns
         -------
-        TYPE
-            Queries CH1 or CH2 work mode. 6 modes below: SERies/PARallel/INDE pendent, CV Load/CC Load/CR Load
+        str
+            SERies/PARallel/INDependent, CV Load/CC Load/CR Load
 
         '''
-        ChannelLS = [1,2]
         
-        if channel in ChannelLS:
+        if channel in self._mainChannelLS:
            return self.query_values(":MODE"+str(channel)+"?")
         else:
             raise ValueError('Invalid channel number! Possible channel numbers are [1,2,3,4]')
@@ -414,7 +478,7 @@ class GPP4323:
         
         
         
-    def ask_LoadResistor(self,channel):
+    def ask_LoadResistor(self, channel: int) -> float:
         '''
         
 
@@ -429,8 +493,8 @@ class GPP4323:
             Set load Resistance Value for given channel.
 
         '''
-        ChannelLs = [1,2]   
-        if channel in ChannelLs:
+  
+        if channel in self._mainChannelLS:
             return float(self.query_values(":LOAD"+str(channel) + ":RESistor?"))
         else: 
             raise ValueError('Invalid channel number! Possible channel numbers are [1,2,3,4]')
@@ -455,7 +519,7 @@ class GPP4323:
 # Get/Save Data
 # =============================================================================
 
-    def get_data(self, channel):
+    def get_data(self, channel: int) -> dict:
         '''
         
 
@@ -465,9 +529,9 @@ class GPP4323:
             Return a dictionary with the measured voltage and current.
 
         '''
-        ChannelLS = [1,2,3,4]
+
         OutPut = {}
-        if channel in ChannelLS:
+        if channel in self._ChannelLS:
             Voltage = self.read_Measurment(channel, 'Voltage')
             Current = self.read_Measurment(channel, 'Current')
             Power = self.read_Measurment(channel, 'Power')
