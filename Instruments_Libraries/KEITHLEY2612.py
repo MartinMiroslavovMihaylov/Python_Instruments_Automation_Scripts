@@ -8,12 +8,13 @@ Created on Fri Dec 10 08:39:48 2021
 
 import numpy as np
 import pyvisa as visa
+from time import sleep
 
 
     
 class KEITHLEY2612:
     '''
-    This function is using pyvisa. Please install PyVisa before you use it.
+    This class is using pyvisa. Please install PyVisa before you use it.
     '''
     def __init__(self, resource_str):
         '''
@@ -34,6 +35,19 @@ class KEITHLEY2612:
     def Close(self):
         self._resource.close()
         print('Instrument Keithley Instruments Inc., Model 2612, 1152698, 1.4.2 is closed!')
+    
+    def getIdn(self):
+        '''
+
+
+        Returns
+        -------
+        str
+            Instrument identification
+
+        '''
+        return str(self.query('*IDN?')).strip()
+    
     
 # =============================================================================
 # Reset to Default
@@ -65,7 +79,11 @@ class KEITHLEY2612:
         else:
             raise ValueError('Unknown input! See function description for more info.')
         
-            
+    def clear(self):
+        self.write('*CLS')
+
+    def clear_eror_queue(self):
+        self.write('errorqueue.clear()')        
     
     
     
@@ -73,21 +91,7 @@ class KEITHLEY2612:
 # =============================================================================
 # ASK
 # =============================================================================
-    def getIdn(self):
-        '''
-
-
-        Returns
-        -------
-        TYPE  str
-            Instrument identification
-
-        '''
-
-        return str(self.query('*IDN?')).strip()
-
-
-
+    
     def ask_LimitReached(self,chan: str) -> bool:
         '''This attribute contains the state of source compliance.
         
@@ -100,7 +104,7 @@ class KEITHLEY2612:
 
         Returns
         -------
-        TYPE
+        bool
             DESCRIPTION.
 
         '''
@@ -115,7 +119,7 @@ class KEITHLEY2612:
     
     
     def ask_Current(self,chan: str) -> float:
-        '''This function performs one current measurements and returns the value.
+        '''Performs one current measurements and returns the value.
         
 
         Parameters
@@ -130,7 +134,7 @@ class KEITHLEY2612:
 
         Returns
         -------
-        TYPE  float
+        float
             Return float with the measured current value on the channel.
 
         '''
@@ -162,7 +166,7 @@ class KEITHLEY2612:
 
         Returns
         -------
-        TYPE : float
+        float
             Return float with the measured voltage value on the channel.
 
         '''
@@ -194,7 +198,7 @@ class KEITHLEY2612:
 
         Returns
         -------
-        TYPE : float
+        float
             Return float with the measured power value on the channel.
 
         '''
@@ -226,7 +230,7 @@ class KEITHLEY2612:
 
         Returns
         -------
-        TYPE : float
+        float
             Return float with the measured resistance value on the channel.
 
         '''
@@ -238,6 +242,41 @@ class KEITHLEY2612:
             raise ValueError('Unknown input! See function description for more info.')
         
     
+    def read_Measurement(self,chan: str, type: str) -> float:
+        '''This function performs one measurements and returns the value.
+        
+
+        Parameters
+        ----------
+        chan : str
+            Select chan A or B
+        type : str
+            Select measurement type: 
+            'volt', 'amp', 'ohm', or 'watt'.
+
+        Raises
+        ------
+        ValueError
+            Error message 
+
+        Returns
+        -------
+        float
+            Return float with the measured value on the chan.
+
+        '''
+        
+        chan = chan.lower()
+        type_mapping = {'voltage': 'v', 'volt': 'v',
+                        'current': 'i', 'amp': 'i',
+                        'power': 'p', 'watt': 'p',
+                        'resistance': 'r', 'ohm': 'r'
+                    }
+        type = type_mapping.get(type.lower() if isinstance(type, str) else type)
+        if chan in self._chList and type is not None:
+            return float(self.query('print(smu'+str(chan)+'.measure.'+str(type)+'())'))
+        else:
+            raise ValueError('Unknown input! See function description for more info.')
     
     
     
@@ -312,46 +351,16 @@ class KEITHLEY2612:
                 self.write('smu'+str(chan)+'.source.output = smu'+str(chan)+'.OUTPUT_'+str(state_normalized))
         else:
             raise ValueError('Unknown input! See function description for more info.')
-    
-    
-    
-
-
+    def set_Out(self, chan: str, state: int|str) -> None:
+        '''Alias for set_SourceOutput().'''
+        self.set_SourceOutput(chan,state)
     def set_MeasOutput(self, chan: str, state: int|str) -> None:   
-        '''This attribute sets source output state (on or off)
-
-        Parameters
-        ----------
-        chan : str
-            Select channel A or B
-        state : str 
-            Set source output (CHAN A/B) ON or OFF
-
-        Raises
-        ------
-        ValueError
-            Error message 
-
-        Returns
-        -------
-        None.
-
-        '''
-        # Normalize channel and state inputs
-        chan = chan.lower()
-        state_mapping = { 'on': 'ON', 'off': 'OFF', 1: 'ON', 0: 'OFF', 2: 'HIGH_Z', '1': 'ON', '0': 'OFF' }
-        state_normalized = state_mapping.get(state if isinstance(state, int) else state.lower())
-
-        # Validate inputs
-        if chan in self._chList and state_normalized is not None:
-            self.write('smu'+str(chan)+'.source.output = smu'+str(chan)+'.OUTPUT_'+str(state_normalized))
-        else:
-            raise ValueError('Invalid channel or state! Channel must be "A" or "B". \
-                             State must be "ON", "OFF", 1, or 0.')
-            
+        '''Alias for set_SourceOutput().'''
+        self.set_SourceOutput(chan,state)
+ 
+       
     
-    
-    
+
     
     def set_AutoVoltageRange(self, chan: str, state: int|str) -> None:
         '''This attribute contains the state of the source autorange control (on/off).
@@ -627,21 +636,14 @@ class KEITHLEY2612:
     
     
     
-    def set_ChannelDisplay(self,chan: str, double: bool = True) -> None:
+    def set_ChannelDisplay(self,chan: str|None = None) -> None:
         '''
         
 
         Parameters
         ----------
-        chan : str
-            Select channel A or B
-        double : boolean, optional
-            Displays source-measure for SMU A and SMU B.
-            double = True per default.
-            if double = True:
-                Display Chan A and B 
-            else:
-                Display only Chan selected
+        chan : str | None
+            Select chan A or B. If None, displays SMU A and SMU B.
 
         Raises
         ------
@@ -654,15 +656,14 @@ class KEITHLEY2612:
 
         '''
         
-        chan = chan.lower()
-        
-        if chan in self._chList:
-            if double == False:
-                self.write('display.screen = display.SMU'+str(chan.upper()))  
-            else:
-                self.write('display.screen = display.SMUA_SMUB')
+        if chan is None:
+            self.write('display.screen = display.SMUA_SMUB')
         else:
-            raise ValueError('Unknown input! See function description for more info.')
+            chan = chan.lower()
+            if chan in self._chList:
+                self.write('display.screen = display.SMU'+str(chan.upper())) 
+            else:
+                raise ValueError('Unknown input! See function description for more info.')
                    
     
     
@@ -749,9 +750,9 @@ class KEITHLEY2612:
         
 
         
-    def set_MeasurementVoltageRange(self, chan: str, type: str, value: int|float) -> None:
+    def set_MeasurementRange(self, chan: str, type: str, value: int|float) -> None:
         '''This attribute contains the positive full-scale value of the measure range for voltage or current.
-        
+        Same as set_CurrentRange and set_VoltageRange.
 
         Parameters
         ----------
@@ -863,7 +864,7 @@ class KEITHLEY2612:
 # =============================================================================
 # Get/Save Data
 # =============================================================================
-    def get_Data(self,chan):
+    def get_Data(self,chan:str|None = None) -> dict:
         '''
         
 
@@ -871,6 +872,7 @@ class KEITHLEY2612:
         ----------
         chan : str
             Select channel A or B
+            If no chan is selected, all channels are measured
 
         Returns
         -------
@@ -878,11 +880,21 @@ class KEITHLEY2612:
             Return a dictionary with the measured voltage and current.
 
         '''
-        chan = chan.lower()
-        OutPut = {}
-        if chan in self._chList:
+        if chan is None:
+            Current = []
+            Voltage = []
+            for chan in self._chList:
+                Current.append(self.ask_Current(chan))
+                Voltage.append(self.ask_Voltage(chan))
+            OutPut = {}
+            OutPut['Voltage/V'] = Voltage
+            OutPut['Current/A'] = Current
+        else:
+            chan = chan.lower()
             Current = self.ask_Current(chan)
             Voltage = self.ask_Voltage(chan)
-        OutPut['Voltage/V'] = Voltage
-        OutPut['Current/A'] = Current
+            OutPut = {}
+            OutPut['Voltage/V'] = Voltage
+            OutPut['Current/A'] = Current
+        
         return OutPut
