@@ -8,6 +8,8 @@ Created on Mon Dec  1 20:17:32 2024
 
 import numpy as np
 import pyvisa as visa
+from os.path import splitext
+from datetime import datetime
 
 
 class UXR:
@@ -302,49 +304,6 @@ class UXR:
             self.write(f":CHANnel{channel}:DISPlay {value}")
         else:  # query
             return int(self.query(f":CHANnel{channel}:DISPlay?"))
-        
-    def function_display(
-        self, function_num: int, write: bool = False, value: int | str | None = None
-    ) -> int:
-        """The :FUNCtion<N>:DISPlay command turns the display of the specified function_num on
-        or off.
-
-            Parameters
-            ----------
-            function_num : int
-                Function Number
-            write : bool, optional
-                write the channel display state, else query
-            value : int, str, optional
-                ON, 1, OFF, 0
-
-
-            Returns
-            -------
-            int
-                The :FUNCtion<N>:DISPlay? query returns the current display condition for the
-                specified function_num
-
-            Raises
-            ------
-            ValueError
-                For function_num expected one of: 1-16
-            ValueError
-                For values expected one of: ON, 1, OFF, 0
-        """
-        _type_value = ["ON", 1, "OFF", 0]
-        if int(function_num) < 1 or int(function_num) > 16:
-            raise ValueError(
-                "Invalid Argument. Expected one of: 1-16"
-            )
-        if write:
-            if isinstance(value, str):
-                value = value.upper()
-            if value not in _type_value:
-                raise ValueError("Invalid Argument. Expected one of: %s" % _type_value)
-            self.write(f":FUNCtion{function_num}:DISPlay {value}")
-        else:  # query
-            return int(self.query(f":FUNCtion{function_num}:DISPlay?"))
 
     def channel_range(
         self, channel: int, write: bool = False, range_value: float | None = None
@@ -427,6 +386,93 @@ class UXR:
                 raise ValueError("Invalid Argument. Expected to be <= 500mV/div")
         else:  # query
             return float(self.query(f":CHANnel{channel}:SCALe?"))
+        
+    # =============================================================================
+    # :DISPlay Commands
+    # =============================================================================
+
+    def screenshot(
+        self,
+        path: str = "./screenshot.png",
+        with_time: bool = True,
+        time_fmt: str = "%Y-%m-%d_%H-%M-%S",
+        divider: str = "_",
+    ):
+        """Save screen to {path} with {image_type}: bmp, jpg, gif, tif, png
+        Adapted from:
+        https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/Keysight/Infiniium.py
+        """
+        # we lazy import PIL here to avoid importing pillow when unused
+        from PIL.Image import open as pil_open
+
+        time_str = datetime.now().strftime(time_fmt) if with_time else ""
+        img_name, img_type = splitext(path)
+        img_path = f"{img_name}{divider if with_time else ''}{time_str}{img_type.lower()}"
+
+        old_timeout = self.instrument.timeout  # save current timeout
+        self.instrument.timeout = 5000  # 5 seconds in milliseconds
+        try:
+            with open(img_path, "wb") as f:
+                screen_bytes = self.query_binary_values(
+                    f":DISPlay:DATA? {img_type.upper()[1:]}",  # without .
+                    # https://docs.python.org/3/library/struct.html#format-characters
+                    datatype="B",  # Capitcal B for unsigned byte
+                    container=bytes,
+                )
+                f.write(screen_bytes)  # type: ignore[arg-type]
+            print(f"Screen image written to {img_path}")
+        except Exception as e:
+            self.instrument.timeout = old_timeout  # restore original timeout
+            print(f"Failed to save screenshot, Error occurred: \n{e}")
+        finally:
+            self.instrument.timeout = old_timeout  # restore original timeout
+
+    # =============================================================================
+    # :FUNCtion Commands
+    # =============================================================================
+
+    def function_display(
+        self, function_num: int, write: bool = False, value: int | str | None = None
+    ) -> int:
+        """The :FUNCtion<N>:DISPlay command turns the display of the specified function_num on
+        or off.
+
+            Parameters
+            ----------
+            function_num : int
+                Function Number
+            write : bool, optional
+                write the channel display state, else query
+            value : int, str, optional
+                ON, 1, OFF, 0
+
+
+            Returns
+            -------
+            int
+                The :FUNCtion<N>:DISPlay? query returns the current display condition for the
+                specified function_num
+
+            Raises
+            ------
+            ValueError
+                For function_num expected one of: 1-16
+            ValueError
+                For values expected one of: ON, 1, OFF, 0
+        """
+        _type_value = ["ON", 1, "OFF", 0]
+        if int(function_num) < 1 or int(function_num) > 16:
+            raise ValueError(
+                "Invalid Argument. Expected one of: 1-16"
+            )
+        if write:
+            if isinstance(value, str):
+                value = value.upper()
+            if value not in _type_value:
+                raise ValueError("Invalid Argument. Expected one of: %s" % _type_value)
+            self.write(f":FUNCtion{function_num}:DISPlay {value}")
+        else:  # query
+            return int(self.query(f":FUNCtion{function_num}:DISPlay?"))
 
     # =============================================================================
     # :SYSTem Commands
@@ -615,7 +661,7 @@ class UXR:
     def waveform_source(self, key: str | None = None, value: int | None = None) -> str:
         """The :WAVeform:SOURce command selects a channel, function, waveform
         memory, or histogram as the waveform source
-        To Do: No checkes implemented
+        To Do: No checks implemented
 
             Parameters
             ----------
