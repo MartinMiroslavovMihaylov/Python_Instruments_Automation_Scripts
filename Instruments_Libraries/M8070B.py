@@ -38,7 +38,7 @@ class M8070B:
     # Check functions
     # =============================================================================
 
-    def check_valid_channel(self, channel: int) -> int:
+    def _validate_channel(self, channel: int) -> int:
         channel = int(channel)
         if channel not in self._channelLS:
             raise ValueError("Channel must be 1 or 2")
@@ -49,7 +49,7 @@ class M8070B:
     # =============================================================================
 
     def get_amplitude(self, channel: int = 1) -> float:
-        """Returns the amplitude setting for the selected channel.
+        """Returns the differential amplitude setting for the selected channel.
 
         Parameters
         ----------
@@ -59,9 +59,9 @@ class M8070B:
         Returns
         -------
         float
-            Amplitude setting.
+            Differential amplitude setting.
         """
-        channel = self.check_valid_channel(channel)
+        channel = self._validate_channel(channel)
         return float(self.query(f":SOURce:VOLTage:AMPLitude? 'M2.DataOut{channel}'"))
 
     # =============================================================================
@@ -69,7 +69,7 @@ class M8070B:
     # =============================================================================
 
     def set_amplitude(self, channel: int, value: float) -> None:
-        """Amplitude setting for the selected channel.
+        """Differential amplitude setting for the selected channel.
 
         Parameters
         ----------
@@ -78,7 +78,7 @@ class M8070B:
         value : float
             Amplitude setting in V. Must be between 0.1 and 2.7 V
         """
-        channel = self.check_valid_channel(channel)
+        channel = self._validate_channel(channel)
         if 0.1 <= value <= 2.7:
             self.write(f":SOURce:VOLTage:AMPLitude 'M2.DataOut{channel}', {value}")
         else:
@@ -100,7 +100,7 @@ class M8070B:
             Channel must be 1 or 2.
             State must be 0 or 1.
         """
-        channel = self.check_valid_channel(channel)
+        channel = self._validate_channel(channel)
         state_normalized = self.state_mapping.get(
             state.lower() if isinstance(state, str) else int(state)
         )

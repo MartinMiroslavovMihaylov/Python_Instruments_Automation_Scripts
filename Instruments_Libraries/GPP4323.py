@@ -6,87 +6,85 @@ Created on Wed Feb  1 15:55:01 2023
 """
 
 
-
 import io
 import serial
 import time
 
 print(
-'''
+    """
 #####################################################################################
     To use the DC-Power Supply GW-Instek GPP4323 you need to install the USB Driver 
     from https://www.gwinstek.com/en-global/download/ - GPP USB Driver 
     Python Library needed: pip install pyserial
 #####################################################################################
-'''
+"""
 )
+
 
 class GPP4323:
     def __init__(self, resource_str):
-        '''
+        """
         This class is using python serial, time and io libraries. Please be sure to install pyserial.
         Connect to Device and print the Identification Number.
-        '''
-        self._resource =  serial.Serial(resource_str,
-                        baudrate = 115200,
-                        bytesize=8,
-                        timeout=1,
-                        stopbits = serial.STOPBITS_ONE,
-                        parity = serial.PARITY_NONE,
-                        xonxoff = False)
-        
-        self.eol_char = '\n'
-        self.timeout = 0.2
-        self.sio = io.TextIOWrapper(io.BufferedReader(self._resource),newline= self.eol_char)
-        # Predefined Lists
-        self._ChannelLS = [1,2,3,4]
-        self._mainChannelLS = [1,2]
-        self._StateLS_mapping = { 'on': 'ON', 'off': 'OFF', 
-                                 1: 'ON', 0: 'OFF', 
-                                 '1': 'ON', '0': 'OFF',
-                                 True: 'ON', False: 'OFF'
-                                 }
-        print(self.getIdn())
-        
+        """
+        self._resource = serial.Serial(
+            resource_str,
+            baudrate=115200,
+            bytesize=8,
+            timeout=1,
+            stopbits=serial.STOPBITS_ONE,
+            parity=serial.PARITY_NONE,
+            xonxoff=False,
+        )
 
-   
-    
+        self.eol_char = "\n"
+        self.timeout = 0.2
+        self.sio = io.TextIOWrapper(io.BufferedReader(self._resource), newline=self.eol_char)
+        # Predefined Lists
+        self._ChannelLS = [1, 2, 3, 4]
+        self._mainChannelLS = [1, 2]
+        self._StateLS_mapping = {
+            "on": "ON",
+            "off": "OFF",
+            1: "ON",
+            0: "OFF",
+            "1": "ON",
+            "0": "OFF",
+            True: "ON",
+            False: "OFF",
+        }
+        print(self.getIdn())
+
     def write(self, message):
-        self._resource.write((message + self.eol_char).encode('utf-8'))
-    
+        self._resource.write((message + self.eol_char).encode("utf-8"))
 
     def query_values(self, message):
-        self._resource.write((message + self.eol_char).encode('utf-8'))
+        self._resource.write((message + self.eol_char).encode("utf-8"))
         time.sleep(self.timeout)
-        data = self._resource.read_until().decode('utf-8').strip()
+        data = self._resource.read_until().decode("utf-8").strip()
         return data
-    
-    
+
     def query_values_io(self, message):
-        self._resource.write((message + self.eol_char).encode('utf-8'))
+        self._resource.write((message + self.eol_char).encode("utf-8"))
         time.sleep(self.timeout)
         data = self.sio.read()
         return data
 
-    
     def Close(self):
-        print('Instrument GPP4323 is closed!')
+        print("Instrument GPP4323 is closed!")
         return self._resource.close()
-    
 
     def reset(self):
         self.write("*RST")
-    
 
     def getIdn(self) -> str:
-        ''' Returns the Instrument Identification: GW Instek,GPP-4323
-        '''
+        """Returns the Instrument Identification: GW Instek,GPP-4323"""
         return self.query_values("*IDN?")
-    
-# =============================================================================
-# Checks and Validations
-# =============================================================================
- 
+
+    # =============================================================================
+    # Checks and Validations
+    # =============================================================================
+
     def _validate_channel(self, channel: int, mainChannel: bool = False) -> int:
         channel = int(channel)
         if mainChannel and channel not in self._mainChannelLS:
@@ -94,13 +92,15 @@ class GPP4323:
         if channel not in self._ChannelLS:
             raise ValueError("Invalid channel number given! Channel Number can be [1,2,3,4].")
         return channel
-    
+
     def _validate_state(self, state: int | str) -> str:
-        state_normalized = self._StateLS_mapping.get(state.lower() if isinstance(state, str) else int(state))      
+        state_normalized = self._StateLS_mapping.get(
+            state.lower() if isinstance(state, str) else int(state)
+        )
         if state_normalized is None:
             raise ValueError("Invalid state given! State can be [on,off,1,0,True,False].")
         return state_normalized
-    
+
     def _validate_voltage(self, channel: int, voltage: int | float) -> str:
         if channel in self._mainChannelLS and voltage < 0 or voltage > 32:
             raise ValueError("Invalid voltage given! Voltage can be [0,32].")
@@ -109,26 +109,26 @@ class GPP4323:
         if channel == 4 and voltage < 0 or voltage > 15:
             raise ValueError("Invalid voltage given! Voltage on Channel 4 can be [0,15].")
         return f"{voltage:.3f}"
-    
+
     def _validate_amp(self, channel: int, amp: int | float) -> str:
         if channel in self._mainChannelLS and amp < 0 or amp > 3:
             raise ValueError("Invalid current given! Current on Channels 1 and 2 can be [0,3].")
         if (channel == 3 or channel == 4) and amp < 0 or amp > 1:
             raise ValueError("Invalid current given! Current on Channels 3 and 4 can be [0,1].")
         return f"{amp:.4f}"
-    
+
     def _validate_resistor(self, res: int | float) -> str:
         if res < 1 or res > 1000:
             raise ValueError("Invalid resistance given! Resistance can be [1,1000].")
         return f"{res:.3f}"
 
-# =============================================================================
-# Set Values and Modes
-# =============================================================================
-    
-    def set_Volt(self, channel: int, voltage: int|float) -> None:
-        '''Set Voltage on the specified channel.
-        
+    # =============================================================================
+    # Set Values and Modes
+    # =============================================================================
+
+    def set_Volt(self, channel: int, voltage: int | float) -> None:
+        """Set Voltage on the specified channel.
+
 
         Parameters
         ----------
@@ -141,20 +141,18 @@ class GPP4323:
         -------
         None.
 
-        '''
+        """
         channel = self._validate_channel(channel)
         voltage = self._validate_voltage(channel, voltage)
         self.write(f"VSET{channel}:{voltage}")
 
     def set_Voltage(self, channel: int, voltage: int | float) -> None:
-        '''Alias for set_Volt().'''
+        """Alias for set_Volt()."""
         self.set_Volt(channel, voltage)
-        
-        
-        
-    def set_Amp(self, channel: int, amp: int|float) -> None:
-        '''
-        
+
+    def set_Amp(self, channel: int, amp: int | float) -> None:
+        """
+
 
         Parameters
         ----------
@@ -167,95 +165,25 @@ class GPP4323:
         -------
         None.
 
-        '''
+        """
         channel = self._validate_channel(channel)
         amp = self._validate_amp(channel, amp)
         self.write(f"ISET{channel}:{amp}")
 
     def set_Current(self, channel: int, amp: int | float) -> None:
-        '''Alias for set_Amp().'''
+        """Alias for set_Amp()."""
         self.set_Amp(channel, amp)
+
     def set_CurrentLimit(self, channel: int, amp: int | float) -> None:
-        '''Alias for set_Amp().'''
-        self.set_Amp(channel, amp) 
-        
-        
-        
-    def set_ChannelToSerial(self, channel: int, status: str|int) -> None:
-        '''
-        
+        """Alias for set_Amp()."""
+        self.set_Amp(channel, amp)
+
+    def set_ChannelToSerial(self, status: str | int) -> None:
+        """Sets CH1/CH2 as Tracking series mode.
+
 
         Parameters
         ----------
-        channel : int
-            Select channel from List of Channel Numbers [1,2].
-        status : str
-            Sets CH1/CH2 as Tracking series mode.
-
-        Returns
-        -------
-        None.
-
-        '''
-        channel = self._validate_channel(channel, mainChannel=True)
-        state_normalized = self._validate_state(status)
-        self.write(f":OUTPut:SERies {state_normalized}")
-        
-        
-    def set_ChannelToParallel(self, channel: int, status: str|int) -> None:
-        '''
-        
-
-        Parameters
-        ----------
-        channel : int
-            Select channel from List of Channel Numbers [1,2].
-        status : str
-            Sets CH1/CH2 as Tracking parallel mode.
-
-        Returns
-        -------
-        None.
-
-        '''
-        channel = self._validate_channel(channel, mainChannel=True)
-        state_normalized = self._validate_state(status)
-        self.write(f":OUTPut:PARallel {state_normalized}") 
-        
-         
-    def set_ChannelTracking(self, mode: int) -> None:
-        '''
-        
-
-        Parameters
-        ----------
-        mode : int
-            Selects the operation mode: independent, tracking series, or tracking parallel.
-            GPP-1326 does not have this function. Series-parallel mode is not supported under LOAD.
-
-        Returns
-        -------
-        None.
-
-        '''
-        modeLS = [0,1,2]
-        if mode not in modeLS:
-            raise ValueError("Invalid Mode Number. Select 0 - Independent, 1 - Series or 2 - Parallel")
-        self.write(f"TRACK{mode}")
-  
-        
-        
-        
-    def set_ChannelLoadMode(self, channel: int, mode: str, status: str|int) -> None:
-        '''
-        
-
-        Parameters
-        ----------
-        channel : int
-            Select channel from List of Channel Numbers [1,2].
-        mode : str
-            Sets CH1/CH2 as Load CV, CC or CR mode.
         status : str
             Possible status ["ON", "OFF"].
 
@@ -263,21 +191,77 @@ class GPP4323:
         -------
         None.
 
-        '''
-        modeLS = ['CC', 'CV', 'CR']
+        """
+        state_normalized = self._validate_state(status)
+        self.write(f":OUTPut:SERies {state_normalized}")
+
+    def set_ChannelToParallel(self, status: str | int) -> None:
+        """Sets CH1/CH2 as Tracking parallel mode.
+
+
+        Parameters
+        ----------
+        status : str
+            Possible status ["ON", "OFF"].
+
+        Returns
+        -------
+        None.
+
+        """
+        state_normalized = self._validate_state(status)
+        self.write(f":OUTPut:PARallel {state_normalized}")
+
+    def set_ChannelTracking(self, mode: int) -> None:
+        """Selects the operation mode: independent, tracking series, or tracking parallel.
+        GPP-1326 does not have this function. Series-parallel mode is not supported under LOAD.
+
+
+        Parameters
+        ----------
+        mode : int
+            Select 0 - Independent, 1 - Series or 2 - Parallel
+
+        Returns
+        -------
+        None.
+
+        """
+        modeLS = [0, 1, 2]
+        if mode not in modeLS:
+            raise ValueError(
+                "Invalid Mode Number. Select 0 - Independent, 1 - Series or 2 - Parallel"
+            )
+        self.write(f"TRACK{mode}")
+
+    def set_ChannelLoadMode(self, channel: int, mode: str, status: str | int) -> None:
+        """Sets CH1 or CH2 as Load CV, CC or CR mode.
+
+
+        Parameters
+        ----------
+        channel : int
+            Select channel from List of Channel Numbers [1,2].
+        mode : str
+            Select Load CV, CC or CR mode.
+        status : str
+            Possible status ["ON", "OFF"].
+
+        Returns
+        -------
+        None.
+
+        """
+        modeLS = ["CC", "CV", "CR"]
         channel = self._validate_channel(channel, mainChannel=True)
         state_normalized = self._validate_state(status)
         if mode not in modeLS:
-            raise ValueError("Invalid Mode Number. Select 0 - Independent, 1 - Series or 2 - Parallel")
+            raise ValueError("Invalid Mode Setting. Select Load CV, CC or CR mode.")
         self.write(f":LOAD{channel}:{mode} {state_normalized}")
 
-        
-        
-        
-        
     def set_LoadResistor(self, channel: int, res: float) -> None:
-        '''
-        
+        """Sets the Load CR level.
+
 
         Parameters
         ----------
@@ -290,15 +274,14 @@ class GPP4323:
         -------
         None.
 
-        '''
+        """
         channel = self._validate_channel(channel, mainChannel=True)
         res = self._validate_resistor(res)
         self.write(f":LOAD{channel}:RESistor {res}")
 
-        
-    def set_Out(self, channel: int, status: str|int) -> None:
-        '''Enable/Disable Output
-        
+    def set_Out(self, channel: int, status: str | int) -> None:
+        """Enable/Disable Output
+
 
         Parameters
         ----------
@@ -311,20 +294,38 @@ class GPP4323:
         -------
         None.
 
-        '''
+        """
         channel = self._validate_channel(channel)
         state_normalized = self._validate_state(status)
-        self.write(f":OUTPut{channel}:STATe {state_normalized}")     
-        
-        
-# =============================================================================
-# Ask Commands
-# =============================================================================
+        self.write(f":OUTPut{channel}:STATe {state_normalized}")
 
+    def set_AllOut(self, status: str | int) -> None:
+        """Enable/Disable All Outputs
+
+
+        Parameters
+        ----------
+        status : str
+            Status of power Supple output. Could be ["ON", "OFF"]
+
+        Returns
+        -------
+        None.
+
+        """
+        state_normalized = self._validate_state(status)
+        if state_normalized == "ON":
+            self.write("ALLOUTON")
+        else:
+            self.write("ALLOUTOFF")
+
+    # =============================================================================
+    # Ask Commands
+    # =============================================================================
 
     def ask_VoltageSetting(self, channel: int) -> float:
-        ''' Returns the voltage setting, NOT the measured voltage!!!
-        
+        """Returns the voltage setting, NOT the measured voltage!!!
+
 
         Parameters
         ----------
@@ -336,16 +337,14 @@ class GPP4323:
         float
             Voltage Setting.
 
-        '''
-        
-        channel = self._validate_channel(channel)   
-        return float(self.query_values("VSET"+str(channel)+"?"))
-        
-        
-        
+        """
+
+        channel = self._validate_channel(channel)
+        return float(self.query_values("VSET" + str(channel) + "?"))
+
     def ask_CurrentSetting(self, channel: int) -> float:
-        '''Returns the current setting, NOT the measured current!!!
-        
+        """Returns the current setting, NOT the measured current!!!
+
 
         Parameters
         ----------
@@ -357,15 +356,13 @@ class GPP4323:
         float
             Current Setting.
 
-        '''
-    
-        channel = self._validate_channel(channel) 
-        return float(self.query_values("ISET"+str(channel)+"?"))     
+        """
 
+        channel = self._validate_channel(channel)
+        return float(self.query_values("ISET" + str(channel) + "?"))
 
-       
     def read_Measurement(self, channel: int, type: str) -> float:
-        '''Performs a measurement and returns the measured value.
+        """Performs a measurement and returns the measured value.
 
 
         Parameters
@@ -373,37 +370,44 @@ class GPP4323:
         channel : int
             Select channel from List of Channel Numbers [1,2,3,4].
         Type : str
-            Select measurement type: 
+            Select measurement type:
             'volt', 'amp' or 'watt'.
-        
+
         Returns
         -------
         float
             Return float with the measured value on the channel.
 
-        '''
+        """
 
         channel = self._validate_channel(channel)
-        type_mapping = {'voltage': 'Voltage', 'volt': 'Voltage', 'v': 'Voltage',
-                'current': 'Current', 'amp': 'Current', 'a': 'Current',
-                'power': 'Power', 'watt': 'Power', 'p': 'Power',
-            }
+        type_mapping = {
+            "voltage": "Voltage",
+            "volt": "Voltage",
+            "v": "Voltage",
+            "current": "Current",
+            "amp": "Current",
+            "a": "Current",
+            "power": "Power",
+            "watt": "Power",
+            "p": "Power",
+        }
         type_normalized = type_mapping.get(type.lower() if isinstance(type, str) else type)
-        
-        if type_normalized is not None:
-            return float(self.query_values(":MEASure"+str(channel)+":"+str(type)+"?"))
-        else:
-            raise ValueError('Invalid type of measurment! Possible tapes are ["Voltage", "Current", "Power"]')
-             
 
+        if type_normalized is not None:
+            return float(self.query_values(":MEASure" + str(channel) + ":" + str(type) + "?"))
+        else:
+            raise ValueError(
+                'Invalid type of measurment! Possible tapes are ["Voltage", "Current", "Power"]'
+            )
 
     def ask_Current(self, channel: int) -> float:
-        ''' Performs one current measurements and returns the value.
-        
+        """Performs one current measurements and returns the value.
+
 
         Parameters
         ----------
-        channel : int    
+        channel : int
             Select channel from List of Channel Numbers [1,2,3,4].
 
         Returns
@@ -411,18 +415,16 @@ class GPP4323:
         float
             Measured Current.
 
-        '''
-        return self.read_Measurement(channel, 'amp')
-
-
+        """
+        return self.read_Measurement(channel, "amp")
 
     def ask_Voltage(self, channel: int) -> float:
-        ''' Performs one voltage measurements and returns the value.
-        
+        """Performs one voltage measurements and returns the value.
+
 
         Parameters
         ----------
-        channel : int    
+        channel : int
             Select channel from List of Channel Numbers [1,2,3,4].
 
         Returns
@@ -430,18 +432,16 @@ class GPP4323:
         float
             Measured Voltage.
 
-        '''
-        return self.read_Measurement(channel, 'volt')
-
-
+        """
+        return self.read_Measurement(channel, "volt")
 
     def ask_Power(self, channel: int) -> float:
-        ''' Performs one power measurements and returns the value.
-        
+        """Performs one power measurements and returns the value.
+
 
         Parameters
         ----------
-        channel : int    
+        channel : int
             Select channel from List of Channel Numbers [1,2,3,4].
 
         Returns
@@ -449,14 +449,13 @@ class GPP4323:
         float
             Measured Power.
 
-        '''
-        return self.read_Measurement(channel, 'watt')    
-        
-        
+        """
+        return self.read_Measurement(channel, "watt")
+
     def ask_ChannelLoadMode(self, channel: int) -> str:
-        ''' Queries CH1 or CH2 work mode. 
+        """Queries CH1 or CH2 work mode.
         6 modes: SERies/PARallel/INDE pendent, CV Load/CC Load/CR Load
-        
+
 
         Parameters
         ----------
@@ -468,17 +467,14 @@ class GPP4323:
         str
             SERies/PARallel/INDependent, CV Load/CC Load/CR Load
 
-        '''
-        
-        channel = self._validate_channel(channel, mainChannel = True)
-        return self.query_values(":MODE"+str(channel)+"?")
-        
-        
-        
-        
+        """
+
+        channel = self._validate_channel(channel, mainChannel=True)
+        return self.query_values(":MODE" + str(channel) + "?")
+
     def ask_LoadResistor(self, channel: int) -> float:
-        '''
-        
+        """
+
 
         Parameters
         ----------
@@ -490,16 +486,13 @@ class GPP4323:
         float
             Set load Resistance Value for given channel.
 
-        '''
-  
-        channel = self._validate_channel(channel, mainChannel = True)
-        return float(self.query_values(":LOAD"+str(channel) + ":RESistor?"))
-                        
+        """
 
-    
+        channel = self._validate_channel(channel, mainChannel=True)
+        return float(self.query_values(":LOAD" + str(channel) + ":RESistor?"))
+
     # def ask_Status(self):
     #     '''
-        
 
     #     Returns
     #     -------
@@ -507,17 +500,16 @@ class GPP4323:
     #         Get the state of the output and CC/CV
 
     #     '''
-        
-    #     return float(self.query_values("STATUS?"))
-    
 
-# =============================================================================
-# Get/Save Data
-# =============================================================================
+    #     return float(self.query_values("STATUS?"))
+
+    # =============================================================================
+    # Get/Save Data
+    # =============================================================================
 
     def get_data(self, channel: int) -> dict:
-        '''
-        
+        """
+
         Parameters
         ----------
         channel : int
@@ -528,14 +520,14 @@ class GPP4323:
         OutPut : dict
             Return a dictionary with the measured voltage and current.
 
-        '''
+        """
 
         channel = self._validate_channel(channel)
         OutPut = {}
-        Voltage = self.read_Measurement(channel, 'Voltage')
-        Current = self.read_Measurement(channel, 'Current')
-        Power = self.read_Measurement(channel, 'Power')
-        OutPut['Voltage/V'] = Voltage
-        OutPut['Current/A'] = Current
-        OutPut['Power/W'] = Power
+        Voltage = self.read_Measurement(channel, "Voltage")
+        Current = self.read_Measurement(channel, "Current")
+        Power = self.read_Measurement(channel, "Power")
+        OutPut["Voltage/V"] = Voltage
+        OutPut["Current/A"] = Current
+        OutPut["Power/W"] = Power
         return OutPut
