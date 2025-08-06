@@ -21,8 +21,10 @@ class UXR:
         self,
         resource_str="TCPIP0::KEYSIGH-Q75EBO9.local::hislip0::INSTR",
         num_channel=2,
+        visa_library="@ivi", # If you have problems try "@py"! 
+                             # Or try setting Kesyight visa32.dll as primary!
     ):
-        self.instrument = visa.ResourceManager().open_resource(
+        self.instrument = visa.ResourceManager(visa_library).open_resource(
             str(resource_str), read_termination="\n", query_delay=0.5
         )
         print(self.IDN())
