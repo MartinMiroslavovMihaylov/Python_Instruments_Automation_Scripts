@@ -21,11 +21,25 @@ class SMA100B(vxi11.Instrument):
     def __init__(self, hostname):
         '''
         Get name and identification.
-        Make a restart of the instrument in the beginning to get the instrument 
+        Execute the reset() command if you want to get the instrument 
         to default settings.
         '''
         super().__init__(hostname)
-        print(self.ask('*IDN?'))
+
+        # Predefine Lists
+        self._StateLS_mapping = {
+            "on": 1,
+            "off": 0,
+            1: 1,
+            0: 0,
+            "1": 1,
+            "0": 0,
+            True: 1,
+            False: 0,
+        }
+
+        # Get name and identification
+        print(self.getIdn())
 
     def query(self, message):
         return self.ask(message)
@@ -36,17 +50,29 @@ class SMA100B(vxi11.Instrument):
 
     def reset(self):
         return self.write('*RST')
+    
+# =============================================================================
+# Validate Variables
+# =============================================================================
+
+    def _validate_state(self, state: int | str) -> int:
+        state_normalized = self._StateLS_mapping.get(
+            state.lower() if isinstance(state, str) else int(state)
+        )
+        if state_normalized is None:
+            raise ValueError("Invalid state given! State can be [on,off,1,0,True,False].")
+        return state_normalized
+    
 # =============================================================================
 # Get Identication Command
 # =============================================================================
-    def getIdn(self):
+    def getIdn(self) -> str:
         '''
         
-
         Returns
         -------
-        TYPE
-            DESCRIPTION.
+        str
+            Instrument identification.
 
         '''
         return self.query('*IDN?')
@@ -55,14 +81,13 @@ class SMA100B(vxi11.Instrument):
 # Ask Commands
 # =============================================================================
 
-    def ask_OutputImpedance(self):
+    def ask_OutputImpedance(self) -> float:
         """
         
-
         Returns
         -------
-        TYPE
-            Queries the impedance of the RF outputs.
+        float
+            Queries the impedance of the RF output.
 
         """
         return float(self.query(":OUTPut1:IMP?"))
@@ -72,12 +97,12 @@ class SMA100B(vxi11.Instrument):
 # Set Commands
 # =============================================================================
 
-    def set_rf_output_all(self, value):
+    def set_rf_output_all(self, state: int | str) -> None:
         """Activates all Signal Genrator RF Outputs
 
         Parameters
         ----------
-        value : str/int
+        state : str/int
             'ON' 1 or 'OFF' 0
 
         Raises
@@ -85,24 +110,16 @@ class SMA100B(vxi11.Instrument):
         ValueError
             Valid values are: \'ON\', \'OFF\', 1, 0
         """
-        
-        OnsStates = ["On", "ON", "on", "oN", "1", 1]
-        OffsStates = ["Off", "oFf", "ofF", "OFF", "off", "0", 0]
-        if value in OnsStates:
-            self.write(':OUTPut:ALL:STATe 1')
-        elif value in OffsStates:
-            self.write(':OUTPut:ALL:STATe 0')
-        else:
-            raise ValueError('Not a valid input. Valid: \'ON\', \'OFF\', 1, 0')
-            
-            
+        state = self._validate_state(state)
+        self.write(f':OUTPut:ALL:STATe {state}')
 
-    def set_rf_output(self, value):
+
+    def set_rf_output(self, state: int | str) -> None:
         """Activates the Signal Genrator RF Output
 
         Parameters
         ----------
-        value : str/int
+        state : str/int
             'ON' 1 or 'OFF' 0
 
         Raises
@@ -110,22 +127,16 @@ class SMA100B(vxi11.Instrument):
         ValueError
             Valid values are: \'ON\', \'OFF\', 1, 0
         """
-        OnsStates = ["On", "ON", "on", "oN", "1", 1]
-        OffsStates = ["Off", "oFf", "ofF", "OFF", "off", "0", 0]
-        if value in OnsStates:
-            self.write(':OUTPut' + ' 1')
-        elif value in  OffsStates:
-            self.write(':OUTPut' + ' 0')
-        else:
-            raise ValueError('Not a valid input. Valid: \'ON\', \'OFF\', 1, 0')
+        state = self._validate_state(state)
+        self.write(f':OUTPut {state}')
 
 
-    def set_output(self,value):
+    def set_output(self,state: int | str) -> None:
         """Activates the Signal Genrator RF Output
 
         Parameters
         ----------
-        value : str/int
+        state : str/int
             'ON' 1 or 'OFF' 0
 
         Raises
@@ -133,9 +144,9 @@ class SMA100B(vxi11.Instrument):
         ValueError
             Valid values are: \'ON\', \'OFF\', 1, 0
         """
-        self.set_rf_output(value)
+        self.set_rf_output(state)
 
-    def set_DCOffset(self, value):
+    def set_DCOffset(self, value: int | float) -> None:
         """
         
 
@@ -152,12 +163,12 @@ class SMA100B(vxi11.Instrument):
 
         """
         if value >= -5 and value <= 5:
-            self.write(":CSYNthesis:OFFSet "+ str(value))
+            self.write(f":CSYNthesis:OFFSet {value}")
         else:
             raise ValueError("Allowed Offsets are numbers between -5 and 5!")
 
 
-    def set_CMOS_Voltage(self, value):
+    def set_CMOS_Voltage(self, value: int | float) -> None:
         """
         
 
@@ -179,11 +190,11 @@ class SMA100B(vxi11.Instrument):
 
         """
         if value >= 0.8 and value <= 2.7:
-            self.write(":CSYNthesis:VOLTage "+str(value))
+            self.write(f":CSYNthesis:VOLTage {value}")
         else:
             raise ValueError("Wrong Value. Allowed values are between o.8 and 2.7!")
             
-    def set_ClockSigPhase(self, value):
+    def set_ClockSigPhase(self, value: int | float) -> None:
         """
         
 
@@ -206,7 +217,7 @@ class SMA100B(vxi11.Instrument):
 
         """
         if value >= -36000 and value <= 36000:
-            self.write(":CSYNthesis:PHASe "+ str(value))
+            self.write(f":CSYNthesis:PHASe {value}")
         else:
             raise ValueError("Wrong value range! Allowed values between -36000 and 36000!")
         
@@ -215,7 +226,7 @@ class SMA100B(vxi11.Instrument):
 # SOURce:FREQuency subsystem
 # =============================================================================
 
-    def set_frequency_mode(self, MODE):
+    def set_frequency_mode(self, MODE: str) -> None:
         '''
         Parameters
         ----------
@@ -242,22 +253,23 @@ class SMA100B(vxi11.Instrument):
                 defined sweep steps.
         '''
         
-        sStates = ["CW", "cw", "Cw", "cW", "FIXed", "SWEep", "LIST", "CIMBined"]
+        sStates = ["CW", "FIXed", "FIX", "SWEep", "SWE", "LIST", "COMBined", "COMB"]
+        MODE = MODE.upper()
         if MODE in sStates:
-            self.write(':FREQuency:MODE ' + MODE)
+            self.write(f':FREQuency:MODE {MODE}')
         else:
             raise ValueError("Not a valid input. Valid: CW | FIXed | SWEep | LIST | COMBined !")
             
 
-    def set_freq_CW(self, value, unit):
+    def set_freq_CW(self, value: int | float, unit: str = None) -> None:
         '''
         Parameters
         ----------
         value : int/float
             Parameter Frequency
 
-        unit : str
-            Frequency Unit: 'GHz' or 'MHz'
+        unit : str (optional)
+            Frequency Unit: 'GHz' or 'MHz' or 'Hz'
 
         Returns
         -------
@@ -267,43 +279,42 @@ class SMA100B(vxi11.Instrument):
 
         minFreq = 8e3 # 8 kHz
         maxFreq = 72e9  # 67 GHz calibrated, 72 GHz max
-        stUnit = ['MHz', 'GHz']
 
-        if unit == 'MHz':
-            if value*1e6 <= maxFreq and value*1e6 >= minFreq:
-                self.write(':SOURce:FREQuency:CW ' + str(value) + ' ' + unit)
+        if unit == 'Hz' or unit is None:
+            unit = 'Hz'
+            if value <= maxFreq and value >= minFreq:
+                self.write(f':SOURce:FREQuency:CW {value} {unit}')
             else:
-                raise ValueError(
-                    'Warning !! Minimum Frequency = 8 kHz and Maximum Frequency = 67 GHz')
+                raise ValueError('Minimum Frequency = 8 kHz and Maximum Frequency = 67 GHz')
+        elif unit == 'MHz':
+            if value*1e6 <= maxFreq and value*1e6 >= minFreq:
+                self.write(f':SOURce:FREQuency:CW {value} {unit}')
+            else:
+                raise ValueError('Minimum Frequency = 8 kHz and Maximum Frequency = 67 GHz')
         elif unit == 'GHz':
             if value*1e9 <= maxFreq and value*1e9 >= minFreq:
-                self.write(':SOURce:FREQuency:CW ' + str(value) + ' ' + unit)
+                self.write(f':SOURce:FREQuency:CW {value} {unit}')
             else:
-                raise ValueError(
-                    'Warning !! Minimum Frequency = 8 kHz and Maximum Frequency = 67 GHz')
+                raise ValueError('Minimum Frequency = 8 kHz and Maximum Frequency = 67 GHz')
         else:
             raise ValueError(
-                'Unknown input! See function description for more info.')
+                'Unknown input! Unit must be None or "MHz" or "GHz"!')
 
 
 # =============================================================================
 # Activate Commands
 # =============================================================================
 
-    def act_DCOffset(self, state):
-        '''
+    def activate_DCOffset(self, state) -> None:
+        '''Activates a DC offset.
         
-
-        Returns
-        -------
-        Activates a DC offset.
-
+        Parameters
+        ----------
+        state : str
+            'ON' 1 or 'OFF' 0
         '''
-        sState = ["On", "oN", "on", "ON", "1", "Off", "OFF", "off", "0"]
-        if state in sState:
-            self.write(":CSYNthesis:OFFSet:STATe "+ state)
-        else:
-            raise ValueError("Wrong command! You can give 'ON', 'OFF', '0', '1'!")
+        state = self._validate_state(state)
+        self.write(f":CSYNthesis:OFFSet:STATe {state}")
         
     
     
@@ -311,28 +322,28 @@ class SMA100B(vxi11.Instrument):
 # SOURce:POWer subsystem
 # =============================================================================
 
-    def set_rf_power(self, value):
-        """Sets the Signal Generator Output Power in dBm
+    def set_rf_power(self, value: int | float) -> None:
+        """Sets the Signal Generator Output Power in dBm.
 
         Parameters
         ----------
-        value : float
+        value : int/float
             Output Power in dBm
-        """        ''''''
+        """
         minVal = -20.0
         maxVal = 30.0
         if value > maxVal or value < minVal:
-            raise ValueError('Unknown input! See function description for more info.')
-        else:
-            self.write('SOURce:POWer:LEVel:IMMediate:AMPlitude ' + str(value))
+            raise ValueError(f'Power out of range! You can set power between {minVal} and {maxVal} dBm!')
+
+        self.write(f'SOURce:POWer:LEVel:IMMediate:AMPlitude {value}')
   
     
-    def set_OutputPowerLevel(self,value):
-        """Sets the Signal Generator Output Power in dBm
+    def set_OutputPowerLevel(self,value: int | float) -> None:
+        """Sets the Signal Generator Output Power in dBm. Alias for set_rf_power().
 
         Parameters
         ----------
-        value : float
+        value : int/float
             Output Power in dBm
-        """        ''''''
+        """
         self.set_rf_power(value)
