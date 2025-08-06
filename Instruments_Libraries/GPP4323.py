@@ -395,7 +395,7 @@ class GPP4323:
         type_normalized = type_mapping.get(type.lower() if isinstance(type, str) else type)
 
         if type_normalized is not None:
-            return float(self.query_values(":MEASure" + str(channel) + ":" + str(type) + "?"))
+            return float(self.query_values(":MEASure" + str(channel) + ":" + str(type_normalized) + "?"))
         else:
             raise ValueError(
                 'Invalid type of measurment! Possible tapes are ["Voltage", "Current", "Power"]'
