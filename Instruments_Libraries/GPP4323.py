@@ -6,9 +6,9 @@ Created on Wed Feb  1 15:55:01 2023
 """
 
 
-import io
 import serial
 import time
+import numpy as np
 
 print(
     """
@@ -39,20 +39,8 @@ class GPP4323:
 
         self.eol_char = "\n"
         self.timeout = 0.2
-        self.sio = io.TextIOWrapper(io.BufferedReader(self._resource), newline=self.eol_char)
         # Predefined Lists
-        self._ChannelLS = [1, 2, 3, 4]
-        self._mainChannelLS = [1, 2]
-        self._StateLS_mapping = {
-            "on": "ON",
-            "off": "OFF",
-            1: "ON",
-            0: "OFF",
-            "1": "ON",
-            "0": "OFF",
-            True: "ON",
-            False: "OFF",
-        }
+        self._define_lists()
         print(self.getIdn())
 
     def write(self, message):
@@ -62,12 +50,6 @@ class GPP4323:
         self._resource.write((message + self.eol_char).encode("utf-8"))
         time.sleep(self.timeout)
         data = self._resource.read_until().decode("utf-8").strip()
-        return data
-
-    def query_values_io(self, message):
-        self._resource.write((message + self.eol_char).encode("utf-8"))
-        time.sleep(self.timeout)
-        data = self.sio.read()
         return data
 
     def Close(self):
@@ -84,6 +66,32 @@ class GPP4323:
     # =============================================================================
     # Checks and Validations
     # =============================================================================
+
+    def _define_lists(self):
+        # Predefined Lists
+        self._ChannelLS = [1, 2, 3, 4]
+        self._mainChannelLS = [1, 2]
+        self._StateLS_mapping = {
+            "on": "ON",
+            "off": "OFF",
+            1: "ON",
+            0: "OFF",
+            "1": "ON",
+            "0": "OFF",
+            True: "ON",
+            False: "OFF",
+        }
+        self._measurement_type_mapping = {
+            "voltage": "Voltage",
+            "volt": "Voltage",
+            "v": "Voltage",
+            "current": "Current",
+            "amp": "Current",
+            "a": "Current",
+            "power": "Power",
+            "watt": "Power",
+            "p": "Power",
+        }
 
     def _validate_channel(self, channel: int, mainChannel: bool = False) -> int:
         channel = int(channel)
@@ -121,6 +129,14 @@ class GPP4323:
         if res < 1 or res > 1000:
             raise ValueError("Invalid resistance given! Resistance can be [1,1000].")
         return f"{res:.3f}"
+
+    def _validate_measurement_type(self, measurement_type: str) -> str:
+        type_normalized = self._measurement_type_mapping.get(
+            measurement_type.lower() if isinstance(measurement_type, str) else measurement_type
+        )
+        if type_normalized is None:
+            raise ValueError("Invalid measurement type given! Type can be [voltage,current,power].")
+        return type_normalized
 
     # =============================================================================
     # Set Values and Modes
@@ -381,25 +397,8 @@ class GPP4323:
         """
 
         channel = self._validate_channel(channel)
-        type_mapping = {
-            "voltage": "Voltage",
-            "volt": "Voltage",
-            "v": "Voltage",
-            "current": "Current",
-            "amp": "Current",
-            "a": "Current",
-            "power": "Power",
-            "watt": "Power",
-            "p": "Power",
-        }
-        type_normalized = type_mapping.get(type.lower() if isinstance(type, str) else type)
-
-        if type_normalized is not None:
-            return float(self.query_values(":MEASure" + str(channel) + ":" + str(type_normalized) + "?"))
-        else:
-            raise ValueError(
-                'Invalid type of measurment! Possible tapes are ["Voltage", "Current", "Power"]'
-            )
+        type = self._validate_measurement_type(type) 
+        return float(self.query_values(f":MEASure{channel}:{type}?"))
 
     def ask_Current(self, channel: int) -> float:
         """Performs one current measurements and returns the value.
