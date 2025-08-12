@@ -196,7 +196,7 @@ def PowerMeter():
 
 
 def LU1000():
-    from Instruments_Libraries.LU1000_new import LU1000_Cband
+    from Instruments_Libraries.LU1000 import LU1000_Cband
     return LU1000_Cband("USB")
 
 
