@@ -182,17 +182,75 @@ def PowerSupply():
 
 
 
-def PowerMeter():
+def PowerMeter(index: int = 0):
+    """
+    Auto-detect a connected Thorlabs PM100-series power meter and return a PM100D instance.
+
+    Parameters
+    ----------
+    index : int
+        If multiple PM100 meters are connected, choose which one to open (0 = first found).
+
+    Raises
+    ------
+    RuntimeError
+        If no PM100-series device is detected or we cannot open it.
+    IndexError
+        If 'index' is out of range.
+    """
+    import re
+    from pyvisa.errors import VisaIOError
     from Instruments_Libraries.PM100D import PM100D
-    Serien_Nummer = ['P0024970','P0033858', 'P0037385', 'P0037393']
-    for _ in Serien_Nummer:
+
+    rm = visa.ResourceManager()
+    matches = []
+
+    # Look at VISA instruments (USB TMC shows up as USB...::INSTR)
+    for res in rm.list_resources("?*::INSTR"):
+        if not res.startswith("USB"):  # PM100D is typically USBTMC
+            continue
         try:
-            PM100D(_)
-            InstrPM = _
-            break
-        except (visa.VisaIOError): 
-           print('Serial Number dont match!')
-    return PM100D(InstrPM)
+            with rm.open_resource(res) as inst:
+                inst.timeout = 500  # ms
+                # Try query, fall back to write+read for quirky backends
+                try:
+                    idn = inst.query("*IDN?").strip()
+                except Exception:
+                    inst.write("*IDN?")
+                    idn = inst.read().strip()
+        except Exception:
+            continue  # not a responsive device for SCPI/*IDN?; skip
+
+        # Identify Thorlabs PM100 family by ID string
+        if ("PM100" in idn):
+            # Try to obtain a serial without ever printing/logging it
+            m = re.search(r"::([A-Z]\d{6,})::", res)  # e.g. ::P00XXXXX::
+            serial = m.group(1) if m else None
+            if serial is None:
+                m2 = re.search(r"(P\d{6,})", idn)     # fallback: parse from IDN
+                serial = m2.group(1) if m2 else None
+            matches.append({"resource": res, "idn": idn, "serial": serial})
+
+    if not matches:
+        raise RuntimeError("No Thorlabs PM100-series power meter found via VISA.")
+
+    if not (0 <= index < len(matches)):
+        raise IndexError(f"index {index} out of range (found {len(matches)} device(s)).")
+
+    picked = matches[index]
+    # Prefer constructing by serial (keeps resource backends swappable)
+    if picked["serial"] is not None:
+        try:
+            return PM100D(picked["serial"])
+        except (VisaIOError, Exception):
+            pass
+
+    # Fall back to VISA resource name
+    try:
+        return PM100D(resource_name=picked["resource"])
+    except TypeError:
+        raise RuntimeError("Detected a Thorlabs PM100 but could not open it.")
+
 
 
 def LU1000():
