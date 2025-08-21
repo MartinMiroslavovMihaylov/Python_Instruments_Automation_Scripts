@@ -21,8 +21,10 @@ class UXR:
         self,
         resource_str="TCPIP0::KEYSIGH-Q75EBO9.local::hislip0::INSTR",
         num_channel=2,
+        visa_library="@ivi", # If you have problems try "@py"! 
+                             # Or try setting Kesyight visa32.dll as primary!
     ):
-        self.instrument = visa.ResourceManager().open_resource(
+        self.instrument = visa.ResourceManager(visa_library).open_resource(
             str(resource_str), read_termination="\n", query_delay=0.5
         )
         print(self.IDN())
@@ -397,6 +399,7 @@ class UXR:
         with_time: bool = True,
         time_fmt: str = "%Y-%m-%d_%H-%M-%S",
         divider: str = "_",
+        timeout: float = 5000,
     ):
         """Save screen to {path} with {image_type}: bmp, jpg, gif, tif, png
         Adapted from:
@@ -410,7 +413,7 @@ class UXR:
         img_path = f"{img_name}{divider if with_time else ''}{time_str}{img_type.lower()}"
 
         old_timeout = self.instrument.timeout  # save current timeout
-        self.instrument.timeout = 5000  # 5 seconds in milliseconds
+        self.instrument.timeout = timeout  # 5 seconds in milliseconds
         try:
             with open(img_path, "wb") as f:
                 screen_bytes = self.query_binary_values(

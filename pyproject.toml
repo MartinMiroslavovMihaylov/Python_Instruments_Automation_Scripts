@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Instruments_Libraries"
-version = "2025.07.30"
+version = "2025.08.20"
 authors = [
   { name = "Martin Mihaylov", email = "martinmi@hni.uni-paderborn.de" },
   { name = "Maxim Weizel", email = "mweizel@hni.uni-paderborn.de" },
@@ -20,6 +20,7 @@ dependencies = [
   "pyserial>=3.5",
   "python-vxi11>=0.9",
   "PyVISA>=1.14.1",
+  "matlabengine>=24.2",
 ]
 
 [project.optional-dependencies]

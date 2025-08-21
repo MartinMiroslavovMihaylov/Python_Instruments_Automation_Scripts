@@ -26,12 +26,13 @@ import logging
     # LU1000 Laser Base Class #
 ##################################
 class LU1000_Base:
-    def __init__(self, target='USB', port=5025):
+    def __init__(self, target='USB', port=None):
         if target == 'USB':
             self.n = NovoptelUSB('LU1000')
             if self.n.DEVNO < 0:
                 raise ConnectionError("Could not open USB connection")
         else:
+            port = int(port) if port is not None else 5025
             self.n = NovoptelTCP(target, port=port)
         self._available_lasers = [1, 2]
         self._num_of_attempts = 5 # try to write 5 times
@@ -51,8 +52,7 @@ class LU1000_Base:
             raise ValueError(f"Laser {laser} is not in available lasers {self._available_lasers}")
 
     def _calc_address(self, laser: int, offset: int) -> int:
-        if laser not in self._available_lasers:
-            raise ValueError("Invalid laser number. Must be one of: " + str(self._available_lasers))
+        self._validate_laser(laser)
         return int(128 * laser + offset)
 
 # =============================================================================

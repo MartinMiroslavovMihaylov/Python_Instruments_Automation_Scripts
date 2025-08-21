@@ -8,7 +8,9 @@ Created on Fri Dec 10 08:39:48 2021
 
 import numpy as np
 import pyvisa as visa
+from pyvisa.errors import VisaIOError
 from time import sleep
+import re
 
 
 class KEITHLEY2612:
@@ -21,6 +23,7 @@ class KEITHLEY2612:
         Connect to Device and print the Identification Number.
         """
         self._resource = visa.ResourceManager().open_resource(resource_str)
+        self._resource.read_termination  = "\n"
         idn = self.getIdn()
         # Verify this is a Keithley 2612
         if "2612" not in idn:
@@ -44,6 +47,7 @@ class KEITHLEY2612:
             "ohm": "r",
             "r": "r",
         }
+        self.dict_of_lua_scripts = {}
 
         # Voltage and current limits for safety
         self._absolute_Voltage_Limits = {"min": 20e-3, "max": 200}
@@ -56,9 +60,15 @@ class KEITHLEY2612:
     def write(self, message):
         return self._resource.write(message)
 
+    def read(self):
+        return self._resource.read()
+
     def Close(self):
         self._resource.close()
         print("Instrument Keithley Instruments Inc., Model 2612, 1152698, 1.4.2 is closed!")
+
+    def reset(self):
+        self.write("*RST")
 
     def getIdn(self):
         """
@@ -69,7 +79,7 @@ class KEITHLEY2612:
             Instrument identification
 
         """
-        return str(self.query("*IDN?")).strip()
+        return str(self.query("*IDN?"))
 
     # =============================================================================
     # Checks and Validations
@@ -126,8 +136,8 @@ class KEITHLEY2612:
     # Reset and Clear
     # =============================================================================
 
-    def Reset(self, channel: str) -> None:
-        """Reset channel to default settings
+    def reset_channel(self, channel: str) -> None:
+        """Reset channel to default settings.
 
         Parameters
         ----------
@@ -292,7 +302,7 @@ class KEITHLEY2612:
 
         """
         channel = self._validate_channel(channel)
-        response = self.query(f"print(smu{channel}.source.compliance)").strip().lower()
+        response = self.query(f"print(smu{channel}.source.compliance)").lower()
         return True if response == "true" else False
 
     def ask_AutoVoltageRange(self, channel: str) -> int:
@@ -306,7 +316,7 @@ class KEITHLEY2612:
 
         """
         channel = self._validate_channel(channel)
-        return int(float(self.query(f"print(smu{channel}.source.autorangev)").strip()))
+        return int(float(self.query(f"print(smu{channel}.source.autorangev)")))
 
     def ask_AutoCurrentRange(self, channel: str) -> int:
         """This attribute contains the state of (smuX.source.autorangeY) the source autorange
@@ -319,7 +329,7 @@ class KEITHLEY2612:
 
         """
         channel = self._validate_channel(channel)
-        return int(float(self.query(f"print(smu{channel}.source.autorangei)").strip()))
+        return int(float(self.query(f"print(smu{channel}.source.autorangei)")))
 
     def ask_VoltageRange(self, channel: str) -> float:
         """This attribute contains the source voltage range.
@@ -331,7 +341,7 @@ class KEITHLEY2612:
 
         """
         channel = self._validate_channel(channel)
-        return float(self.query(f"print(smu{channel}.source.rangev)").strip())
+        return float(self.query(f"print(smu{channel}.source.rangev)"))
 
     def ask_CurrentRange(self, channel: str) -> float:
         """This attribute contains the source current range.
@@ -343,7 +353,7 @@ class KEITHLEY2612:
 
         """
         channel = self._validate_channel(channel)
-        return float(self.query(f"print(smu{channel}.source.rangei)").strip())
+        return float(self.query(f"print(smu{channel}.source.rangei)"))
 
     def ask_VoltageLimit(self, channel: str) -> float:
         """This attribute contains the source voltage limit.
@@ -355,7 +365,7 @@ class KEITHLEY2612:
 
         """
         channel = self._validate_channel(channel)
-        return float(self.query(f"print(smu{channel}.source.levelv)").strip())
+        return float(self.query(f"print(smu{channel}.source.levelv)"))
 
     def ask_CurrentLimit(self, channel: str) -> float:
         """This attribute contains the source current limit.
@@ -367,7 +377,7 @@ class KEITHLEY2612:
 
         """
         channel = self._validate_channel(channel)
-        return float(self.query(f"print(smu{channel}.source.leveli)").strip())
+        return float(self.query(f"print(smu{channel}.source.leveli)"))
 
     def ask_VoltageSetting(self, channel: str) -> float:
         """This attribute contains the source voltage setting.
@@ -379,7 +389,7 @@ class KEITHLEY2612:
 
         """
         channel = self._validate_channel(channel)
-        return float(self.query(f"print(smu{channel}.source.levelv)").strip())
+        return float(self.query(f"print(smu{channel}.source.levelv)"))
 
     def ask_CurrentSetting(self, channel: int) -> float:
         """This attribute contains the source current setting.
@@ -391,7 +401,7 @@ class KEITHLEY2612:
 
         """
         channel = self._validate_channel(channel)
-        return float(self.query(f"print(smu{channel}.source.leveli)").strip())
+        return float(self.query(f"print(smu{channel}.source.leveli)"))
 
     def ask_OutputSourceFunction(self, channel: int) -> str:
         """This attribute contains the source output function.
@@ -409,11 +419,11 @@ class KEITHLEY2612:
 
         """
         channel = self._validate_channel(channel)
-        if int(float(self.query(f"print(smu{channel}.source.func)").strip())) == 1:
+        if int(float(self.query(f"print(smu{channel}.source.func)"))) == 1:
             return "voltage"
-        elif int(float(self.query(f"print(smu{channel}.source.func)").strip())) == 0:
+        elif int(float(self.query(f"print(smu{channel}.source.func)"))) == 0:
             return "current"
-        
+
     # =============================================================================
     # Further ASK Methods
     # =============================================================================
@@ -546,7 +556,9 @@ class KEITHLEY2612:
         channel = self._validate_channel(channel)
         if highVoltage:  # You want more than 10V
             if not (
-                self._absolute_Voltage_Limits["min"] <= limit <= self._absolute_Voltage_Limits["max"]
+                self._absolute_Voltage_Limits["min"]
+                <= limit
+                <= self._absolute_Voltage_Limits["max"]
             ):
                 raise ValueError(
                     f"Voltage limit must be between {self._absolute_Voltage_Limits['min']} and {self._absolute_Voltage_Limits['max']} V"
@@ -906,3 +918,227 @@ class KEITHLEY2612:
         self.set_DisplayMeasurementFunction(channel, "voltage")
         self.set_Current(channel, current)
         self.set_VoltageLimit(channel, voltage_limit)
+
+    # =============================================================================
+    # Send Lua Code to the Instrument - Experimental!!!
+    # =============================================================================
+
+    def validate_lua_script(self, lua_script: str) -> tuple[str, str]:
+        """
+        Validates a Keithley 2612 Lua script to ensure:
+        - It starts with 'loadscript <name>'
+        - It ends with 'endscript'
+        - A script name is provided
+
+        Parameters
+        ----------
+        lua_script : str
+            The Lua script to validate.
+        
+        Returns
+        -------
+        script_name : str
+            The name of the script.
+        lua_script : str
+            The validated Lua script.
+        
+        Raises
+        ------
+        ValueError
+            If the script is invalid.
+        """
+        from textwrap import dedent
+
+        lua_script = dedent(lua_script)
+        lines = [line.strip() for line in lua_script.strip().splitlines() if line.strip()]
+
+        if not lines:
+            raise ValueError("Lua script is empty.")
+
+        # Check start
+        first_line = lines[0]
+        match = re.match(r"^loadscript\s+([a-zA-Z_]\w*)$", first_line)
+        if not match:
+            if first_line.startswith("loadscript"):
+                raise ValueError("Script must include a name after 'loadscript'.")
+            else:
+                raise ValueError("Script must start with 'loadscript <name>'.")
+
+        script_name = match.group(1)
+
+        # Check end
+        last_line = lines[-1].lower()
+        if last_line != "endscript":
+            raise ValueError("Script must end with 'endscript'.")
+
+        return script_name, lua_script
+
+    def define_lua_script(self, lua_script: str = None) -> None:
+        """
+        Define a Lua script to be loaded into the instrument.
+
+        Parameters
+        ----------
+        lua_script : str, optional
+            The Lua script to define. If not provided, an example script will be loaded.
+
+        Raises
+        ------
+        ValueError
+            If the script is invalid.
+        """
+        if lua_script is None:
+            # Load Example Script. It prints: Hello World!
+            lua_script = """
+                loadscript my_script
+                display.clear()
+                myMessage = "Hello World!"
+                for k = 1, string.len(myMessage) do
+                    x = string.sub(myMessage, k, k)
+                    display.settext(x)
+                    print(x)
+                    delay(1)
+                end
+                print("__END__")
+                endscript
+                """
+            script_name, lua_script = self.validate_lua_script(lua_script)
+            self.dict_of_lua_scripts[script_name] = lua_script
+            self.write(lua_script)
+            self.write("my_script.run()")  # Run the script
+            self.read_after_lua_script(print_output=True)
+        else:
+            script_name = self.validate_lua_script(lua_script)
+            self.dict_of_lua_scripts[script_name] = lua_script
+            self.write(lua_script)
+
+    def execute_lua_script(self, script_name: str) -> None:
+        """Execute a Lua script on the instrument.
+
+        Parameters
+        ----------
+        script_name : str
+            The name of the script to execute.
+
+        Raises
+        ------
+        ValueError
+            If the script name is not found in the dict_of_lua_scripts.
+        """
+        # Check if the script_name exists in the dict_of_lua_scripts
+        if script_name not in self.dict_of_lua_scripts:
+            raise ValueError(f"Script '{script_name}' not found in dict_of_lua_scripts.")
+        self.write(f"{script_name}.run()")
+
+    def delete_lua_script(self, script_name: str):
+        """Delete a Lua script from the instrument. 
+        TODO: check if it works
+
+        Parameters
+        ----------
+        script_name : str
+            The name of the script to delete.
+
+        Raises
+        ------
+        ValueError
+            If the script name is not found in the dict_of_lua_scripts.
+        """
+        if script_name in self.dict_of_lua_scripts:
+            try:
+                self.write(f"{script_name} = nil")
+                self.write(f"script.user.scripts.{script_name}.name = ''")
+                self.write(f"script.delete('{script_name}')")  # maybe wrong?
+                del self.dict_of_lua_scripts[script_name]
+            except:
+                raise
+        else:
+            raise ValueError(f"Script '{script_name}' not found in dict_of_lua_scripts.")
+
+    def read_after_lua_script(self, print_output: bool = False) -> tuple[list[str], str]:
+        """Reads output from the instrument after executing a Lua script.
+
+        Parameters
+        ----------
+        print_output : bool, optional
+            If True, prints the output to the console. The default is False.
+
+        Returns
+        -------
+        list[str]
+            A list of strings representing the output lines.
+        str
+            A string containing all the output lines separated by newlines.
+        """
+        lines = []
+        try:
+            while True:
+                line = self.read().strip()
+                if line == "__END__":
+                    break
+                lines.append(line)
+        except VisaIOError as e:
+            if "VI_ERROR_TMO" in str(e):
+                pass
+            else:
+                raise
+
+        if print_output:
+            print("Output:")
+            for l in lines:
+                print(l)
+
+        return lines, "\n".join(lines)
+
+    def read_lua_table(self, lua_table_name: str) -> list:
+        """
+        Reads an array-like Lua table from the Keithley 2612 using one-line queries.
+
+        Parameters:
+            lua_table_name: Name of the Lua table (must already exist in instrument memory).
+
+        Returns:
+            A list of floats representing the table contents.
+        """
+        try:
+            # ask Lua to join all numeric elements with commas
+            raw_response = self.query(f"print(table.concat({lua_table_name}, ','))")
+            # e.g. raw_response == "1,2,3,4"
+            values = [float(x) for x in raw_response.strip().split(',')]
+            return values
+        except:
+            print("Failed to read lua table")
+    
+    def read_lua_kv_table(self, lua_table_name):
+        """
+        Reads an associative (key-value) Lua table from the Keithley 2612.
+        Returns a Python dict mapping str→(float or str).
+        """
+        # Build and run a little anonymous Lua function that:
+        #  1. iterates k,v in pairs(tbl)
+        #  2. makes strings "k:v"
+        #  3. concatenates them with commas
+        lua = (
+            "print((function() "
+            f"  local out = {{}} "
+            f"  for k,v in pairs({lua_table_name}) do "
+            f"    table.insert(out, tostring(k)..\":\"..tostring(v)) "
+            f"  end "
+            f"  return table.concat(out, \",\") "
+            "end)())"
+        )
+        resp = self.query(lua).strip()
+        # resp looks like: "A:1.23,B:4.56,Mode:ON"
+        
+        result = {}
+        if resp:
+            for pair in resp.split(","):
+                key, val = pair.split(":", 1)
+                # try casting numeric values to float
+                try:
+                    result[key] = float(val)
+                except ValueError:
+                    result[key] = val
+        return result
+
+        

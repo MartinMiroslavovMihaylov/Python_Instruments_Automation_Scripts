@@ -24,10 +24,9 @@ Option '-e' for editable
 Customtkinter GUI for connecting and disconnecting instruments.
 You can go to the “GUI_Scripts” folder and copy the “Instrument Connect and Disconnect GUI” folder.
 In the main.py you can see a simple example of how the connect and disconnect functions work. 
-Please read the documentation (https://martinmiroslavovmihaylov.github.io/Python_Instruments_Automation_Scripts/), because 
-you will need some Python libraries to be installed so that you can use all the functions in this package.
+Please read the documentation (https://martinmiroslavovmihaylov.github.io/Python_Instruments_Automation_Scripts/), because you will need some Python libraries to be installed so that you can use all the functions in this package.
 
-	pip install --no-cache-dir --force-reinstall "git+https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts.git[gui]"
+	pip install "git+https://github.com/MartinMiroslavovMihaylov/Python_Instruments_Automation_Scripts.git[gui]"
 
 
 The Live Update extension for the GUI is still in development and since it is not a priority it will take a while to be finished. 
