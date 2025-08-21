@@ -88,6 +88,7 @@ class PM100D:
         return self._resource.write(message)
 
     def Close(self):
+        """Closes the VISA resource."""
         self._resource.close()
         print("Instrument PM100D is closed!")
 
@@ -1112,7 +1113,7 @@ class PM100D:
         while complete != "1":
             complete = self.OPC()
             time.sleep(0.1)
-        
+
         return self.fetchData()
 
     def DefaultPowerMeas_W(self, WaveLength: float | int) -> float:
@@ -1157,6 +1158,7 @@ class PM100D:
         self,
         unit: str = None,
         waveLength: float = None,
+        *,
         allow_NaN: bool = False,
         delay: float | None = None,
     ) -> float:
@@ -1165,9 +1167,9 @@ class PM100D:
         Parameters
         ----------
         unit : str, optional
-            Power unit ['W','dBm']. The default is None.
+            Power unit ['W','dBm']. The default is (keep unchanged).
         waveLength : float, optional
-            Wavelength in nm. The default is None.
+            Wavelength in nm. The default is (keep unchanged).
         allow_NaN : bool, optional
             If True, returns 'nan' if no data is available. The default is False.
         delay : float, optional
@@ -1200,26 +1202,9 @@ class PM100D:
         self,
         unit: str = None,
         waveLength: float = None,
+        *,
         allow_NaN: bool = False,
         delay: float | None = None,
     ) -> float:
-        """Calls get_Power().
-
-        Parameters
-        ----------
-        unit : str, optional
-            Power unit ['W','dBm']. The default is None.
-        waveLength : float, optional
-            Wavelength in nm. The default is None.
-        allow_NaN : bool, optional
-            If True, returns 'nan' if no data is available. The default is False.
-        delay : float, optional
-            Delay in seconds between query and read. The default is (standard delay).
-
-        Returns
-        -------
-        float
-            Power in dBm or W.
-
-        """
+        """Calls get_Power()."""
         return self.get_Power(unit, waveLength, allow_NaN, delay)
