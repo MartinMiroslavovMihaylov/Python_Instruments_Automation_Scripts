@@ -21,17 +21,28 @@ class UXR:
         self,
         resource_str="TCPIP0::KEYSIGH-Q75EBO9.local::hislip0::INSTR",
         num_channel=2,
-        visa_library="@ivi", # If you have problems try "@py"! 
-                             # Or try setting Kesyight visa32.dll as primary!
+        visa_library="@ivi",  # If you have problems try "@py"!
+        # Or try setting Keysight visa32.dll as primary!
     ):
-        self.instrument = visa.ResourceManager(visa_library).open_resource(
+        self._resource = visa.ResourceManager(visa_library).open_resource(
             str(resource_str), read_termination="\n", query_delay=0.5
         )
         print(self.IDN())
 
-        # Internal Variables
+        # Internal Variables and Predefined Lists
         self._types_channel = list(range(1, num_channel + 1))
         self._waveform_format = "ASC"
+        self._types_channel = list(range(1, num_channel + 1))
+        self._StateLS_mapping = {
+            "on": "ON",
+            "off": "OFF",
+            1: "ON",
+            0: "OFF",
+            "1": "ON",
+            "0": "OFF",
+            True: "ON",
+            False: "OFF",
+        }
 
         # Default Settings
         self.system_header("off")  # Default is off and should stay off!!!
@@ -40,12 +51,12 @@ class UXR:
         self.waveform_streaming("off")
 
     def query(self, message):
-        return self.instrument.query(message)
+        return self._resource.query(message)
 
     def query_binary_values(
         self, message, datatype="h", container=np.array, data_points=int(0), **kwargs
     ):
-        return self.instrument.query_binary_values(
+        return self._resource.query_binary_values(
             message,
             datatype=datatype,
             container=container,
@@ -54,10 +65,35 @@ class UXR:
         )
 
     def write(self, message):
-        return self.instrument.write(message)
+        return self._resource.write(message)
 
     def Close(self):
-        self.instrument.close()
+        self._resource.close()
+
+    # =============================================================================
+    # Checks and Validations
+    # =============================================================================
+
+    def _validate_generic(self, value: str | int, valid_List: list) -> str:
+        if value not in valid_List:
+            raise ValueError(f"Invalid value given! Value can be one of {valid_List}.")
+        return value
+
+    def _validate_channel(self, channel: int) -> int:
+        channel = int(channel)
+        if channel not in self._types_channel:
+            raise ValueError(
+                f"Invalid channel number given! Channel Number can be one of {self._types_channel}."
+            )
+        return channel
+
+    def _validate_state(self, state: int | str) -> str:
+        state_normalized = self._StateLS_mapping.get(
+            state.lower() if isinstance(state, str) else int(state)
+        )
+        if state_normalized is None:
+            raise ValueError("Invalid state given! State can be [ON,OFF,1,0,True,False].")
+        return state_normalized
 
     # =============================================================================
     # * (Common) Commands
@@ -110,7 +146,7 @@ class UXR:
             {1 | 0}
         """
         return int(self.query(":ADER?"))
-    
+
     def aquisition_state(self) -> str:
         """The :ASTate? query returns the acquisition state.
 
@@ -147,8 +183,7 @@ class UXR:
         """
         _types = ["ALL", "DISPLAYED", "DISP"]
         if value is not None:
-            if value.upper() not in _types:
-                raise ValueError("Invalid Argument. Expected one of: %s" % _types)
+            value = self._validate_generic(value.upper(), _types)
             self.write(f":AUToscale:CHANnels {value}")
         else:  # Query
             return self.query(":AUToscale:CHANnels?")
@@ -170,10 +205,7 @@ class UXR:
                 Expected one of: channel number
         """
         if channel_num is not None:
-            if int(channel_num) not in self._types_channel:
-                raise ValueError(
-                    "Invalid Argument. Expected one of: %s" % self._types_channel
-                )
+            channel_num = self._validate_channel(channel_num)
             self.write(f":DIGitize CHANnel{channel_num}")
         else:
             self.write(":DIGitize")
@@ -205,7 +237,7 @@ class UXR:
         """The :STATus? query shows whether the specified channel, function, wmemory,
         histogram, measurement trend, measurement spectrum, or equalized waveform is
         on or off.
-        To Do: Each type has a different range of values that is excepted. No Checking
+        TODO: Each type has a different range of values that is excepted. No Checking
         is implemented.
 
             Parameters
@@ -247,8 +279,7 @@ class UXR:
             "XT",
         ]
         if key is not None:
-            if key.upper() not in _types_key:
-                raise ValueError("Invalid Argument. Expected one of: %s" % _types_key)
+            key = self._validate_generic(key.upper(), _types_key)
             if int(value) <= 16:  # For CHAN <=2, for FUNC <=16, ... etc.
                 return int(self.query(f":STATus? {key}{value}"))
         else:
@@ -264,9 +295,7 @@ class UXR:
     # :CHANnel<N> Commands
     # =============================================================================
 
-    def channel_display(
-        self, channel: int, write: bool = False, value: int | str | None = None
-    ) -> int:
+    def channel_display(self, channel: int, state: int | str | None = None) -> int:
         """The :CHANnel<N>:DISPlay command turns the display of the specified channel on
         or off.
 
@@ -274,9 +303,7 @@ class UXR:
             ----------
             channel : int
                 An integer, analog input channel 1 or 2
-            write : bool, optional
-                write the channel display state, else query
-            value : int, str, optional
+            state : int, str, optional
                 ON, 1, OFF, 0
 
 
@@ -285,42 +312,23 @@ class UXR:
             int
                 The :CHANnel<N>:DISPlay? query returns the current display condition for the
                 specified channel
-
-            Raises
-            ------
-            ValueError
-                For Channel expected one of: num_channels
-            ValueError
-                For values expected one of: ON, 1, OFF, 0
         """
-        _type_value = ["ON", 1, "OFF", 0]
-        if int(channel) not in self._types_channel:
-            raise ValueError(
-                "Invalid Argument. Expected one of: %s" % self._types_channel
-            )
-        if write:
-            if isinstance(value, str):
-                value = value.upper()
-            if value not in _type_value:
-                raise ValueError("Invalid Argument. Expected one of: %s" % _type_value)
-            self.write(f":CHANnel{channel}:DISPlay {value}")
+        channel = self._validate_channel(channel)
+        if state is not None:
+            state = self._validate_state(state)
+            self.write(f":CHANnel{channel}:DISPlay {state}")
         else:  # query
             return int(self.query(f":CHANnel{channel}:DISPlay?"))
 
-    def channel_range(
-        self, channel: int, write: bool = False, range_value: float | None = None
-    ) -> float:
+    def channel_range(self, channel: int, range_value: float | None = None) -> float:
         """The :CHANnel<N>:RANGe command defines the full-scale vertical axis of the
-        selected channel. The values represent the full-scale deflection
-        factor of the vertical axis in volts. These values change as the probe attenuation
-        factor is changed.
+        selected channel. The values represent the full-scale deflection factor of the
+        vertical axis in volts. These values change as the probe attenuation factor is changed.
 
             Parameters
             ----------
             channel : int
                 An integer, analog input channel 1 or 2
-            write : bool, optional
-                write else query, by default False
             range_value : float, optional
                 A real number for the full-scale voltage of the specified channel number,
                 by default None
@@ -337,11 +345,8 @@ class UXR:
             ValueError
                 For range_value expected to be < 2V
         """
-        if int(channel) not in self._types_channel:
-            raise ValueError(
-                "Invalid Argument. Expected one of: %s" % self._types_channel
-            )
-        if write:
+        channel = self._validate_channel(channel)
+        if range_value is not None:
             if range_value <= 4:  # 2V Full Scale Range
                 self.write(f":CHANnel{channel}:RANGe {range_value}")
             else:
@@ -349,9 +354,7 @@ class UXR:
         else:  # query
             return float(self.query(f":CHANnel{channel}:RANGe?"))
 
-    def channel_scale(
-        self, channel: int, write: bool = False, scale_value: float | None = None
-    ) -> float:
+    def channel_scale(self, channel: int, scale_value: float | None = None) -> float:
         """The :CHANnel<N>:SCALe command sets the vertical scale, or units per division, of
         the selected channel. This command is the same as the front-panel channel scale.
 
@@ -359,8 +362,6 @@ class UXR:
             ----------
             channel : int
                 An integer, analog input channel 1 or 2
-            write : bool, optional
-                write else query, by default False
             scale_value : float, optional
                 A real number for the vertical scale of the channel in units per division,
                 by default None
@@ -377,18 +378,15 @@ class UXR:
             ValueError
                 For range_value expected to be < 500mV/div
         """
-        if int(channel) not in self._types_channel:
-            raise ValueError(
-                "Invalid Argument. Expected one of: %s" % self._types_channel
-            )
-        if write:
+        channel = self._validate_channel(channel)
+        if scale_value is not None:
             if scale_value <= 0.5:  # 500mV/div Scale
                 self.write(f":CHANnel{channel}:SCALe {scale_value}")
             else:
                 raise ValueError("Invalid Argument. Expected to be <= 500mV/div")
         else:  # query
             return float(self.query(f":CHANnel{channel}:SCALe?"))
-        
+
     # =============================================================================
     # :DISPlay Commands
     # =============================================================================
@@ -412,8 +410,8 @@ class UXR:
         img_name, img_type = splitext(path)
         img_path = f"{img_name}{divider if with_time else ''}{time_str}{img_type.lower()}"
 
-        old_timeout = self.instrument.timeout  # save current timeout
-        self.instrument.timeout = timeout  # 5 seconds in milliseconds
+        old_timeout = self._resource.timeout  # save current timeout
+        self._resource.timeout = timeout  # 5 seconds in milliseconds
         try:
             with open(img_path, "wb") as f:
                 screen_bytes = self.query_binary_values(
@@ -425,18 +423,16 @@ class UXR:
                 f.write(screen_bytes)  # type: ignore[arg-type]
             print(f"Screen image written to {img_path}")
         except Exception as e:
-            self.instrument.timeout = old_timeout  # restore original timeout
+            self._resource.timeout = old_timeout  # restore original timeout
             print(f"Failed to save screenshot, Error occurred: \n{e}")
         finally:
-            self.instrument.timeout = old_timeout  # restore original timeout
+            self._resource.timeout = old_timeout  # restore original timeout
 
     # =============================================================================
     # :FUNCtion Commands
     # =============================================================================
 
-    def function_display(
-        self, function_num: int, write: bool = False, value: int | str | None = None
-    ) -> int:
+    def function_display(self, function_num: int, state: int | str | None = None) -> int:
         """The :FUNCtion<N>:DISPlay command turns the display of the specified function_num on
         or off.
 
@@ -444,9 +440,7 @@ class UXR:
             ----------
             function_num : int
                 Function Number
-            write : bool, optional
-                write the channel display state, else query
-            value : int, str, optional
+            state : int, str, optional
                 ON, 1, OFF, 0
 
 
@@ -460,20 +454,12 @@ class UXR:
             ------
             ValueError
                 For function_num expected one of: 1-16
-            ValueError
-                For values expected one of: ON, 1, OFF, 0
         """
-        _type_value = ["ON", 1, "OFF", 0]
         if int(function_num) < 1 or int(function_num) > 16:
-            raise ValueError(
-                "Invalid Argument. Expected one of: 1-16"
-            )
-        if write:
-            if isinstance(value, str):
-                value = value.upper()
-            if value not in _type_value:
-                raise ValueError("Invalid Argument. Expected one of: %s" % _type_value)
-            self.write(f":FUNCtion{function_num}:DISPlay {value}")
+            raise ValueError("Invalid Argument. Expected one of: 1-16")
+        if state is not None:
+            state = self._validate_state(state)
+            self.write(f":FUNCtion{function_num}:DISPlay {state}")
         else:  # query
             return int(self.query(f":FUNCtion{function_num}:DISPlay?"))
 
@@ -481,7 +467,7 @@ class UXR:
     # :SYSTem Commands
     # =============================================================================
 
-    def system_header(self, value: int | str | None = None) -> int:
+    def system_header(self, state: int | str | None = None) -> int:
         """!!!! SHOULD BE OFF !!!!
         The :SYSTem:HEADer command specifies whether the instrument will output a
         header for query responses. When :SYSTem:HEADer is set to ON, the query
@@ -490,7 +476,7 @@ class UXR:
 
             Parameters
             ----------
-            value : int | str | None, optional
+            state : int | str | None, optional
                 {{ON | 1} | {OFF | 0}}, by default None
 
             Returns
@@ -503,13 +489,9 @@ class UXR:
             ValueError
                 Expected one of: {{ON | 1} | {OFF | 0}}
         """
-        _type_value = ["ON", 1, "OFF", 0]
-        if value is not None:
-            if isinstance(value, str):
-                value = value.upper()
-            if value not in _type_value:
-                raise ValueError("Invalid Argument. Expected one of: %s" % _type_value)
-            self.write(f":SYSTem:HEADer {value}")
+        if state is not None:
+            state = self._validate_state(state)
+            self.write(f":SYSTem:HEADer {state}")
         else:  # query
             return int(self.query(":SYSTem:HEADer?"))
 
@@ -517,7 +499,7 @@ class UXR:
     # :WAVeform Commands
     # =============================================================================
 
-    def waveform_byteorder(self, value: str = 'LSBFIRST') -> str:
+    def waveform_byteorder(self, value: str = "LSBFIRST") -> str:
         """The :WAVeform:BYTeorder command selects the order in which bytes are
         transferred from (or to) the oscilloscope using WORD and LONG formats
 
@@ -538,8 +520,7 @@ class UXR:
         """
         _types = ["MSBF", "MSBFIRST", "LSBF", "LSBFIRST"]
         if value is not None:
-            if value.upper() not in _types:
-                raise ValueError("Invalid Argument. Expected one of: %s" % _types)
+            value = self._validate_generic(value.upper(), _types)
             self.write(f":WAVeform:BYTeorder {value}")
         else:  # Query
             return self.query(":WAVeform:BYTeorder?")
@@ -604,15 +585,15 @@ class UXR:
         if self._waveform_format == "WORD":
             try:
                 return self.query_binary_values(
-                message,
-                datatype=datatype,
-                container=container,
-                data_points=data_points,
-                **kwargs,
-            )
+                    message,
+                    datatype=datatype,
+                    container=container,
+                    data_points=data_points,
+                    **kwargs,
+                )
             except Exception as e:
                 print("Error:", e)
-            
+
         else:
             raise NotImplementedError(
                 f"Unsupported waveform format: {self._waveform_format}. "
@@ -642,10 +623,9 @@ class UXR:
         """
         _types = ["ASC", "ASCII", "BIN", "BINARY", "BYTE", "WORD"]
         if value is not None:
-            if value.upper() not in _types:
-                raise ValueError("Invalid Argument. Expected one of: %s" % _types)
+            value = self._validate_generic(value.upper(), _types)
             self.write(f":WAVeform:FORMat {value}")
-            self._waveform_format = value.upper()
+            self._waveform_format = self.query(":WAVeform:FORMat?").upper()
         else:  # Query
             self._waveform_format = self.query(":WAVeform:FORMat?").upper()
             return self._waveform_format
@@ -664,7 +644,7 @@ class UXR:
     def waveform_source(self, key: str | None = None, value: int | None = None) -> str:
         """The :WAVeform:SOURce command selects a channel, function, waveform
         memory, or histogram as the waveform source
-        To Do: No checks implemented
+        TODO: No checks implemented
 
             Parameters
             ----------
@@ -685,33 +665,24 @@ class UXR:
         else:
             return self.query(":WAVeform:SOURce?")
 
-    def waveform_streaming(self, value: int | str | None = None) -> int:
+    def waveform_streaming(self, state: int | str | None = None) -> int:
         """When enabled, :WAVeform:STReaming allows more than 999,999,999 bytes of
         data to be transferred from the Infiniium oscilloscope to a PC when using the
         :WAVeform:DATA? query.
 
             Parameters
             ----------
-            value : int | str | None, optional
+            state : int | str | None, optional
                 {{ON | 1} | {OFF | 0}}, by default None
 
             Returns
             -------
             int
                 {1 | 0}
-
-            Raises
-            ------
-            ValueError
-                Expected one of: {{ON | 1} | {OFF | 0}}
         """
-        _type_value = ["ON", 1, "OFF", 0]
-        if value is not None:
-            if isinstance(value, str):
-                value = value.upper()
-            if value not in _type_value:
-                raise ValueError("Invalid Argument. Expected one of: %s" % _type_value)
-            self.write(f":WAVeform:STReaming {value}")
+        if state is not None:
+            state = self._validate_state(state)
+            self.write(f":WAVeform:STReaming {state}")
         else:  # query
             return int(self.query(":WAVeform:STReaming?"))
 
