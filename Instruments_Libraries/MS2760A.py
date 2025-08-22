@@ -870,7 +870,7 @@ class MS2760A:
         """
         Sets the channel power measurement state.
         Sets the state of the channel power measurement, ON or OFF. When using
-            :CONFigure:CHPower,the state is automatically set to ON
+        :CONFigure:CHPower, the state is automatically set to ON.
 
         Parameters
         ----------
@@ -1106,14 +1106,7 @@ class MS2760A:
         Old function to keep legacy scripts working.
         Better use: ExtractTraceData()
 
-        Parameters
-        ----------
-        traceNumber : int
-
         !!!!!USE IT AT YOUR OWN RISK is not an official function, but a workaround!!!!!
-
-            Trace Number from which the data is taken:
-                Can be set to  [1,2,3,4,5,6].
             1 - This Function will set the continues Measurement to 'OFF'.
             2 - Will set the Data Format to ASCii. This is needed since
             :TREACE:DATA? <num> is defect!!
@@ -1123,6 +1116,12 @@ class MS2760A:
             have the data and the Data Format.
             5 - Make manupulations to separate the actual data from the rest and
             return the data in Output np.array() form.
+
+        Parameters
+        ----------
+        traceNumber : int
+            Trace Number from which the data is taken:
+            Can be set to [1,2,3,4,5,6].
 
         Returns
         -------

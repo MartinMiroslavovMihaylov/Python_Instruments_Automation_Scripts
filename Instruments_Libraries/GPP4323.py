@@ -3,22 +3,17 @@
 Created on Wed Feb  1 15:55:01 2023
 
 @author: Martin.Mihaylov
+
+Install Driver:
+    To use the DC-Power Supply GW-Instek GPP4323 you need to install the USB Driver
+    from https://www.gwinstek.com/en-global/download/ - GPP USB Driver
+    Python Library needed: ``pip install pyserial``
 """
 
 
 import serial
 import time
 import numpy as np
-
-print(
-    """
-#####################################################################################
-    To use the DC-Power Supply GW-Instek GPP4323 you need to install the USB Driver 
-    from https://www.gwinstek.com/en-global/download/ - GPP USB Driver 
-    Python Library needed: pip install pyserial
-#####################################################################################
-"""
-)
 
 
 class GPP4323:
@@ -397,7 +392,7 @@ class GPP4323:
         """
 
         channel = self._validate_channel(channel)
-        type = self._validate_measurement_type(type) 
+        type = self._validate_measurement_type(type)
         return float(self.query_values(f":MEASure{channel}:{type}?"))
 
     def ask_Current(self, channel: int) -> float:

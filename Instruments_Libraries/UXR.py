@@ -100,24 +100,25 @@ class UXR:
     # =============================================================================
 
     def clear_status(self) -> None:
-        """The *CLS command clears all status and error registers."""
+        """The \*CLS command clears all status and error registers."""
         self.write("*CLS")
 
     def IDN(self) -> str:
-        """The *IDN? query returns the company name, oscilloscope model number, serial
+        """The \*IDN? query returns the company name, oscilloscope model number, serial
         number, and software version by returning this string:
         Keysight Technologies,<Model #>,<USXXXXXXXX>,<Rev #>[,<Options>]
 
-            Returns
-            -------
-            str
-                Keysight Technologies,DSO9404A,USXXXXXXXX,XX.XX.XXXX
+        Returns
+        -------
+        str
+            Keysight Technologies,DSO9404A,USXXXXXXXX,XX.XX.XXXX
         """
         return self.query("*IDN?")
 
     def OPC(self) -> int:
         """Places a “1” into the output queue when all device
         operations have been completed
+
         Returns
         -------
         TYPE str
@@ -126,7 +127,7 @@ class UXR:
         return int(self.query("*OPC?"))
 
     def reset(self) -> None:
-        """The *RST command performs a default setup which is the same as pressing the
+        """The \*RST command performs a default setup which is the same as pressing the
         oscilloscope front panel [Default Setup] key.
         """
         self.write("*RST")
@@ -166,20 +167,21 @@ class UXR:
     def autoscale_channels(self, value: str | None = None) -> str:
         """The :AUToscale:CHANnels command selects whether to apply autoscale to all of
         the input channels or just the input channels that are currently displayed.
-            Parameters
-            ----------
-            value : str, optional
-                {ALL | DISPlayed}, if None then query
 
-            Returns
-            -------
-            str
-                {ALL | DISP}
+        Parameters
+        ----------
+        value : str, optional
+            {ALL | DISPlayed}, if None then query
 
-            Raises
-            ------
-            ValueError
-                Expected one of: {ALL | DISP | DISPlayed }
+        Returns
+        -------
+        str
+            {ALL | DISP}
+
+        Raises
+        ------
+        ValueError
+            Expected one of: {ALL | DISP | DISPlayed }
         """
         _types = ["ALL", "DISPLAYED", "DISP"]
         if value is not None:
@@ -194,15 +196,15 @@ class UXR:
         completely acquired, the oscilloscope is stopped.
         To Do: input can be: [CHANnel<N> | DIFF<D> | COMMonmode<C>]
 
-            Parameters
-            ----------
-            channel_num : int
-                Number of the Channel
+        Parameters
+        ----------
+        channel_num : int
+            Number of the Channel
 
-            Raises
-            ------
-            channel_numError
-                Expected one of: channel number
+        Raises
+        ------
+        channel_numError
+            Expected one of: channel number
         """
         if channel_num is not None:
             channel_num = self._validate_channel(channel_num)
@@ -240,22 +242,22 @@ class UXR:
         TODO: Each type has a different range of values that is excepted. No Checking
         is implemented.
 
-            Parameters
-            ----------
-            key : str, optional
-                if None return status of Channel1
-            value : int, optional
-                For Channel [1,2], for Function <=16
+        Parameters
+        ----------
+        key : str, optional
+            if None return status of Channel1
+        value : int, optional
+            For Channel [1,2], for Function <=16
 
-            Returns
-            -------
-            int
-                A return value of 1 means on and a return value of 0 means off
+        Returns
+        -------
+        int
+            A return value of 1 means on and a return value of 0 means off
 
-            Raises
-            ------
-            ValueError
-                Expected one of: CHANNEL, FUNCTION, HIST, ... etc.
+        Raises
+        ------
+        ValueError
+            Expected one of: CHANNEL, FUNCTION, HIST, ... etc.
         """
         _types_key = [
             "CHAN",
@@ -299,19 +301,19 @@ class UXR:
         """The :CHANnel<N>:DISPlay command turns the display of the specified channel on
         or off.
 
-            Parameters
-            ----------
-            channel : int
-                An integer, analog input channel 1 or 2
-            state : int, str, optional
-                ON, 1, OFF, 0
+        Parameters
+        ----------
+        channel : int
+            An integer, analog input channel 1 or 2
+        state : int, str, optional
+            ON, 1, OFF, 0
 
 
-            Returns
-            -------
-            int
-                The :CHANnel<N>:DISPlay? query returns the current display condition for the
-                specified channel
+        Returns
+        -------
+        int
+            The :CHANnel<N>:DISPlay? query returns the current display condition for the
+            specified channel
         """
         channel = self._validate_channel(channel)
         if state is not None:
@@ -325,25 +327,25 @@ class UXR:
         selected channel. The values represent the full-scale deflection factor of the
         vertical axis in volts. These values change as the probe attenuation factor is changed.
 
-            Parameters
-            ----------
-            channel : int
-                An integer, analog input channel 1 or 2
-            range_value : float, optional
-                A real number for the full-scale voltage of the specified channel number,
-                by default None
+        Parameters
+        ----------
+        channel : int
+            An integer, analog input channel 1 or 2
+        range_value : float, optional
+            A real number for the full-scale voltage of the specified channel number,
+            by default None
 
-            Returns
-            -------
-            float
-                full-scale vertical axis of the selected channel
+        Returns
+        -------
+        float
+            full-scale vertical axis of the selected channel
 
-            Raises
-            ------
-            ValueError
-                For Channel expected one of: num_channels
-            ValueError
-                For range_value expected to be < 2V
+        Raises
+        ------
+        ValueError
+            For Channel expected one of: num_channels
+        ValueError
+            For range_value expected to be < 2V
         """
         channel = self._validate_channel(channel)
         if range_value is not None:
@@ -358,25 +360,25 @@ class UXR:
         """The :CHANnel<N>:SCALe command sets the vertical scale, or units per division, of
         the selected channel. This command is the same as the front-panel channel scale.
 
-            Parameters
-            ----------
-            channel : int
-                An integer, analog input channel 1 or 2
-            scale_value : float, optional
-                A real number for the vertical scale of the channel in units per division,
-                by default None
+        Parameters
+        ----------
+        channel : int
+            An integer, analog input channel 1 or 2
+        scale_value : float, optional
+            A real number for the vertical scale of the channel in units per division,
+            by default None
 
-            Returns
-            -------
-            float
-                A real number for the vertical scale of the channel in units per division
+        Returns
+        -------
+        float
+            A real number for the vertical scale of the channel in units per division
 
-            Raises
-            ------
-            ValueError
-                For Channel expected one of: num_channels
-            ValueError
-                For range_value expected to be < 500mV/div
+        Raises
+        ------
+        ValueError
+            For Channel expected one of: num_channels
+        ValueError
+            For range_value expected to be < 500mV/div
         """
         channel = self._validate_channel(channel)
         if scale_value is not None:
@@ -436,24 +438,24 @@ class UXR:
         """The :FUNCtion<N>:DISPlay command turns the display of the specified function_num on
         or off.
 
-            Parameters
-            ----------
-            function_num : int
-                Function Number
-            state : int, str, optional
-                ON, 1, OFF, 0
+        Parameters
+        ----------
+        function_num : int
+            Function Number
+        state : int, str, optional
+            ON, 1, OFF, 0
 
 
-            Returns
-            -------
-            int
-                The :FUNCtion<N>:DISPlay? query returns the current display condition for the
-                specified function_num
+        Returns
+        -------
+        int
+            The :FUNCtion<N>:DISPlay? query returns the current display condition for the
+            specified function_num
 
-            Raises
-            ------
-            ValueError
-                For function_num expected one of: 1-16
+        Raises
+        ------
+        ValueError
+            For function_num expected one of: 1-16
         """
         if int(function_num) < 1 or int(function_num) > 16:
             raise ValueError("Invalid Argument. Expected one of: 1-16")
@@ -473,21 +475,20 @@ class UXR:
         header for query responses. When :SYSTem:HEADer is set to ON, the query
         responses include the command header.
 
+        Parameters
+        ----------
+        state : int | str | None, optional
+            {{ON | 1} | {OFF | 0}}, by default None
 
-            Parameters
-            ----------
-            state : int | str | None, optional
-                {{ON | 1} | {OFF | 0}}, by default None
+        Returns
+        -------
+        int
+            {1 | 0}
 
-            Returns
-            -------
-            int
-                {1 | 0}
-
-            Raises
-            ------
-            ValueError
-                Expected one of: {{ON | 1} | {OFF | 0}}
+        Raises
+        ------
+        ValueError
+            Expected one of: {{ON | 1} | {OFF | 0}}
         """
         if state is not None:
             state = self._validate_state(state)
@@ -503,20 +504,20 @@ class UXR:
         """The :WAVeform:BYTeorder command selects the order in which bytes are
         transferred from (or to) the oscilloscope using WORD and LONG formats
 
-            Parameters
-            ----------
-            value : str, optional
-                byteorder {MSBF, LSBF}, by default LSBFIRST
+        Parameters
+        ----------
+        value : str, optional
+            byteorder {MSBF, LSBF}, by default LSBFIRST
 
-            Returns
-            -------
-            str
-                byteorder {MSBF, LSBF}
+        Returns
+        -------
+        str
+            byteorder {MSBF, LSBF}
 
-            Raises
-            ------
-            ValueError
-                Expected one of: MSBFIRST, LSBFIRST
+        Raises
+        ------
+        ValueError
+            Expected one of: MSBFIRST, LSBFIRST
         """
         _types = ["MSBF", "MSBFIRST", "LSBF", "LSBFIRST"]
         if value is not None:
@@ -606,20 +607,20 @@ class UXR:
         the oscilloscope, and pertains to all waveforms.
         To Do: Only WORD is tested. There is a FLOAT type?
 
-            Parameters
-            ----------
-            value : str, optional
-                One of {ASCii | BINary | BYTE | WORD }, by default None
+        Parameters
+        ----------
+        value : str, optional
+            One of {ASCii | BINary | BYTE | WORD }, by default None
 
-            Returns
-            -------
-            str
-                {ASC | BIN | BYTE | WORD }
+        Returns
+        -------
+        str
+            {ASC | BIN | BYTE | WORD }
 
-            Raises
-            ------
-            ValueError
-                Expected one of: {ASCii | BINary | BYTE | WORD}
+        Raises
+        ------
+        ValueError
+            Expected one of: {ASCii | BINary | BYTE | WORD}
         """
         _types = ["ASC", "ASCII", "BIN", "BINARY", "BYTE", "WORD"]
         if value is not None:
@@ -634,10 +635,10 @@ class UXR:
         """The :WAVeform:POINts? query returns the points value in the current waveform
         preamble.
 
-            Returns
-            -------
-            int
-                Number of points in the current waveform
+        Returns
+        -------
+        int
+            Number of points in the current waveform
         """
         return int(self.query(":WAVeform:POINts?"))
 
@@ -646,19 +647,19 @@ class UXR:
         memory, or histogram as the waveform source
         TODO: No checks implemented
 
-            Parameters
-            ----------
-            key : str | None, optional
-                One of: {CHANnel<N> | DIFF<D> | COMMonmode<C> | FUNCtion<F> | HISTogram |
-                WMEMory<R> | CLOCk | MTRend | MSPectrum | EQUalized | XT<X> | PNOise |
-                INPut | CORRected | ERRor | LFPR | NREDuced}, by default None
-            value : int | None, optional
-                Number e.g. 1 for Channel1, by default None
+        Parameters
+        ----------
+        key : str | None, optional
+            One of: {CHANnel<N> | DIFF<D> | COMMonmode<C> | FUNCtion<F> | HISTogram |
+            WMEMory<R> | CLOCk | MTRend | MSPectrum | EQUalized | XT<X> | PNOise |
+            INPut | CORRected | ERRor | LFPR | NREDuced}, by default None
+        value : int | None, optional
+            Number e.g. 1 for Channel1, by default None
 
-            Returns
-            -------
-            str
-                The :WAVeform:SOURce? query returns the currently selected waveform source.
+        Returns
+        -------
+        str
+            The :WAVeform:SOURce? query returns the currently selected waveform source.
         """
         if key is not None and value is not None:
             self.write(f":WAVeform:SOURce {key}{value}")
@@ -670,15 +671,15 @@ class UXR:
         data to be transferred from the Infiniium oscilloscope to a PC when using the
         :WAVeform:DATA? query.
 
-            Parameters
-            ----------
-            state : int | str | None, optional
-                {{ON | 1} | {OFF | 0}}, by default None
+        Parameters
+        ----------
+        state : int | str | None, optional
+            {{ON | 1} | {OFF | 0}}, by default None
 
-            Returns
-            -------
-            int
-                {1 | 0}
+        Returns
+        -------
+        int
+            {1 | 0}
         """
         if state is not None:
             state = self._validate_state(state)

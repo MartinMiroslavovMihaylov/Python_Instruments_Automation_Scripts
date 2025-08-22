@@ -59,7 +59,7 @@ class AQ6370D(vxi11.Instrument):
 
         Returns
         -------
-        None.
+        None
             OSA.ask_SweepMode()
 
         '''
@@ -99,21 +99,20 @@ class AQ6370D(vxi11.Instrument):
     
     def ask_DisplayYUnit(self):
         '''
+        Queries the units of the main scale of the level axis.
+        DBM = dBm
+        W = W
+        DBM/NM = dBm/nm or dBm/THz
+        W/NM = W/nm or W/THz
         
 
         Returns
         -------
         str
-            Queries the units of the main scale of the
-            level axis.
-            DBM = dBm
-            W = W
-            DBM/NM = dBm/nm or dBm/THz
-            W/NM = W/nm or W/THz
-            Response 0 = dBm
-                1 = W
-                2 = DBM/NM
-                3 = W/NM
+            0 = dBm
+            1 = W
+            2 = DBM/NM
+            3 = W/NM
 
         '''
                
@@ -664,7 +663,7 @@ class AQ6370D(vxi11.Instrument):
 
         Returns
         -------
-        None.
+        None
 
         '''
         
@@ -696,7 +695,7 @@ class AQ6370D(vxi11.Instrument):
 
         Returns
         -------
-        None.
+        None
 
         '''
         
@@ -734,12 +733,16 @@ class AQ6370D(vxi11.Instrument):
         Parameters
         ----------
         unit : str
-            sUnit = ['ASCii', 'REAL[,64]', 'REAL,32']
-            
-            
-            When the format is set to REAL (binary) using
-            this command, the output data of the following
-            commands are produced in the REAL format.
+            sUnit = ['ASCii', 'REAL[,64]', 'REAL,32']  
+            Sets the parameter format displayed in an SNP data file.
+
+        Notes
+        -----
+        When the format is set to REAL (binary) using this command, the
+        output data of the following commands is produced in REAL format:
+
+        .. code-block:: none
+
             :CALCulate:DATA:CGAin?
             :CALCulate:DATA:CNF?
             :CALCulate:DATA:CPOWers?
@@ -747,34 +750,22 @@ class AQ6370D(vxi11.Instrument):
             :CALCulate:DATA:CWAVelengths?
             :TRACe[:DATA]:X?
             :TRACe[:DATA]:Y?
-                • The default is ASCII mode.
-                • When the *RST command is executed, the
-                format is reset to the ASCII mode.
-                • The ASCII format outputs a list of numerics
-                each of which is delimited by a comma (,).
-                For example: 12345,12345,....
-                • By default, the REAL format outputs data in
-                fixed length blocks of 64 bits, floating-point
-                binary numerics.
-                • If “REAL,32” is specified in the parameter,
-                data is output in the 32-bit, floating-point
-                binary form.
-                • The fixed length block is defined by IEEE
-                488.2 and consists of “#” (ASCII), one numeric
-                (ASCII) indicating the number of bytes that
-                specifies the length after #, length designation
-                (ASCII), and binary data of a specified length
-                in this order. Binary data consists of a floating point data string of 8 bytes (64 bits) or 4 bytes
-                (32 bits). Floating-point data consists of lower order bytes to higher-order bytes.
-                E.g.: #18 [eight <byte data>]
-                #280[80 <byte data>]
-                #48008[8008 <byte data>]
-                • For data output in the 32-bit floating-point
-                binary form, cancellation of significant digits
-                is more likely to occur in comparison with
-                transfer of data in the 64-bit, floating-point
-                binary form.
-                • This is a sequential command
+        
+        - The default is ASCII mode.
+        - When the ``*RST`` command is executed, the format is reset to ASCII.
+        - The ASCII format outputs a comma-delimited list of numerics (e.g., ``12345,12345,...``).
+        - By default, the REAL format outputs 64-bit floating-point binary numbers.
+          Specify ``REAL,32`` for 32-bit floating-point.
+        - The fixed-length block is defined by IEEE 488.2 and starts with ``#``,
+          followed by a digit indicating the number of bytes used to encode the
+          length, then the length digits, then the binary payload, for example:
+
+        .. code-block:: none
+
+            #18<8-byte data>
+            #280<80-byte data>
+            #48008<8008-byte data>
+
 
         Raises
         ------
@@ -783,7 +774,7 @@ class AQ6370D(vxi11.Instrument):
 
         Returns
         -------
-        None.
+        None
 
         '''
         
@@ -814,7 +805,7 @@ class AQ6370D(vxi11.Instrument):
 
         Returns
         -------
-        None.
+        None
 
         '''
         
@@ -847,7 +838,7 @@ class AQ6370D(vxi11.Instrument):
 
         Returns
         -------
-        None.
+        None
 
         '''
         
@@ -874,7 +865,7 @@ class AQ6370D(vxi11.Instrument):
 
         Returns
         -------
-        None.
+        None
 
         '''
         
@@ -906,7 +897,7 @@ class AQ6370D(vxi11.Instrument):
 
         Returns
         -------
-        None.
+        None
 
         '''
         
@@ -943,7 +934,7 @@ class AQ6370D(vxi11.Instrument):
 
         Returns
         -------
-        None.
+        None
 
         '''
         
@@ -969,7 +960,7 @@ class AQ6370D(vxi11.Instrument):
 
         Returns
         -------
-        None.
+        None
 
         '''
         value = int(value)
@@ -992,7 +983,7 @@ class AQ6370D(vxi11.Instrument):
 
         Returns
         -------
-        None.
+        None
 
         '''
         value = int(value)
@@ -1013,7 +1004,7 @@ class AQ6370D(vxi11.Instrument):
 
         Returns
         -------
-        None.
+        None
 
         '''
         
@@ -1037,7 +1028,7 @@ class AQ6370D(vxi11.Instrument):
 
         Returns
         -------
-        None.
+        None
 
         '''
         
@@ -1071,7 +1062,7 @@ class AQ6370D(vxi11.Instrument):
 
         Returns
         -------
-        None.
+        None
 
         '''
         
@@ -1102,7 +1093,7 @@ class AQ6370D(vxi11.Instrument):
 
         Returns
         -------
-        None.
+        None
 
         '''
         
@@ -1133,7 +1124,7 @@ class AQ6370D(vxi11.Instrument):
 
         Returns
         -------
-        None.
+        None
 
         '''
         
@@ -1177,7 +1168,7 @@ class AQ6370D(vxi11.Instrument):
 
         Returns
         -------
-        None.
+        None
 
         '''
         

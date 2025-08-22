@@ -570,7 +570,7 @@ class PM100D:
              Can be set to ['ON','OFF',1,0].
 
 
-         Raises
+        Raises
         ------
         ValueError
             Error message.
