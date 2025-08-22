@@ -701,10 +701,10 @@ class KEITHLEY2612:
         channel : str
             Channel A or B
         mode : int or str
-            0 or NORMAL: Configures the source function according to
+            0 or ``NORMAL``: Configures the source function according to
             ``smuX.source.offfunc`` attribute
-            1 or ZERO: Configures source to output 0 V
-            2 or HIGH\_Z: Opens the output relay when the output is turned off
+            1 or ``ZERO``: Configures source to output 0 V
+            2 or ``HIGH_Z``: Opens the output relay when the output is turned off
 
         """
         channel = self._validate_channel(channel)

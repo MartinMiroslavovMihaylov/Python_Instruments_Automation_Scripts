@@ -100,11 +100,11 @@ class UXR:
     # =============================================================================
 
     def clear_status(self) -> None:
-        """The \*CLS command clears all status and error registers."""
+        """The ``*CLS`` command clears all status and error registers."""
         self.write("*CLS")
 
     def IDN(self) -> str:
-        """The \*IDN? query returns the company name, oscilloscope model number, serial
+        """The ``*IDN?`` query returns the company name, oscilloscope model number, serial
         number, and software version by returning this string:
         Keysight Technologies,<Model #>,<USXXXXXXXX>,<Rev #>[,<Options>]
 
@@ -127,7 +127,7 @@ class UXR:
         return int(self.query("*OPC?"))
 
     def reset(self) -> None:
-        """The \*RST command performs a default setup which is the same as pressing the
+        """The ``*RST`` command performs a default setup which is the same as pressing the
         oscilloscope front panel [Default Setup] key.
         """
         self.write("*RST")

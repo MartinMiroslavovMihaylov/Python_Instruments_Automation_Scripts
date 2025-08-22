@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Instruments_Libraries"
-version = "2025.08.20"
+version = "2025.08.24"
 authors = [
   { name = "Martin Mihaylov", email = "martinmi@hni.uni-paderborn.de" },
   { name = "Maxim Weizel", email = "mweizel@hni.uni-paderborn.de" },
@@ -25,6 +25,10 @@ dependencies = [
 
 [project.optional-dependencies]
 gui = ["customtkinter", "pillow"]
+
+[tool.setuptools]
+packages = ["Instruments_Libraries"]
+include-package-data = true #needs MANIFEST.in maybe needed in future releases
 
 [tool.black]
 line-length = 100
