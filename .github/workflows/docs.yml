@@ -29,7 +29,7 @@ jobs:
       - name: Checkout docs branch (Sphinx sources)
         uses: actions/checkout@v5
         with:
-          ref: docs
+          ref: docu
           path: docs-src
 
       - name: Set up Python
@@ -44,17 +44,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r docs-src/requirements-docs.txt
           echo "PYTHONPATH=$GITHUB_WORKSPACE/repo:$PYTHONPATH" >> $GITHUB_ENV
-
-      - name: Make include path for ../../Python_Instruments_Automation_Scripts/Examples/*
-        run: |
-          # Create the nested link the RST expects
-          rm -rf "${{ github.workspace }}/Python_Instruments_Automation_Scripts"
-          ln -s "${{ github.workspace }}/repo" \
-                "${{ github.workspace }}/Python_Instruments_Automation_Scripts"
-
-          # Debug: prove the target files exist at the resolved path
-          ls -la "${{ github.workspace }}/Python_Instruments_Automation_Scripts" || true
-          ls -la "${{ github.workspace }}/Python_Instruments_Automation_Scripts/Examples" || true
 
       - name: Sanity import check
         run: |
