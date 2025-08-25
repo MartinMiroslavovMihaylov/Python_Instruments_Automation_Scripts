@@ -1,7 +1,0 @@
-Anritsu Vector Network Analyzer MS2760A module
-==============
-
-.. automodule:: MS2760A
-   :members:
-   :undoc-members:
-   :show-inheritance:

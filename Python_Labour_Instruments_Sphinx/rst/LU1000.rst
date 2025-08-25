@@ -1,8 +1,0 @@
-Novoptel LU1000 Module
-======================
-
-.. automodule:: LU1000
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
