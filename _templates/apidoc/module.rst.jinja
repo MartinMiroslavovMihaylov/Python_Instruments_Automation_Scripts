@@ -1,0 +1,27 @@
+{# configurable: top-level package prefix to strip from titles #}
+{%- set TOP_PREFIX = 'Instruments_Libraries.' -%}
+
+{# Try many possible variable names that various Sphinx/apidoc versions use #}
+{%- set _full = (
+    fullname
+    or modname
+    or module
+    or qualname
+    or dotted_name
+    or name
+    or pkgname         
+    or ''
+) -%}
+
+{# If still empty, emit a clear placeholder so it's obvious at a glance #}
+{{- [(_full|replace(TOP_PREFIX, '')), "module"] | join(" ") | e | heading }}
+
+.. automodule:: {{ _full }}
+{%- for option in automodule_options %}
+   :{{ option }}:
+{%- endfor %}
+
+{# Optional: only show rubric if the env provides "members" and it's non-empty #}
+{%- if members %}
+.. rubric:: Module contents
+{%- endif %}
