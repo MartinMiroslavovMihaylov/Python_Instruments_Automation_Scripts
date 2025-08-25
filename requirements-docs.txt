@@ -1,0 +1,5 @@
+sphinx
+sphinx-rtd-theme
+myst-parser
+numpy>=2.0.0
+pandas>=2.2.0
