@@ -1,0 +1,81 @@
+name: Build & Deploy Sphinx (docs branch + main code)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # This action checks-out your repository under $GITHUB_WORKSPACE
+      - name: Checkout main (code)
+        uses: actions/checkout@v5
+        with:
+          path: repo
+
+      - name: Checkout docs branch (Sphinx sources)
+        uses: actions/checkout@v5
+        with:
+          ref: docu
+          path: docs-src
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: "docs-src/requirements-docs.txt"
+
+      - name: Install doc dependencies (+PYTHONPATH fallback)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r docs-src/requirements-docs.txt
+          echo "PYTHONPATH=$GITHUB_WORKSPACE/repo:$PYTHONPATH" >> $GITHUB_ENV
+
+      - name: Sanity import check
+        run: |
+          python - <<'PY'
+          import os, sys
+          p = r"${{ github.workspace }}/repo"
+          print("CODE_DIR exists:", os.path.isdir(p), p)
+          sys.path.insert(0, p)
+          import Instruments_Libraries as IL
+          print("Imported:", getattr(IL, "__file__", None))
+          PY
+
+      - name: Build Sphinx HTML
+        env:
+          # Make your package importable for autodoc
+          CODE_DIR: ${{ github.workspace }}/repo
+        run: |
+          sphinx-build -b html docs-src _site
+          # Drop -W if you don't want warnings to fail the build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

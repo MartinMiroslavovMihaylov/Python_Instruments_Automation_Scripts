@@ -1,5 +1,12 @@
 # Instruments_Libraries/__init__.py
-import importlib.metadata as _metadata
+from importlib.metadata import PackageNotFoundError, version
 
-__version__ = _metadata.version(__name__)
-__all__ = ["__version__"]
+try:
+    __version__ = version(__name__)
+except PackageNotFoundError:
+    __version__ = "0+unknown"  # fallback for source (e.g., docs/CI)
+
+# __all__
+__all__ = [
+    "__version__",
+]

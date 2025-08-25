@@ -3,22 +3,17 @@
 Created on Wed Feb  1 15:55:01 2023
 
 @author: Martin.Mihaylov
+
+Install Driver:
+    To use the DC-Power Supply GW-Instek GPP4323 you need to install the USB Driver
+    from https://www.gwinstek.com/en-global/download/ - GPP USB Driver
+    Python Library needed: ``pip install pyserial``
 """
 
 
 import serial
 import time
 import numpy as np
-
-print(
-    """
-#####################################################################################
-    To use the DC-Power Supply GW-Instek GPP4323 you need to install the USB Driver 
-    from https://www.gwinstek.com/en-global/download/ - GPP USB Driver 
-    Python Library needed: pip install pyserial
-#####################################################################################
-"""
-)
 
 
 class GPP4323:
@@ -194,38 +189,38 @@ class GPP4323:
         """Alias for set_Amp()."""
         self.set_Amp(channel, amp)
 
-    def set_ChannelToSerial(self, status: str | int) -> None:
+    def set_ChannelToSerial(self, state: str | int) -> None:
         """Sets CH1/CH2 as Tracking series mode.
 
 
         Parameters
         ----------
-        status : str
-            Possible status ["ON", "OFF"].
+        state : str
+            Possible state ["ON", "OFF"].
 
         Returns
         -------
         None.
 
         """
-        state_normalized = self._validate_state(status)
+        state_normalized = self._validate_state(state)
         self.write(f":OUTPut:SERies {state_normalized}")
 
-    def set_ChannelToParallel(self, status: str | int) -> None:
+    def set_ChannelToParallel(self, state: str | int) -> None:
         """Sets CH1/CH2 as Tracking parallel mode.
 
 
         Parameters
         ----------
-        status : str
-            Possible status ["ON", "OFF"].
+        state : str
+            Possible state ["ON", "OFF"].
 
         Returns
         -------
         None.
 
         """
-        state_normalized = self._validate_state(status)
+        state_normalized = self._validate_state(state)
         self.write(f":OUTPut:PARallel {state_normalized}")
 
     def set_ChannelTracking(self, mode: int) -> None:
@@ -250,7 +245,7 @@ class GPP4323:
             )
         self.write(f"TRACK{mode}")
 
-    def set_ChannelLoadMode(self, channel: int, mode: str, status: str | int) -> None:
+    def set_ChannelLoadMode(self, channel: int, mode: str, state: str | int) -> None:
         """Sets CH1 or CH2 as Load CV, CC or CR mode.
 
 
@@ -260,8 +255,8 @@ class GPP4323:
             Select channel from List of Channel Numbers [1,2].
         mode : str
             Select Load CV, CC or CR mode.
-        status : str
-            Possible status ["ON", "OFF"].
+        state : str
+            Possible state ["ON", "OFF"].
 
         Returns
         -------
@@ -270,7 +265,7 @@ class GPP4323:
         """
         modeLS = ["CC", "CV", "CR"]
         channel = self._validate_channel(channel, mainChannel=True)
-        state_normalized = self._validate_state(status)
+        state_normalized = self._validate_state(state)
         if mode not in modeLS:
             raise ValueError("Invalid Mode Setting. Select Load CV, CC or CR mode.")
         self.write(f":LOAD{channel}:{mode} {state_normalized}")
@@ -295,7 +290,7 @@ class GPP4323:
         res = self._validate_resistor(res)
         self.write(f":LOAD{channel}:RESistor {res}")
 
-    def set_Out(self, channel: int, status: str | int) -> None:
+    def set_Out(self, channel: int, state: str | int) -> None:
         """Enable/Disable Output
 
 
@@ -303,8 +298,8 @@ class GPP4323:
         ----------
         channel : int
             Select channel from List of Channel Numbers [1,2,3,4].
-        status : str
-            Status of power Supple output. Could be ["ON", "OFF"]
+        state : str
+            state of power Supple output. Could be ["ON", "OFF"]
 
         Returns
         -------
@@ -312,24 +307,24 @@ class GPP4323:
 
         """
         channel = self._validate_channel(channel)
-        state_normalized = self._validate_state(status)
+        state_normalized = self._validate_state(state)
         self.write(f":OUTPut{channel}:STATe {state_normalized}")
 
-    def set_AllOut(self, status: str | int) -> None:
+    def set_AllOut(self, state: str | int) -> None:
         """Enable/Disable All Outputs
 
 
         Parameters
         ----------
-        status : str
-            Status of power Supple output. Could be ["ON", "OFF"]
+        state : str
+            state of power Supple output. Could be ["ON", "OFF"]
 
         Returns
         -------
         None.
 
         """
-        state_normalized = self._validate_state(status)
+        state_normalized = self._validate_state(state)
         if state_normalized == "ON":
             self.write("ALLOUTON")
         else:
@@ -397,7 +392,7 @@ class GPP4323:
         """
 
         channel = self._validate_channel(channel)
-        type = self._validate_measurement_type(type) 
+        type = self._validate_measurement_type(type)
         return float(self.query_values(f":MEASure{channel}:{type}?"))
 
     def ask_Current(self, channel: int) -> float:

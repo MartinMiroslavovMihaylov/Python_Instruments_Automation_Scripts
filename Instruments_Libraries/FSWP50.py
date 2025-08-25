@@ -72,29 +72,29 @@ class FSWP50:
 
         Returns
         -------
-        TYPE str
+        str
             A string with the Instrument name.
         '''
         return self.query_str('*IDN?')
 
     def reset(self) -> None:
-        '''Reset the instrument (execute *RST command).'''
+        '''Reset the instrument (execute ``*RST`` command).'''
         self._resource.reset()
 
     def clear(self) -> None:
-        '''Clear the instrument status (execute *CLS command).'''
+        '''Clear the instrument status (execute ``*CLS`` command).'''
         self.write_str("*CLS")
 
     def wait(self) -> None:
         '''
         Wait to continue. Prevents servicing of the subsequent commands until 
         all preceding commands have been executed and all signals have settled 
-        (see also command synchronization and *OPC command).
+        (see also command synchronization and ``*OPC`` command).
         '''
         self.write_str("*WAI")
 
     def operation_complete(self) -> int:
-        '''Wait until the operation is complete (execute *OPC command).'''
+        '''Wait until the operation is complete (execute ``*OPC`` command).'''
         return int(self.query_float("*OPC?"))
 
     def abort(self) -> None:
@@ -111,8 +111,8 @@ class FSWP50:
 
         Parameters
         ----------
-        state : int | str
-            ON | OFF | 1 | 0
+        state : int or str
+            ``ON | OFF | 1 | 0``
         '''
         state = state.upper() if isinstance(state, str) else int(state)
         if state in self._state_List:

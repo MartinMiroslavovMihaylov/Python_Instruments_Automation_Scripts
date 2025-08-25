@@ -131,8 +131,8 @@ class LU1000_Base:
             ----------
             laser : int
                 Laser output selected -  1 or 2
-            value : int/str
-                value = 'ON'|'OFF'|1|0
+            value : int or str
+                value = ``'ON' |'OFF'|1|0``
 
             Raises
             ------
@@ -141,7 +141,7 @@ class LU1000_Base:
 
             Returns
             -------
-            None.
+            None
 
             '''
 
@@ -771,7 +771,7 @@ class LU1000_Cband(LU1000_Base):
         ----------
         laser : int
             Laser output selected - 1 or 2
-        value : float
+        value : int or float
             optical power in dBm
         ignore_warning : bool
             When True, no warning for power > 10dBm is displayed
@@ -783,7 +783,7 @@ class LU1000_Cband(LU1000_Base):
 
         Returns
         -------
-        None.
+        None
 
         '''
         self._validate_laser(laser)
@@ -815,7 +815,7 @@ class LU1000_Cband(LU1000_Base):
 
         Returns
         -------
-        None.
+        None
 
         '''
 
@@ -844,7 +844,7 @@ class LU1000_Cband(LU1000_Base):
 
         Returns
         -------
-        None.
+        None
 
         '''
         
@@ -872,7 +872,7 @@ class LU1000_Cband(LU1000_Base):
         ----------
         laser : int
             Laser output selected - 1 or 2
-        value : int | float
+        value : int or float
             Channel's frequency, THz
 
         Raises
@@ -882,7 +882,7 @@ class LU1000_Cband(LU1000_Base):
 
         Returns
         -------
-        None.
+        None
 
         '''
 
@@ -897,7 +897,7 @@ class LU1000_Cband(LU1000_Base):
         ----------
         laser : int
             Laser output selected - 1 or 2
-        value : int | float
+        value : int or float
             Channel's frequency, GHz*10
 
         Raises
@@ -907,7 +907,7 @@ class LU1000_Cband(LU1000_Base):
 
         Returns
         -------
-        None.
+        None
 
         '''
 
@@ -927,7 +927,7 @@ class LU1000_Cband(LU1000_Base):
 
         Returns
         -------
-        None.
+        None
 
         '''
 
@@ -948,7 +948,7 @@ class LU1000_Cband(LU1000_Base):
 
         Returns
         -------
-        None.
+        None
 
         '''
 
@@ -995,7 +995,7 @@ class LU1000_Cband(LU1000_Base):
 
         Returns
         -------
-        None.
+        None
 
         '''
 
@@ -1230,7 +1230,7 @@ class LU1000_Oband(LU1000_Base):
 
         Returns
         -------
-        None.
+        None
 
         '''
         addr = self._calc_address(laser, 23)
@@ -1258,7 +1258,7 @@ class LU1000_Oband(LU1000_Base):
 
         Returns
         -------
-        None.
+        None
 
         '''
 
