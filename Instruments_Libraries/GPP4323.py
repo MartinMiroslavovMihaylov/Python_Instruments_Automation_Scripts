@@ -105,11 +105,11 @@ class GPP4323:
         return state_normalized
 
     def _validate_voltage(self, channel: int, voltage: int | float) -> str:
-        if channel in self._mainChannelLS and voltage < 0 or voltage > 32:
+        if channel in self._mainChannelLS and (voltage < 0 or voltage > 32):
             raise ValueError("Invalid voltage given! Voltage can be [0,32].")
-        if channel == 3 and voltage < 0 or voltage > 5:
+        if channel == 3 and (voltage < 0 or voltage > 5):
             raise ValueError("Invalid voltage given! Voltage on Channel 3 can be [0,5].")
-        if channel == 4 and voltage < 0 or voltage > 15:
+        if channel == 4 and (voltage < 0 or voltage > 15):
             raise ValueError("Invalid voltage given! Voltage on Channel 4 can be [0,15].")
         return f"{voltage:.3f}"
 
