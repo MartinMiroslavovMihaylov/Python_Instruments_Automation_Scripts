@@ -23,3 +23,4 @@ Full Code Examples:
    Example_Powersupply_GPP4323
    Example_Powersupply_Keithly
    Example_Thorlabs_PM100D
+   Example_SignalGenerator
