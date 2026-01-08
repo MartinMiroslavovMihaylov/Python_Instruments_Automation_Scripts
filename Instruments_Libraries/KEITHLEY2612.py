@@ -50,9 +50,9 @@ class KEITHLEY2612:
         self.dict_of_lua_scripts = {}
 
         # Voltage and current limits for safety
-        self._absolute_Voltage_Limits = {"min": 20e-3, "max": 200}
-        self._Voltage_Limits = {"min": 20e-3, "max": 10}
-        self._Current_Limits = {"min": 10e-9, "max": 3}
+        self._absolute_Voltage_Limits = {"min": 0, "max": 200}
+        self._Voltage_Limits = {"min": 0, "max": 10.0}
+        self._Current_Limits = {"min": 0, "max": 3.0}
 
     def query(self, message):
         return self._resource.query(message)
@@ -403,7 +403,7 @@ class KEITHLEY2612:
         channel = self._validate_channel(channel)
         return float(self.query(f"print(smu{channel}.source.leveli)"))
 
-    def ask_OutputSourceFunction(self, channel: int) -> str:
+    def ask_OutputSourceFunction(self, channel: int) -> int:
         """This attribute contains the source output function.
         Returns: 1 = voltage, 0 = current
 
@@ -419,10 +419,8 @@ class KEITHLEY2612:
 
         """
         channel = self._validate_channel(channel)
-        if int(float(self.query(f"print(smu{channel}.source.func)"))) == 1:
-            return "voltage"
-        elif int(float(self.query(f"print(smu{channel}.source.func)"))) == 0:
-            return "current"
+        return int(self.query(f"print(smu{channel}.source.func)"))
+
 
     # =============================================================================
     # Further ASK Methods
