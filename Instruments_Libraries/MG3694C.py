@@ -24,54 +24,90 @@ Befor using the MG3694C you need to:
 """
 
 import numpy as np
-import vxi11
+import pyvisa as visa
 
 
-class MG3694C(vxi11.Instrument):
+class MG3694C():
     """
-    This class uses vxi11 library to connect to Anritsu MG3694C.
-    Need to have python 'vxi11' library installed!
-
+    This class uses pyvisa to connect to an Anritsu MG3694C Signal Generator.
     """
 
-    def __init__(self, hostname):
-        """
-        Get name and identification.
-        Make a restart of the instrument in the beginning to get the instrument
-        to default settings.
-        """
-        self.hostname = hostname
-        super().__init__(hostname)
-        print(self.ask("*IDN?"))
-        self.write("*RST")
+    def __init__(
+        self,
+        resource_str="ip_adress",
+        visa_library="@ivi",
+    ):
+        if "TCPIP" not in resource_str.upper():
+            self.resource_str = f"TCPIP::{resource_str}::INSTR"
+        else:
+            self.resource_str = resource_str
+        self.visa_library = visa_library
+
+        self._resource = visa.ResourceManager(visa_library).open_resource(
+            str(self.resource_str), read_termination="\n", query_delay=0.5
+        )
+
+        # Predefine Lists
+        self._StateLS_mapping = {
+            "on": 1,
+            "off": 0,
+            1: 1,
+            0: 0,
+            "1": 1,
+            "0": 0,
+            True: 1,
+            False: 0,
+        }
+
+        # Get name and identification
+        print(self.getIdn())
 
     def reconnect(self, attempts_number=3):
         for attempts_num in range(attempts_number):
             try:
-                super().__init__(self.hostname)
+                self._resource = visa.ResourceManager(self.visa_library).open_resource(
+                    str(self.resource_str), read_termination="\n", query_delay=0.5)
                 break
             except:
-                print("Exeption occured {0} times".format(attempts_num))
+                print("Tried to reconnect {0} times".format(attempts_num))
 
     def write(self, message, encoding="utf-8"):
-        # super().write(message,encoding)
+        # self._resource.write(message)
         for attempts_num in range(3):
             try:
-                super().write(message, encoding)
+                self._resource.write(message)
                 break
             except:
                 self.reconnect()
 
     def query(self, message):
+        # self._resource.query(message)
         for attempts_num in range(3):
             try:
-                return self.ask(message)
-                break
+                return self._resource.query(message)
             except:
                 self.reconnect()
 
     def Close(self):
-        return self.close()
+        return self._resource.close()
+    
+    def reset(self):
+        return self.write('*RST')
+    
+    def getIdn(self):
+        return self.query('*IDN?')
+    
+    # =============================================================================
+    # Validate Variables
+    # =============================================================================
+
+    def _validate_state(self, state: int | str) -> int:
+        state_normalized = self._StateLS_mapping.get(
+            state.lower() if isinstance(state, str) else int(state)
+        )
+        if state_normalized is None:
+            raise ValueError("Invalid state given! State can be [on,off,1,0,True,False].")
+        return state_normalized
 
     # =============================================================================
     # Abort Command
@@ -474,32 +510,39 @@ class MG3694C(vxi11.Instrument):
     # =============================================================================
     # Set Output
     # =============================================================================
-    def set_output(self, state):
-        """
-
+    def set_rf_output(self, state: int | str) -> None:
+        """Activates the Signal Genrator RF Output.
 
         Parameters
         ----------
         state : str/int
-                Description: Turns MG369xC RF output power on/off.
-                Parameters: ON | OFF | 1 | 0
-                Default: OFF
+            'ON' 1 or 'OFF' 0
 
         Raises
         ------
         ValueError
-            Error message
-
-        Returns
-        -------
-        None.
-
+            Valid values are: \'ON\', \'OFF\', 1, 0
         """
 
-        if state in ["ON", "OFF", 1, 0]:
-            self.write(":OUTPut:STATe " + str(state))
-        else:
-            raise ValueError("Unknown input! See function description for more info.")
+        state = self._validate_state(state)
+        self.write(f":OUTPut:STATe {state}")
+
+
+    def set_output(self, state: int | str) -> None:
+        """Activates the Signal Genrator RF Output.
+
+        Parameters
+        ----------
+        state : str/int
+            'ON' 1 or 'OFF' 0
+
+        Raises
+        ------
+        ValueError
+            Valid values are: \'ON\', \'OFF\', 1, 0
+        """
+        self.set_rf_output(state)
+
 
     def set_output_protection(self, state):
         """
@@ -559,33 +602,35 @@ class MG3694C(vxi11.Instrument):
         else:
             raise ValueError("Unknown input! See function description for more info.")
 
-    def set_OutputPowerLevel(self, value):
-        """
+# =============================================================================
+# SOURce:POWer subsystem
+# =============================================================================
 
+    def set_rf_power(self, value):
+        """Sets the Signal Generator Output Power in dBm.
 
         Parameters
         ----------
         value : float/int
-                Description: Sets the power level of the unswept RF output signal.
-                Parameters: Power level (in dBm) | UP | DOWN | MIN | MAX
-                Range: MIN to MAX (see notes below)
-                Default: 0 dBm
-
-        Returns
-        -------
-        TYPE
-            DESCRIPTION.
-
+            Output Power in dBm
         """
-
-        unit = "dBm"
         minVal = -20.0
         maxVal = 30.0
         if value > maxVal or value < minVal:
-            raise ValueError("Unknown input! See function description for more info.")
-        else:
-            self.write(":SOURce:POWer:LEVel:IMMediate:AMPLitude " + str(value) + " " + unit)
+            raise ValueError(f'Power out of range! You can set power between {minVal} and {maxVal} dBm!')
 
+        self.write(f":SOURce:POWer:LEVel:IMMediate:AMPLitude {str(value)} dBm")
+
+    def set_OutputPowerLevel(self, value: int | float) -> None:
+        """Sets the Signal Generator Output Power in dBm. Alias for set_rf_power().
+
+        Parameters
+        ----------
+        value : int/float
+            Output Power in dBm
+        """
+        self.set_rf_power(value)
+    
     # =============================================================================
     # Set Control system commands:
     #            Amplitude Modulation
@@ -989,29 +1034,15 @@ class MG3694C(vxi11.Instrument):
     # =============================================================================
     # Frequency Commands
     # =============================================================================
-    def set_freq_CW(self, value, unit):
+    def set_freq_CW(self, value: int | float, unit: str = None) -> None:
         """
-
-
         Parameters
         ----------
         value : int/float
-            Description: Sets the RF output frequency of the MG369xC to the value entered.
-            Parameters UP | DOWN increment/decrement the frequency by the value set by
-            [:SOURce]:FREQuency:STEP:INCRement command.
-            Parameters: Frequency (in Hz) | UP | DOWN | MIN | MAX
-            Range: MIN to MAX (see note below)
-            Default: (MIN + MAX) / 2
+            Parameter Frequency
 
-            Model   Minimum Frequency*      Maximum Frequency
-            MG3691C 10 MHz                  10 GHz
-            MG3692C 10 MHz                  20 GHz
-            MG3693C 10 MHz                  31.8 GHz
-            MG3694C 10 MHz                  40 GHz
-            MG3695C 10 MHz                  50 GHz
-            MG3697C 10 MHz                  70 GHz
-        unit : str
-            Parameter Frequency.
+        unit : str (optional)
+            Frequency Unit: 'GHz' or 'MHz' or 'Hz'
 
         Returns
         -------
@@ -1021,24 +1052,26 @@ class MG3694C(vxi11.Instrument):
 
         minFreq = 10e6  # 10 MHz
         maxFreq = 40e9  # 40 GHz
-        stUnit = ["MHz", "GHz"]
 
-        if unit == "MHz":
-            if value * 1e6 <= maxFreq and value * 1e6 >= minFreq:
-                self.write(":SOURce:FREQuency:CW " + str(value) + " " + unit)
+        if unit == 'Hz' or unit is None:
+            unit = 'Hz'
+            if value <= maxFreq and value >= minFreq:
+                self.write(f':SOURce:FREQuency:CW {value} {unit}')
             else:
-                raise ValueError(
-                    "Warning !! Minimum Frequency = 10 MHz and Maximum Frequency = 40 GHz"
-                )
-        elif unit == "GHz":
-            if value * 1e9 <= maxFreq and value * 1e9 >= minFreq:
-                self.write(":SOURce:FREQuency:CW " + str(value) + " " + unit)
+                raise ValueError('Minimum Frequency = 8 kHz and Maximum Frequency = 67 GHz')
+        elif unit == 'MHz':
+            if value*1e6 <= maxFreq and value*1e6 >= minFreq:
+                self.write(f':SOURce:FREQuency:CW {value} {unit}')
             else:
-                raise ValueError(
-                    "Warning !! Minimum Frequency = 0.01 GHz and Maximum Frequency = 40 GHz"
-                )
+                raise ValueError('Minimum Frequency = 8 kHz and Maximum Frequency = 67 GHz')
+        elif unit == 'GHz':
+            if value*1e9 <= maxFreq and value*1e9 >= minFreq:
+                self.write(f':SOURce:FREQuency:CW {value} {unit}')
+            else:
+                raise ValueError('Minimum Frequency = 8 kHz and Maximum Frequency = 67 GHz')
         else:
-            raise ValueError("Unknown input! See function description for more info.")
+            raise ValueError(
+                'Unknown input! Unit must be None or "MHz" or "GHz"!')
 
     def set_freq_step(self, value, unit):
         """
