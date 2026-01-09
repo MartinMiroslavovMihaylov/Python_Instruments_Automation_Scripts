@@ -60,13 +60,16 @@ DC_Sources: dict[str, SourceCfg] = {
 # %% ==========================================================================
 # Configure the Instrument
 # =============================================================================
-for source in DC_Sources.values():
-    if source.auto == True:
-        source.apply_startup()
-
+# Keithly Sourcemeter needs to be setup as voltage source more specifically
 myKEITHLEY2612.set_ChannelDisplay() # Display all channels
+myKEITHLEY2612.set_OutputSourceFunction('a', "voltage")
+myKEITHLEY2612.set_OutputSourceFunction('b', "voltage")
 myKEITHLEY2612.set_DisplayMeasurementFunction('a','amp') # measure current
 myKEITHLEY2612.set_DisplayMeasurementFunction('b','amp') # measure current
+
+
+for source in DC_Sources.values():
+    source.apply_startup() # apply startup, checks for "auto" internally
 
 # %% ==========================================================================
 # Measurement

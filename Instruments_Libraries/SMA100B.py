@@ -7,24 +7,25 @@ Created on Fir Feb 02 13:00:00 2024
 """
 
 import numpy as np
-import vxi11
+import pyvisa as visa
 
 
-
-class SMA100B(vxi11.Instrument):
+class SMA100B():
     '''
-    A class thats uses vxi11 library to interface a SMA100B
-    Need to have python 'vxi11' library installed!
-
+    A class thats uses pyvisa to connect to an SMA100B Signal Generator.
     '''
 
-    def __init__(self, hostname):
-        '''
-        Get name and identification.
-        Execute the reset() command if you want to get the instrument 
-        to default settings.
-        '''
-        super().__init__(hostname)
+    def __init__(
+        self,
+        resource_str="ip_adress",
+        visa_library="@ivi",
+    ):
+        if "TCPIP" not in resource_str.upper():
+            resource_str = f"TCPIP::{resource_str}::INSTR"
+        
+        self._resource = visa.ResourceManager(visa_library).open_resource(
+            str(resource_str), read_termination="\n", query_delay=0.5
+        )
 
         # Predefine Lists
         self._StateLS_mapping = {
@@ -42,11 +43,14 @@ class SMA100B(vxi11.Instrument):
         print(self.getIdn())
 
     def query(self, message):
-        return self.ask(message)
+        return self._resource.query(message)
+    
+    def write(self, message):
+        return self._resource.write(message)
 
     def Close(self):
         print("Instrument Rohde&Schwarz SMA100B is closed!")
-        return self.close()
+        return self._resource.close()
 
     def reset(self):
         return self.write('*RST')
@@ -115,7 +119,7 @@ class SMA100B(vxi11.Instrument):
 
 
     def set_rf_output(self, state: int | str) -> None:
-        """Activates the Signal Genrator RF Output
+        """Activates the Signal Genrator RF Output.
 
         Parameters
         ----------
@@ -131,8 +135,8 @@ class SMA100B(vxi11.Instrument):
         self.write(f':OUTPut {state}')
 
 
-    def set_output(self,state: int | str) -> None:
-        """Activates the Signal Genrator RF Output
+    def set_output(self, state: int | str) -> None:
+        """Activates the Signal Genrator RF Output.
 
         Parameters
         ----------
@@ -338,7 +342,7 @@ class SMA100B(vxi11.Instrument):
         self.write(f'SOURce:POWer:LEVel:IMMediate:AMPlitude {value}')
   
     
-    def set_OutputPowerLevel(self,value: int | float) -> None:
+    def set_OutputPowerLevel(self, value: int | float) -> None:
         """Sets the Signal Generator Output Power in dBm. Alias for set_rf_power().
 
         Parameters

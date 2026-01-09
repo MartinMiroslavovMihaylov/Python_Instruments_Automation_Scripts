@@ -126,7 +126,8 @@ class M8070B:
             raise ValueError(f"Value must be between 0.1 and 2.7 V. You entered: {amplitude} V")
 
     def set_rf_power(self, channel: int, powerdBm: int | float) -> None:
-        """Sets the Signal Generator Output Power in dBm.
+        """Sets the Signal Generator Output Power in dBm. Converts from dBm to V and 
+        uses ``set_amplitude()`` internally.
 
         Parameters
         ----------
@@ -141,7 +142,8 @@ class M8070B:
         self.set_amplitude(channel, amplitude)
 
     def set_OutputPowerLevel(self, channel: int, powerdBm: int | float) -> None:
-        """Sets the Signal Generator Output Power in dBm. Alias for set_rf_power().
+        """Sets the Signal Generator Output Power in dBm. Converts from dBm to V and 
+        uses ``set_amplitude()`` internally. Alias for set_rf_power().
 
         Parameters
         ----------
@@ -199,7 +201,7 @@ class M8070B:
 
     def get_sample_clk_out_frequency(self, channel: int = 1) -> float:
         """Returns the sample clock OUT1 or OUT2 frequency from the M8008A CLK module.
-        Both freqeuncies are the same.
+        Both frequencies are the same.
 
         Parameters
         ----------
@@ -429,3 +431,85 @@ class M8070B:
         # Call MATLAB
         result = matlab_engine.iqdownload(iqdata, fs, *args, nargout=1)
         return result
+
+    def generate_multitone(
+        self,
+        matlab_engine,
+        *,
+        channel: int,
+        tones: np.ndarray,
+        magnitudes_dB: np.ndarray = None,
+        phases: np.ndarray | str = 'Random',
+        correction: int = 0,
+        run: int = 1,
+        fs: float = 256e9,
+    ) -> None:
+        """Set the CW tone frequency on the AWG via MATLAB engine.
+
+        Parameters
+        ----------
+        matlab_engine : matlab.engine
+            An active MATLAB engine session.
+        channel : int
+            AWG channel (1 or 2).
+        tones : ndarray
+            Tone frequency in Hz.
+        magnitude : ndarray, optional
+            Tone magnitude in dBm (default None).
+        correction : int, optional
+            Enable correction (default 0).
+        run : int, optional
+            AWG run number (default 1).
+        fs : float, optional
+            AWG sample rate (default 256e9).
+        """
+        # 1) Validate channel
+        channel = self._validate_channel(channel)
+
+        # 2) Prepare arrays
+        frequency = np.asarray(tones, dtype=np.float64)      # 1-D
+        if magnitudes_dB is None:
+            magnitudes_dB = np.zeros_like(frequency, dtype=np.float64)   # dBm
+        else:
+            magnitudes_dB = np.asarray(magnitudes_dB, dtype=np.float64)
+
+        # phase: either the literal 'Random' or a numeric vector
+        if isinstance(phases, str):
+            phase_arg = phases  # pass plain string to MATLAB
+        else:
+            phase_arg = np.asarray(phases, dtype=np.float64)
+            # make column vectors if iqtone expects columns
+            # phase_arg = matlab.double([[v] for v in phase_arr])
+
+        # If iqtone wants column vectors for tone/magnitude too:
+        # tone_arg      = matlab.double([[v] for v in frequency])
+        # magnitude_arg = matlab.double([[v] for v in magnitudes_dB])
+
+        # If iqtone wants row vectors for tone/magnitude too:
+        tone_arg = frequency
+        magnitude_arg = magnitudes_dB
+
+        # channelMapping already fine
+        channel_mapping = matlab.double([[1, 0], [0, 0]] if channel == 1 else [[0, 0], [1, 0]])
+
+        iqdata, _, _, _, chMap = matlab_engine.iqtone(
+            'sampleRate',       fs,
+            'numSamples',       0,
+            'tone',             tone_arg,         # explicit column vector
+            'phase',            phase_arg,        # string or column vector
+            'normalize',        1,
+            'magnitude',        magnitude_arg,    # explicit column vector
+            'correction',       correction,
+            'channelMapping',   channel_mapping,
+            nargout=5
+        )
+
+        # 6) Push the generated IQ out to the AWG
+        matlab_engine.iqdownload(
+            iqdata,
+            fs,
+            'channelMapping', chMap,
+            'segmentNumber',  1,
+            'run',            run,
+            nargout=0
+        )

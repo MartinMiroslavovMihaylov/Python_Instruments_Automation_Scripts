@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Instruments_Libraries"
-version = "2025.08.24"
+version = "2026.01.08"
 authors = [
   { name = "Martin Mihaylov", email = "martinmi@hni.uni-paderborn.de" },
   { name = "Maxim Weizel", email = "mweizel@hni.uni-paderborn.de" },
@@ -30,23 +30,18 @@ gui = ["customtkinter", "pillow"]
 packages = ["Instruments_Libraries"]
 include-package-data = true #needs MANIFEST.in maybe needed in future releases
 
+# Code Formatting Settings: mostly black/autopep8 or nothing is used in the project
 [tool.black]
 line-length = 100
-target-version = ['py311', 'py312']
-include = '\.pyi?$'
-exclude = '''
-  /(
-      \.eggs         # exclude eggs directory
-    | \.git          # exclude git directory
-    | \.hg           # exclude mercurial directory
-    | \.mypy_cache    # exclude mypy cache directory
-    | \.nox           # exclude nox directory
-    | \.tox           # exclude tox directory
-    | \.venv          # exclude python virtual environments
-    | build           # exclude build directory
-    | dist            # exclude dist directory
-    | venv            # exclude python virtual environments
-    | __pycache__     # exclude pycache directories
-    | .*\.py[co]        # exclude python bytecode files
-  )$
-'''
+
+[tool.autopep8]
+max_line_length = 100
+ignore = ["E402", "W503", "E266"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.flake8]
+max-line-length = 100
+ignore = ["E402", "W503", "E266"]
