@@ -14,7 +14,7 @@ customtkinter.set_default_color_theme("green")  # Themes: "blue" (standard), "gr
 
 
 
-ListInstruments = ["Anrtisu Spectrum Analyzer MS2760A", "Anritsu Signal Generator MG3694C", "Anritsu Vectro Analyzer MS4647B", "Power Meter ThorLabs PM100D", "Novoptel Laser LU1000", "Yokogawa Optical Spectrum Analyzer AQ6370D", "KEITHLEY Source Meter 2612", "Power Supply KA3005", "CoBrite Tunable Laser", "AnaPico AG,APPH20G", "4-Channels Power Suppy GPP4323", "Rohde and Schwarz SMA100B" ]
+ListInstruments = ["Anrtisu Spectrum Analyzer MS2760A", "Anritsu Signal Generator MG3694C", "Anritsu Vectro Analyzer MS4647B", "Power Meter ThorLabs PM100D", "Novoptel Laser LU1000", "Yokogawa Optical Spectrum Analyzer AQ6370D", "KEITHLEY Source Meter 2612", "Power Supply KA3005", "CoBrite Tunable Laser", "AnaPico AG,APPH20G", "4-Channels Power Suppy GPP4323", "Rohde and Schwarz SMA100B", "Rohde and Schwarz FSWP50", "Keysight UXR0702A"]
 
 
 
@@ -235,42 +235,36 @@ class App(customtkinter.CTk):
                 self.Instrument.append(SA)
                 print('Anrtisu Spectrum Analyzer MS2760A is connected as SA')
                 Ist_List.append(SA)
-                # return SA
             elif base_element == " Anritsu Signal Generator MG3694C  ":
                 print(base_element)
                 SG = InstInit(base_element)
                 self.Instrument.append(SG)
                 print('Anritsu Signal Generator MG3694C is connected as PM')
                 Ist_List.append(SG)
-                # return SG
             elif base_element == " Anritsu Vectro Analyzer MS4647B  ":
                 print(base_element)
                 VNA = InstInit(base_element)
                 self.Instrument.append(VNA)
                 print('Anritsu Vectro Analyzer MS4647B is connected as PM')
                 Ist_List.append(VNA)
-                # return VNA
             elif base_element == ' Power Meter ThorLabs PM100D  ':
                 print(base_element)
                 PM = InstInit(base_element)
                 self.Instrument.append(PM)
                 print('Power Meter ThorLabs PM100D is connected as PM')
                 Ist_List.append(PM)
-                # return PM
             elif base_element == " Novoptel Laser LU1000  ":
                 print(base_element)
                 LU = InstInit(base_element)
                 self.Instrument.append(LU)
                 print('Novoptel Laser LU1000 is connected as LU')
                 Ist_List.append(LU)
-                # return LU
             elif base_element == " Yokogawa Optical Spectrum Analyzer AQ6370D  ":
                 print(base_element)
                 OSA = InstInit(base_element)
                 self.Instrument.append(OSA)
                 print('Yokogawa Optical Spectrum Analyzer AQ6370D is connected as OSA')
                 Ist_List.append(OSA)
-                # return OSA
             elif base_element == " Rohde and Schwarz SMA100B  ":
                 print(base_element)
                 SMA = InstInit(base_element)
@@ -283,28 +277,24 @@ class App(customtkinter.CTk):
                 self.Instrument.append(KA)
                 print('KEITHLEY Source Meter 2612 is connected as KA')
                 Ist_List.append(KA)
-                # return KA
             elif base_element == " Power Supply KA3005 ":
                 print(base_element)
                 PS = InstInit(base_element)
                 self.Instrument.append(PS)
                 print('Power Supply KA3005 is connected as PS')
                 Ist_List.append(PS)
-                # return PS
             elif base_element == " CoBrite Tunable Laser  ":
                 print(base_element)
                 CO = InstInit(base_element)
                 self.Instrument.append(CO)
                 print('CoBrite Tunable Laser is connected as PS')
                 Ist_List.append(CO)
-                # return CO
             elif base_element == " AnaPico AG,APPH20G  ":
                 print(base_element)
                 APP = InstInit(base_element)
                 self.Instrument.append(APP)
                 print('AnaPico AG,APPH20G is connected as PS')
                 Ist_List.append(APP)
-                # return APP
             elif base_element == " 4-Channels Power Suppy GPP4323 ":
                 print(base_element)
                 Var = 0
@@ -314,7 +304,18 @@ class App(customtkinter.CTk):
                 self.Instrument.append(Var)
                 print('4-Channels Power Suppy GPP4323 is connected as PS')
                 Ist_List.append(Var)
-                # return GPP
+            elif base_element == " Rohde and Schwarz FSWP50  ":
+                print(base_element)
+                FSWP = InstInit(base_element)
+                self.Instrument.append(FSWP)
+                print('Rohde and Schwarz FSWP50')
+                Ist_List.append(FSWP)
+            elif base_element == " Keysight UXR0702A  ":
+                print(base_element)
+                UXR = InstInit(base_element)
+                self.Instrument.append(UXR)
+                print('Keysight UXR0702A')
+                Ist_List.append(UXR)
             else:
                 raise ValueError("Wrong instrument")
         if Ist_List:
