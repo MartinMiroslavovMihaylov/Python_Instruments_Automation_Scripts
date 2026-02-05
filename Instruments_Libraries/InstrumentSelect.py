@@ -443,6 +443,18 @@ def UXR_1002A():
     except visa.VisaIOError as e: 
         print('Caught VisaIOError: ', e)
     return my_UXR
+
+
+
+def FSWP50():
+    from Instruments_Libraries.FSWP50 import FSWP50
+    try:
+        my_FSWP50 = FSWP50("169.254.253.126")
+    except visa.VisaIOError as e:
+        print("caught VisaIOError: ", e)
+    return my_FSWP50
+
+
 # =============================================================================
 #     Old GPP Function
 # =============================================================================
@@ -493,6 +505,8 @@ def InstInit(Num):
         return RnS_SMA100B()
     elif Num == " Keysight UXR0702A  ":
         return UXR_1002A()
+    elif Num == " Rohde and Schwarz FSWP50  ":
+        return FSWP50()
     else:
         raise ValueError('Invalid Instrument Selected')
     
