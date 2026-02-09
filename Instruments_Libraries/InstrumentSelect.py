@@ -272,39 +272,78 @@ def SpecAnalyser():
     
 
 
-def SigGen():
+def SigGen(visa_library='@ivi'):
     from Instruments_Libraries.MG3694C import MG3694C
-    print('''
-          ########### Set the correct network settings ###########
-          
-              Follow the instrictions to set the network
-              addapter and ip. After you are done confurm 
-              to continuen!
-              
-         ########### Set the correct network settings ###########
-          ''')
-          
-    print('\n')
-    conf = input('Are you finish yes/no: ')
-    if conf == 'yes':
-        return MG3694C('192.168.0.254')
-        print('Instrument Connected as SG')
-    else:
-        pass
 
-def RnS_SMA100B():
-    from Instruments_Libraries.SMA100B import SMA100B
-    import vxi11
-    rm = vxi11.list_devices()
+    # Initialize the Resource Manager
+    rm = visa.ResourceManager(visa_library)
+    print("Scanning network for Anritsu MG3694C...")
 
-    for _ in rm:
+    try:
+        # List all TCPIP instruments found on the network
+        available_resources = rm.list_resources('TCPIP?*INSTR')
+    except ValueError:
+        available_resources = []
+
+    # Check each device
+    for resource in available_resources:
         try:
-             SMA = SMA100B(str(_))
-             InstrSMA = _
-             SMA.Close()
-        except (visa.VisaIOError): 
-            print('Serial Number dont match!')
-    return SMA100B(InstrSMA)
+            # Open a temporary connection to check the ID
+            with rm.open_resource(resource) as inst:
+                inst.timeout = 200  # Short timeout to skip unrelated devices quickly
+                
+                try:
+                    idn = inst.query('*IDN?')
+                except visa.errors.VisaIOError:
+                    continue
+
+                # Anritsu IDNs typically look like: "ANRITSU,MG3694C,..."
+                if 'MG369' in idn: 
+                    print(f"--> Found Anritsu Signal Generator at: {resource}")
+                    return MG3694C(resource_str=resource, visa_library=visa_library)
+
+        except (visa.errors.VisaIOError, OSError):
+            continue
+
+    # If loop finishes without returning
+    raise Exception("Could not find Anritsu MG3694C on the network. \n"
+                    "Ensure the device is connected to the LAN and has an IP assigned via DHCP.")
+
+def RnS_SMA100B(visa_library='@ivi'):
+    from Instruments_Libraries.SMA100B import SMA100B
+
+    # Create the Resource Manager
+    rm = visa.ResourceManager(visa_library)
+    print("Scanning for TCPIP instruments...")
+
+    try:
+        # Filter specifically for TCPIP devices
+        found_resources = rm.list_resources('TCPIP?*INSTR')
+    except ValueError:
+        found_resources = []
+
+    for resource_str in found_resources:
+        try:
+            # Open a temporary connection to check identity
+            # The 'with' statement ensures this connection is closed immediately after the check
+            with rm.open_resource(resource_str) as inst:
+                inst.timeout = 200  # short timeout to speed up scanning
+
+                try:
+                    idn = inst.query('*IDN?')
+                except visa.errors.VisaIOError:
+                    # Connection succeeded but device didn't reply (not SCPI compliant or busy)
+                    continue
+
+                # Check if 'SMA100B' is in the ID string
+                if 'SMA100B' in idn:
+                    print(f"Found SMA100B at: {resource_str}")
+                    return SMA100B(resource_str=resource_str, visa_library=visa_library)
+                    
+        except (visa.errors.VisaIOError, OSError):
+            continue # Skip devices that cannot be opened
+
+    raise Exception("SMA100B instrument not found on the network.")
 
 
 def VNA():

@@ -22,9 +22,17 @@ from Instruments_Libraries.SMA100B import SMA100B  # Rohde&Schwarz SigGen
 # =============================================================================
 # Anritsu MG3694C Signal Generator
 SignalGenerator = MG3694C("169.254.236.243")
+# Find the IP adress by running "arp -a" in a terminal and search for the 
+# MAC-Address of the MG3694C (written on top/back-side of the instrument). If 
+# it does not show up open NI-Max or Keysight Connection Expert and try to 
+# auto-discover the instrument. NI-Max works somewhat better. Do !!!NOT!!! 
+# change your Network Adapter to a static IP! As of 13.01.2026 the MG3694C is 
+# set up in dynamic DHCP mode.
 
 # Rhode und Schwarz SMA100B Signal Generator
-# SG_RhodeSchwarz = SMA100B("169.254.2.20")
+# SignalGenerator = SMA100B("169.254.2.20")
+# The SMA100B is in dynamic mode. It typically shows you its IP address on the 
+# instrument screen.
 
 SignalGenerator.reset()
 # %% ==========================================================================
@@ -42,8 +50,6 @@ SigGen_power_init = test_powerlevels[0]
 # =============================================================================
 SignalGenerator.set_freq_CW(test_frequencies[0])
 SignalGenerator.set_rf_power(test_powerlevels[0])
-
-
 
 # %% ==========================================================================
 # Measurement

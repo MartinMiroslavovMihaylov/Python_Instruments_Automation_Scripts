@@ -7,25 +7,49 @@ Created on Wed Dec  1 07:00:19 2021
 
 Currently the Anritsu MG3694C Signal Generator is in dynamic DHCP mode!!!
     1) Make sure Instrument and PC are connected vie ethernet cable.
-    2) Hold Windows + R keys and type cmd
-    3) type: arp -a
-    4) Find the IP-Adress corresponding to the MAC:Adress printed on the device
-    5) For SCT-LAB it is: 00-50-c2-38-3f-eb
-    6) Use this IP-Adress to connect
+    2) In the Windows terminal run: arp -a
+    3) Find the IP-Adress corresponding to the MAC:Adress printed on the device
+    4) If it does not show up try opening NI-MAX and run auto-discover.
+    5) Try "arp -a" again.
 
-Befor using the MG3694C you need to:
-    1) Make sure Instrument and PC are connected vie ethernet cable.
-    2) Hold Windows + R keys and type ncpa.cpl
-    3) Search for your Ethernet Adapter and go to Properties
-    4) Go to 'Internetprotocoll, Version 4(TCP/IPv4)'
-    5) Change the IP-Address from 'automatic' to 'static' and give the IP:192.168.0.1
-    6) DNS will be filled automatically! Press 'OK' and leave.
+Legacy instructions (not applicable as of 13.01.2026):
+    1) Go to Network Adapter Settings -> 'Internetprotocoll, Version 4(TCP/IPv4)'
+    2) Change the IP-Address from 'automatic' to 'static' and give the IP:192.168.0.1
+    3) DNS will be filled automatically! Press 'OK' and leave.
+    4) The standard IP of the instrument is: 192.168.0.254
     7) After your measurement dont forget to change the IP back to 'automatic'!
 """
 
 import numpy as np
 import pyvisa as visa
+import pyvisa.constants as vi_const
+import functools
+import time
 
+def auto_reconnect(func):
+    """
+    Decorator that catches VISA errors, reconnects, and retries the command.
+    """
+    @functools.wraps(func)
+    def wrapper(self, *args, **kwargs):
+        attempts = 3
+        for i in range(attempts):
+            try:
+                # Try to execute the function (write/query)
+                return func(self, *args, **kwargs)
+            except (visa.errors.VisaIOError, OSError) as e:
+                # If it's the last attempt, raise the error
+                if i == attempts - 1:
+                    print(f"Failed after {attempts} attempts. Error: {e}")
+                    raise e
+                
+                print(f"Connection lost during {func.__name__}. Reconnecting (Attempt {i+1}/{attempts})...")
+                try:
+                    self.reconnect()
+                except Exception as reconnect_err:
+                    print(f"Reconnect failed: {reconnect_err}")
+                    time.sleep(1) # Wait a bit before next loop
+    return wrapper
 
 class MG3694C():
     """
@@ -34,7 +58,7 @@ class MG3694C():
 
     def __init__(
         self,
-        resource_str="ip_adress",
+        resource_str="192.168.0.254",
         visa_library="@ivi",
     ):
         if "TCPIP" not in resource_str.upper():
@@ -43,9 +67,7 @@ class MG3694C():
             self.resource_str = resource_str
         self.visa_library = visa_library
 
-        self._resource = visa.ResourceManager(visa_library).open_resource(
-            str(self.resource_str), read_termination="\n", query_delay=0.5
-        )
+        self.connect()
 
         # Predefine Lists
         self._StateLS_mapping = {
@@ -60,33 +82,44 @@ class MG3694C():
         }
 
         # Get name and identification
-        print(self.getIdn())
+        print(f"Connected to: {self.getIdn()}")
+    
+    def connect(self):
+        """Opens connection and sets up attributes."""
+        rm = visa.ResourceManager(self.visa_library)
+        self._resource = rm.open_resource(
+            str(self.resource_str), 
+            read_termination="\n", 
+            query_delay=0.5
+        )
+        
+        # Enable Native TCP KeepAlive to prevent timeouts
+        try:
+            self._resource.set_visa_attribute(vi_const.VI_ATTR_TCPIP_KEEPALIVE, True)
+        except visa.VisaIOError:
+            pass # Not all interfaces support this
 
-    def reconnect(self, attempts_number=3):
-        for attempts_num in range(attempts_number):
-            try:
-                self._resource = visa.ResourceManager(self.visa_library).open_resource(
-                    str(self.resource_str), read_termination="\n", query_delay=0.5)
-                break
-            except:
-                print("Tried to reconnect {0} times".format(attempts_num))
+    def reconnect(self):
+        """Closes and re-opens the connection."""
+        try:
+            self._resource.close()
+        except:
+            pass # Ignore errors if it was already closed
+        
+        time.sleep(1) # Give the socket a moment to clear
+        self.connect()
 
+    @auto_reconnect
     def write(self, message, encoding="utf-8"):
-        # self._resource.write(message)
-        for attempts_num in range(3):
-            try:
-                self._resource.write(message)
-                break
-            except:
-                self.reconnect()
+        self._resource.write(message, encoding=encoding)
 
+    @auto_reconnect
     def query(self, message):
-        # self._resource.query(message)
-        for attempts_num in range(3):
-            try:
-                return self._resource.query(message)
-            except:
-                self.reconnect()
+        return self._resource.query(message)
+    
+    @auto_reconnect
+    def read(self):
+        return self._resource.read()
 
     def Close(self):
         return self._resource.close()
