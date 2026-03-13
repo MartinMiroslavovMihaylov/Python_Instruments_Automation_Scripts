@@ -15,11 +15,7 @@ class MS4647B(BaseInstrument):
     """
 
     def __init__(self, resource_str: str, visa_library: str = "@py", **kwargs):
-        """
-        Connect to Device and print the Identification Number.
-        """
-        # Set default read_termination to '\n' to avoid manual splitting of responses
-        kwargs.setdefault("read_termination", "\n")
+        # Do not modify read_termination; pass exactly as in old script
         super().__init__(resource_str, visa_library=visa_library, **kwargs)
         print(self.get_idn())
 

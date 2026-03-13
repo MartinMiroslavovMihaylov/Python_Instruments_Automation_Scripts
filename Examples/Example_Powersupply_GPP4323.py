@@ -18,8 +18,8 @@ from Instruments_Libraries.InstrumentSelect import PowerSupply_GPP4323
 # %% ==========================================================================
 # Select Instruments and Load Instrument Libraries
 # =============================================================================
-# myGPP4323 = GPP4323('COMXX') # noqa: N816
-myGPP4323: GPP4323 = PowerSupply_GPP4323() # noqa: N816
+myGPP4323 = GPP4323('COMXX') 
+# myGPP4323: GPP4323 = PowerSupply_GPP4323() # noqa: N816
 myGPP4323.reset()
 
 # %% ==========================================================================

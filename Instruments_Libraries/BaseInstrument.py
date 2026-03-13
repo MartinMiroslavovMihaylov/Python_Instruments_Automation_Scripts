@@ -66,6 +66,23 @@ class BaseInstrument:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.close()
+    
+    @staticmethod
+    def com_to_asrl(com_port: str) -> str:
+        """
+        Convert a Windows COM port string to a PyVISA ASRL resource string.
+
+        Parameters
+        ----------
+        com_port : str
+            Windows COM port (e.g., "COM3").
+
+        Returns
+        -------
+        str
+            VISA ASRL string (e.g., "ASRL3::INSTR").
+        """
+        return f"ASRL{com_port.upper().replace('COM','')}::INSTR"
 
     # =============================================================================
     # Communication Wrappers

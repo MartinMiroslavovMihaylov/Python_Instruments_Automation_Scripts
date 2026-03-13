@@ -6,6 +6,7 @@ Created on Tue Dec 14 12:58:27 2021
 
 import numpy as np
 import pandas as pd
+import pyvisa 
 
 from .BaseInstrument import BaseInstrument
 

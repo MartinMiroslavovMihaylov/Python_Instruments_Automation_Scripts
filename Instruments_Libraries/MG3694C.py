@@ -65,7 +65,7 @@ class MG3694C(BaseInstrument):
     This class uses pyvisa to connect to an Anritsu MG3694C Signal Generator.
     """
 
-    def __init__(self, resource_str: str = "192.168.0.254", visa_library: str = "@ivi", **kwargs):
+    def __init__(self, resource_str: str = "169.254.20.95", visa_library: str = "@ivi", **kwargs):
         kwargs.setdefault("read_termination", "\n")
         kwargs.setdefault("query_delay", 0.5)
         self._pyvisa_kwargs = kwargs

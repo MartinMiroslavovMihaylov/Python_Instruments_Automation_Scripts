@@ -12,33 +12,41 @@ import numpy as np
 
 from .BaseInstrument import BaseInstrument
 
-
 class MS2760A(BaseInstrument):
     """
     Driver for Anritsu MS2760A Spectrum Analyzer using BaseInstrument.
+    Handles the socket-specific read/write terminations.
     """
 
-    def __init__(
-        self, resource_str: str = "127.0.0.1::59001", visa_library="@py", **kwargs
-    ) -> None:
+    def __init__(self, ip="127.0.0.1", port=59001, visa_library="@py") -> None:
+        resource_str = f"TCPIP::{ip}::{port}::SOCKET"
 
-        # Default socket connection parameters for MS2760A
-        # PyVISA-compatible keyword arguments
-        kwargs.setdefault("read_termination", "\n")
-        kwargs.setdefault("write_termination", "\n")
-        kwargs.setdefault("query_delay", 0.5)
+        # Initialize using BaseInstrument
+        super().__init__(resource_str, visa_library=visa_library)
 
-        # Construct the VISA resource string for socket connection
-        socket_resource_str = f"TCPIP0::{resource_str}::SOCKET"
+        # Set socket-specific attributes manually
+        try:
+            self._resource.read_termination = "\n"
+            self._resource.write_termination = "\n"
+            self._resource.query_delay = 0.5
+        except Exception as e:
+            self.logger.warning(f"Failed to set VISA socket parameters: {e}")
 
-        super().__init__(socket_resource_str, visa_library=visa_library, **kwargs)
+        # Test connection
+        try:
+            idn = self._resource.query("*IDN?")
+            self.logger.info(f"Connected to {idn}")
+        except Exception as e:
+            self.logger.error(f"Failed to query *IDN?: {e}")
+            raise
 
-        # Internal Variables
+        # Internal variables
         self._freq_Units_List = ["HZ", "KHZ", "MHZ", "GHZ"]
         self._trace_List = [1, 2, 3, 4, 5, 6]
-        self._marker_List = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-        self._exeption_state = 0  # indicates that an exception occured
+        self._marker_List = list(range(1, 13))
+        self._exeption_state = 0
         self._dataFormat = None
+
         self.set_data_format("ASCii")
 
     # =============================================================================

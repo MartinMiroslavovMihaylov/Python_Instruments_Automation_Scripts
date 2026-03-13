@@ -8,9 +8,8 @@ Install Driver:
     from https://www.gwinstek.com/en-global/download/ - GPP USB Driver
     Python Library needed: ``pip install pyserial``
 """
-
 from .BaseInstrument import BaseInstrument
-
+import pyvisa.constants as visa_const
 
 class GPP4323(BaseInstrument):
     """
@@ -28,19 +27,18 @@ class GPP4323(BaseInstrument):
         **kwargs : dict
             Additional keyword arguments passed to the BaseInstrument constructor.
         """
-        # Default serial connection parameters for GPP4323
-        # PyVISA-compatible keyword arguments for ASRL resources
+        # PyVISA-compatible serial parameters
         kwargs.setdefault("baud_rate", 115200)
         kwargs.setdefault("data_bits", 8)
-        kwargs.setdefault("stop_bits", 1.0)  # 1 stop bit
-        kwargs.setdefault("parity", 0)  # No parity
+        kwargs.setdefault("stop_bits", visa_const.StopBits.one)  # <-- enum
+        kwargs.setdefault("parity", visa_const.Parity.none)      # <-- enum
         kwargs.setdefault("read_termination", "\n")
         kwargs.setdefault("write_termination", "\n")
         kwargs.setdefault("timeout", 2000)  # 2s
 
         super().__init__(resource_str, visa_library=visa_library, **kwargs)
 
-        # Internal Variables
+        # Internal variables
         self._ChannelLS = [1, 2, 3, 4]
         self._mainChannelLS = [1, 2]
         self._measurement_type_mapping = {

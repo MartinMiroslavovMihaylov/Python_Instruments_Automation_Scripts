@@ -67,6 +67,20 @@ class LU1000_Base:  # noqa: N801
     # =============================================================================
     # Base Class - General instrument data
     # =============================================================================
+    
+    def get_idn(self) -> str:
+        """Return a string similar to VISA *IDN?"""
+        try:
+            serial = self.get_serial_number()
+        except Exception:
+            serial = "UnknownSN"
+
+        try:
+            fw = self.get_firmware()
+        except Exception:
+            fw = "UnknownFW"
+
+        return f"Novoptel LU1000, SN:{serial}, FW:{fw}"
 
     def get_controller_temp(self) -> float:
         """
@@ -179,6 +193,19 @@ class LU1000_Cband(LU1000_Base):  # noqa: N801
     # =============================================================================
 
     # Inherit from parent class
+    def get_idn(self) -> str:
+        """Return a string similar to VISA *IDN?"""
+        try:
+            serial = self.get_serial_number()
+        except Exception:
+            serial = "UnknownSN"
+
+        try:
+            fw = self.get_firmware()
+        except Exception:
+            fw = "UnknownFW"
+
+        return f"Novoptel LU1000, SN:{serial}, FW:{fw}"
 
     # =============================================================================
     # C-Band Laser - GET functions

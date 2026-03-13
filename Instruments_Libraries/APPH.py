@@ -4,15 +4,26 @@ Created on Tue Feb 15 10:57:49 2022
 @author: Martin.Mihaylov
 """
 
-from .BaseInstrument import BaseInstrument
 
+import numpy as np
+import pyvisa as visa
 
-class APPH(BaseInstrument):
-    def __init__(self, resource_str: str, visa_library: str = "@py", **kwargs):
-        kwargs.setdefault("query_delay", 0.5)
-        kwargs.setdefault("read_termination", "\n")
-        super().__init__(str(resource_str), visa_library=visa_library, **kwargs)
-        print(self.get_idn())
+class APPH:
+    def __init__(self, resource_str):
+
+        self._resource = visa.ResourceManager().open_resource(str(resource_str),query_delay  = 0.5,read_termination = '\n')
+        print(self._resource.query('*IDN?'))
+
+        
+    def query(self, message):
+        return self._resource.query(message)
+    
+    def write(self, message):
+        return self._resource.write(message)
+    
+    def Close(self):
+        print('AnaPico AG,APPH20G is closed!')
+        self._resource.close()
 
     # =============================================================================
     # Initiate System
@@ -32,6 +43,60 @@ class APPH(BaseInstrument):
         Abort measurement
         """
         self.write(":ABORt")
+    
+    # =============================================================================
+    # Validate Variables
+    # =============================================================================
+
+    def _parse_state(self, state: str | int | float | bool) -> str:
+        """
+        Helper to parse various input types into SCPI 'ON' or 'OFF' strings.
+        Supports bool (True/False), numeric (1/0, 1.0/0.0), and strings ('ON'/'OFF', '1'/'0').
+        """
+        if isinstance(state, bool):
+            return "ON" if state else "OFF"
+
+        if isinstance(state, (int, float)):
+            if state == 1:
+                return "ON"
+            elif state == 0:
+                return "OFF"
+
+        s = str(state).strip().upper()
+        if s in ["ON", "1", "1.0"]:
+            return "ON"
+        elif s in ["OFF", "0", "0.0"]:
+            return "OFF"
+        else:
+            raise ValueError(f"Invalid state: '{state}'. Use True/False, 1/0, or 'ON'/'OFF'.")
+        
+    def _check_scpi_param(self, user_input: str, allowed_params: list[str]) -> str:
+        """
+        Validates user input against a list of allowed SCPI parameters.
+        Supports SCPI short forms (e.g., 'PHOT' for 'PHOTodiode') and is case-insensitive.
+        Returns the exact parameter string as provided in allowed_params.
+        """
+        user_input_upper = str(user_input).strip().upper()
+
+        for param in allowed_params:
+            # Handle optional characters like [] if they exist
+            clean_param = param.replace("[", "").replace("]", "")
+
+            # Extract the mandatory short form, represented by uppercase letters
+            short_form = "".join(c for c in param if c.isupper())
+            if not short_form:
+                short_form = clean_param.upper()
+
+            long_form = clean_param.upper()
+
+            # Input must be at least the short form length, and match the long form's prefix
+            if len(user_input_upper) >= len(short_form) and long_form.startswith(user_input_upper):
+                return param
+
+        raise ValueError(
+            f"Invalid input '{user_input}'. Allowed parameters are: {allowed_params} "
+            "(case-insensitive, abbreviation allowed up to the capital letters)."
+        )
 
     # =============================================================================
     # ASK
@@ -41,26 +106,26 @@ class APPH(BaseInstrument):
         """
         Reads back the detected frequency from a frequency search.
         """
-        return float(self.query(":CALCulate:FREQuency?"))
+        return float(self.query(':CALCulate:FREQuency?').split('\n')[0])
 
     def get_calc_power(self) -> float:
         """
         Reads back the detected power level from a frequency search.
         """
-        return float(self.query(":CALCulate:POWer?"))
+        return float(self.query(':CALCulate:POWer?').split('\n')[0])  
 
     def get_dut_port_voltage(self) -> float:
         """
         Sets/gets the voltage at the DUT TUNE port. Returns the configured value. If the output
         is turned off, it doesn't necessarily return 0, as an internal voltage may be configured.
         """
-        return float(self.query(":SOURce:TUNE:DUT:VOLT?"))
+        return float(self.query(':SOURce:TUNE:DUT:VOLT?').split('\n')[0])
 
     def get_dut_port_status(self) -> str:
         """
         Query the status of the DUT TUNE port.
         """
-        stat = self.query("SOURce:TUNE:DUT:STAT?")
+        stat = self.query("SOURce:TUNE:DUT:STAT?").split('\n')[0]
         if stat == "0":
             stat = "OFF"
         else:
@@ -109,13 +174,13 @@ class APPH(BaseInstrument):
         """
         Query the start offset frequency
         """
-        return float(self.query(":SENSe:PN:FREQuency:STARt?"))
+        return float(self.query(':SENSe:PN:FREQuency:STARt?').split('\n')[0])
 
     def get_pn_stop_freq(self) -> float:
         """
         Query the stop offset frequency
         """
-        return float(self.query(":SENSe:PN:FREQuency:STOP?"))
+        return float(self.query(':SENSe:PN:FREQuency:STOP?').split('\n')[0])
 
     def get_pn_spot(self, value: float) -> str:
         """
@@ -820,3 +885,6 @@ class APPH(BaseInstrument):
             1
         )  # Request spot noise data array @offset #1 (1.2kHz)
         result_dict["Error Value"] = err  # Write Error status if 0 no errors!
+
+
+ 

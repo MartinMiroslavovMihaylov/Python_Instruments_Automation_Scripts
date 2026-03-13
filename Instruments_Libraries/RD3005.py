@@ -53,6 +53,12 @@ class RD3005(BaseInstrument):
         resource_str : str
             COM Port
         """
+
+        # Automatically convert COM ports
+        if resource_str.upper().startswith("COM"):
+            resource_str = BaseInstrument.com_to_asrl(resource_str)
+            
+            
         # Let BaseInstrument handle the pyvisa connection.
         # We enforce serial settings required by RD3005 inline.
         kwargs.setdefault("baud_rate", 9600)
